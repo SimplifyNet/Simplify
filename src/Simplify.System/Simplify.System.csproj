@@ -5,15 +5,14 @@
 		<Product>Simplify</Product>
 		<Description>Core classes for applications and libraries</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1</Version>
+		<Version>1.2</Version>
 		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.System</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.System</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET</PackageTags>
 		<PackageReleaseNotes>
-			+ ApplicationEnvironment class with environment name added
-			- IHideObjectMembers removed
+			+ ConfigurationException added
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
