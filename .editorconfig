@@ -1,5 +1,6 @@
+root = true
 
-[*.{config,cs,csproj,css,json,nuspec,resx,xml,tpl}]
+[*.{cs,csproj,config,json,xml,tpl,nuspec,resx,ps1}]
 indent_style=tab
 indent_size=tab
 tab_width=4
