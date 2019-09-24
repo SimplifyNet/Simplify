@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netcoreapp2.0</TargetFramework>
+		<TargetFramework>netcoreapp2.2</TargetFramework>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.System unit tests</Description>
@@ -10,9 +10,9 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
 		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
 		<ProjectReference Include="..\Simplify.Resources\Simplify.Resources.csproj" />
 	</ItemGroup>
 </Project>
