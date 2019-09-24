@@ -13,9 +13,9 @@ namespace Simplify.DI
 		/// <param name="registrator">The DI registrator.</param>
 		/// <param name="concreteType">Concrete type.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering concrete type.</param>
-		public static void Register(this IDIRegistrator registrator, Type concreteType, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public static IDIRegistrator Register(this IDIRegistrator registrator, Type concreteType, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 		{
-			registrator.Register(concreteType, concreteType, lifetimeType);
+			return registrator.Register(concreteType, concreteType, lifetimeType);
 		}
 
 		/// <summary>
@@ -24,10 +24,10 @@ namespace Simplify.DI
 		/// <typeparam name="TConcrete">Concrete type.</typeparam>
 		/// <param name="registrator">The DI registrator.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering concrete type.</param>
-		public static void Register<TConcrete>(this IDIRegistrator registrator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public static IDIRegistrator Register<TConcrete>(this IDIRegistrator registrator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 			where TConcrete : class
 		{
-			registrator.Register(typeof(TConcrete), typeof(TConcrete), lifetimeType);
+			return registrator.Register(typeof(TConcrete), typeof(TConcrete), lifetimeType);
 		}
 
 		/// <summary>
@@ -37,9 +37,9 @@ namespace Simplify.DI
 		/// <param name="registrator">The DI registrator.</param>
 		/// <param name="implementationType">Implementation type.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering service type.</param>
-		public static void Register<TService>(this IDIRegistrator registrator, Type implementationType, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public static IDIRegistrator Register<TService>(this IDIRegistrator registrator, Type implementationType, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 		{
-			registrator.Register(typeof(TService), implementationType, lifetimeType);
+			return registrator.Register(typeof(TService), implementationType, lifetimeType);
 		}
 
 		/// <summary>
@@ -49,11 +49,11 @@ namespace Simplify.DI
 		/// <param name="registrator">The DI registrator.</param>
 		/// <param name="instanceCreator">The instance creator.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering concrete type.</param>
-		public static void Register<TService>(this IDIRegistrator registrator, Func<IDIResolver, TService> instanceCreator,
+		public static IDIRegistrator Register<TService>(this IDIRegistrator registrator, Func<IDIResolver, TService> instanceCreator,
 			LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 			where TService : class
 		{
-			registrator.Register(typeof(TService), instanceCreator, lifetimeType);
+			return registrator.Register(typeof(TService), instanceCreator, lifetimeType);
 		}
 
 		/// <summary>
@@ -63,9 +63,9 @@ namespace Simplify.DI
 		/// <typeparam name="TImplementation">Implementation type.</typeparam>
 		/// <param name="registrator">The DI registrator.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering service type.</param>
-		public static void Register<TService, TImplementation>(this IDIRegistrator registrator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public static IDIRegistrator Register<TService, TImplementation>(this IDIRegistrator registrator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 		{
-			registrator.Register(typeof(TService), typeof(TImplementation), lifetimeType);
+			return registrator.Register(typeof(TService), typeof(TImplementation), lifetimeType);
 		}
 	}
 }

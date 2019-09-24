@@ -1,5 +1,5 @@
-﻿using DryIoc;
-using System;
+﻿using System;
+using DryIoc;
 
 namespace Simplify.DI.Provider.DryIoc
 {
@@ -36,7 +36,7 @@ namespace Simplify.DI.Provider.DryIoc
 		/// <param name="implementationType">Implementation type.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering services type.</param>
 		/// <exception cref="ArgumentOutOfRangeException">lifetimeType - null</exception>
-		public void Register(Type serviceType, Type implementationType, LifetimeType lifetimeType)
+		public IDIRegistrator Register(Type serviceType, Type implementationType, LifetimeType lifetimeType)
 		{
 			switch (lifetimeType)
 			{
@@ -55,6 +55,8 @@ namespace Simplify.DI.Provider.DryIoc
 				default:
 					throw new ArgumentOutOfRangeException(nameof(lifetimeType), lifetimeType, null);
 			}
+
+			return this;
 		}
 
 		/// <summary>
@@ -64,7 +66,7 @@ namespace Simplify.DI.Provider.DryIoc
 		/// <param name="instanceCreator">The instance creator.</param>
 		/// <param name="lifetimeType">Type of the lifetime.</param>
 		/// <exception cref="ArgumentOutOfRangeException">lifetimeType - null</exception>
-		public void Register(Type serviceType, Func<IDIResolver, object> instanceCreator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public IDIRegistrator Register(Type serviceType, Func<IDIResolver, object> instanceCreator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 		{
 			switch (lifetimeType)
 			{
@@ -83,6 +85,8 @@ namespace Simplify.DI.Provider.DryIoc
 				default:
 					throw new ArgumentOutOfRangeException(nameof(lifetimeType), lifetimeType, null);
 			}
+
+			return this;
 		}
 
 		/// <summary>
