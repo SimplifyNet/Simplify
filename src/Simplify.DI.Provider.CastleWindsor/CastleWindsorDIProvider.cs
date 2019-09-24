@@ -1,6 +1,6 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using System;
 
 namespace Simplify.DI.Provider.CastleWindsor
 {
@@ -36,7 +36,7 @@ namespace Simplify.DI.Provider.CastleWindsor
 		/// <param name="serviceType">Service type.</param>
 		/// <param name="implementationType">Implementation type.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering services type.</param>
-		public void Register(Type serviceType, Type implementationType, LifetimeType lifetimeType)
+		public IDIRegistrator Register(Type serviceType, Type implementationType, LifetimeType lifetimeType)
 		{
 			switch (lifetimeType)
 			{
@@ -52,6 +52,8 @@ namespace Simplify.DI.Provider.CastleWindsor
 					Container.Register(Component.For(serviceType).ImplementedBy(implementationType).LifestyleTransient());
 					break;
 			}
+
+			return this;
 		}
 
 		/// <summary>
@@ -60,7 +62,7 @@ namespace Simplify.DI.Provider.CastleWindsor
 		/// <param name="serviceType">Type of the service.</param>
 		/// <param name="instanceCreator">The instance creator.</param>
 		/// <param name="lifetimeType">Type of the lifetime.</param>
-		public void Register(Type serviceType, Func<IDIResolver, object> instanceCreator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public IDIRegistrator Register(Type serviceType, Func<IDIResolver, object> instanceCreator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 		{
 			switch (lifetimeType)
 			{
@@ -76,6 +78,8 @@ namespace Simplify.DI.Provider.CastleWindsor
 					Container.Register(Component.For(serviceType).UsingFactoryMethod(c => instanceCreator(this)).LifestyleTransient());
 					break;
 			}
+
+			return this;
 		}
 
 		/// <summary>
