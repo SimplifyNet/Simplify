@@ -1,3 +1,6 @@
 {
-	"dotnet-test-explorer.testProjectPath": "src/**/*Tests.csproj"
+	"dotnet-test-explorer.testProjectPath": "src/**/*Tests.csproj",
+	"cSpell.words": [
+		"registrator"
+	]
 }
