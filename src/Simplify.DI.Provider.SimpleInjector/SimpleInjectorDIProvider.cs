@@ -1,6 +1,6 @@
-﻿using SimpleInjector;
+﻿using System;
+using SimpleInjector;
 using SimpleInjector.Lifestyles;
-using System;
 
 namespace Simplify.DI.Provider.SimpleInjector
 {
@@ -45,7 +45,7 @@ namespace Simplify.DI.Provider.SimpleInjector
 		/// <param name="serviceType">Service type.</param>
 		/// <param name="implementationType">Implementation type.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering services type.</param>
-		public void Register(Type serviceType, Type implementationType, LifetimeType lifetimeType)
+		public IDIRegistrator Register(Type serviceType, Type implementationType, LifetimeType lifetimeType)
 		{
 			switch (lifetimeType)
 			{
@@ -61,6 +61,8 @@ namespace Simplify.DI.Provider.SimpleInjector
 					Container.Register(serviceType, implementationType, Lifestyle.Transient);
 					break;
 			}
+
+			return this;
 		}
 
 		/// <summary>
@@ -69,7 +71,7 @@ namespace Simplify.DI.Provider.SimpleInjector
 		/// <param name="serviceType">Type of the service.</param>
 		/// <param name="instanceCreator">The instance creator.</param>
 		/// <param name="lifetimeType">Lifetime type of the registering type.</param>
-		public void Register(Type serviceType, Func<IDIResolver, object> instanceCreator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
+		public IDIRegistrator Register(Type serviceType, Func<IDIResolver, object> instanceCreator, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 		{
 			switch (lifetimeType)
 			{
@@ -85,6 +87,8 @@ namespace Simplify.DI.Provider.SimpleInjector
 					Container.Register(serviceType, () => instanceCreator(this), Lifestyle.Transient);
 					break;
 			}
+
+			return this;
 		}
 
 		/// <summary>
