@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Simplify.DI;
-using Simplify.Scheduler.Jobs;
-using Simplify.Scheduler.Jobs.Crontab;
-using Simplify.System;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Simplify.DI;
+using Simplify.Scheduler.Jobs;
+using Simplify.Scheduler.Jobs.Crontab;
+using Simplify.System;
 
 namespace Simplify.Scheduler
 {
@@ -18,7 +18,7 @@ namespace Simplify.Scheduler
 	{
 		private readonly IList<ISchedulerJob> _jobs = new List<ISchedulerJob>();
 		private readonly IList<ICrontabSchedulerJobTask> _workingJobsTasks = new List<ICrontabSchedulerJobTask>();
-		private readonly IDictionary<object, ILifetimeScope> _workingBasicJobs = new Dictionary<object, ILifetimeScope>();
+		private readonly IDictionary<ISchedulerJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<ISchedulerJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
 		private bool _shutdownInProcess;
@@ -38,6 +38,16 @@ namespace Simplify.Scheduler
 		/// Occurs when exception thrown.
 		/// </summary>
 		public event SchedulerExceptionEventHandler OnException;
+
+		/// <summary>
+		/// Occurs when the job start.
+		/// </summary>
+		public event JobEventHandler OnJobStart;
+
+		/// <summary>
+		/// Occurs when job is finished.
+		/// </summary>
+		public event JobEventHandler OnJobFinish;
 
 		/// <summary>
 		/// Gets the name of the application.
@@ -148,7 +158,11 @@ namespace Simplify.Scheduler
 		{
 			if (disposing)
 				foreach (var basicJobItem in _workingBasicJobs)
+				{
+					OnJobFinish?.Invoke(basicJobItem.Key);
+
 					basicJobItem.Value.Dispose();
+				}
 		}
 
 		private void InitializeJob(ICrontabSchedulerJob job)
@@ -187,13 +201,15 @@ namespace Simplify.Scheduler
 			}
 		}
 
+		#region Execution
+
 		private void Run(object state)
 		{
 			var (jobTaskID, job) = (Tuple<long, ICrontabSchedulerJob>)state;
 
 			try
 			{
-				RunJob(job);
+				RunScoped(job);
 			}
 			catch (Exception e)
 			{
@@ -204,25 +220,25 @@ namespace Simplify.Scheduler
 			}
 			finally
 			{
-				if (job.Settings.CleanupOnTaskFinish)
-					GC.Collect();
-
-				lock (_workingJobsTasks)
-					_workingJobsTasks.Remove(_workingJobsTasks.Single(x => x.ID == jobTaskID));
+				FinalizeJob(jobTaskID, job);
 			}
 		}
 
-		private void RunJob(ISchedulerJob job)
+		private void RunScoped(ISchedulerJobRepresentation job)
 		{
 			using (var scope = DIContainer.Current.BeginLifetimeScope())
 			{
 				var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
+				OnJobStart?.Invoke(job);
+
 				InvokeJobMethod(job, jobObject);
+
+				OnJobFinish?.Invoke(job);
 			}
 		}
 
-		private void RunBasicJob(ISchedulerJob job)
+		private void RunBasicJob(ISchedulerJobRepresentation job)
 		{
 			try
 			{
@@ -230,9 +246,11 @@ namespace Simplify.Scheduler
 
 				var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
+				OnJobStart?.Invoke(job);
+
 				InvokeJobMethod(job, jobObject);
 
-				_workingBasicJobs.Add(jobObject, scope);
+				_workingBasicJobs.Add(job, scope);
 			}
 			catch (Exception e)
 			{
@@ -243,7 +261,7 @@ namespace Simplify.Scheduler
 			}
 		}
 
-		private void InvokeJobMethod(ISchedulerJob job, object jobObject)
+		private void InvokeJobMethod(ISchedulerJobRepresentation job, object jobObject)
 		{
 			switch (job.InvokeMethodParameterType)
 			{
@@ -263,5 +281,16 @@ namespace Simplify.Scheduler
 					throw new ArgumentOutOfRangeException();
 			}
 		}
+
+		private void FinalizeJob(long jobTaskID, ICrontabSchedulerJob job)
+		{
+			if (job.Settings.CleanupOnTaskFinish)
+				GC.Collect();
+
+			lock (_workingJobsTasks)
+				_workingJobsTasks.Remove(_workingJobsTasks.Single(x => x.ID == jobTaskID));
+		}
+
+		#endregion Execution
 	}
 }
