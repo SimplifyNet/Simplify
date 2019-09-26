@@ -20,7 +20,7 @@ namespace Simplify.WindowsServices
 	{
 		private readonly IList<IServiceJob> _jobs = new List<IServiceJob>();
 		private readonly IList<ICrontabServiceJobTask> _workingJobsTasks = new List<ICrontabServiceJobTask>();
-		private readonly IDictionary<object, ILifetimeScope> _workingBasicJobs = new Dictionary<object, ILifetimeScope>();
+		private readonly IDictionary<IServiceJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<IServiceJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
 		private bool _shutdownInProcess;
@@ -41,6 +41,16 @@ namespace Simplify.WindowsServices
 		/// Occurs when exception thrown.
 		/// </summary>
 		public event ServiceExceptionEventHandler OnException;
+
+		/// <summary>
+		/// Occurs when the job start.
+		/// </summary>
+		public event JobEventHandler OnJobStart;
+
+		/// <summary>
+		/// Occurs when job is finished.
+		/// </summary>
+		public event JobEventHandler OnJobFinish;
 
 		/// <summary>
 		/// Gets or sets the service job factory.
@@ -183,8 +193,12 @@ namespace Simplify.WindowsServices
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
-				foreach (var jobObject in _workingBasicJobs.Select(item => item.Key as IDisposable))
-					jobObject?.Dispose();
+				foreach (var basicJobItem in _workingBasicJobs)
+				{
+					OnJobFinish?.Invoke(basicJobItem.Key);
+
+					basicJobItem.Value.Dispose();
+				}
 
 			base.Dispose(disposing);
 		}
@@ -258,18 +272,19 @@ namespace Simplify.WindowsServices
 			}
 		}
 
+		#region Execution
+
+		/// <summary>
+		/// Separate thread entry point for job processing
+		/// </summary>
+		/// <param name="state">The state.</param>
 		private void Run(object state)
 		{
 			var (jobTaskID, job) = (Tuple<long, ICrontabServiceJob>)state;
 
 			try
 			{
-				using (var scope = DIContainer.Current.BeginLifetimeScope())
-				{
-					var jobObject = scope.Resolver.Resolve(job.JobClassType);
-
-					InvokeJobMethod(job, jobObject);
-				}
+				RunScoped(job);
 			}
 			catch (Exception e)
 			{
@@ -280,15 +295,25 @@ namespace Simplify.WindowsServices
 			}
 			finally
 			{
-				if (job.Settings.CleanupOnTaskFinish)
-					GC.Collect();
-
-				lock (_workingJobsTasks)
-					_workingJobsTasks.Remove(_workingJobsTasks.Single(x => x.ID == jobTaskID));
+				FinalizeJob(jobTaskID, job);
 			}
 		}
 
-		private void RunBasicJob(IServiceJob job)
+		private void RunScoped(IServiceJobRepresentation job)
+		{
+			using (var scope = DIContainer.Current.BeginLifetimeScope())
+			{
+				var jobObject = scope.Resolver.Resolve(job.JobClassType);
+
+				OnJobStart?.Invoke(job);
+
+				InvokeJobMethod(job, jobObject);
+
+				OnJobFinish?.Invoke(job);
+			}
+		}
+
+		private void RunBasicJob(IServiceJobRepresentation job)
 		{
 			try
 			{
@@ -296,9 +321,11 @@ namespace Simplify.WindowsServices
 
 				var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
+				OnJobStart?.Invoke(job);
+
 				InvokeJobMethod(job, jobObject);
 
-				_workingBasicJobs.Add(jobObject, scope);
+				_workingBasicJobs.Add(job, scope);
 			}
 			catch (Exception e)
 			{
@@ -309,7 +336,7 @@ namespace Simplify.WindowsServices
 			}
 		}
 
-		private void InvokeJobMethod(IServiceJob job, object jobObject)
+		private void InvokeJobMethod(IServiceJobRepresentation job, object jobObject)
 		{
 			switch (job.InvokeMethodParameterType)
 			{
@@ -329,5 +356,16 @@ namespace Simplify.WindowsServices
 					throw new ArgumentOutOfRangeException();
 			}
 		}
+
+		private void FinalizeJob(long jobTaskID, ICrontabServiceJob job)
+		{
+			if (job.Settings.CleanupOnTaskFinish)
+				GC.Collect();
+
+			lock (_workingJobsTasks)
+				_workingJobsTasks.Remove(_workingJobsTasks.Single(x => x.ID == jobTaskID));
+		}
+
+		#endregion Execution
 	}
 }
