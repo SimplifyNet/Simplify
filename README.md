@@ -54,8 +54,8 @@
 
 | Package | Dependencies | Target Framework | Documentation |
 | :------ | :------: | :------: | :------: |
-| [![Simplify.Scheduler](http://img.shields.io/badge/Simplify.Scheduler-v1.0-blue.svg)](https://www.nuget.org/packages/Simplify.Scheduler/) ![prerelease](https://img.shields.io/badge/prerelease-v02-red)| [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Scheduler.svg)](https://libraries.io/nuget/Simplify.Scheduler) | Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Scheduler) |
-| [![Simplify.WindowsServices](http://img.shields.io/badge/Simplify.WindowsServices-v2.9.1-blue.svg)](https://www.nuget.org/packages/Simplify.WindowsServices/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.WindowsServices.svg)](https://libraries.io/nuget/Simplify.WindowsServices) | 4.6.2 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices) |
+| [![Simplify.Scheduler](http://img.shields.io/badge/Simplify.Scheduler-v1.0-blue.svg)](https://www.nuget.org/packages/Simplify.Scheduler/) ![prerelease](https://img.shields.io/badge/prerelease-v03-red)| [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Scheduler.svg)](https://libraries.io/nuget/Simplify.Scheduler) | Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Scheduler) |
+| [![Simplify.WindowsServices](http://img.shields.io/badge/Simplify.WindowsServices-v2.10-blue.svg)](https://www.nuget.org/packages/Simplify.WindowsServices/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.WindowsServices.svg)](https://libraries.io/nuget/Simplify.WindowsServices) | 4.6.2 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices) |
 
 ### Main
 
