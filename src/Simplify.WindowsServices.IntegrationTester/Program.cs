@@ -15,16 +15,17 @@ namespace Simplify.WindowsServices.IntegrationTester
 			IocRegistrations.Register();
 			DIContainer.Current.Verify();
 
-			var handler = new MultitaskServiceHandler();
+			using (var handler = new MultitaskServiceHandler())
+			{
+				handler.AddJob<OneSecondStepProcessor>("OneSecondStepProcessor");
+				handler.AddJob<TwoSecondStepProcessor>(IocRegistrations.Configuration, startupArgs: "Hello world!!!");
+				handler.AddJob<OneMinuteStepCrontabProcessor>(IocRegistrations.Configuration, "OneMinuteStepCrontabProcessor", automaticallyRegisterUserType: true);
+				handler.AddJob<TwoParallelTasksProcessor>(invokeMethodName: "Execute");
+				handler.AddBasicJob<BasicTaskProcessor>();
 
-			handler.AddJob<OneSecondStepProcessor>("OneSecondStepProcessor");
-			handler.AddJob<TwoSecondStepProcessor>(IocRegistrations.Configuration, startupArgs: "Hello world!!!");
-			handler.AddJob<OneMinuteStepCrontabProcessor>(IocRegistrations.Configuration, "OneMinuteStepCrontabProcessor", automaticallyRegisterUserType: true);
-			handler.AddJob<TwoParallelTasksProcessor>(invokeMethodName: "Execute");
-			handler.AddBasicJob<BasicTaskProcessor>();
-
-			if (handler.Start(args))
-				return;
+				if (handler.Start(args))
+					return;
+			}
 
 			using (var scope = DIContainer.Current.BeginLifetimeScope())
 				scope.Resolver.Resolve<BasicTaskProcessor>().Run();

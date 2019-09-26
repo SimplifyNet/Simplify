@@ -12,7 +12,6 @@ namespace Simplify.WindowsServices.IntegrationTester.Setup
 			RegisterConfiguration();
 
 			DIContainer.Current.Register<DisposableDependency>();
-
 			DIContainer.Current.Register<OneSecondStepProcessor>();
 			DIContainer.Current.Register<TwoSecondStepProcessor>();
 			DIContainer.Current.Register<TwoParallelTasksProcessor>();
