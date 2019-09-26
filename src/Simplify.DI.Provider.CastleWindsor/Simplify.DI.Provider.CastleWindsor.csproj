@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.DI CastleWindsor provider</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.5</Version>
+		<Version>1.6</Version>
 		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.DI</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.DI.Provider.CastleWindsor</RepositoryUrl>
