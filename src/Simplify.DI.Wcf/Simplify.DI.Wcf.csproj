@@ -6,9 +6,9 @@
 		<Description>Provides ability to use Simplify.DI as IOC container in WCF services</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.4</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.DI.Wcf</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.DI.Wcf</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI.Wcf</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Wcf</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET DI IOC-container</PackageTags>
 		<PackageReleaseNotes>

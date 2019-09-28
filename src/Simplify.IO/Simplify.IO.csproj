@@ -6,9 +6,9 @@
 		<Description>IO helper functions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.1</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.IO</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.IO</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET IO</PackageTags>
 		<PackageReleaseNotes>

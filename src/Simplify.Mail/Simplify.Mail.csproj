@@ -6,9 +6,9 @@
 		<Description>Simple mail sender</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.4</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.Mail</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.Mail</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Mail</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Mail</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET mail-sender</PackageTags>
 		<PackageReleaseNotes>

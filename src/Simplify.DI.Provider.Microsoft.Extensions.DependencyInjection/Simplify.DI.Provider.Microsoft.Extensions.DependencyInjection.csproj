@@ -6,9 +6,9 @@
 		<Description>Simplify.DI Microsoft.Extensions.DependencyInjection provider</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.2</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.DI</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET DI IOC-container-provider</PackageTags>
 		<PackageReleaseNotes>

@@ -6,14 +6,16 @@
 		<title>Simplify.Xml.Sources</title>
 		<authors>Alexander Krylkov</authors>
 		<owners>Alexander Krylkov</owners>
-		<projectUrl>https://github.com/i4004/Simplify/wiki/Simplify.Xml</projectUrl>
-		<iconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</iconUrl>
+		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>XML extensions.</description>
 		<summary>XML extensions</summary>
 		<releaseNotes>
-			* Added .NET Standard 2.0 support
-			* Upgrade to .NET Framework 4.5.2
+			New Features
+			* RemoveAllXmlNamespaces added
+			Updates
+			* OuterXml/InnerXml for XNode elements instead of just XElements
 		</releaseNotes>
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>

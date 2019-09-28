@@ -6,9 +6,9 @@
 		<Description>Core classes for applications and libraries</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.2</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.System</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.System</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.System</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET</PackageTags>
 		<PackageReleaseNotes>

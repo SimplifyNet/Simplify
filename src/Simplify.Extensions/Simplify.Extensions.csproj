@@ -6,9 +6,9 @@
 		<Description>Extensions for system classes</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.1.1</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.Extensions</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.Extensions</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Extensions</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET system-extensions</PackageTags>
 		<PackageReleaseNotes>

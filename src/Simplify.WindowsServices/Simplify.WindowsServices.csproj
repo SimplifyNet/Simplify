@@ -6,9 +6,9 @@
 		<Description>Windows services framework with DI</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>2.10</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.WindowsServices</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.WindowsServices</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.WindowsServices</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET windows-service DI</PackageTags>
 		<PackageReleaseNotes>

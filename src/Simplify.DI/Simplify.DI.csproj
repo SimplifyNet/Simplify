@@ -6,9 +6,9 @@
 		<Description>Simplify DI common interface for IOC containers</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>4.0</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.DI</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.DI</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET DI IOC-container</PackageTags>
 		<PackageReleaseNotes>

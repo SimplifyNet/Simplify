@@ -68,7 +68,7 @@
 | [![Simplify.System](http://img.shields.io/badge/Simplify.System-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.System/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.System.svg)](https://libraries.io/nuget/Simplify.System) | 4.5.2, Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.System) |
 | [![Simplify.System.Sources](http://img.shields.io/badge/Simplify.System.Sources-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.System.Sources/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.System.Sources.svg)](https://libraries.io/nuget/Simplify.System.Sources) | 4.5.2, Standard 2.0 |
 | [![Simplify.Templates](http://img.shields.io/badge/Simplify.Templates-v1.5.1-blue.svg)](https://www.nuget.org/packages/Simplify.Templates/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Templates.svg)](https://libraries.io/nuget/Simplify.Templates) | 4.5.2, Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates) |
-| [![Simplify.Web](http://img.shields.io/badge/Simplify.Web-green.svg)](https://github.com/i4004/Simplify.Web) |||
+| [![Simplify.Web](http://img.shields.io/badge/Simplify.Web-green.svg)](https://github.com/SimplifyNet/Simplify.Web) |||
 
 ### Utility
 

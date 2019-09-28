@@ -6,9 +6,9 @@
 		<Description>Simplifies FluentNHibernate connection configuration and allows you to write data-base queries with lambda expressions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.9</Version>
-		<PackageProjectUrl>https://github.com/i4004/Simplify/wiki/Simplify.FluentNHibernate</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/i4004/Simplify/tree/master/src/Simplify.FluentNHibernate</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.FluentNHibernate</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.FluentNHibernate</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET FluentNHibernate ORM</PackageTags>
 		<PackageReleaseNotes>

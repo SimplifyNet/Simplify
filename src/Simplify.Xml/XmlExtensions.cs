@@ -23,7 +23,7 @@ namespace Simplify.Xml
 		/// <summary>
 		/// Gets the inner XML string of an XNode.
 		/// </summary>
-		/// <param name="element">The inner XML stringt.</param>
+		/// <param name="element">The inner XML string.</param>
 		/// <returns></returns>
 		public static string InnerXml(this XNode element)
 		{

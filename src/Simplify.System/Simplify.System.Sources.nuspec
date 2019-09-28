@@ -6,8 +6,8 @@
 		<title>Simplify.System.Sources</title>
 		<authors>Alexander Krylkov</authors>
 		<owners>Alexander Krylkov</owners>
-		<projectUrl>https://github.com/i4004/Simplify/wiki/Simplify.System</projectUrl>
-		<iconUrl>https://raw.githubusercontent.com/i4004/Simplify/master/Images/Icon.png</iconUrl>
+		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Core classes for applications and libraries.</description>
 		<summary>Core classes for applications and libraries.</summary>
