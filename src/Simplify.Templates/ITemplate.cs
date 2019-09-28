@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Text templates interface
 	/// </summary>
-	public interface ITemplate : IHideObjectMembers
+	public interface ITemplate
 	{
 		/// <summary>
 		/// Gets the file path of the template file.
