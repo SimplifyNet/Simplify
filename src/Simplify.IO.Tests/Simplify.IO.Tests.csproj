@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net452</TargetFrameworks>
+		<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.IO unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1</Version>
+		<Version>1.1.1</Version>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
@@ -14,6 +14,5 @@
 		<PackageReference Include="NUnit" Version="3.12.0" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
 		<ProjectReference Include="..\Simplify.IO\Simplify.IO.csproj" />
-		<PackageReference Include="System.IO.Abstractions" Version="2.1.0.178" />
 	</ItemGroup>
 </Project>
