@@ -17,7 +17,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Windows.Forms.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.Resources" Version="1.0.0" />
+		<PackageReference Include="Simplify.Resources" Version="1.0.1" />
 		<Reference Include="System.Windows.Forms" />
 	</ItemGroup>
 </Project>
