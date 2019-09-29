@@ -9,13 +9,13 @@
 
 `Simplify` is a set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
 
-## Packages status
+## Packages
 
 ### Dependency Injection
 
 #### Simplify.DI
 
-[![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI)
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI)
 ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI)](https://libraries.io/nuget/Simplify.DI)
@@ -25,21 +25,21 @@
 
 ##### CastleWindsor
 
-[![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.CastleWindsor)](https://www.nuget.org/packages/Simplify.DI.Provider.CastleWindsor)
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.DI.Provider.CastleWindsor)](https://www.nuget.org/packages/Simplify.DI.Provider.CastleWindsor)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.DI.Provider.CastleWindsor)](https://www.nuget.org/packages/Simplify.DI.Provider.CastleWindsor)
 ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.6%20%7C%20.NET%204.5.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.CastleWindsor)](https://libraries.io/nuget/Simplify.DI.Provider.CastleWindsor)
 
 ##### Microsoft.Extensions.DependencyInjection
 
-[![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)
 ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.6.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)](https://libraries.io/nuget/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)
 
 ##### SimpleInjector
 
-[![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.SimpleInjector)](https://www.nuget.org/packages/Simplify.DI.Provider.SimpleInjector)
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.DI.Provider.SimpleInjector)](https://www.nuget.org/packages/Simplify.DI.Provider.SimpleInjector)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.DI.Provider.SimpleInjector)](https://www.nuget.org/packages/Simplify.DI.Provider.SimpleInjector)
 ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.3%20%7C%20.NET%204.5.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.SimpleInjector)](https://libraries.io/nuget/Simplify.DI.Provider.SimpleInjector)
@@ -48,14 +48,14 @@
 
 ##### Microsoft.Extensions.DependencyInjection
 
-[![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)
 ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)](https://libraries.io/nuget/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection)
 
 ##### WCF
 
-[![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Wcf)](https://www.nuget.org/packages/Simplify.DI.Wcf)
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.DI.Wcf)](https://www.nuget.org/packages/Simplify.DI.Wcf)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.DI.Wcf)](https://www.nuget.org/packages/Simplify.DI.Wcf)
 ![Platform](https://img.shields.io/badge/platform-.NET%204.5.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Wcf)](https://libraries.io/nuget/Simplify.DI.Wcf)
@@ -63,50 +63,174 @@
 
 ### Repositories & Databases
 
-| Package                                                                                                                                                                                           |                                                                                                    Dependencies                                                                                                    |  Target Framework   |                                                              Documentation                                                              |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
-| [![Simplify.FluentNHibernate](http://img.shields.io/badge/Simplify.FluentNHibernate-v1.9-blue.svg)](https://www.nuget.org/packages/Simplify.FluentNHibernate/)                                    |            [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.FluentNHibernate.svg)](https://libraries.io/nuget/Simplify.FluentNHibernate)            | 4.6.2, Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.FluentNHibernate) |
-| [![Simplify.Repository](http://img.shields.io/badge/Simplify.Repository-v1.1-blue.svg)](https://www.nuget.org/packages/Simplify.Repository/)                                                      |                  [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Repository.svg)](https://libraries.io/nuget/Simplify.Repository)                  | 4.5.2, Standard 1.2 |
-| [![Simplify.Repository.FluentNHibernate](http://img.shields.io/badge/Simplify.Repository.FluentNHibernate-v1.0.2-blue.svg)](https://www.nuget.org/packages/Simplify.Repository.FluentNHibernate/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Repository.FluentNHibernate.svg)](https://libraries.io/nuget/Simplify.Repository.FluentNHibernate) | 4.6.2, Standard 2.0 |
+#### Simplify.FluentNHibernate
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.FluentNHibernate)](https://www.nuget.org/packages/Simplify.FluentNHibernate)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.FluentNHibernate)](https://www.nuget.org/packages/Simplify.FluentNHibernate)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.6.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.FluentNHibernate)](https://libraries.io/nuget/Simplify.FluentNHibernate)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.FluentNHibernate)
+
+#### Simplify.Repository
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Repository)](https://www.nuget.org/packages/Simplify.Repository)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Repository)](https://www.nuget.org/packages/Simplify.Repository)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.2%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Repository)](https://libraries.io/nuget/Simplify.Repository)
+
+#### Simplify.Repository.FluentNHibernate
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Repository.FluentNHibernate)](https://www.nuget.org/packages/Simplify.Repository.FluentNHibernate)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Repository.FluentNHibernate)](https://www.nuget.org/packages/Simplify.Repository.FluentNHibernate)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.6.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Repository.FluentNHibernate)](https://libraries.io/nuget/Simplify.Repository.FluentNHibernate)
 
 ### Schedulers
 
-| Package                                                                                                                                                                                                  |                                                                                        Dependencies                                                                                        | Target Framework |                                                             Documentation                                                              |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| [![Simplify.Scheduler](http://img.shields.io/badge/Simplify.Scheduler-v1.0-blue.svg)](https://www.nuget.org/packages/Simplify.Scheduler/) ![prerelease](https://img.shields.io/badge/prerelease-v03-red) |       [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Scheduler.svg)](https://libraries.io/nuget/Simplify.Scheduler)       |   Standard 2.0   |    [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Scheduler)    |
-| [![Simplify.WindowsServices](http://img.shields.io/badge/Simplify.WindowsServices-v2.10-blue.svg)](https://www.nuget.org/packages/Simplify.WindowsServices/)                                             | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.WindowsServices.svg)](https://libraries.io/nuget/Simplify.WindowsServices) |      4.6.2       | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices) |
+#### Simplify.Scheduler
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Scheduler)](https://www.nuget.org/packages/Simplify.Scheduler)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Scheduler)](https://www.nuget.org/packages/Simplify.Scheduler)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Scheduler)](https://libraries.io/nuget/Simplify.Scheduler)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Scheduler)
+
+#### Simplify.WindowsServices
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.WindowsServices)](https://www.nuget.org/packages/Simplify.WindowsServices)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.WindowsServices)](https://www.nuget.org/packages/Simplify.WindowsServices)
+![Platform](https://img.shields.io/badge/platform-.NET%204.6.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.WindowsServices)](https://libraries.io/nuget/Simplify.WindowsServices)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices)
 
 ### Main
 
-| Package                                                                                                                                                  |                                                                                       Dependencies                                                                                       |  Target Framework   |                                                          Documentation                                                           |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------: |
-| [![Simplify.Log](http://img.shields.io/badge/Simplify.Log-v1.4.3-blue.svg)](https://www.nuget.org/packages/Simplify.Log/)                                |            [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Log.svg)](https://libraries.io/nuget/Simplify.Log)            |        4.6.2        |    [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Log)    |
-| [![Simplify.Mail](http://img.shields.io/badge/Simplify.Mail-v1.4-blue.svg)](https://www.nuget.org/packages/Simplify.Mail/)                               |           [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Mail.svg)](https://libraries.io/nuget/Simplify.Mail)           | 4.6.2, Standard 2.0 |   [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Mail)    |
-| [![Simplify.Pipelines](http://img.shields.io/badge/Simplify.Pipelines-v0.3.1-blue.svg)](https://www.nuget.org/packages/Simplify.Pipelines/)              |      [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Pipelines.svg)](https://libraries.io/nuget/Simplify.Pipelines)      | 4.5.2, Standard 1.2 |
-| [![Simplify.Resources](http://img.shields.io/badge/Simplify.Resources-v1.0.1-blue.svg)](https://www.nuget.org/packages/Simplify.Resources/)              |      [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Resources.svg)](https://libraries.io/nuget/Simplify.Resources)      | 4.5.2, Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Resources) |
-| [![Simplify.System](http://img.shields.io/badge/Simplify.System-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.System/)                         |         [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.System.svg)](https://libraries.io/nuget/Simplify.System)         | 4.5.2, Standard 2.0 |  [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.System)   |
-| [![Simplify.System.Sources](http://img.shields.io/badge/Simplify.System.Sources-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.System.Sources/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.System.Sources.svg)](https://libraries.io/nuget/Simplify.System.Sources) | 4.5.2, Standard 2.0 |
-| [![Simplify.Templates](http://img.shields.io/badge/Simplify.Templates-v1.5.1-blue.svg)](https://www.nuget.org/packages/Simplify.Templates/)              |      [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Templates.svg)](https://libraries.io/nuget/Simplify.Templates)      | 4.5.2, Standard 2.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates) |
-| [![Simplify.Web](http://img.shields.io/badge/Simplify.Web-green.svg)](https://github.com/SimplifyNet/Simplify.Web)                                       |                                                                                                                                                                                          |                     |
+#### Simplify.Log
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Log)](https://www.nuget.org/packages/Simplify.Log)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Log)](https://www.nuget.org/packages/Simplify.Log)
+![Platform](https://img.shields.io/badge/platform-.NET%204.6.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Log)](https://libraries.io/nuget/Simplify.Log)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Log)
+
+#### Simplify.Mail
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Mail)](https://www.nuget.org/packages/Simplify.Mail)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Mail)](https://www.nuget.org/packages/Simplify.Mail)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.6.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Mail)](https://libraries.io/nuget/Simplify.Mail)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Mail)
+
+#### Simplify.Pipelines
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Pipelines)](https://www.nuget.org/packages/Simplify.Pipelines)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Pipelines)](https://www.nuget.org/packages/Simplify.Pipelines)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Pipelines)](https://libraries.io/nuget/Simplify.Pipelines)
+
+#### Simplify.Resources
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Resources)](https://www.nuget.org/packages/Simplify.Resources)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Resources)](https://www.nuget.org/packages/Simplify.Resources)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Resources)](https://libraries.io/nuget/Simplify.Resources)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Resources)
+
+#### Simplify.System
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.System)](https://www.nuget.org/packages/Simplify.System)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.System)](https://www.nuget.org/packages/Simplify.System)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.System)](https://libraries.io/nuget/Simplify.System)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.System)
+
+#### Simplify.System.Sources
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.System.Sources)](https://www.nuget.org/packages/Simplify.System.Sources)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.System.Sources)](https://www.nuget.org/packages/Simplify.System.Sources)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.System.Sources)](https://libraries.io/nuget/Simplify.System.Sources)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.System)
+
+#### Simplify.Templates
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Templates)](https://www.nuget.org/packages/Simplify.Templates)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Templates)](https://www.nuget.org/packages/Simplify.Templates)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Templates)](https://libraries.io/nuget/Simplify.Templates)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates)
 
 ### Utility
 
-| Package                                                                                                                                                                |                                                                                           Dependencies                                                                                           |  Target Framework   |                                                            Documentation                                                            |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: | :---------------------------------------------------------------------------------------------------------------------------------: |
-| [![Simplify.Cryptography](http://img.shields.io/badge/Simplify.Cryptography-v1-blue.svg)](https://www.nuget.org/packages/Simplify.Cryptography/)                       |       [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Cryptography.svg)](https://libraries.io/nuget/Simplify.Cryptography)       |         4.5         | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Cryptography) |
-| [![Simplify.Extensions](http://img.shields.io/badge/Simplify.Extensions-v1.1.1-blue.svg)](https://www.nuget.org/packages/Simplify.Extensions/)                         |     [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Extensions.Sources.svg)](https://libraries.io/nuget/Simplify.Extensions)     | 4.5.2, Standard 1.0 |  [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions)  |
-| [![Simplify.Extensions.Sources](http://img.shields.io/badge/Simplify.Extensions.Sources-v1.1.1-blue.svg)](https://www.nuget.org/packages/Simplify.Extensions.Sources/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Extensions.Sources.svg)](https://libraries.io/nuget/Simplify.Extensions.Sources) | 4.5.2, Standard 1.0 |
-| [![Simplify.IO](http://img.shields.io/badge/Simplify.IO-v1.1-blue.svg)](https://www.nuget.org/packages/Simplify.IO/)                                                   |                 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.IO.svg)](https://libraries.io/nuget/Simplify.IO)                 |        4.5.2        |
-| [![Simplify.String](http://img.shields.io/badge/Simplify.String-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.String/)                                       |             [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.String.svg)](https://libraries.io/nuget/Simplify.String)             | 4.5.2, Standard 2.0 |
-| [![Simplify.String.Sources](http://img.shields.io/badge/Simplify.String.Sources-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.String.Sources/)               |     [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.String.Sources.svg)](https://libraries.io/nuget/Simplify.String.Sources)     | 4.5.2, Standard 2.0 |
-| [![Simplify.Xml](http://img.shields.io/badge/Simplify.Xml-v1.1-blue.svg)](https://www.nuget.org/packages/Simplify.Xml/)                                                |                [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Xml.svg)](https://libraries.io/nuget/Simplify.Xml)                | 4.5.2, Standard 2.0 |     [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml)      |
-| [![Simplify.Xml.Sources](http://img.shields.io/badge/Simplify.Xml.Sources-v1.1-blue.svg)](https://www.nuget.org/packages/Simplify.Xml.Sources/)                        |        [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Xml.Sources.svg)](https://libraries.io/nuget/Simplify.Xml.Sources)        | 4.5.2, Standard 2.0 |
+#### Simplify.Cryptography
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Cryptography)](https://www.nuget.org/packages/Simplify.Cryptography)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Cryptography)](https://www.nuget.org/packages/Simplify.Cryptography)
+![Platform](https://img.shields.io/badge/platform-4.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Cryptography)](https://libraries.io/nuget/Simplify.Cryptography)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Cryptography)
+
+#### Simplify.Extensions
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Extensions)](https://www.nuget.org/packages/Simplify.Extensions)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Extensions)](https://www.nuget.org/packages/Simplify.Extensions)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Extensions)](https://libraries.io/nuget/Simplify.Extensions)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions)
+
+#### Simplify.Extensions.Sources
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Extensions.Sources)](https://www.nuget.org/packages/Simplify.Extensions.Sources)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Extensions.Sources)](https://www.nuget.org/packages/Simplify.Extensions.Sources)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Extensions.Sources)](https://libraries.io/nuget/Simplify.Extensions.Sources)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions)
+
+#### Simplify.IO
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.IO)](https://www.nuget.org/packages/Simplify.IO)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.IO)](https://www.nuget.org/packages/Simplify.IO)
+![Platform](https://img.shields.io/badge/platform-.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.IO)](https://libraries.io/nuget/Simplify.IO)
+
+#### Simplify.String
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.String)](https://www.nuget.org/packages/Simplify.String)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.String)](https://www.nuget.org/packages/Simplify.String)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.String)](https://libraries.io/nuget/Simplify.String)
+
+#### Simplify.String.Sources
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.String.Sources)](https://www.nuget.org/packages/Simplify.String.Sources)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.String.Sources)](https://www.nuget.org/packages/Simplify.String.Sources)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.String.Sources)](https://libraries.io/nuget/Simplify.String.Sources)
+
+#### Simplify.Xml
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Xml)](https://www.nuget.org/packages/Simplify.Xml)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Xml)](https://www.nuget.org/packages/Simplify.Xml)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Xml)](https://libraries.io/nuget/Simplify.Xml)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml)
+
+#### Simplify.Xml.Sources
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Xml.Sources)](https://www.nuget.org/packages/Simplify.Xml.Sources)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Xml.Sources)](https://www.nuget.org/packages/Simplify.Xml.Sources)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Xml.Sources)](https://libraries.io/nuget/Simplify.Xml.Sources)
+[![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml)
 
 ### Desktop
 
-| Package                                                                                                                                             |                                                                                      Dependencies                                                                                      | Target Framework | Documentation |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :-----------: |
-| [![Simplify.Windows.Forms](http://img.shields.io/badge/Simplify.Windows.Forms-v1-blue.svg)](https://www.nuget.org/packages/Simplify.Windows.Forms/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Windows.Forms.svg)](https://libraries.io/nuget/Simplify.Windows.Forms) |       4.5        |
+#### Simplify.Windows.Forms
+
+[![Nuget Version](https://img.shields.io/nuget/v/Simplify.Windows.Forms)](https://www.nuget.org/packages/Simplify.Windows.Forms)
+[![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Windows.Forms)](https://www.nuget.org/packages/Simplify.Windows.Forms)
+![Platform](https://img.shields.io/badge/platform-.NET%204.5-lightgrey)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Windows.Forms)](https://libraries.io/nuget/Simplify.Windows.Forms)
 
 ## Contributing
 
