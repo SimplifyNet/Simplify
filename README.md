@@ -2,30 +2,28 @@
 
 ![Simplify](https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo128x128.png)
 
-`Simplify` is a set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
-
-## Issues
-
 [![Issues board](https://dxssrr2j0sq4w.cloudfront.net/3.2.0/img/external/zenhub-badge.svg)](https://app.zenhub.com/workspaces/simplify-5d7dd300da4a88000107f7e5/board?repos=208544410,208543783,208544195,208544168,208544390,208544370,208543999)
+[![AppVeyor](https://img.shields.io/appveyor/ci/i4004/simplify)](https://ci.appveyor.com/project/i4004/simplify)
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/i4004/simplify)](https://ci.appveyor.com/project/i4004/simplify)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/SimplifyNet/Simplify)](https://www.codefactor.io/repository/github/simplifynet/simplify)
 
-## Documentation
-
- All documentation can be found on the [wiki](https://github.com/SimplifyNet/Simplify/wiki) page.
-
-## Build status
-
-| Branch | Status |
-| :------ | :------ |
-| **master** | [![Build status](https://ci.appveyor.com/api/projects/status/kmm7aa2iqp71dcwi/branch/master?svg=true)](https://ci.appveyor.com/project/i4004/simplify) |
-| **develop** | [![Build status](https://ci.appveyor.com/api/projects/status/kmm7aa2iqp71dcwi/branch/develop?svg=true)](https://ci.appveyor.com/project/i4004/simplify) |
+`Simplify` is a set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
 
 ## Packages status
 
 ### Dependency Injection
 
-| Package | Dependencies | Target Framework | Documentation |
-| :------ | :------: | :------: | :------: |
-| [![Simplify.DI](https://img.shields.io/badge/Simplify.DI-v4.0-blue.svg)](https://www.nuget.org/packages/Simplify.DI/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.svg)](https://libraries.io/nuget/Simplify.DI) | 4.5.2, Standard 1.0 | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI) |
+#### Simplify.DI
+
+ [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI/)
+ ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)
+ [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.svg)](https://libraries.io/nuget/Simplify.DI)
+ [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI)
+
+
+| Package | Version | Target Framework | Dependencies | Documentation |
+| :------ | :------: | :------: | :------: | :------: |
+| Simplify.DI | [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI/) | ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)| [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.svg)](https://libraries.io/nuget/Simplify.DI) | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI) |
 
 #### Simplify.DI Providers
 
