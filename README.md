@@ -17,15 +17,16 @@
 
  [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI/)
  ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)
- [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.svg)](https://libraries.io/nuget/Simplify.DI)
- [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI)
-
-
-| Package | Version | Target Framework | Dependencies | Documentation |
-| :------ | :------: | :------: | :------: | :------: |
-| Simplify.DI | [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI)](https://www.nuget.org/packages/Simplify.DI/) | ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.0%20%7C%20.NET%204.5.2-lightgrey)| [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.svg)](https://libraries.io/nuget/Simplify.DI) | [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI) |
+ [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI)](https://libraries.io/nuget/Simplify.DI)
+ [![Documentation](https://img.shields.io/badge/docs-green)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI)
 
 #### Simplify.DI Providers
+
+##### Simplify.DI.Provider.CastleWindsor
+
+ [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.CastleWindsor)](https://www.nuget.org/packages/Simplify.DI.Provider.CastleWindsor/)
+ ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.6%20%7C%20.NET%204.5.2-lightgrey)
+ [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.CastleWindsor)](https://libraries.io/nuget/Simplify.DI)
 
 | Package | Dependencies | Target Framework | Documentation |
 | :------ | :------: | :------: | :------: |
