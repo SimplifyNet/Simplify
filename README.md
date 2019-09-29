@@ -22,16 +22,23 @@
 
 #### Simplify.DI Providers
 
-##### Simplify.DI.Provider.CastleWindsor
+##### CastleWindsor
 
  [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.CastleWindsor)](https://www.nuget.org/packages/Simplify.DI.Provider.CastleWindsor/)
  ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.6%20%7C%20.NET%204.5.2-lightgrey)
- [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.CastleWindsor)](https://libraries.io/nuget/Simplify.DI)
+ [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.CastleWindsor)](https://libraries.io/nuget/Simplify.DI.Provider.CastleWindsor)
 
-| Package | Dependencies | Target Framework | Documentation |
-| :------ | :------: | :------: | :------: |
-| [![Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection](http://img.shields.io/badge/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection-v1.2-blue.svg)](https://www.nuget.org/packages/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.svg)](https://libraries.io/nuget/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection) | 4.6.2, Standard 2.0 |
-| [![Simplify.DI.Provider.SimpleInjector](http://img.shields.io/badge/Simplify.DI.Provider.SimpleInjector-v1.8-blue.svg)](https://www.nuget.org/packages/Simplify.DI.Provider.SimpleInjector/) | [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.SimpleInjector.svg)](https://libraries.io/nuget/Simplify.DI.Provider.SimpleInjector) | 4.5.2, Standard 1.3 |
+##### Microsoft.Extensions.DependencyInjection
+
+ [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)](https://www.nuget.org/packages/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection/)
+ ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.6.2-lightgrey)
+ [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection)](https://libraries.io/nuget/Simplify.DI.Providers.Microsoft.Extensions.DependencyInjection)
+ 
+##### SimpleInjector
+
+ [![Simplify.DI](https://img.shields.io/nuget/v/Simplify.DI.Provider.SimpleInjector)](https://www.nuget.org/packages/Simplify.DI.Provider.SimpleInjector/)
+ ![Platform](https://img.shields.io/badge/platform-.NET%20Standard%201.3%20%7C%20.NET%204.5.2-lightgrey)
+ [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI.Provider.SimpleInjector)](https://libraries.io/nuget/Simplify.DI.Provider.SimpleInjector)
 
 #### Simplify.DI Integrations
 
