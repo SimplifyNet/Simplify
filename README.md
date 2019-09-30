@@ -6,6 +6,7 @@
 [![AppVeyor](https://img.shields.io/appveyor/ci/i4004/simplify/master)](https://ci.appveyor.com/project/i4004/simplify)
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/i4004/simplify/master)](https://ci.appveyor.com/project/i4004/simplify)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/SimplifyNet/Simplify)](https://www.codefactor.io/repository/github/simplifynet/simplify)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=SimplifyNet/Simplify)](https://dependabot.com)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](http://makeapullrequest.com)
 
 `Simplify` is a set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
