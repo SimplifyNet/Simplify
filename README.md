@@ -23,7 +23,7 @@
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.DI)](https://libraries.io/nuget/Simplify.DI)
 [![Documentation](https://img.shields.io/badge/docs-green)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI)
 
-A common interface for IOC containers. Decouples users and frameworks (that are based on Simplify.DI) from dependency on IOC containers. Disciplines and unifies dependencies registration, validation and objects creation.
+A common interface for IOC containers. Decouples users and frameworks (that are based on Simplify.DI) from dependency on IOC containers. Disciplines and unifies dependencies registration, verification and objects creation.
 
 
 #### Simplify.DI IOC Containers Providers
