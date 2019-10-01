@@ -1,6 +1,10 @@
 {
 	"dotnet-test-explorer.testProjectPath": "src/**/*Tests.csproj",
 	"cSpell.words": [
-		"registrator"
+		"SMTP",
+		"localizable",
+		"registrator",
+		"serializer",
+		"Сonveyor"
 	]
 }
