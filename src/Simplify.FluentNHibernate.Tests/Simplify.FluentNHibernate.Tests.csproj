@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netcoreapp3.0</TargetFramework>
+		<TargetFramework>net462</TargetFramework>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.FluentNHibernate unit tests</Description>
@@ -18,9 +18,6 @@
 		<ProjectReference Include="..\Simplify.FluentNHibernate\Simplify.FluentNHibernate.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Update="App.config">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
