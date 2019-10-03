@@ -18,6 +18,9 @@
 		<ProjectReference Include="..\Simplify.FluentNHibernate\Simplify.FluentNHibernate.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<None Update="App.config">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
