@@ -5,9 +5,9 @@
 		<Product>Simplify</Product>
 		<Description>Simplifies FluentNHibernate connection configuration and allows you to write data-base queries with lambda expressions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.10-pre01</Version>
+		<Version>1.10</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.FluentNHibernate</PackageProjectUrl>
-		<PackageIcon>icon.png</PackageIcon>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo64x64.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.FluentNHibernate</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET FluentNHibernate ORM</PackageTags>
@@ -22,8 +22,5 @@
 	<ItemGroup>
 		<PackageReference Include="FluentNHibernate" Version="2.1.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
