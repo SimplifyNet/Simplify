@@ -14,7 +14,7 @@
 		<PackageReleaseNotes>
 			Updates
 			* Upgrade to Microsoft.Extensions.Configuration 3.0.0
-			* System.Configuration.ConfigurationManager removed
+			* System.Configuration.ConfigurationManager removed due to reference via NHibernate
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.FluentNHibernate.xml</DocumentationFile>
