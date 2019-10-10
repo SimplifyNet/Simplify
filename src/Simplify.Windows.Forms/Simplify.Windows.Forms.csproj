@@ -15,6 +15,7 @@
 		<PackageReleaseNotes>
 			Updates
 			* Upgrade to .NET Framework 4.5.2
+			* Upgrade to Simplify.Resources 1.0.1
 			New
 			* .NET Core 3.0 support
 		</PackageReleaseNotes>
