@@ -24,21 +24,47 @@ namespace Simplify.Windows.Forms
 			_checkItems = checkItems;
 		}
 
-		private void ValidateItems()
+		/// <summary>
+		/// Enable items validation
+		/// </summary>
+		public void EnableValidation()
 		{
-			foreach(var item in _checkItems)
+			_validationEnabled = true;
+
+			foreach (var item in _checkItems)
 			{
 				var castItemComboBox = item as ComboBox;
 
-				if(castItemComboBox != null)
+				// Special validation for ComboBox controls
+				if (castItemComboBox != null)
 				{
-					if(castItemComboBox.DropDownStyle == ComboBoxStyle.DropDownList && castItemComboBox.SelectedIndex == -1)
+					if (castItemComboBox.Items.Count == 0 && castItemComboBox.DropDownStyle == ComboBoxStyle.DropDownList)
+						castItemComboBox.Enabled = false;
+					else
+						castItemComboBox.SelectedIndexChanged += OnItemCheckEvent;
+				}
+				else
+					item.TextChanged += OnItemCheckEvent;
+			}
+
+			ValidateItems();
+		}
+
+		private void ValidateItems()
+		{
+			foreach (var item in _checkItems)
+			{
+				var castItemComboBox = item as ComboBox;
+
+				if (castItemComboBox != null)
+				{
+					if (castItemComboBox.DropDownStyle == ComboBoxStyle.DropDownList && castItemComboBox.SelectedIndex == -1)
 					{
 						_resultStatusControl.Enabled = false;
 						return;
 					}
 				}
-				else if(item.Text.Length == 0)
+				else if (item.Text.Length == 0)
 				{
 					_resultStatusControl.Enabled = false;
 					return;
@@ -50,34 +76,8 @@ namespace Simplify.Windows.Forms
 
 		private void OnItemCheckEvent(object sender, EventArgs e)
 		{
-			if(_validationEnabled)
+			if (_validationEnabled)
 				ValidateItems();
-		}
-
-		/// <summary>
-		/// Elable items validation
-		/// </summary>
-		public void EnableValidation()
-		{
-			_validationEnabled = true;
-
-			foreach(var item in _checkItems)
-			{
-				var castItemComboBox = item as ComboBox;
-
-				// Special validation for ComboBox controls
-				if(castItemComboBox != null)
-				{
-					if(castItemComboBox.Items.Count == 0 && castItemComboBox.DropDownStyle == ComboBoxStyle.DropDownList)
-						castItemComboBox.Enabled = false;
-					else
-						castItemComboBox.SelectedIndexChanged += OnItemCheckEvent;
-				}
-				else
-					item.TextChanged += OnItemCheckEvent;
-			}
-
-			ValidateItems();
 		}
 	}
 }

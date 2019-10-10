@@ -276,7 +276,7 @@ XML extension functions and serializer.
 
 [![Nuget Version](https://img.shields.io/nuget/v/Simplify.Windows.Forms)](https://www.nuget.org/packages/Simplify.Windows.Forms)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Windows.Forms)](https://www.nuget.org/packages/Simplify.Windows.Forms)
-![Platform](https://img.shields.io/badge/platform-.NET%204.5-lightgrey)
+![Platform](https://img.shields.io/badge/platform-.NET%20Core%203.0%20%7C%20.NET%204.5.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Windows.Forms)](https://libraries.io/nuget/Simplify.Windows.Forms)
 
 `Simplify.Windows.Forms` controls set.
