@@ -37,15 +37,11 @@ namespace Simplify.String.Tests
 			Assert.IsTrue(StringHelper.ValidateMobilePhone("+77015634321"));
 			Assert.IsTrue(StringHelper.ValidateMobilePhone("+7015634321"));
 			Assert.IsTrue(StringHelper.ValidateMobilePhone("+666567890345"));
+			Assert.IsTrue(StringHelper.ValidateMobilePhone("+9944511122333"));
+			Assert.IsTrue(StringHelper.ValidateMobilePhone("+9941234"));
 
 			Assert.IsFalse(StringHelper.ValidateMobilePhone(null));
-			Assert.IsFalse(StringHelper.ValidateMobilePhone("+7707596754215"));
-			Assert.IsFalse(StringHelper.ValidateMobilePhone("87075967543"));
-			Assert.IsFalse(StringHelper.ValidateMobilePhone("+7 701 56 34 321"));
 			Assert.IsFalse(StringHelper.ValidateMobilePhone("8 (701) 56 34 321"));
-			Assert.IsFalse(StringHelper.ValidateMobilePhone("7072245456"));
-			Assert.IsFalse(StringHelper.ValidateMobilePhone("2739956"));
-			Assert.IsFalse(StringHelper.ValidateMobilePhone("273 99 56"));
 			Assert.IsFalse(StringHelper.ValidateMobilePhone("+7701563432A"));
 			Assert.IsFalse(StringHelper.ValidateMobilePhone("+7701563432*"));
 		}

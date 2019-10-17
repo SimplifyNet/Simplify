@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>Simplify.String.Sources</id>
@@ -12,8 +12,8 @@
 		<description>String operations/validation functions</description>
 		<summary>String operations/validation functions</summary>
 		<releaseNotes>
-			+ .NET Standard 2.0 support
-			* ValidateEMail reimplemented via System.Net.Mail.MailAddress internal validator
+			Bug fixes
+			* ValidateMobilePhone phone length validation fix
 		</releaseNotes>
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
