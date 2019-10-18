@@ -18,7 +18,7 @@ namespace Simplify.System
 		// ReSharper disable once InconsistentNaming
 		public const string DefaultEnvironmentName = "Production";
 
-		private static string _name = Environment.GetEnvironmentVariable(EnvironmentVariableName) ?? DefaultEnvironmentName;
+		private static string? _name;
 
 		/// <summary>
 		/// Gets or sets the current environment name.
@@ -28,7 +28,7 @@ namespace Simplify.System
 		/// </value>
 		public static string Name
 		{
-			get => _name;
+			get { return _name ??= Environment.GetEnvironmentVariable(EnvironmentVariableName) ?? DefaultEnvironmentName; }
 			set => _name = value ?? throw new ArgumentNullException(nameof(value));
 		}
 	}
