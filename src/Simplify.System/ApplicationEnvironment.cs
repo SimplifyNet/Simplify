@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
 
 namespace Simplify.System
 {
@@ -17,9 +15,10 @@ namespace Simplify.System
 		/// <summary>
 		/// The default environment name
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		public const string DefaultEnvironmentName = "Production";
 
-		private static string _name;
+		private static string _name = Environment.GetEnvironmentVariable(EnvironmentVariableName) ?? DefaultEnvironmentName;
 
 		/// <summary>
 		/// Gets or sets the current environment name.
@@ -29,16 +28,8 @@ namespace Simplify.System
 		/// </value>
 		public static string Name
 		{
-			get
-			{
-				if (!string.IsNullOrEmpty(_name))
-					return _name;
-
-				_name = Environment.GetEnvironmentVariable(EnvironmentVariableName) ?? DefaultEnvironmentName;
-
-				return _name;
-			}
-			set => _name = value;
+			get => _name;
+			set => _name = value ?? throw new ArgumentNullException(nameof(value));
 		}
 	}
 }
