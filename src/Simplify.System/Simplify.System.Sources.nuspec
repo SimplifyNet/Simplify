@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>Simplify.System.Sources</id>
-		<version>1.2.1</version>
+		<version>$version$</version>
 		<title>Simplify.System.Sources</title>
 		<authors>Alexander Krylkov</authors>
 		<owners>Alexander Krylkov</owners>
