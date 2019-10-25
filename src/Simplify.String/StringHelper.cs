@@ -52,7 +52,7 @@ namespace Simplify.String
 			if (string.IsNullOrEmpty(phone))
 				return false;
 
-			return Regex.IsMatch(phone, @"^\+[1-9]{1}[0-9]{7,11}$");
+			return Regex.IsMatch(phone, @"^\+[1-9]{1}[0-9]{4,12}$");
 		}
 
 		/// <summary>

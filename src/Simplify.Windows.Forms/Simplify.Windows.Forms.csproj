@@ -1,23 +1,31 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
-		<TargetFrameworks>net45</TargetFrameworks>
+		<TargetFrameworks>net452;netcoreapp3.0</TargetFrameworks>
+		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>System.Windows.Forms additional controls</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0.1</Version>
+		<Version>1.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Pipelines</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET pipelines</PackageTags>
 		<PackageReleaseNotes>
+			Updates
+			* Upgrade to .NET Framework 4.5.2
+			* Upgrade to Simplify.Resources 1.0.1
+			New
+			* .NET Core 3.0 support
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Windows.Forms.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.Resources" Version="1.0.0" />
+		<PackageReference Include="Simplify.Resources" Version="1.0.1" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
 		<Reference Include="System.Windows.Forms" />
 	</ItemGroup>
 </Project>

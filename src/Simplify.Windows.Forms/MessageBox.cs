@@ -7,7 +7,7 @@ namespace Simplify.Windows.Forms
 	/// Provides easy message box showing for windows desktop applications
 	/// </summary>
 	public class MessageBox
-	{	
+	{
 		/// <summary>
 		/// Shows the message box
 		/// </summary>
@@ -28,6 +28,6 @@ namespace Simplify.Windows.Forms
 		public static DialogResult ShowStMessageBox(string stringTableRecordName, MessageBoxIcon icon = MessageBoxIcon.Information, MessageBoxButtons buttons = MessageBoxButtons.OK)
 		{
 			return ShowMessageBox(StringTable.Entry[stringTableRecordName], icon, buttons);
-		}		 
+		}
 	}
 }

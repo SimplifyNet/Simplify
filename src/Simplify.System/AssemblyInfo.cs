@@ -8,7 +8,7 @@ namespace Simplify.System
 	/// </summary>
 	public class AssemblyInfo : IAssemblyInfo
 	{
-		private static IAssemblyInfo _entryAssemblyInfo;
+		private static IAssemblyInfo? _entryAssemblyInfo;
 		private readonly Assembly _infoAssembly;
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace Simplify.System
 		/// <exception cref="ArgumentNullException">value</exception>
 		public static IAssemblyInfo Entry
 		{
-			get => _entryAssemblyInfo ?? (_entryAssemblyInfo = new AssemblyInfo(Assembly.GetEntryAssembly()));
+			get => _entryAssemblyInfo ??= new AssemblyInfo(Assembly.GetEntryAssembly());
 			set => _entryAssemblyInfo = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -54,7 +54,9 @@ namespace Simplify.System
 				if (attributes.Length > 0)
 				{
 					var titleAttribute = (AssemblyTitleAttribute)attributes[0];
-					if (titleAttribute.Title.Length > 0) return titleAttribute.Title;
+
+					if (titleAttribute.Title.Length > 0)
+						return titleAttribute.Title;
 				}
 
 				return global::System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);

@@ -7,7 +7,7 @@ namespace Simplify.System
 	/// </summary>
 	public static class TimeProvider
 	{
-		private static ITimeProvider _currentInstance;
+		private static ITimeProvider? _currentInstance;
 
 		/// <summary>
 		/// Gets or sets the current time provider.
@@ -18,7 +18,7 @@ namespace Simplify.System
 		/// <exception cref="ArgumentNullException">value</exception>
 		public static ITimeProvider Current
 		{
-			get => _currentInstance ?? (_currentInstance = new SystemTimeProvider());
+			get => _currentInstance ??= new SystemTimeProvider();
 			set => _currentInstance = value ?? throw new ArgumentNullException(nameof(value));
 		}
 	}

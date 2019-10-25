@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+		<LangVersion>8.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Core classes for applications and libraries</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.2</Version>
+		<Version>1.2.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.System</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET</PackageTags>
 		<PackageReleaseNotes>
-			+ ConfigurationException added
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>

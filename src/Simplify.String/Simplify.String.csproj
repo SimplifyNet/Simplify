@@ -5,15 +5,15 @@
 		<Product>Simplify</Product>
 		<Description>String operations/validation functions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.2</Version>
+		<Version>1.2.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.String</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET</PackageTags>
 		<PackageReleaseNotes>
-			+ .NET Standard 2.0 support
-			* ValidateEMail reimplemented via System.Net.Mail.MailAddress internal validator
+			Bug fixes
+			* ValidateMobilePhone phone length validation fix
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.String.xml</DocumentationFile>
