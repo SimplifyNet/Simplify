@@ -83,7 +83,7 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			return queryable.Select(x => x).SingleOrDefault();
+			return queryable.SingleOrDefault();
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			return queryable.Select(x => x).SingleOrDefaultAsync();
+			return queryable.SingleOrDefaultAsync();
 		}
 
 		/// <summary>
@@ -118,7 +118,7 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			return queryable.Select(x => x).FirstOrDefault();
+			return queryable.FirstOrDefault();
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			return queryable.Select(x => x).FirstOrDefaultAsync();
+			return queryable.FirstOrDefaultAsync();
 		}
 
 		/// <summary>
@@ -155,7 +155,7 @@ namespace Simplify.FluentNHibernate
 
 			queryable = queryable.WithOptions(x => x.SetCacheable(true));
 
-			return queryable.Select(x => x).SingleOrDefault();
+			return queryable.SingleOrDefault();
 		}
 
 		/// <summary>
@@ -204,7 +204,7 @@ namespace Simplify.FluentNHibernate
 			if (customProcessing != null)
 				queryable = customProcessing(queryable);
 
-			return queryable.Select(x => x).ToList();
+			return queryable.ToList();
 		}
 
 		/// <summary>
