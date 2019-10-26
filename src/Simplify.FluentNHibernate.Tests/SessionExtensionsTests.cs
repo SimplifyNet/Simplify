@@ -35,32 +35,47 @@ namespace Simplify.FluentNHibernate.Tests
 		}
 
 		[Test]
-		public void GetObject_Tests()
+		public void GetObject_DfferentCountions_Met()
 		{
+			// Act & Assert
 			Assert.IsNull(_session.GetObject<User>(x => x.Name == "test"));
+
+			// Assign
 
 			_session.Save(new User { Name = "test" });
 			_session.Flush();
 
+			// Act
 			var user = _session.GetObject<User>(x => x.Name == "test");
+
+			// Assert
 			Assert.IsNotNull(user);
+
+			// Assign
 
 			user.Name = "foo";
 			_session.Update(user);
 			_session.Flush();
 
+			// Act
 			user = _session.GetObject<User>(x => x.Name == "foo");
+
+			// Assert
 			Assert.IsNotNull(user);
+
+			// Assign
 
 			_session.Delete(user);
 			_session.Flush();
+
+			// Act & Assert
 			Assert.IsNull(_session.GetObject<User>(x => x.Name == "foo"));
 		}
 
 		[Test]
-		public void GetListPaged_Tests()
+		public void GetListPagedAndGetCount_MultipleItems_CorrectCountAndPage()
 		{
-			// Act
+			// Assign
 
 			_session.Save(new User { Name = "test0", LastActivityTime = new DateTime(2015, 2, 3, 14, 15, 0) });
 			_session.Save(new User { Name = "test1", LastActivityTime = new DateTime(2015, 2, 3, 14, 19, 0) });
@@ -72,8 +87,8 @@ namespace Simplify.FluentNHibernate.Tests
 
 			_session.Flush();
 
+			// Act
 			var items = _session.GetListPaged<User>(1, 2, x => x.Name.Contains("test"), x => x.OrderByDescending(o => o.LastActivityTime));
-
 			var itemsCount = _session.GetCount<User>(x => x.Name.Contains("test"));
 
 			// Assert
