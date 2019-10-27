@@ -50,6 +50,44 @@ namespace Simplify.FluentNHibernate
 		}
 
 		/// <summary>
+		/// Get and cache an object from database by filter (in case of several objects returned exception will be thrown)
+		/// </summary>
+		/// <typeparam name="T">The type of the object</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		public static T GetSingleObjectCacheable<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			queryable = queryable.WithOptions(x => x.SetCacheable(true));
+
+			return queryable.SingleOrDefault();
+		}
+
+		/// <summary>
+		/// Get and cache an object from database by filter asynchronously (in case of several objects returned exception will be thrown)
+		/// </summary>
+		/// <typeparam name="T">The type of the object</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		public static Task<T> GetSingleObjectCacheableAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			queryable = queryable.WithOptions(x => x.SetCacheable(true));
+
+			return queryable.SingleOrDefaultAsync();
+		}
+
+		/// <summary>
 		/// Get a first object from database by filter
 		/// </summary>
 		/// <typeparam name="T">The type of the object</typeparam>
@@ -83,44 +121,6 @@ namespace Simplify.FluentNHibernate
 				queryable = queryable.Where(query);
 
 			return queryable.FirstOrDefaultAsync();
-		}
-
-		/// <summary>
-		/// Get and cache an object from database by filter (in case of several objects returned exception will be thrown)
-		/// </summary>
-		/// <typeparam name="T">The type of the object</typeparam>
-		/// <param name="session">The NHibernate session.</param>
-		/// <param name="query">Query</param>
-		public static T GetObjectCacheable<T>(this ISession session, Expression<Func<T, bool>> query = null)
-			where T : class
-		{
-			var queryable = session.Query<T>();
-
-			if (query != null)
-				queryable = queryable.Where(query);
-
-			queryable = queryable.WithOptions(x => x.SetCacheable(true));
-
-			return queryable.SingleOrDefault();
-		}
-
-		/// <summary>
-		/// Get and cache an object from database by filter asynchronously (in case of several objects returned exception will be thrown)
-		/// </summary>
-		/// <typeparam name="T">The type of the object</typeparam>
-		/// <param name="session">The NHibernate session.</param>
-		/// <param name="query">Query</param>
-		public static Task<T> GetObjectCacheableAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
-			where T : class
-		{
-			var queryable = session.Query<T>();
-
-			if (query != null)
-				queryable = queryable.Where(query);
-
-			queryable = queryable.WithOptions(x => x.SetCacheable(true));
-
-			return queryable.Select(x => x).SingleOrDefaultAsync();
 		}
 
 		#endregion Single objects operations
