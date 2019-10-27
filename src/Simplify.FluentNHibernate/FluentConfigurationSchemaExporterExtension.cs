@@ -8,15 +8,15 @@ using NHibernate.Tool.hbm2ddl;
 namespace Simplify.FluentNHibernate
 {
 	/// <summary>
-	/// Entities to database exporter
+	/// Entities to database exporter extensions
 	/// </summary>
-	public static class SchemaExporter
+	public static class FluentConfigurationSchemaExporterExtension
 	{
 		/// <summary>
-		/// Create database structure from entities
+		/// Create database structure from code
 		/// </summary>
 		/// <param name="configuration">The configuration.</param>
-		public static void Export(FluentConfiguration configuration)
+		public static void ExportSchema(this FluentConfiguration configuration)
 		{
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
