@@ -1,5 +1,7 @@
-﻿using NHibernate;
+﻿using System.Threading.Tasks;
+using NHibernate;
 using NUnit.Framework;
+using Simplify.FluentNHibernate.Tests.Entities.Accounts;
 
 namespace Simplify.FluentNHibernate.Tests
 {
@@ -11,30 +13,63 @@ namespace Simplify.FluentNHibernate.Tests
 		[SetUp]
 		public void Initialize()
 		{
-			CreateDatabase(x => (_session = x.OpenStatelessSession()).Connection);
+			CreateDatabase(x => (_session = x.OpenStatelessSession()).Connection, false);
+		}
+
+		[Test]
+		public void GetSingleObject_NotExist_ReturnNull()
+		{
+			PerformSingleObjectNotExistTest(() => _session.GetSingleObject(SingleObjectQuery));
+		}
+
+		[Test]
+		public async Task GetSingleObjectAsync_NotExist_ReturnNull()
+		{
+			await PerformSingleObjectNotExistAsyncTest(() => _session.GetSingleObjectAsync(SingleObjectQuery));
+		}
+
+		[Test]
+		public void GetSingleObject_Exist_ReturnNotNull()
+		{
+			PerformSingleObjectExistTest(() => _session.GetSingleObject(SingleObjectQuery), CreateTestUser);
+		}
+
+		[Test]
+		public async Task GetSingleObjectAsync_Exist_ReturnNotNull()
+		{
+			await PerformSingleObjectExistAsyncTest(() => _session.GetSingleObjectAsync(SingleObjectQuery), CreateTestUser);
+		}
+
+		[Test]
+		public void GetSingleObjectCacheable_NotExist_ReturnNull()
+		{
+			PerformSingleObjectNotExistTest(() => _session.GetSingleObjectCacheable(SingleObjectQuery));
+		}
+
+		[Test]
+		public async Task GetSingleObjectCacheableAsync_NotExist_ReturnNull()
+		{
+			await PerformSingleObjectNotExistAsyncTest(() => _session.GetSingleObjectCacheableAsync(SingleObjectQuery));
+		}
+
+		[Test]
+		public void GetSingleObjectCacheable_Exist_ReturnNull()
+		{
+			PerformSingleObjectExistTest(() => _session.GetSingleObjectCacheable(SingleObjectQuery), CreateTestUser);
+		}
+
+		[Test]
+		public async Task GetSingleObjectCacheableAsync_Exist_ReturnNull()
+		{
+			await PerformSingleObjectExistAsyncTest(() => _session.GetSingleObjectCacheableAsync(SingleObjectQuery), CreateTestUser);
+		}
+
+		private void CreateTestUser()
+		{
+			_session.Insert(new User { Name = "test" });
 		}
 
 		// TODO refactor same as SessionExtensionsTests
-
-		//[Test]
-		//public void Stateless_GetObject_Tests()
-		//{
-		//	Assert.IsNull(_session.GetObject<User>(x => x.Name == "test"));
-
-		//	_session.Insert(new User { Name = "test" });
-
-		//	var user = _session.GetObject<User>(x => x.Name == "test");
-		//	Assert.IsNotNull(user);
-
-		//	user.Name = "foo";
-		//	_session.Update(user);
-
-		//	user = _session.GetObject<User>(x => x.Name == "foo");
-		//	Assert.IsNotNull(user);
-
-		//	_session.Delete(user);
-		//	Assert.IsNull(_session.GetObject<User>(x => x.Name == "foo"));
-		//}
 
 		//[Test]
 		//public void Stateless_GetListPaged_Tests()
