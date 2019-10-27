@@ -13,6 +13,8 @@
 		<PackageTags>.NET FluentNHibernate ORM</PackageTags>
 		<PackageReleaseNotes>
 			Breaking Changes
+			New 
+			* Session Async operation
 			Updates
 			* SchemaExporter now is the FluentConfiguration extension method
 		</PackageReleaseNotes>
