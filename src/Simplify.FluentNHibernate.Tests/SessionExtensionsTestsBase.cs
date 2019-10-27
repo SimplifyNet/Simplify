@@ -75,6 +75,26 @@ namespace Simplify.FluentNHibernate.Tests
 			Assert.IsNotNull(result);
 		}
 
+		protected void PerformSingleObjectMultipleExistTest(Func<User> act, Action userCreator)
+		{
+			// Arrange
+
+			userCreator();
+
+			// Act & Assert
+			Assert.Throws<InvalidOperationException>(() => act());
+		}
+
+		protected void PerformSingleObjectMultipleExistAsyncTest(Func<Task<User>> act, Action userCreator)
+		{
+			// Arrange
+
+			userCreator();
+
+			// Act
+			Assert.ThrowsAsync<InvalidOperationException>(() => act());
+		}
+
 		private static FluentConfiguration CreateConfigurationInMemory()
 		{
 			return Fluently.Configure()
