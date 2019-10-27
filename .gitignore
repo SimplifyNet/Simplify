@@ -113,3 +113,6 @@ Logs.log
 
 # Temp test SQLite databases ignore
 *.sqlite
+
+# Coverage files ignore
+*lcov.info
