@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.FluentNHibernate unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.4.1</Version>
+		<Version>2.0</Version>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
