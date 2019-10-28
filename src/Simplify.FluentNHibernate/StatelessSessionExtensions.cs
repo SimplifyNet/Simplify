@@ -189,7 +189,9 @@ namespace Simplify.FluentNHibernate
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public static IList<T> GetListPaged<T>(this IStatelessSession session, int pageIndex, int itemsPerPage,
+		public static IList<T> GetListPaged<T>(this IStatelessSession session,
+			int pageIndex,
+			int itemsPerPage,
 			Expression<Func<T, bool>> query = null,
 			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
 			where T : class
@@ -216,7 +218,9 @@ namespace Simplify.FluentNHibernate
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public static async Task<IList<T>> GetListPagedAsync<T>(this IStatelessSession session, int pageIndex, int itemsPerPage,
+		public static async Task<IList<T>> GetListPagedAsync<T>(this IStatelessSession session,
+			int pageIndex,
+			int itemsPerPage,
 			Expression<Func<T, bool>> query = null,
 			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
 			where T : class
