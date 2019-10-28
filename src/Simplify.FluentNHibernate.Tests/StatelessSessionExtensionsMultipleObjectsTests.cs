@@ -7,14 +7,14 @@ using Simplify.FluentNHibernate.Tests.Entities.Accounts;
 namespace Simplify.FluentNHibernate.Tests
 {
 	[TestFixture]
-	public class SessionExtensionsMultipleObjectsTests : SessionExtensionsTestsBase
+	public class StatelessSessionExtensionsMultipleObjectsTests : SessionExtensionsTestsBase
 	{
-		private ISession _session;
+		private IStatelessSession _session;
 
 		[SetUp]
 		public void Initialize()
 		{
-			CreateDatabase(x => (_session = x.OpenSession()).Connection);
+			CreateDatabase(x => (_session = x.OpenStatelessSession()).Connection, false);
 			CreateUsers();
 		}
 
@@ -68,15 +68,13 @@ namespace Simplify.FluentNHibernate.Tests
 
 		private void CreateUsers()
 		{
-			_session.Save(new User { Name = "test0", LastActivityTime = new DateTime(2015, 2, 3, 14, 15, 0) });
-			_session.Save(new User { Name = "test1", LastActivityTime = new DateTime(2015, 2, 3, 14, 19, 0) });
-			_session.Save(new User { Name = "foo2", LastActivityTime = new DateTime(2015, 2, 3, 14, 17, 0) });
-			_session.Save(new User { Name = "test3", LastActivityTime = new DateTime(2015, 2, 3, 14, 18, 0) });
-			_session.Save(new User { Name = "test4", LastActivityTime = new DateTime(2015, 2, 3, 14, 14, 0) });
-			_session.Save(new User { Name = "test5", LastActivityTime = new DateTime(2015, 2, 3, 14, 16, 0) });
-			_session.Save(new User { Name = "foo1", LastActivityTime = new DateTime(2015, 2, 3, 14, 16, 0) });
-
-			_session.Flush();
+			_session.Insert(new User { Name = "test0", LastActivityTime = new DateTime(2015, 2, 3, 14, 15, 0) });
+			_session.Insert(new User { Name = "test1", LastActivityTime = new DateTime(2015, 2, 3, 14, 19, 0) });
+			_session.Insert(new User { Name = "foo2", LastActivityTime = new DateTime(2015, 2, 3, 14, 17, 0) });
+			_session.Insert(new User { Name = "test3", LastActivityTime = new DateTime(2015, 2, 3, 14, 18, 0) });
+			_session.Insert(new User { Name = "test4", LastActivityTime = new DateTime(2015, 2, 3, 14, 14, 0) });
+			_session.Insert(new User { Name = "test5", LastActivityTime = new DateTime(2015, 2, 3, 14, 16, 0) });
+			_session.Insert(new User { Name = "foo1", LastActivityTime = new DateTime(2015, 2, 3, 14, 16, 0) });
 		}
 	}
 }
