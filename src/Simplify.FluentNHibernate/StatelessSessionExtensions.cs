@@ -154,6 +154,32 @@ namespace Simplify.FluentNHibernate
 		}
 
 		/// <summary>
+		/// Get a list of objects asynchronously
+		/// </summary>
+		/// <typeparam name="T">The type of elements</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		/// <param name="customProcessing">The custom processing.</param>
+		/// <returns>
+		/// List of objects
+		/// </returns>
+		public static async Task<IList<T>> GetListAsync<T>(this IStatelessSession session,
+			Expression<Func<T, bool>> query = null,
+			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			if (customProcessing != null)
+				queryable = customProcessing(queryable);
+
+			return await queryable.ToListAsync();
+		}
+
+		/// <summary>
 		/// Gets the list of objects paged.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
@@ -180,6 +206,33 @@ namespace Simplify.FluentNHibernate
 				.Take(itemsPerPage).ToList();
 		}
 
+		/// <summary>
+		/// Gets the list of objects paged asynchronously.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="pageIndex">Index of the page.</param>
+		/// <param name="itemsPerPage">The items per page.</param>
+		/// <param name="query">The query.</param>
+		/// <param name="customProcessing">The custom processing.</param>
+		/// <returns></returns>
+		public static async Task<IList<T>> GetListPagedAsync<T>(this IStatelessSession session, int pageIndex, int itemsPerPage,
+			Expression<Func<T, bool>> query = null,
+			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			if (customProcessing != null)
+				queryable = customProcessing(queryable);
+
+			return await queryable.Skip(pageIndex * itemsPerPage)
+				.Take(itemsPerPage).ToListAsync();
+		}
+
 		#endregion List operations
 
 		#region Count operations
@@ -200,6 +253,60 @@ namespace Simplify.FluentNHibernate
 				queryable = queryable.Where(query);
 
 			return queryable.Count();
+		}
+
+		/// <summary>
+		/// Gets the number of elements asynchronously.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="query">The query.</param>
+		/// <returns></returns>
+		public static Task<int> GetCountAsync<T>(this IStatelessSession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.CountAsync();
+		}
+
+		/// <summary>
+		/// Gets the number of elements.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="query">The query.</param>
+		/// <returns></returns>
+		public static long GetLongCount<T>(this IStatelessSession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.LongCount();
+		}
+
+		/// <summary>
+		/// Gets the number of elements asynchronously.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="query">The query.</param>
+		/// <returns></returns>
+		public static Task<long> GetLongCountAsync<T>(this IStatelessSession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.LongCountAsync();
 		}
 
 		#endregion Count operations

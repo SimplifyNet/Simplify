@@ -15,7 +15,8 @@
 			Breaking Changes
 			* GetSingleObject methods unified with GetObject
 			New
-			* Session Async operation
+			* Session Async operations
+			* LongCount and LongCountAsync session methods
 			Updates
 			* SchemaExporter now is the FluentConfiguration extension method
 		</PackageReleaseNotes>
