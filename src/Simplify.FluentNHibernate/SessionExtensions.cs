@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -16,40 +16,12 @@ namespace Simplify.FluentNHibernate
 		#region Single objects operations
 
 		/// <summary>
-		/// Get an object from single item table
-		/// </summary>
-		/// <typeparam name="T">Object type to get</typeparam>
-		/// <param name="session">The NHibernate session.</param>
-		/// <returns></returns>
-		public static T GetSingleObject<T>(this ISession session)
-			where T : class
-		{
-			return GetSingleObject<T>(session, LockMode.None);
-		}
-
-		/// <summary>
-		/// Get an object from single item table
-		/// </summary>
-		/// <typeparam name="T">Object type to get</typeparam>
-		/// <param name="session">The NHibernate session.</param>
-		/// <param name="lockMode">The lock mode.</param>
-		/// <returns></returns>
-		public static T GetSingleObject<T>(this ISession session, LockMode lockMode)
-			where T : class
-		{
-			return session.CreateCriteria<T>()
-				.SetLockMode(lockMode)
-				.UniqueResult<T>();
-		}
-
-		/// <summary>
 		/// Get an object from database by filter (in case of several objects returned exception will be thrown)
 		/// </summary>
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
-		/// <returns></returns>
-		public static T GetObject<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static T GetSingleObject<T>(this ISession session, Expression<Func<T, bool>> query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -57,7 +29,62 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			return queryable.Select(x => x).SingleOrDefault();
+			return queryable.SingleOrDefault();
+		}
+
+		/// <summary>
+		/// Get an object from database by filter asynchronously (in case of several objects returned exception will be thrown)
+		/// </summary>
+		/// <typeparam name="T">The type of the object</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		public static Task<T> GetSingleObjectAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.SingleOrDefaultAsync();
+		}
+
+		/// <summary>
+		/// Get and cache an object from database by filter (in case of several objects returned exception will be thrown)
+		/// </summary>
+		/// <typeparam name="T">The type of the object</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		public static T GetSingleObjectCacheable<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			queryable = queryable.WithOptions(x => x.SetCacheable(true));
+
+			return queryable.SingleOrDefault();
+		}
+
+		/// <summary>
+		/// Get and cache an object from database by filter asynchronously (in case of several objects returned exception will be thrown)
+		/// </summary>
+		/// <typeparam name="T">The type of the object</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		public static Task<T> GetSingleObjectCacheableAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			queryable = queryable.WithOptions(x => x.SetCacheable(true));
+
+			return queryable.SingleOrDefaultAsync();
 		}
 
 		/// <summary>
@@ -75,17 +102,17 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			return queryable.Select(x => x).FirstOrDefault();
+			return queryable.FirstOrDefault();
 		}
 
 		/// <summary>
-		/// Get and cache an object from database by filter (in case of several objects returned exception will be thrown)
+		/// Get a first object from database by filter asynchronously
 		/// </summary>
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
 		/// <returns></returns>
-		public static T GetObjectCacheable<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static Task<T> GetFirstObjectAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -93,9 +120,7 @@ namespace Simplify.FluentNHibernate
 			if (query != null)
 				queryable = queryable.Where(query);
 
-			queryable = queryable.WithOptions(x => x.SetCacheable(true));
-
-			return queryable.Select(x => x).SingleOrDefault();
+			return queryable.FirstOrDefaultAsync();
 		}
 
 		#endregion Single objects operations
@@ -125,7 +150,33 @@ namespace Simplify.FluentNHibernate
 			if (customProcessing != null)
 				queryable = customProcessing(queryable);
 
-			return queryable.Select(x => x).ToList();
+			return queryable.ToList();
+		}
+
+		/// <summary>
+		/// Get a list of objects asynchronously
+		/// </summary>
+		/// <typeparam name="T">The type of elements</typeparam>
+		/// <param name="session">The NHibernate session.</param>
+		/// <param name="query">Query</param>
+		/// <param name="customProcessing">The custom processing.</param>
+		/// <returns>
+		/// List of objects
+		/// </returns>
+		public static async Task<IList<T>> GetListAsync<T>(this ISession session,
+			Expression<Func<T, bool>> query = null,
+			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			if (customProcessing != null)
+				queryable = customProcessing(queryable);
+
+			return await queryable.ToListAsync();
 		}
 
 		/// <summary>
@@ -138,7 +189,9 @@ namespace Simplify.FluentNHibernate
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public static IList<T> GetListPaged<T>(this ISession session, int pageIndex, int itemsPerPage,
+		public static IList<T> GetListPaged<T>(this ISession session,
+			int pageIndex,
+			int itemsPerPage,
 			Expression<Func<T, bool>> query = null,
 			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
 			where T : class
@@ -153,6 +206,35 @@ namespace Simplify.FluentNHibernate
 
 			return queryable.Skip(pageIndex * itemsPerPage)
 				.Take(itemsPerPage).ToList();
+		}
+
+		/// <summary>
+		/// Gets the list of objects paged asynchronously.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="pageIndex">Index of the page.</param>
+		/// <param name="itemsPerPage">The items per page.</param>
+		/// <param name="query">The query.</param>
+		/// <param name="customProcessing">The custom processing.</param>
+		/// <returns></returns>
+		public static async Task<IList<T>> GetListPagedAsync<T>(this ISession session,
+			int pageIndex,
+			int itemsPerPage,
+			Expression<Func<T, bool>> query = null,
+			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			if (customProcessing != null)
+				queryable = customProcessing(queryable);
+
+			return await queryable.Skip(pageIndex * itemsPerPage)
+				.Take(itemsPerPage).ToListAsync();
 		}
 
 		#endregion List operations
@@ -175,6 +257,60 @@ namespace Simplify.FluentNHibernate
 				queryable = queryable.Where(query);
 
 			return queryable.Count();
+		}
+
+		/// <summary>
+		/// Gets the number of elements asynchronously.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="query">The query.</param>
+		/// <returns></returns>
+		public static Task<int> GetCountAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.CountAsync();
+		}
+
+		/// <summary>
+		/// Gets the number of elements.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="query">The query.</param>
+		/// <returns></returns>
+		public static long GetLongCount<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.LongCount();
+		}
+
+		/// <summary>
+		/// Gets the number of elements asynchronously.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="session">The session.</param>
+		/// <param name="query">The query.</param>
+		/// <returns></returns>
+		public static Task<long> GetLongCountAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+			where T : class
+		{
+			var queryable = session.Query<T>();
+
+			if (query != null)
+				queryable = queryable.Where(query);
+
+			return queryable.LongCountAsync();
 		}
 
 		#endregion Count operations

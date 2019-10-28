@@ -108,4 +108,11 @@ UpgradeLog*.XML
 
 Logs.log
 
+# Temp VS files ignore
 .vs
+
+# Temp test SQLite databases ignore
+*.sqlite
+
+# Coverage files ignore
+*lcov.info
