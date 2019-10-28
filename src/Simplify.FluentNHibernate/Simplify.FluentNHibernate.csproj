@@ -15,10 +15,10 @@
 			Breaking Changes
 			* GetSingleObject methods unified with GetObject
 			New
-			* Session Async operations
-			* LongCount and LongCountAsync session methods
+			* Session/StatelessSession Async operations
+			* LongCount and LongCountAsync Session/StatelessSession methods
 			Updates
-			* SchemaExporter now is the FluentConfiguration extension method
+			* SchemaExporter now is  FluentConfiguration extension method
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.FluentNHibernate.xml</DocumentationFile>
