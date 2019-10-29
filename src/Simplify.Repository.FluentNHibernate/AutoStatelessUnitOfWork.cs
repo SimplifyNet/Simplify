@@ -7,6 +7,7 @@ namespace Simplify.Repository.FluentNHibernate
 	/// Provides unit of work with auto-open stateless session transaction
 	/// </summary>
 	/// <seealso cref="IUnitOfWork" />
+	[Obsolete("Obsolete in terms of architecture, please use TransactStatelessUnitOfWork")]
 	public class AutoStatelessUnitOfWork : StatelessUnitOfWork, IAutoUnitOfWork
 	{
 		private readonly ITransaction _transaction;
