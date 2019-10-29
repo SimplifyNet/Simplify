@@ -5,15 +5,17 @@
 		<Product>Simplify</Product>
 		<Description>Repository, unit of work and related patterns interfaces</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1</Version>
+		<Version>1.2</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Repository</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 		<PackageReleaseNotes>
-			* CommonEqualityComparer added (useful for mappings integration tests)
-			- IHideObjectMembers removed
+			New
+			* Long identity and named objects
+			Other
+			* IAutoUnitOfWork obsoleting
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.xml</DocumentationFile>
