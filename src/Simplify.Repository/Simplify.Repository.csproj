@@ -14,8 +14,12 @@
 		<PackageReleaseNotes>
 			New
 			* Long identity and named objects
+			* Repository GetLongCount method
+			* Repository async methods
 			Other
 			* IAutoUnitOfWork obsoleting
+			* .NET Standard 2.0 support
+			* GetSingleByIDExclusive obsoleting
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.xml</DocumentationFile>
