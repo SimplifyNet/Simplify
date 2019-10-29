@@ -1,9 +1,9 @@
 ﻿namespace Simplify.Repository
 {
 	/// <summary>
-	/// Represent object with name and identifier
+	/// Represent object with name and long identifier
 	/// </summary>
-	public interface INamedObject : IIdentityObject
+	public interface ILongNamedObject : ILongIdentityObject
 	{
 		/// <summary>
 		/// Gets or sets the name.
