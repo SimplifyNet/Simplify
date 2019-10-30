@@ -4,12 +4,12 @@ using NHibernate;
 namespace Simplify.Repository.FluentNHibernate
 {
 	/// <summary>
-	/// Base class for session factory managers
+	/// Base class for session factory builders
 	/// </summary>
-	public abstract class FactoryManagerBase : IDisposable
+	public abstract class SessionFactoryBuilderBase : IDisposable
 	{
 		/// <summary>
-		/// Gets or sets the instance.
+		/// Gets or sets the session factory.
 		/// </summary>
 		/// <value>
 		/// The instance.
@@ -19,7 +19,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			Instance?.Dispose();
 		}
