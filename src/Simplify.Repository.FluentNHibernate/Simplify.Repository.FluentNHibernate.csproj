@@ -5,23 +5,27 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.Repository FluentNHibernate implementation</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0.2</Version>
+		<Version>1.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Repository.FluentNHibernate</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 		<PackageReleaseNotes>
+			Upgrades according to Simplify.Repository 1.2.0
+			* Repositories async methods
+			* Long identity, named objects entities and mappings added
 			Updates
-			* Upgrade to Simplify.Repository 1.1.0
-			Fixes
-			* StatelessUnitOfWork dispose fix
+			* SessionFactoryBuilderBase based properties methods added
+			Other
+			* AutoStatelessUnitOfWork obsoleting
+			* Repositories non-interfaces methods cleanup
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.FluentNHibernate" Version="1.9.0" />
-		<PackageReference Include="Simplify.Repository" Version="1.1.0" />
+		<PackageReference Include="Simplify.FluentNHibernate" Version="2.0.0" />
+		<PackageReference Include="Simplify.Repository" Version="1.2.0" />
 	</ItemGroup>
 </Project>

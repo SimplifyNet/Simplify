@@ -6,6 +6,7 @@ namespace Simplify.Repository.FluentNHibernate
 	/// <summary>
 	/// Provides unit of work with auto-open transaction
 	/// </summary>
+	[Obsolete("Obsolete in terms of architecture, please use TransactUnitOfWork")]
 	public class AutoUnitOfWork : UnitOfWork, IAutoUnitOfWork
 	{
 		private readonly ITransaction _transaction;
