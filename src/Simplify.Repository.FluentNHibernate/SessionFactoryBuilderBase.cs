@@ -31,7 +31,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <value>
 		/// The instance.
 		/// </value>
-		public ISessionFactory Instance { get; protected set; }
+		public ISessionFactory Instance { get; private set; }
 
 		/// <summary>
 		/// Gets the configuration.
