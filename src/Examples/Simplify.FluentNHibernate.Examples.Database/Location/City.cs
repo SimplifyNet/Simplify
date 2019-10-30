@@ -8,17 +8,22 @@ namespace Simplify.FluentNHibernate.Examples.Database.Location
 {
 	public class City : IdentityObject, ICity
 	{
+		public static string DefaultLanguageCode { get; set; } = "en";
+
 		public virtual IList<ICityName> CityNames { get; set; } = new List<ICityName>();
 
 		public virtual string LocalizableName
 		{
 			get
 			{
-				if (CityNames.Count == 0) return "";
+				if (CityNames.Count <= 0) return "";
 
-				var cityName = CityNames.FirstOrDefault(p => p.Language == Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
+				var itemName = CityNames.FirstOrDefault(p => p.Language == Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
 
-				return cityName != null ? cityName.Name : "";
+				if (itemName != null)
+					return itemName.Name;
+
+				return CityNames.FirstOrDefault(x => x.Language == DefaultLanguageCode)?.Name ?? "";
 			}
 		}
 	}

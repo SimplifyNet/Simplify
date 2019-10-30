@@ -7,12 +7,10 @@ namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
 	public class UsersService : IUsersService
 	{
 		private readonly IGenericRepository<IUser> _repository;
-		private readonly IGenericRepository<ICity> _citiesRepository;
 
-		public UsersService(IGenericRepository<IUser> repository, IGenericRepository<ICity> citiesRepository)
+		public UsersService(IGenericRepository<IUser> repository)
 		{
 			_repository = repository;
-			_citiesRepository = citiesRepository;
 		}
 
 		public IUser GetUser(string userName)
@@ -22,18 +20,12 @@ namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
 			return _repository.GetSingleByQuery(x => x.Name == userName);
 		}
 
-		public void SetUserCity(int userID, int cityID)
+		public void SetUserCity(IUser user, ICity city)
 		{
-			var user = _repository.GetSingleByID(userID);
-			var city = _citiesRepository.GetSingleByID(cityID);
-
 			if (user == null)
-				throw new Exception($"User with ID: {userID} is not found");
+				throw new ArgumentNullException(nameof(user));
 
-			if (city == null)
-				throw new Exception($"City with ID: {userID} is not found");
-
-			user.City = city;
+			user.City = city ?? throw new ArgumentNullException(nameof(city));
 
 			_repository.Update(user);
 		}

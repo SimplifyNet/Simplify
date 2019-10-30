@@ -1,19 +1,23 @@
 ﻿using FluentNHibernate.Cfg;
-using NHibernate;
+using Microsoft.Extensions.Configuration;
 using Simplify.FluentNHibernate.Examples.Database.Mappings;
+using Simplify.Repository.FluentNHibernate;
 
 namespace Simplify.FluentNHibernate.Examples.Database
 {
-	public class ExampleSessionFactoryBuilder
+	public class ExampleSessionFactoryBuilder : SessionFactoryBuilderBase
 	{
-		public ExampleSessionFactoryBuilder(string configSectionName = "ExampleDatabaseConnectionSettings")
+		public ExampleSessionFactoryBuilder(IConfiguration configuration, string configSectionName = "ExampleDatabaseConnectionSettings")
+			: base(configuration, configSectionName)
 		{
-			var configuration = Fluently.Configure();
-			configuration.InitializeFromConfigMsSql(configSectionName);
-			configuration.AddMappingsFromAssemblyOf<UserMap>();
-			Instance = configuration.BuildSessionFactory();
 		}
 
-		public ISessionFactory Instance { get; }
+		public override FluentConfiguration CreateConfiguration()
+		{
+			FluentConfiguration.InitializeFromConfigMsSql(ConfigSectionName);
+			FluentConfiguration.AddMappingsFromAssemblyOf<UserMap>();
+
+			return FluentConfiguration;
+		}
 	}
 }
