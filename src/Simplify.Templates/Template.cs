@@ -30,6 +30,7 @@ namespace Simplify.Templates
 		/// <param name="text">The template text.</param>
 		/// <param name="language">Template language.</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
+		// TODO
 		public Template(string text, string language, bool fixLineEndingsHtml)
 		{
 			InitializeText(text, language, fixLineEndingsHtml);
@@ -43,8 +44,9 @@ namespace Simplify.Templates
 		/// <param name="language">Template language (Thread.CurrentThread language will be used by default)</param>
 		/// <param name="defaultLanguage">Template default language</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
-		/// <exception cref="System.ArgumentNullException">filePath</exception>
+		/// <exception cref="ArgumentNullException">filePath</exception>
 		/// <exception cref="TemplateException">Template: file not found:  + filePath</exception>
+		// TODO
 		public Template(string filePath, string language = null, string defaultLanguage = "en", bool fixLineEndingsHtml = false)
 		{
 			if (string.IsNullOrEmpty(filePath))
@@ -77,12 +79,13 @@ namespace Simplify.Templates
 		/// <param name="language">Template language (Thread.CurrentThread language will be used by default)</param>
 		/// <param name="defaultLanguage">Template default language</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// workingAssembly
 		/// or
 		/// filePath
 		/// </exception>
 		/// <exception cref="TemplateException"></exception>
+		// TODO
 		public Template(Assembly workingAssembly, string filePath, string language = null, string defaultLanguage = "en", bool fixLineEndingsHtml = false)
 		{
 			if (workingAssembly == null)
@@ -176,6 +179,7 @@ namespace Simplify.Templates
 		/// <param name="language">Template language.</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
 		/// <returns></returns>
+		// TODO
 		public static ITemplate FromString(string text, string language = "en", bool fixLineEndingsHtml = false)
 		{
 			return new Template(text, language, fixLineEndingsHtml);
@@ -189,6 +193,7 @@ namespace Simplify.Templates
 		/// <param name="defaultLanguage">Template default language</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
 		/// <returns></returns>
+		// TODO
 		public static ITemplate Load(string filePath, string language = null, string defaultLanguage = "en", bool fixLineEndingsHtml = false)
 		{
 			return new Template($"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{filePath}", language, defaultLanguage, fixLineEndingsHtml);
@@ -202,11 +207,13 @@ namespace Simplify.Templates
 		/// <param name="defaultLanguage">Template default language</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
 		/// <returns></returns>
+		// TODO
 		public static Task<ITemplate> LoadAsync(string filePath, string language = null, string defaultLanguage = "en", bool fixLineEndingsHtml = false)
 		{
 			return Task.Run(() => Load(filePath, language, defaultLanguage, fixLineEndingsHtml));
 		}
 
+		// TODO
 		/// <summary>
 		/// Load template from an calling assembly resources
 		/// </summary>
@@ -228,6 +235,7 @@ namespace Simplify.Templates
 		/// <param name="defaultLanguage">Template default language</param>
 		/// <param name="fixLineEndingsHtml">If set to <c>true</c> Replace all caret return characters by html <![CDATA[<BR />]]> tag.</param>
 		/// <returns></returns>
+		// TODO
 		public static Task<ITemplate> FromManifestAsync(string filePath, string language = null, string defaultLanguage = "en", bool fixLineEndingsHtml = false)
 		{
 			return Task.Run(() => FromManifest(filePath, language, defaultLanguage, fixLineEndingsHtml));
@@ -310,6 +318,7 @@ namespace Simplify.Templates
 			return text;
 		}
 
+		// TODO
 		private void InitializeText(string text, string language = "en", bool fixLineEndingsHtml = false)
 		{
 			_text = text ?? throw new ArgumentNullException(nameof(text));
@@ -319,6 +328,7 @@ namespace Simplify.Templates
 				_text = _text.Replace(Environment.NewLine, "<br />");
 		}
 
+		// TODO
 		private void LoadWithLocalization(string text,
 			string currentCultureStringTableText = null,
 			string defaultCultureStringTableText = null,
