@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
@@ -21,7 +20,6 @@ namespace Simplify.Templates
 		private static Lazy<IFileSystem> _fileSystemInstance = new Lazy<IFileSystem>(() => new FileSystem());
 
 		private string _text;
-
 		private string _textCopy;
 
 		private IDictionary<string, string> _addValues;
@@ -56,6 +54,7 @@ namespace Simplify.Templates
 				throw new TemplateException("Template: file not found: " + filePath);
 
 			var text = FileSystem.File.ReadAllText(filePath);
+
 			FilePath = filePath;
 
 			if (string.IsNullOrEmpty(language))
@@ -251,66 +250,6 @@ namespace Simplify.Templates
 		}
 
 		/// <summary>
-		/// Set template variable value (all occurrences will be replaced)
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Set(string variableName, int value)
-		{
-			return Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Set template variable value (all occurrences will be replaced)
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Set(string variableName, object value)
-		{
-			return Set(variableName, value?.ToString());
-		}
-
-		/// <summary>
-		/// Set template variable value (all occurrences will be replaced)
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Set(string variableName, double value)
-		{
-			return Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Set template variable value (all occurrences will be replaced)
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Set(string variableName, decimal value)
-		{
-			return Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Set template variable value (all occurrences will be replaced)
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Set(string variableName, long value)
-		{
-			return Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Set template variable value with text from template (all occurrences will be replaced)
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="template">Value to set</param>
-		public ITemplate Set(string variableName, ITemplate template)
-		{
-			return Set(variableName, template?.Get());
-		}
-
-		/// <summary>
 		/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 		/// </summary>
 		/// <param name="variableName">Variable name</param>
@@ -328,66 +267,6 @@ namespace Simplify.Templates
 				_addValues[variableName] = _addValues[variableName] + value;
 
 			return this;
-		}
-
-		/// <summary>
-		/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Add(string variableName, int value)
-		{
-			return Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Add(string variableName, object value)
-		{
-			return Add(variableName, value?.ToString());
-		}
-
-		/// <summary>
-		/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Add(string variableName, double value)
-		{
-			return Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Add(string variableName, decimal value)
-		{
-			return Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="value">Value to set</param>
-		public ITemplate Add(string variableName, long value)
-		{
-			return Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-		}
-
-		/// <summary>
-		/// Add value to set template variable value with text from template (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
-		/// </summary>
-		/// <param name="variableName">Variable name</param>
-		/// <param name="template">Value to set</param>
-		public ITemplate Add(string variableName, ITemplate template)
-		{
-			return Add(variableName, template?.Get());
 		}
 
 		/// <summary>
@@ -440,7 +319,12 @@ namespace Simplify.Templates
 				_text = _text.Replace(Environment.NewLine, "<br />");
 		}
 
-		private void LoadWithLocalization(string text, string currentCultureStringTableText = null, string defaultCultureStringTableText = null, string language = "", string defaultLanguage = "en", bool fixLineEndingsHtml = false)
+		private void LoadWithLocalization(string text,
+			string currentCultureStringTableText = null,
+			string defaultCultureStringTableText = null,
+			string language = "",
+			string defaultLanguage = "en",
+			bool fixLineEndingsHtml = false)
 		{
 			InitializeText(text, fixLineEndingsHtml: fixLineEndingsHtml);
 
