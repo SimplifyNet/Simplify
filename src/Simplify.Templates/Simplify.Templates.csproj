@@ -11,17 +11,15 @@
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Templates</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET Templates</PackageTags>
-		<PackageReleaseNotes>	
+		<PackageReleaseNotes>
 			Updates
-			* Upgrade to System.IO.Abstractions 6.0.38
-			Other
-			* Internal upgrade to Simplify.Xml.Sources 1.1
+			* Upgrade to System.IO.Abstractions 7.0.7
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Templates.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.Xml.Sources" Version="1.1" PrivateAssets="All" />
-		<PackageReference Include="System.IO.Abstractions" Version="6.0.38" />
+		<PackageReference Include="System.IO.Abstractions" Version="7.0.7" />
 	</ItemGroup>
 </Project>
