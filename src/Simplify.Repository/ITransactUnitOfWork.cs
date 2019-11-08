@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Tasks;
 
 namespace Simplify.Repository
 {
@@ -19,8 +20,19 @@ namespace Simplify.Repository
 		void Commit();
 
 		/// <summary>
+		/// Commits transaction asynchronously.
+		/// </summary>
+		/// <returns></returns>
+		Task CommitAsync();
+
+		/// <summary>
 		/// Rollbacks transaction.
 		/// </summary>
 		void Rollback();
+
+		/// <summary>
+		/// Rollbacks transaction asynchronously.
+		/// </summary>
+		Task RollbackAsync();
 	}
 }

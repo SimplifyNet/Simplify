@@ -28,14 +28,6 @@ namespace Simplify.Repository
 		Task<T> GetSingleByIDAsync(object id);
 
 		/// <summary>
-		/// Gets the single object by identifier exclusively.
-		/// </summary>
-		/// <param name="id">The identifier.</param>
-		/// <returns></returns>
-		[Obsolete("Obsolete in terms of architecture, not all implementations can do this, for NHibernate, use session directly")]
-		T GetSingleByIDExclusive(object id);
-
-		/// <summary>
 		/// Gets the single object by query.
 		/// </summary>
 		/// <param name="query">The query.</param>
