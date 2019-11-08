@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Threading.Tasks;
 using NHibernate;
 
 namespace Simplify.Repository.FluentNHibernate
@@ -51,12 +52,34 @@ namespace Simplify.Repository.FluentNHibernate
 		}
 
 		/// <summary>
+		/// Commits transaction asynchronously.
+		/// </summary>
+		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
+		public async Task CommitAsync()
+		{
+			if (!_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			await _transaction.CommitAsync();
+			IsTransactionActive = false;
+		}
+
+		/// <summary>
 		/// Rollbacks transaction.
 		/// </summary>
 		public virtual void Rollback()
 		{
 			if (_transaction.IsActive)
 				_transaction.Rollback();
+		}
+
+		/// <summary>
+		/// Rollbacks transaction asynchronously.
+		/// </summary>
+		/// <returns></returns>
+		public Task RollbackAsync()
+		{
+			return _transaction.IsActive ? _transaction.RollbackAsync() : Task.Delay(0);
 		}
 	}
 }
