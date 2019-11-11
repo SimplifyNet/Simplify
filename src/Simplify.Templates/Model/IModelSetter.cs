@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Simplify.Templates
+namespace Simplify.Templates.Model
 {
 	/// <summary>
 	/// Represent model setter to template, sets all objects properties to template

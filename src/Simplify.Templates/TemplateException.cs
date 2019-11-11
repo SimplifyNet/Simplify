@@ -3,7 +3,7 @@
 namespace Simplify.Templates
 {
 	/// <summary>
-	/// The exception class using for Template exceptions
+	/// provides `Template` related exceptions
 	/// </summary>
 	[Serializable]
 	public sealed class TemplateException : Exception

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Simplify.Templates
+namespace Simplify.Templates.Model
 {
 	/// <summary>
 	/// Provides model setter to template, sets all objects properties to template

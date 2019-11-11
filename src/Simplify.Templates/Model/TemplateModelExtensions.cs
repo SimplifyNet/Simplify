@@ -1,4 +1,4 @@
-﻿namespace Simplify.Templates
+﻿namespace Simplify.Templates.Model
 {
 	/// <summary>
 	/// Template model extensions

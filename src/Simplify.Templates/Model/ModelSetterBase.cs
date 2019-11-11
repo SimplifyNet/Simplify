@@ -1,4 +1,4 @@
-﻿namespace Simplify.Templates
+﻿namespace Simplify.Templates.Model
 {
 	/// <summary>
 	/// Provides ModelSetter base class
