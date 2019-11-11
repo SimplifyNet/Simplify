@@ -1,4 +1,5 @@
 ﻿using System.IO.Abstractions;
+using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 
@@ -17,12 +18,24 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public void FromString_String_TemplateGetEqual()
+		public void BuildFromString_String_TemplateGetEqual()
 		{
 			// Act
 			var tpl = TemplateBuilder
 				.FromString("test")
 				.Build();
+
+			// Assert
+			Assert.AreEqual("test", tpl.Get());
+		}
+
+		[Test]
+		public async Task BuildAsyncFromString_String_TemplateGetEqual()
+		{
+			// Act
+			var tpl = await TemplateBuilder
+				.FromString("test")
+				.BuildAsync();
 
 			// Assert
 			Assert.AreEqual("test", tpl.Get());

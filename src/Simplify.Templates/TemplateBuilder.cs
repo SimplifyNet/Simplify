@@ -71,11 +71,21 @@ namespace Simplify.Templates
 		/// <returns></returns>
 		public ITemplate Build()
 		{
-			return new Template(_text);
+			if (_text != null)
+				return new Template(_text);
+
+			throw new NotImplementedException();
 		}
 
+		/// <summary>
+		/// Builds the template asynchronously.
+		/// </summary>
+		/// <returns></returns>
 		public Task<ITemplate> BuildAsync()
 		{
+			if (_text != null)
+				return Task.FromResult<ITemplate>(new Template(_text));
+
 			throw new NotImplementedException();
 		}
 
