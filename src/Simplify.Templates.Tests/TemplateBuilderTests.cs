@@ -18,7 +18,7 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public void BuildFromString_String_TemplateGetEqual()
+		public void Build_FromString_TemplateGetEqual()
 		{
 			// Act
 			var tpl = TemplateBuilder
@@ -30,7 +30,7 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public async Task BuildAsyncFromString_String_TemplateGetEqual()
+		public async Task BuildAsync_FromString_TemplateGetEqual()
 		{
 			// Act
 			var tpl = await TemplateBuilder
@@ -42,7 +42,7 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public void FromFile_String_TemplateGetEqual()
+		public void Build_FromFile_TemplateGetEqual()
 		{
 			// Arrange
 
@@ -52,6 +52,22 @@ namespace Simplify.Templates.Tests
 			var tpl = TemplateBuilder
 				.FromFile("TestFile.txt")
 				.Build();
+
+			// Assert
+			Assert.AreEqual("test", tpl.Get());
+		}
+
+		[Test]
+		public async Task BuildAsync_FromFile_TemplateGetEqual()
+		{
+			// Arrange
+
+			_fs.Setup(x => x.File.ReadAllText(It.Is<string>(s => s == "TestFile.txt"))).Returns("test");
+
+			// Act
+			var tpl = await TemplateBuilder
+				.FromFile("TestFile.txt")
+				.BuildAsync();
 
 			// Assert
 			Assert.AreEqual("test", tpl.Get());
