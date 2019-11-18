@@ -15,7 +15,7 @@
 		/// </summary>
 		/// <param name="template">The template.</param>
 		/// <param name="modelPrefix">The model prefix.</param>
-		protected ModelSetterBase(ITemplate template, string modelPrefix = null)
+		protected ModelSetterBase(ITemplate template, string? modelPrefix = null)
 		{
 			ModelPrefix = modelPrefix;
 			Template = template;
@@ -32,7 +32,7 @@
 		/// <summary>
 		/// The model prefix
 		/// </summary>
-		protected string ModelPrefix { get; }
+		protected string? ModelPrefix { get; }
 
 		/// <summary>
 		/// Formats the name of the variable to replace respecting model prefix.
