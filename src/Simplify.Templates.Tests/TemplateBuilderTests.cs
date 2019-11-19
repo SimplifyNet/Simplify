@@ -1,6 +1,4 @@
-﻿using System.IO.Abstractions;
-using System.Threading.Tasks;
-using Moq;
+﻿using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Simplify.Templates.Tests
@@ -8,13 +6,11 @@ namespace Simplify.Templates.Tests
 	[TestFixture]
 	public class TemplateBuilderTests
 	{
-		private Mock<IFileSystem> _fs;
+		private const string LocalTestFilePath = "TestTemplates/Local/TestFile.txt";
 
 		[SetUp]
 		public void Initialize()
 		{
-			_fs = new Mock<IFileSystem>();
-			TemplateBuilder.FileSystem = _fs.Object;
 		}
 
 		[Test]
@@ -44,13 +40,9 @@ namespace Simplify.Templates.Tests
 		[Test]
 		public void Build_FromFile_TemplateGetEqual()
 		{
-			// Arrange
-
-			_fs.Setup(x => x.File.ReadAllText(It.Is<string>(s => s == "TestFile.txt"))).Returns("test");
-
 			// Act
 			var tpl = TemplateBuilder
-				.FromFile("TestFile.txt")
+				.FromFile(LocalTestFilePath)
 				.Build();
 
 			// Assert
@@ -60,13 +52,9 @@ namespace Simplify.Templates.Tests
 		[Test]
 		public async Task BuildAsync_FromFile_TemplateGetEqual()
 		{
-			// Arrange
-
-			_fs.Setup(x => x.File.ReadAllText(It.Is<string>(s => s == "TestFile.txt"))).Returns("test");
-
 			// Act
 			var tpl = await TemplateBuilder
-				.FromFile("TestFile.txt")
+				.FromFile(LocalTestFilePath)
 				.BuildAsync();
 
 			// Assert
