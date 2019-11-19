@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.XPath;
+using Simplify.Xml;
 
 namespace Simplify.Templates
 {
@@ -12,6 +18,9 @@ namespace Simplify.Templates
 	{
 		private string? _text;
 		private string? _filePath;
+		private string? _language;
+		private string? _baseLanguage;
+		private bool _fixLineEndingsHtml;
 
 		private TemplateBuilder()
 		{
@@ -59,12 +68,18 @@ namespace Simplify.Templates
 		/// <returns></returns>
 		public ITemplate Build()
 		{
-			BuildProcess();
+			var text = LoadTemplateText();
 
-			if (_text == null)
+			if (text == null)
 				throw new TemplateException("Can't initialize empty template");
 
-			return new Template(_text);
+			text = PreprocessTemplateText(text);
+
+			var tpl = new Template(text);
+
+			PostprocessTemplate(tpl);
+
+			return tpl;
 		}
 
 		/// <summary>
@@ -73,45 +88,92 @@ namespace Simplify.Templates
 		/// <returns></returns>
 		public async Task<ITemplate> BuildAsync()
 		{
-			await BuildProcessAsync();
+			var text = await LoadTemplateTextAsync();
 
-			if (_text == null)
+			if (text == null)
 				throw new TemplateException("Can't initialize empty template");
 
-			return new Template(_text);
+			PreprocessTemplateText(text);
+
+			var tpl = new Template(text);
+
+			PostprocessTemplate(tpl);
+
+			return tpl;
 		}
 
+		/// <summary>
+		/// Localizes the template from xml localization files.
+		/// </summary>
+		/// <param name="language">The language.</param>
+		/// <param name="baseLanguage">The base language.</param>
+		/// <returns></returns>
 		public TemplateBuilder Localizable(string language, string baseLanguage = "en")
 		{
-			throw new NotImplementedException();
+			_language = language;
+			_baseLanguage = baseLanguage;
+
+			return this;
 		}
 
+		/// <summary>
+		/// Localizes the template from xml localization files using Thread.CurrentThread culture language as default.
+		/// </summary>
+		/// <param name="baseLanguage">The base language.</param>
+		/// <returns></returns>
 		public TemplateBuilder LocalizableFromCurrentThreadLanguage(string baseLanguage = "en")
 		{
-			throw new NotImplementedException();
+			_language = Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName;
+			_baseLanguage = baseLanguage;
+
+			return this;
 		}
 
+		/// <summary>
+		/// Replace all caret return characters by html <![CDATA[<BR />]]> tag.
+		/// </summary>
+		/// <returns></returns>
 		public TemplateBuilder FixLineEndingsHtml()
 		{
-			throw new NotImplementedException();
+			_fixLineEndingsHtml = true;
+
+			return this;
 		}
 
-		private void BuildProcess()
+		private string LoadTemplateText()
 		{
 			if (_text != null)
-				return;
+				return _text;
 
 			if (!string.IsNullOrEmpty(_filePath))
-				_text = File.ReadAllText(_filePath);
+				return ReadFile();
+
+			throw new InvalidOperationException();
 		}
 
-		private async Task BuildProcessAsync()
+		private async Task<string> LoadTemplateTextAsync()
 		{
 			if (_text != null)
-				return;
+				return _text;
 
 			if (!string.IsNullOrEmpty(_filePath))
-				_text = await ReadFileAsync();
+				return await ReadFileAsync();
+
+			throw new InvalidOperationException();
+		}
+
+		private string PreprocessTemplateText(string text)
+		{
+			return _fixLineEndingsHtml ? text.Replace(Environment.NewLine, "<br />") : text;
+		}
+
+		private void PostprocessTemplate(ITemplate tpl)
+		{
+		}
+
+		private string ReadFile()
+		{
+			return File.ReadAllText(_filePath);
 		}
 
 		private async Task<string> ReadFileAsync()
@@ -119,6 +181,19 @@ namespace Simplify.Templates
 			using var sr = new StreamReader(_filePath);
 
 			return await sr.ReadToEndAsync();
+		}
+
+		private IDictionary<string, string> LoadStringTableFromString(string fileText)
+		{
+			var stringTable = XDocument.Parse(fileText);
+
+			if (stringTable.Root != null)
+				return stringTable.Root.XPathSelectElements("item")
+					.Where(x => x.HasAttributes)
+					.ToDictionary(item => (string)item.Attribute("name"),
+						item => string.IsNullOrEmpty(item.Value) ? (string)item.Attribute("value") : item.InnerXml().Trim());
+
+			return new Dictionary<string, string>();
 		}
 	}
 }
