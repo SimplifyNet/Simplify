@@ -1,6 +1,5 @@
-﻿using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace Simplify.Templates.Tests
@@ -8,92 +7,26 @@ namespace Simplify.Templates.Tests
 	[TestFixture]
 	public class TemplateBuilderFromFileTests
 	{
-		private const string LocalTestFilePath = "TestTemplates/Local/TestFile.txt";
-		private const string LocalizationTestFilePath = "TestTemplates/Local/LocalizationTest.tpl";
-
-		[SetUp]
-		public void Initialize()
+		[Test]
+		public void FromFile_NullPath_ArgumentNullException()
 		{
+			// Act
+			var ex = Assert.Throws<ArgumentException>(() => TemplateBuilder.FromLocalFile(null));
+
+			// Assert
+			Assert.AreEqual("Value cannot be null or empty.\r\nParameter name: filePath", ex.Message);
 		}
 
 		[Test]
-		public void Build_FromFile_TemplateGetEqual()
+		public void FromFile_FileNotExist_FileNotFoundException()
 		{
 			// Act
-			var tpl = TemplateBuilder
-				.FromFile(LocalTestFilePath)
-				.Build();
+			var ex = Assert.Throws<FileNotFoundException>(() => TemplateBuilder.FromFile("NotFoundFile.txt"));
 
 			// Assert
-			Assert.AreEqual("test", tpl.Get());
-		}
 
-		[Test]
-		public async Task BuildAsync_FromFile_TemplateGetEqual()
-		{
-			// Act
-			var tpl = await TemplateBuilder
-				.FromFile(LocalTestFilePath)
-				.BuildAsync();
-
-			// Assert
-			Assert.AreEqual("test", tpl.Get());
-		}
-
-		[Test]
-		public void Build_FromFileLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
-		{
-			// Act
-			var tpl = TemplateBuilder
-				.FromFile(LocalizationTestFilePath)
-				.Localizable("ru")
-				.Build();
-
-			// Assert
-			Assert.AreEqual("текст1 text2", tpl.Get());
-		}
-
-		[Test]
-		public async Task BuildAsync_FromFileLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
-		{
-			// Act
-			var tpl = await TemplateBuilder
-				.FromFile(LocalizationTestFilePath)
-				.Localizable("ru")
-				.BuildAsync();
-
-			// Assert
-			Assert.AreEqual("текст1 text2", tpl.Get());
-		}
-
-		[Test]
-		public void Build_FromFileLocalizableFromCurrentThreadLanguageDifferentFromBase_LocalizableLoadedWithBaseReplacements()
-		{
-			Thread.CurrentThread.CurrentCulture = new CultureInfo("ru");
-
-			// Act
-			var tpl = TemplateBuilder
-				.FromFile(LocalizationTestFilePath)
-				.LocalizableFromCurrentThreadLanguage()
-				.Build();
-
-			// Assert
-			Assert.AreEqual("текст1 text2", tpl.Get());
-		}
-
-		[Test]
-		public async Task BuildAsync_FromFileLocalizableFromCurrentThreadLanguageDifferentFromBase_LocalizableLoadedWithBaseReplacements()
-		{
-			Thread.CurrentThread.CurrentCulture = new CultureInfo("ru");
-
-			// Act
-			var tpl = await TemplateBuilder
-				.FromFile(LocalizationTestFilePath)
-				.LocalizableFromCurrentThreadLanguage()
-				.BuildAsync();
-
-			// Assert
-			Assert.AreEqual("текст1 text2", tpl.Get());
+			Assert.That(ex.Message, Does.StartWith("Template file not found"));
+			Assert.That(ex.Message, Does.EndWith("NotFoundFile.txt"));
 		}
 	}
 }

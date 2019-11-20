@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using Simplify.Xml;
 
 namespace Simplify.Templates
 {
@@ -18,6 +13,7 @@ namespace Simplify.Templates
 	{
 		private string? _text;
 		private string? _filePath;
+		private Assembly? assembly;
 		private string? _language;
 		private string? _baseLanguage;
 		private bool _fixLineEndingsHtml;
@@ -33,6 +29,9 @@ namespace Simplify.Templates
 		/// <returns></returns>
 		public static TemplateBuilder FromString(string text)
 		{
+			if (text == null)
+				throw new ArgumentNullException(nameof(text));
+
 			return new TemplateBuilder
 			{
 				_text = text
@@ -40,26 +39,85 @@ namespace Simplify.Templates
 		}
 
 		/// <summary>
-		/// Create builder based on the file.
+		/// Create builder based on the file path, accepted full path or relative path according to current working directory.
 		/// </summary>
 		/// <param name="filePath">The file path.</param>
 		/// <returns></returns>
 		public static TemplateBuilder FromFile(string filePath)
 		{
+			if (string.IsNullOrEmpty(filePath))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
+
+			FileExistenceCheck(filePath);
+
 			return new TemplateBuilder
 			{
 				_filePath = filePath
 			};
 		}
 
-		public static TemplateBuilder FromCurrentAssembly(string filePath)
+		/// <summary>
+		/// Create builder based on the file using calling assembly path prefix in filePath.
+		/// </summary>
+		/// <param name="filePath">The file path.</param>
+		/// <returns></returns>
+		public static TemplateBuilder FromLocalFile(string filePath)
 		{
-			throw new NotImplementedException();
+			if (string.IsNullOrEmpty(filePath))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
+
+			filePath = $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{filePath}";
+
+			FileExistenceCheck(filePath);
+
+			return new TemplateBuilder
+			{
+				_filePath = filePath
+			};
 		}
 
+		/// <summary>
+		/// Creates builder based on specified assembly embedded file, filePath should be path of the file inside assembly.
+		/// </summary>
+		/// <param name="filePath">The file path.</param>
+		/// <param name="assembly">The assembly.</param>
+		/// <returns></returns>
+		/// <exception cref="NotImplementedException"></exception>
 		public static TemplateBuilder FromAssembly(string filePath, Assembly assembly)
 		{
-			throw new NotImplementedException();
+			if (string.IsNullOrEmpty(filePath))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
+
+			if (assembly == null)
+				throw new ArgumentNullException(nameof(assembly));
+
+			FileExistenceCheck(filePath);
+
+			return new TemplateBuilder
+			{
+				_filePath = filePath,
+				assembly = assembly
+			};
+		}
+
+		/// <summary>
+		/// Creates builder based on the calling assembly embedded file, filePath should be path of the file inside assembly.
+		/// </summary>
+		/// <param name="filePath">The file path.</param>
+		/// <returns></returns>
+		/// <exception cref="NotImplementedException"></exception>
+		public static TemplateBuilder FromCurrentAssembly(string filePath)
+		{
+			if (string.IsNullOrEmpty(filePath))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
+
+			FileExistenceCheck(filePath);
+
+			return new TemplateBuilder
+			{
+				_filePath = filePath,
+				assembly = Assembly.GetCallingAssembly()
+			};
 		}
 
 		/// <summary>
@@ -97,7 +155,7 @@ namespace Simplify.Templates
 
 			var tpl = new Template(text);
 
-			PostprocessTemplate(tpl);
+			await PostprocessTemplateAsync(tpl);
 
 			return tpl;
 		}
@@ -110,6 +168,12 @@ namespace Simplify.Templates
 		/// <returns></returns>
 		public TemplateBuilder Localizable(string language, string baseLanguage = "en")
 		{
+			if (string.IsNullOrEmpty(language))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(language));
+
+			if (string.IsNullOrEmpty(baseLanguage))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(baseLanguage));
+
 			_language = language;
 			_baseLanguage = baseLanguage;
 
@@ -123,7 +187,10 @@ namespace Simplify.Templates
 		/// <returns></returns>
 		public TemplateBuilder LocalizableFromCurrentThreadLanguage(string baseLanguage = "en")
 		{
-			_language = Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName;
+			if (string.IsNullOrEmpty(baseLanguage))
+				throw new ArgumentException("Value cannot be null or empty.", nameof(baseLanguage));
+
+			_language = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 			_baseLanguage = baseLanguage;
 
 			return this;
@@ -140,13 +207,19 @@ namespace Simplify.Templates
 			return this;
 		}
 
+		private static void FileExistenceCheck(string filePath)
+		{
+			if (!File.Exists(filePath))
+				throw new FileNotFoundException($"Template file not found: {filePath}");
+		}
+
 		private string LoadTemplateText()
 		{
 			if (_text != null)
 				return _text;
 
 			if (!string.IsNullOrEmpty(_filePath))
-				return ReadFile();
+				return FileReader.ReadFile(_filePath);
 
 			throw new InvalidOperationException();
 		}
@@ -157,7 +230,7 @@ namespace Simplify.Templates
 				return _text;
 
 			if (!string.IsNullOrEmpty(_filePath))
-				return await ReadFileAsync();
+				return await FileReader.ReadFileAsync(_filePath);
 
 			throw new InvalidOperationException();
 		}
@@ -169,31 +242,18 @@ namespace Simplify.Templates
 
 		private void PostprocessTemplate(ITemplate tpl)
 		{
+			if (string.IsNullOrEmpty(_language) || string.IsNullOrEmpty(_baseLanguage))
+				return;
+
+			tpl.Localize(_filePath, _language, _baseLanguage);
 		}
 
-		private string ReadFile()
+		private async Task PostprocessTemplateAsync(ITemplate tpl)
 		{
-			return File.ReadAllText(_filePath);
-		}
+			if (string.IsNullOrEmpty(_language) || string.IsNullOrEmpty(_baseLanguage))
+				return;
 
-		private async Task<string> ReadFileAsync()
-		{
-			using var sr = new StreamReader(_filePath);
-
-			return await sr.ReadToEndAsync();
-		}
-
-		private IDictionary<string, string> LoadStringTableFromString(string fileText)
-		{
-			var stringTable = XDocument.Parse(fileText);
-
-			if (stringTable.Root != null)
-				return stringTable.Root.XPathSelectElements("item")
-					.Where(x => x.HasAttributes)
-					.ToDictionary(item => (string)item.Attribute("name"),
-						item => string.IsNullOrEmpty(item.Value) ? (string)item.Attribute("value") : item.InnerXml().Trim());
-
-			return new Dictionary<string, string>();
+			await tpl.LocalizeAsync(_filePath, _language, _baseLanguage);
 		}
 	}
 }

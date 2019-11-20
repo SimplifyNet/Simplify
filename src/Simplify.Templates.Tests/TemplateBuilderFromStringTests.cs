@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Simplify.Templates.Tests
@@ -7,7 +8,17 @@ namespace Simplify.Templates.Tests
 	public class TemplateBuilderFromStringTests
 	{
 		[Test]
-		public void Build_FromString_TemplateGetEqual()
+		public void FromString_NullString_TemplateGetEqual()
+		{
+			// Act
+			var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null));
+
+			// Assert
+			Assert.AreEqual("Value cannot be null.\r\nParameter name: text", ex.Message);
+		}
+
+		[Test]
+		public void Build_FromString_TemplateContentIsCorrect()
 		{
 			// Act
 			var tpl = TemplateBuilder
@@ -19,7 +30,7 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public async Task BuildAsync_FromString_TemplateGetEqual()
+		public async Task BuildAsync_FromString_TemplateContentIsCorrect()
 		{
 			// Act
 			var tpl = await TemplateBuilder
@@ -28,6 +39,19 @@ namespace Simplify.Templates.Tests
 
 			// Assert
 			Assert.AreEqual("test", tpl.Get());
+		}
+
+		[Test]
+		public void Build_FromStringFixLineEndingsHtml_LineEndingReplacedWithBrs()
+		{
+			// Act
+			var tpl = TemplateBuilder
+				.FromString("test\r\ntest2")
+				.FixLineEndingsHtml()
+				.Build();
+
+			// Assert
+			Assert.AreEqual("test<br />test2", tpl.Get());
 		}
 	}
 }

@@ -25,7 +25,13 @@
 		string Get();
 
 		/// <summary>
-		/// Return loaded template to it's initial state
+		/// Sets initial template state equal to current.
+		/// </summary>
+		/// <returns></returns>
+		void Commit();
+
+		/// <summary>
+		/// Return template to it's initial state
 		/// </summary>
 		void RollBack();
 
