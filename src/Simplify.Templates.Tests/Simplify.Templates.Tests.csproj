@@ -9,12 +9,24 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="TestData\Embedded\MasterTemplate.tpl" />
-		<EmbeddedResource Include="TestData\Embedded\MasterTemplateResult.tpl" />
-		<EmbeddedResource Include="TestData\Embedded\TemplateTest.tpl" />
-		<EmbeddedResource Include="TestData\Embedded\TemplateTest.tpl-en.xml" />
-		<EmbeddedResource Include="TestData\Embedded\TemplateTest.tpl-ru.xml" />
-		<EmbeddedResource Include="TestData\Embedded\TemplateTestResult.tpl" />
+		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl" />
+		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl.en.xml" />
+		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl.ru.xml" />
+		<None Remove="TestTemplates\Embedded\TestFile.txt" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="TestTemplates\Embedded\LocalizationTest.tpl">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestTemplates\Embedded\LocalizationTest.tpl.en.xml">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestTemplates\Embedded\LocalizationTest.tpl.ru.xml">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestTemplates\Embedded\TestFile.txt">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
@@ -26,32 +38,14 @@
 		<ProjectReference Include="..\Simplify.Templates\Simplify.Templates.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Update="TestData\Local\MasterTemplate.tpl">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Local\MasterTemplateResult.tpl">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Local\TemplateTest.tpl">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Local\TemplateTest.tpl.en.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Local\TemplateTest.tpl.ru.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Local\TemplateTestResult.tpl">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="TestTemplates\Local\LocalizationTest.tpl">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="TestTemplates\Local\LocalizationTest.tpl.en.xml">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="TestTemplates\Local\LocalizationTest.tpl.ru.xml">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="TestTemplates\Local\TestFile.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
