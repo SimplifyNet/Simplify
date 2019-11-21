@@ -5,7 +5,7 @@ namespace Simplify.Templates
 {
 	internal static class TemplateLocalizeExtensions
 	{
-		internal static void Localize(this ITemplate tpl, string? filePath, string? language, string? baseLanguage)
+		internal static void Localize(this ITemplate tpl, string filePath, string language, string baseLanguage)
 		{
 			var currentCultureStringTableFilePath = StringTable.FormatStringTableFileName(filePath, language);
 			var baseCultureStringTableFilePath = StringTable.FormatStringTableFileName(filePath, baseLanguage);
@@ -19,7 +19,7 @@ namespace Simplify.Templates
 			tpl.Commit();
 		}
 
-		internal static async Task LocalizeAsync(this ITemplate tpl, string? filePath, string? language, string? baseLanguage)
+		internal static async Task LocalizeAsync(this ITemplate tpl, string filePath, string language, string baseLanguage)
 		{
 			var currentCultureStringTableFilePath = StringTable.FormatStringTableFileName(filePath, language);
 			var baseCultureStringTableFilePath = StringTable.FormatStringTableFileName(filePath, baseLanguage);

@@ -9,7 +9,7 @@ namespace Simplify.Templates
 {
 	internal static class StringTable
 	{
-		internal static string FormatStringTableFileName(string? filePath, string? languageCode)
+		internal static string FormatStringTableFileName(string filePath, string languageCode)
 		{
 			return $"{filePath}.{languageCode}.xml";
 		}
@@ -20,17 +20,17 @@ namespace Simplify.Templates
 				tpl.Set(item.Key, item.Value);
 		}
 
-		internal static IDictionary<string, string> LoadStringTableFromFile(string? filePath)
+		internal static IDictionary<string, string> LoadStringTableFromFile(string filePath)
 		{
 			return LoadStringTableFromString(FileReader.ReadFile(filePath));
 		}
 
-		internal static async Task<IDictionary<string, string>> LoadStringTableFromFileAsync(string? filePath)
+		internal static async Task<IDictionary<string, string>> LoadStringTableFromFileAsync(string filePath)
 		{
 			return LoadStringTableFromString(await FileReader.ReadFileAsync(filePath));
 		}
 
-		internal static IDictionary<string, string> LoadStringTableFromString(string? fileText)
+		internal static IDictionary<string, string> LoadStringTableFromString(string fileText)
 		{
 			var stringTable = XDocument.Parse(fileText);
 

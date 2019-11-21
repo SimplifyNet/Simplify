@@ -242,7 +242,10 @@ namespace Simplify.Templates
 
 		private void PostprocessTemplate(ITemplate tpl)
 		{
-			if (string.IsNullOrEmpty(_language) || string.IsNullOrEmpty(_baseLanguage))
+			if (_language == null || _baseLanguage == null)
+				return;
+
+			if (_filePath == null)
 				return;
 
 			tpl.Localize(_filePath, _language, _baseLanguage);
@@ -250,7 +253,10 @@ namespace Simplify.Templates
 
 		private async Task PostprocessTemplateAsync(ITemplate tpl)
 		{
-			if (string.IsNullOrEmpty(_language) || string.IsNullOrEmpty(_baseLanguage))
+			if (_language == null || _baseLanguage == null)
+				return;
+
+			if (_filePath == null)
 				return;
 
 			await tpl.LocalizeAsync(_filePath, _language, _baseLanguage);
