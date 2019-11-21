@@ -218,7 +218,7 @@ namespace Simplify.Templates
 			if (_text != null)
 				return _text;
 
-			if (!string.IsNullOrEmpty(_filePath))
+			if (_filePath != null)
 				return FileReader.ReadFile(_filePath);
 
 			throw new InvalidOperationException();
@@ -229,7 +229,7 @@ namespace Simplify.Templates
 			if (_text != null)
 				return _text;
 
-			if (!string.IsNullOrEmpty(_filePath))
+			if (_filePath != null)
 				return await FileReader.ReadFileAsync(_filePath);
 
 			throw new InvalidOperationException();
