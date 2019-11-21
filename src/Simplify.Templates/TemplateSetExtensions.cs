@@ -26,7 +26,7 @@ namespace Simplify.Templates
 		/// <param name="variableName">Variable name</param>
 		/// <param name="value">Value to set</param>
 		/// <returns></returns>
-		public static ITemplate Set(this ITemplate tpl, string variableName, object value)
+		public static ITemplate Set(this ITemplate tpl, string variableName, object? value)
 		{
 			return tpl.Set(variableName, value?.ToString());
 		}

@@ -22,7 +22,7 @@ namespace Simplify.Templates.Model
 		/// <param name="template">The template.</param>
 		/// <param name="model">The model.</param>
 		/// <param name="modelPrefix">The model prefix.</param>
-		public ModelSetter(ITemplate template, T model, string modelPrefix = null)
+		public ModelSetter(ITemplate template, T model, string? modelPrefix = null)
 			: base(template, modelPrefix)
 		{
 			_model = model;
