@@ -12,30 +12,6 @@ namespace Simplify.Templates.Tests
 		private const string LocalizationTestFilePath = "TestTemplates/Local/LocalizationTest.tpl";
 
 		[Test]
-		public void Build_FromCurrentAssembly_TemplateContentIsCorrect()
-		{
-			// Act
-			var tpl = TemplateBuilder
-				.FromCurrentAssembly(LocalTestFilePath)
-				.Build();
-
-			// Assert
-			Assert.AreEqual("test", tpl.Get());
-		}
-
-		[Test]
-		public async Task BuildAsync_FromCurrentAssembly_TemplateContentIsCorrect()
-		{
-			// Act
-			var tpl = await TemplateBuilder
-				.FromCurrentAssembly(LocalTestFilePath)
-				.BuildAsync();
-
-			// Assert
-			Assert.AreEqual("test", tpl.Get());
-		}
-
-		[Test]
 		public void Build_FromCurrentAssemblyLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
 		{
 			// Act

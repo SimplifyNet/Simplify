@@ -8,32 +8,7 @@ namespace Simplify.Templates.Tests
 	[TestFixture]
 	public class TemplateBuilderFromLocalFileTests
 	{
-		private const string LocalTestFilePath = "TestTemplates/Local/TestFile.txt";
 		private const string LocalizationTestFilePath = "TestTemplates/Local/LocalizationTest.tpl";
-
-		[Test]
-		public void Build_FromLocalFile_TemplateContentIsCorrect()
-		{
-			// Act
-			var tpl = TemplateBuilder
-				.FromLocalFile(LocalTestFilePath)
-				.Build();
-
-			// Assert
-			Assert.AreEqual("test", tpl.Get());
-		}
-
-		[Test]
-		public async Task BuildAsync_FromLocalFile_TemplateContentIsCorrect()
-		{
-			// Act
-			var tpl = await TemplateBuilder
-				.FromLocalFile(LocalTestFilePath)
-				.BuildAsync();
-
-			// Assert
-			Assert.AreEqual("test", tpl.Get());
-		}
 
 		[Test]
 		public void Build_FromLocalFileLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
