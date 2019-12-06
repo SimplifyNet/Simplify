@@ -6,17 +6,17 @@ using NUnit.Framework;
 namespace Simplify.Templates.Tests
 {
 	[TestFixture]
-	public class TemplateBuilderFromLocalFileTests
+	public class TemplateBuilderFromAssemblyTests
 	{
 		private const string LocalTestFilePath = "TestTemplates/Local/TestFile.txt";
 		private const string LocalizationTestFilePath = "TestTemplates/Local/LocalizationTest.tpl";
 
 		[Test]
-		public void Build_FromLocalFile_TemplateContentIsCorrect()
+		public void Build_FromCurrentAssembly_TemplateContentIsCorrect()
 		{
 			// Act
 			var tpl = TemplateBuilder
-				.FromLocalFile(LocalTestFilePath)
+				.FromCurrentAssembly(LocalTestFilePath)
 				.Build();
 
 			// Assert
@@ -24,11 +24,11 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public async Task BuildAsync_FromLocalFile_TemplateContentIsCorrect()
+		public async Task BuildAsync_FromCurrentAssembly_TemplateContentIsCorrect()
 		{
 			// Act
 			var tpl = await TemplateBuilder
-				.FromLocalFile(LocalTestFilePath)
+				.FromCurrentAssembly(LocalTestFilePath)
 				.BuildAsync();
 
 			// Assert
@@ -36,11 +36,11 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public void Build_FromLocalFileLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
+		public void Build_FromCurrentAssemblyLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
 		{
 			// Act
 			var tpl = TemplateBuilder
-				.FromLocalFile(LocalizationTestFilePath)
+				.FromCurrentAssembly(LocalizationTestFilePath)
 				.Localizable("ru")
 				.Build();
 
@@ -49,11 +49,11 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public async Task BuildAsync_FromLocalFileLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
+		public async Task BuildAsync_FromCurrentAssemblyLocalizableDifferentFromBase_LocalizableLoadedWithBaseReplacements()
 		{
 			// Act
 			var tpl = await TemplateBuilder
-				.FromLocalFile(LocalizationTestFilePath)
+				.FromCurrentAssembly(LocalizationTestFilePath)
 				.Localizable("ru")
 				.BuildAsync();
 
@@ -62,13 +62,13 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public void Build_FromFileLocalizableFromCurrentThreadLanguageDifferentFromBase_LocalizableLoadedWithBaseReplacements()
+		public void Build_FromCurrentAssemblyLocalizableFromCurrentThreadLanguageDifferentFromBase_LocalizableLoadedWithBaseReplacements()
 		{
 			Thread.CurrentThread.CurrentCulture = new CultureInfo("ru");
 
 			// Act
 			var tpl = TemplateBuilder
-				.FromLocalFile(LocalizationTestFilePath)
+				.FromCurrentAssembly(LocalizationTestFilePath)
 				.LocalizableFromCurrentThreadLanguage()
 				.Build();
 
@@ -77,13 +77,13 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public async Task BuildAsync_FromFileLocalizableFromCurrentThreadLanguageDifferentFromBase_LocalizableLoadedWithBaseReplacements()
+		public async Task BuildAsync_FromCurrentAssemblyLocalizableFromCurrentThreadLanguageDifferentFromBase_LocalizableLoadedWithBaseReplacements()
 		{
 			Thread.CurrentThread.CurrentCulture = new CultureInfo("ru");
 
 			// Act
 			var tpl = await TemplateBuilder
-				.FromLocalFile(LocalizationTestFilePath)
+				.FromCurrentAssembly(LocalizationTestFilePath)
 				.LocalizableFromCurrentThreadLanguage()
 				.BuildAsync();
 

@@ -14,7 +14,7 @@ namespace Simplify.Templates.Tests
 			var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null));
 
 			// Assert
-			Assert.AreEqual("Value cannot be null.\r\nParameter name: text", ex.Message);
+			Assert.AreEqual("Value cannot be null. (Parameter 'text')", ex.Message);
 		}
 
 		[Test]
