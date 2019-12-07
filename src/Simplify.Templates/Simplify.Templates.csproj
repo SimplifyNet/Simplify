@@ -1,27 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+		<LangVersion>8.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Text templates engine</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.5.2</Version>
+		<Version>2.0-pre01</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Templates</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET Templates</PackageTags>
-		<PackageReleaseNotes>	
-			Updates
-			* Upgrade to System.IO.Abstractions 6.0.38
+		<PackageReleaseNotes>
+			Breaking Changes
+			* Rewrite of `Template` class, build functionality moved to `TemplateBuilder` class
+			* Fluent interfaces
+			New
+			* Asynchronous methods
 			Other
-			* Internal upgrade to Simplify.Xml.Sources 1.1
+			* System.IO.Abstractions dependency drop
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Templates.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.Xml.Sources" Version="1.1" PrivateAssets="All" />
-		<PackageReference Include="System.IO.Abstractions" Version="6.0.38" />
 	</ItemGroup>
 </Project>

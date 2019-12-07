@@ -1,8 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
-using Simplify.Templates.Tests.Models;
+using Simplify.Templates.Model;
+using Simplify.Templates.Tests.Model.Models;
 
-namespace Simplify.Templates.Tests
+namespace Simplify.Templates.Tests.Model
 {
 	[TestFixture]
 	public class TemplateModelExtensionsTests
@@ -12,7 +13,9 @@ namespace Simplify.Templates.Tests
 		[SetUp]
 		public void Initialize()
 		{
-			_template = Template.FromString("{ID} {Name} {EMail} {CreationTime}");
+			_template = TemplateBuilder
+				.FromString("{ID} {Name} {EMail} {CreationTime}")
+				.Build();
 		}
 
 		[Test]
@@ -21,7 +24,7 @@ namespace Simplify.Templates.Tests
 			// Act
 			_template.Model<TestModel>(null).Set();
 
-			// Assert		
+			// Assert
 			Assert.AreEqual("   ", _template.Get());
 		}
 
@@ -35,11 +38,10 @@ namespace Simplify.Templates.Tests
 			Assert.AreEqual("   ", _template.Get());
 		}
 
-
 		[Test]
 		public void Set_Model_SetCorrectly()
 		{
-			// Assign
+			// Arrange
 			var model = new TestModel { CreationTime = new DateTime(2014, 10, 5), Name = "Foo", EMail = "Foo@example.com", ID = 5 };
 
 			// Act
@@ -52,9 +54,12 @@ namespace Simplify.Templates.Tests
 		[Test]
 		public void Set_EverythingIsNull_SetCorrectly()
 		{
-			// Assign
+			// Arrange
 
-			_template = Template.FromString("{ID} {Name} {EMail}");
+			_template = TemplateBuilder
+				.FromString("{ID} {Name} {EMail}")
+				.Build();
+
 			var model = new TestModel();
 
 			// Act
@@ -67,9 +72,12 @@ namespace Simplify.Templates.Tests
 		[Test]
 		public void Add_TwoModels_DataCombined()
 		{
-			// Assign
+			// Arrange
 
-			_template = Template.FromString("{Name} {EMail}");
+			_template = TemplateBuilder
+				.FromString("{Name} {EMail}")
+				.Build();
+
 			var model = new TestModel { Name = "Test", EMail = "test@test.com" };
 			var model2 = new TestModel { Name = "Foo", EMail = "foomail@test.com" };
 
@@ -85,9 +93,12 @@ namespace Simplify.Templates.Tests
 		[Test]
 		public void Set_ModelWithBaseClass_BaseClassFieldsAlsoSet()
 		{
-			// Assign
+			// Arrange
 
-			_template = Template.FromString("{ID} {Name}");
+			_template = TemplateBuilder
+				.FromString("{ID} {Name}")
+				.Build();
+
 			var model = new ChildTestModel { ID = 3, Name = "Hello!" };
 
 			// Act
@@ -100,9 +111,12 @@ namespace Simplify.Templates.Tests
 		[Test]
 		public void Set_ModelWithPrefix_PrefixAdded()
 		{
-			// Assign
+			// Arrange
 
-			_template = Template.FromString("{Model.ID}");
+			_template = TemplateBuilder
+				.FromString("{Model.ID}")
+				.Build();
+
 			var model = new ChildTestModel { ID = 3 };
 
 			// Act

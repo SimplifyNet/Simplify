@@ -1,4 +1,4 @@
-﻿namespace Simplify.Templates.Tests.Models
+﻿namespace Simplify.Templates.Tests.Model.Models
 {
 	public class BaseTestModel
 	{
