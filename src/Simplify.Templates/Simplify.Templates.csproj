@@ -7,7 +7,7 @@
 		<Product>Simplify</Product>
 		<Description>Text templates engine</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>2.0</Version>
+		<Version>2.0-pre01</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Templates</RepositoryUrl>
@@ -15,9 +15,12 @@
 		<PackageTags>.NET Templates</PackageTags>
 		<PackageReleaseNotes>
 			Breaking Changes
+			* Rewrite of `Template` class, build functionality moved to `TemplateBuilder` class
+			* Fluent interfaces
 			New
-			Updates
-			* Upgrade to System.IO.Abstractions 7.0.7
+			* Asynchronous methods
+			Other
+			* System.IO.Abstractions dependency drop
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Templates.xml</DocumentationFile>
