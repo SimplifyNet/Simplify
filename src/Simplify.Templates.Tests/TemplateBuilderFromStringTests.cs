@@ -42,7 +42,7 @@ namespace Simplify.Templates.Tests
 		}
 
 		[Test]
-		public void Build_FromStringFixLineEndingsHtml_LineEndingReplacedWithBrs()
+		public void FromStringFixLineEndingsHtml_WithLineBreak_LineEndingReplacedWithBrs()
 		{
 			// Act
 			var tpl = TemplateBuilder
