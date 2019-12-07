@@ -50,17 +50,6 @@ namespace Simplify.Repository.FluentNHibernate
 		}
 
 		/// <summary>
-		/// Gets the single object by identifier exclusively.
-		/// </summary>
-		/// <param name="id">The identifier.</param>
-		/// <returns></returns>
-		[Obsolete("Obsolete in terms of architecture, not all implementations can do this, use session directly")]
-		public T GetSingleByIDExclusive(object id)
-		{
-			return Session.Get<T>(id, LockMode.Upgrade);
-		}
-
-		/// <summary>
 		/// Gets the single object by query.
 		/// </summary>
 		/// <param name="query">The query.</param>
