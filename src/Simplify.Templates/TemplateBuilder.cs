@@ -48,7 +48,7 @@ namespace Simplify.Templates
 			if (string.IsNullOrEmpty(filePath))
 				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
 
-			FileExistenceCheck(filePath);
+			ValidateTemplateFileExists(filePath);
 
 			return new TemplateBuilder
 			{
@@ -66,9 +66,9 @@ namespace Simplify.Templates
 			if (string.IsNullOrEmpty(filePath))
 				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
 
-			filePath = ConstructFilePathFromLocalPath(filePath);
+			filePath = FileUtil.ConstructFullFilePath(filePath);
 
-			FileExistenceCheck(filePath);
+			ValidateTemplateFileExists(filePath);
 
 			return new TemplateBuilder
 			{
@@ -91,9 +91,13 @@ namespace Simplify.Templates
 			if (assembly == null)
 				throw new ArgumentNullException(nameof(assembly));
 
+			filePath = FileUtil.ConstructAssemblyFilePath(filePath, assembly);
+
+			ValidateAssemblyTemplateFileExists(filePath, assembly);
+
 			return new TemplateBuilder
 			{
-				_filePath = ConstructAssemblyFileName(filePath, assembly),
+				_filePath = filePath,
 				_assembly = assembly
 			};
 		}
@@ -110,10 +114,13 @@ namespace Simplify.Templates
 				throw new ArgumentException("Value cannot be null or empty.", nameof(filePath));
 
 			var assembly = Assembly.GetCallingAssembly();
+			filePath = FileUtil.ConstructAssemblyFilePath(filePath, assembly);
+
+			ValidateAssemblyTemplateFileExists(filePath, assembly);
 
 			return new TemplateBuilder
 			{
-				_filePath = ConstructAssemblyFileName(filePath, assembly),
+				_filePath = filePath,
 				_assembly = assembly
 			};
 		}
@@ -205,23 +212,18 @@ namespace Simplify.Templates
 			return this;
 		}
 
-		private static string ConstructFilePathFromLocalPath(string filePath)
-		{
-			return $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{filePath}";
-		}
-
-		private static string ConstructAssemblyFileName(string filePath, Assembly assembly)
-		{
-			filePath = filePath.Replace("/", ".");
-			filePath = $"{assembly.GetName().Name}.{filePath}";
-
-			return filePath;
-		}
-
-		private static void FileExistenceCheck(string filePath)
+		private static void ValidateTemplateFileExists(string filePath)
 		{
 			if (!File.Exists(filePath))
 				throw new FileNotFoundException($"Template file not found: {filePath}");
+		}
+
+		private static void ValidateAssemblyTemplateFileExists(string filePath, Assembly assembly)
+		{
+			if (FileUtil.AssemblyFileExists(filePath, assembly))
+				return;
+
+			throw new FileNotFoundException($"Template file not found: {filePath}");
 		}
 
 		private string LoadTemplateText()
@@ -232,9 +234,9 @@ namespace Simplify.Templates
 			if (_filePath == null)
 				throw new InvalidOperationException();
 
-			return _assembly != null
-				? FileReader.ReadFromAssembly(_filePath, _assembly)
-				: FileReader.ReadFile(_filePath);
+			return _assembly == null
+				? FileReader.ReadFile(_filePath)
+				: FileReader.ReadFromAssembly(_filePath, _assembly);
 		}
 
 		private async Task<string> LoadTemplateTextAsync()
@@ -245,14 +247,9 @@ namespace Simplify.Templates
 			if (_filePath == null)
 				throw new InvalidOperationException();
 
-			return _assembly != null
-				? await FileReader.ReadFromAssemblyAsync(_filePath, _assembly)
-				: await FileReader.ReadFileAsync(_filePath);
-
-			//if (_assembly != null)
-			//	return await FileReader.ReadFromAssemblyAsync(_filePath, _assembly);
-
-			//return await FileReader.ReadFileAsync(_filePath);
+			return _assembly == null
+				? await FileReader.ReadFileAsync(_filePath)
+				: await FileReader.ReadFromAssemblyAsync(_filePath, _assembly);
 		}
 
 		private string PreprocessTemplateText(string text)
@@ -268,7 +265,10 @@ namespace Simplify.Templates
 			if (_filePath == null)
 				return;
 
-			tpl.Localize(_filePath, _language, _baseLanguage);
+			if (_assembly == null)
+				tpl.Localize(_filePath, _language, _baseLanguage);
+			else
+				tpl.LocalizeFromAssembly(_filePath, _assembly, _language, _baseLanguage);
 		}
 
 		private async Task PostprocessTemplateAsync(ITemplate tpl)
@@ -279,7 +279,10 @@ namespace Simplify.Templates
 			if (_filePath == null)
 				return;
 
-			await tpl.LocalizeAsync(_filePath, _language, _baseLanguage);
+			if (_assembly == null)
+				await tpl.LocalizeAsync(_filePath, _language, _baseLanguage);
+			else
+				await tpl.LocalizeFromAssemblyAsync(_filePath, _assembly, _language, _baseLanguage);
 		}
 	}
 }

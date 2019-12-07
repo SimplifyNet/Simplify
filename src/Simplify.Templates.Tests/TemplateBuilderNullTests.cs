@@ -9,10 +9,10 @@ namespace Simplify.Templates.Tests
 	{
 		private static readonly object[] _testCases =
 		{
-			(TestDelegate) (() => TemplateBuilder.FromAssembly(null, Assembly.GetExecutingAssembly())),
-			(TestDelegate) (() => TemplateBuilder.FromCurrentAssembly(null)),
 			(TestDelegate) (() => TemplateBuilder.FromFile(null)),
-			(TestDelegate) (() => TemplateBuilder.FromLocalFile(null))
+			(TestDelegate) (() => TemplateBuilder.FromLocalFile(null)),
+			(TestDelegate) (() => TemplateBuilder.FromAssembly(null, Assembly.GetExecutingAssembly())),
+			(TestDelegate) (() => TemplateBuilder.FromCurrentAssembly(null))
 		};
 
 		[TestCaseSource(nameof(_testCases))]

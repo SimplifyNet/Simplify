@@ -7,12 +7,14 @@ namespace Simplify.Templates.Tests
 	[TestFixture]
 	public class TemplateBuilderFileNotFoundTests
 	{
+		private const string FilePath = "NotFoundFile.txt";
+
 		private static readonly object[] _testCases =
 		{
-			(TestDelegate) (() => TemplateBuilder.FromAssembly("NotFoundFile.txt", Assembly.GetExecutingAssembly())),
-			(TestDelegate) (() => TemplateBuilder.FromCurrentAssembly("NotFoundFile.txt")),
-			(TestDelegate) (() => TemplateBuilder.FromFile("NotFoundFile.txt")),
-			(TestDelegate) (() => TemplateBuilder.FromLocalFile("NotFoundFile.txt"))
+			(TestDelegate) (() => TemplateBuilder.FromFile(FilePath)),
+			(TestDelegate) (() => TemplateBuilder.FromLocalFile(FilePath)),
+			(TestDelegate) (() => TemplateBuilder.FromAssembly(FilePath, Assembly.GetExecutingAssembly())),
+			(TestDelegate) (() => TemplateBuilder.FromCurrentAssembly(FilePath))
 		};
 
 		[TestCaseSource(nameof(_testCases))]
