@@ -7,7 +7,7 @@
 		<Product>Simplify</Product>
 		<Description>Text templates engine</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>2.0-pre01</Version>
+		<Version>2.0</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Templates</RepositoryUrl>
