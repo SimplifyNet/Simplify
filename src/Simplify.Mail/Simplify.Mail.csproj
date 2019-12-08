@@ -5,16 +5,19 @@
 		<Product>Simplify</Product>
 		<Description>Simple mail sender</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.5</Version>
+		<Version>1.6</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Mail</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Mail</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET mail-sender</PackageTags>
 		<PackageReleaseNotes>
+			New
+			* Async methods
+			* Multi-thread locking improve
 			Updates
-			* System.Configuration.ConfigurationManager upgrade to 4.6.0
-			* Microsoft.Extensions.Configuration upgrade to 3.0.0
+			* System.Configuration.ConfigurationManager upgrade to 4.7.0
+			* Microsoft.Extensions.Configuration upgrade to 3.1.0
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Mail.xml</DocumentationFile>
