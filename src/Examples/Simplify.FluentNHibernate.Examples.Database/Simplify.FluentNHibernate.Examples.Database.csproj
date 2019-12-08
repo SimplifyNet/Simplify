@@ -9,7 +9,7 @@
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.Repository.FluentNHibernate" Version="1.1" />
+		<PackageReference Include="Simplify.Repository.FluentNHibernate" Version="1.2.0" />
 		<ProjectReference Include="..\Simplify.FluentNHibernate.Examples.Domain\Simplify.FluentNHibernate.Examples.Domain.csproj" />
 	</ItemGroup>
 </Project>
