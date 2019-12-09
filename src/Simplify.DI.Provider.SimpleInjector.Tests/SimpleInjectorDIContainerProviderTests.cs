@@ -49,7 +49,7 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 
 			var ex = Assert.Throws<ActivationException>(() => _provider.Resolve<NonDepFoo>());
 			Assert.That(ex.Message,
-				Does.StartWith("NonDepFoo is registered as 'Async Scoped' lifestyle, but the instance is requested outside the context of an active (Async Scoped) scope."));
+				Does.StartWith("NonDepFoo is registered using the 'Async Scoped' lifestyle, but the instance is requested outside the context of an active (Async Scoped) scope."));
 		}
 
 		[Test]
