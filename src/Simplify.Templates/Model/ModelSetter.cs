@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Simplify.Templates
+namespace Simplify.Templates.Model
 {
 	/// <summary>
 	/// Provides model setter to template, sets all objects properties to template
@@ -22,7 +22,7 @@ namespace Simplify.Templates
 		/// <param name="template">The template.</param>
 		/// <param name="model">The model.</param>
 		/// <param name="modelPrefix">The model prefix.</param>
-		public ModelSetter(ITemplate template, T model, string modelPrefix = null)
+		public ModelSetter(ITemplate template, T model, string? modelPrefix = null)
 			: base(template, modelPrefix)
 		{
 			_model = model;

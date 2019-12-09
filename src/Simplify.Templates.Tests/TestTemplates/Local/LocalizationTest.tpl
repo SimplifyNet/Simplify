@@ -1,0 +1,1 @@
+﻿{Localizable1} {Localizable2}

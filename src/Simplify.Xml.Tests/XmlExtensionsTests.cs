@@ -35,10 +35,10 @@ namespace Simplify.Xml.Tests
 		public void RemoveAllXmlNamespaces_XmlStringWithBNamespaces_XmlStringWithoutNamespaces()
 		{
 			// Assign
-			var str = Template.FromManifest("TestData.XmlWithNamespaces.xml").Get();
+			var str = TemplateBuilder.FromCurrentAssembly("TestData.XmlWithNamespaces.xml").Build().Get();
 
 			// Act & Assert
-			Assert.AreEqual(Template.FromManifest("TestData.XmlWithoutNamespaces..xml").Get(), str.RemoveAllXmlNamespaces());
+			Assert.AreEqual(TemplateBuilder.FromCurrentAssembly("TestData.XmlWithoutNamespaces..xml").Build().Get(), str.RemoveAllXmlNamespaces());
 		}
 	}
 }
