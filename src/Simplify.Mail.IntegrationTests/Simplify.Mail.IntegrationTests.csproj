@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.Mail integration tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>0.1</Version>
+		<Version>0.2</Version>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
