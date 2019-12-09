@@ -10,6 +10,8 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 	/// <typeparam name="T"></typeparam>
 	public class CrontabServiceJob<T> : ServiceJob<T>, ICrontabServiceJob
 	{
+		private const int CronTimerPeriod = 1000;
+
 		private readonly ICrontabProcessorFactory _crontabProcessorFactory;
 		private Timer _timer;
 
@@ -76,10 +78,16 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 				CrontabProcessor = _crontabProcessorFactory.Create(Settings.CrontabExpression);
 				CrontabProcessor.CalculateNextOccurrences();
 
-				_timer = new Timer(OnCronTimerTick ?? throw new InvalidOperationException("OnCronTimerTick is not assigned"), this, 1000, 60000);
+				_timer = new Timer(OnCronTimerTick ?? throw new InvalidOperationException("OnCronTimerTick is not assigned"),
+					this,
+					1000,
+					CronTimerPeriod);
 			}
 			else
-				_timer = new Timer(OnStartWork ?? throw new InvalidOperationException("OnStartWork is not assigned"), this, 1000, Settings.ProcessingInterval * 1000);
+				_timer = new Timer(OnStartWork ?? throw new InvalidOperationException("OnStartWork is not assigned"),
+					this,
+					1000,
+					Settings.ProcessingInterval * 1000);
 		}
 
 		/// <summary>
