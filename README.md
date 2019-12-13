@@ -197,7 +197,7 @@ Text templates engine with fluent-interfaces, localization and more.
 
 [![Nuget Version](https://img.shields.io/nuget/v/Simplify.Cryptography)](https://www.nuget.org/packages/Simplify.Cryptography)
 [![Nuget Download](https://img.shields.io/nuget/dt/Simplify.Cryptography)](https://www.nuget.org/packages/Simplify.Cryptography)
-![Platform](https://img.shields.io/badge/platform-4.5.2-lightgrey)
+![Platform](https://img.shields.io/badge/platform-.NET%20Standard%202.0%20%7C%20.NET%204.5.2-lightgrey)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/Simplify.Cryptography)](https://libraries.io/nuget/Simplify.Cryptography)
 [![Documentation](https://img.shields.io/badge/docs-green.svg)](https://github.com/SimplifyNet/Simplify/wiki/Simplify.Cryptography)
 
