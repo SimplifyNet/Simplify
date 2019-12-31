@@ -9,7 +9,7 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=SimplifyNet/Simplify)](https://dependabot.com)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](http://makeapullrequest.com)
 
-`Simplify` is  an open-source set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
+`Simplify` is an open-source set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
 
 ## Packages
 
