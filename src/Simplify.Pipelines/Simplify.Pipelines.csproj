@@ -5,14 +5,15 @@
 		<Product>Simplify</Product>
 		<Description>Pipelines processing, validation patterns</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>0.3.1</Version>
+		<Version>0.4</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Pipelines</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET pipelines</PackageTags>
 		<PackageReleaseNotes>
-			Added .NET Standard 1.0 support
+			New
+			* Conveyor patterns
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Pipelines.xml</DocumentationFile>
