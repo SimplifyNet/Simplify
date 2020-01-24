@@ -1,7 +1,7 @@
 ﻿namespace Simplify.Pipelines.Processing
 {
 	/// <summary>
-	///Provides default pipeline processor
+	/// Provides default pipeline processor
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <seealso cref="IPipelineProcessor" />

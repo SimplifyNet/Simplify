@@ -3,7 +3,7 @@
 namespace Simplify.Pipelines.Processing
 {
 	/// <summary>
-	///Provides default resulting pipeline
+	/// Provides default resulting pipeline
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TResult">The type of the result.</typeparam>
@@ -22,13 +22,20 @@ namespace Simplify.Pipelines.Processing
 		}
 
 		/// <summary>
+		/// Gets the error result.
+		/// </summary>
+		/// <value>
+		/// The error result.
+		/// </value>
+		public TResult ErrorResult { get; private set; }
+
+		/// <summary>
 		/// Process pipeline stages.
 		/// </summary>
-		/// <param name="item">The item.</param>
+		/// <param name="item">The item for execution.</param>
 		/// <returns></returns>
 		public bool Execute(T item)
 		{
-			// ReSharper disable once LoopCanBeConvertedToQuery
 			foreach (var stage in _stages)
 				if (!stage.Execute(item))
 				{
@@ -38,13 +45,5 @@ namespace Simplify.Pipelines.Processing
 
 			return true;
 		}
-
-		/// <summary>
-		/// Gets the error result.
-		/// </summary>
-		/// <value>
-		/// The error result.
-		/// </value>
-		public TResult ErrorResult { get; private set; }
 	}
 }

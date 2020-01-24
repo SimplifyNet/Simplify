@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Simplify.Pipelines.Processing
 {
@@ -23,17 +24,12 @@ namespace Simplify.Pipelines.Processing
 		/// <summary>
 		/// Process pipeline stages.
 		/// </summary>
-		/// <param name="args">The arguments.</param>
+		/// <param name="item">The item for execution.</param>
 		/// <returns></returns>
 
-		public virtual bool Execute(T args)
+		public virtual bool Execute(T item)
 		{
-			// ReSharper disable once LoopCanBeConvertedToQuery
-			foreach (var stage in _stages)
-				if (!stage.Execute(args))
-					return false;
-
-			return true;
+			return _stages.All(stage => stage.Execute(item));
 		}
 	}
 }

@@ -7,10 +7,10 @@ namespace Simplify.Pipelines.Processing
 	public interface IPipeline<in T>
 	{
 		/// <summary>
-		/// Process args through pipeline.
+		/// Process item through pipeline.
 		/// </summary>
-		/// <param name="args">The arguments.</param>
+		/// <param name="item">The item for execution.</param>
 		/// <returns></returns>
-		bool Execute(T args);
+		bool Execute(T item);
 	}
 }
