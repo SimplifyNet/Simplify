@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Pipelines processing, validation patterns</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>0.5</Version>
+		<Version>0.5.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Pipelines</RepositoryUrl>
