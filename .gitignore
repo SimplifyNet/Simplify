@@ -115,4 +115,6 @@ Logs.log
 *.sqlite
 
 # Coverage files ignore
+
 *lcov.info
+lcov*.info

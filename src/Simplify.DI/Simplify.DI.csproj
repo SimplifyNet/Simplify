@@ -1,27 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard1.0;net452</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;netstandard2.0;netstandard1.0;net452</TargetFrameworks>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify DI common interface for IOC containers</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>4.0</Version>
+		<Version>4.0.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET DI IOC-container</PackageTags>
 		<PackageReleaseNotes>
-			New Features
-			* Fluent interfaces for registration methods added
+			New
+			* Explicit .NET Standard 2.0 support
+			* Explicit .NET Core 3.1 support
 			Updates
-			* Upgrade to DryIoc 4.0.7
+			* Upgrade internal DryIoc to v4.1.0
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="DryIoc" Version="4.0.7" PrivateAssets="All" />
+		<PackageReference Include="DryIoc" Version="4.1.0" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
 		<Reference Include="System" />
