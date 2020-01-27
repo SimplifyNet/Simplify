@@ -22,7 +22,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="ncrontab" Version="3.3.1" />
-		<PackageReference Include="Simplify.DI" Version="4.0.0" />
+		<PackageReference Include="Simplify.DI" Version="4.0.1" />
 		<PackageReference Include="Simplify.System" Version="1.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
 	</ItemGroup>
