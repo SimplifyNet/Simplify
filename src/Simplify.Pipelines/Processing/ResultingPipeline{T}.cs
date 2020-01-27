@@ -7,7 +7,7 @@ namespace Simplify.Pipelines.Processing
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TResult">The type of the result.</typeparam>
-	/// <seealso cref="Simplify.Pipelines.Processing.IResultingPipeline{T, TResult}" />
+	/// <seealso cref="IResultingPipeline{T, TResult}" />
 	public class ResultingPipeline<T, TResult> : IResultingPipeline<T, TResult>
 	{
 		private readonly IList<IResultingPipelineStage<T, TResult>> _stages;

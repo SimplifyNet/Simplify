@@ -23,13 +23,29 @@ namespace Simplify.Pipelines.ProductionLine
 		}
 
 		/// <summary>
+		/// Occurs when conveyor is about to execute.
+		/// </summary>
+		public event ConveyorAction<T> OnConveyorStart;
+
+		/// <summary>
+		/// Occurs when conveyor stage has finished it's execution.
+		/// </summary>
+		public event ConveyorStageAction<T> OnStageExecuted;
+
+		/// <summary>
 		/// Executes the specified item thru conveyor.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		public void Execute(T item)
 		{
+			OnConveyorStart?.Invoke(item);
+
 			foreach (var stage in _stages)
+			{
 				stage.Execute(item);
+
+				OnStageExecuted?.Invoke(stage.GetType(), item);
+			}
 		}
 	}
 }

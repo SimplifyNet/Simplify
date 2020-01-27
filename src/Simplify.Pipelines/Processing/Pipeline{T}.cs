@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Simplify.Pipelines.Processing
 {
@@ -7,7 +6,7 @@ namespace Simplify.Pipelines.Processing
 	/// Provides default pipeline
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	/// <seealso cref="Processing.IPipeline{T}" />
+	/// <seealso cref="IPipeline{T}" />
 	public class Pipeline<T> : IPipeline<T>
 	{
 		private readonly IList<IPipelineStage<T>> _stages;
@@ -22,14 +21,42 @@ namespace Simplify.Pipelines.Processing
 		}
 
 		/// <summary>
+		/// Occurs when pipeline is about to execute.
+		/// </summary>
+		public event PipelineAction<T> OnPipelineStart;
+
+		/// <summary>
+		/// Occurs when pipeline has finished it's execution.
+		/// </summary>
+		public event PipelineAction<T> OnPipelineEnd;
+
+		/// <summary>
+		/// Occurs when pipeline stage has finished it's execution.
+		/// </summary>
+		public event PipelineStageAction<T> OnStageExecuted;
+
+		/// <summary>
 		/// Process pipeline stages.
 		/// </summary>
 		/// <param name="item">The item for execution.</param>
 		/// <returns></returns>
-
 		public virtual bool Execute(T item)
 		{
-			return _stages.All(stage => stage.Execute(item));
+			OnPipelineStart?.Invoke(item);
+
+			foreach (var stage in _stages)
+			{
+				var result = !stage.Execute(item);
+
+				OnStageExecuted?.Invoke(stage.GetType(), item, result);
+
+				if (result == false)
+					return false;
+			}
+
+			OnPipelineEnd?.Invoke(item);
+
+			return true;
 		}
 	}
 }
