@@ -24,7 +24,7 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 			// Act & Assert
 
 			var ex = Assert.Throws<ActivationException>(() => _provider.Resolve<NonDepFoo>());
-			Assert.That(ex.Message, Does.StartWith("No registration for type NonDepFoo could be found and an implicit registration could not be made."));
+			Assert.That(ex.Message, Does.StartWith("No registration for type NonDepFoo could be found. Make sure NonDepFoo is registered"));
 		}
 
 		[Test]
@@ -35,7 +35,7 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 			using (var scope = _provider.BeginLifetimeScope())
 			{
 				var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<NonDepFoo>());
-				Assert.That(ex.Message, Does.StartWith("No registration for type NonDepFoo could be found and an implicit registration could not be made."));
+				Assert.That(ex.Message, Does.StartWith("No registration for type NonDepFoo could be found. Make sure NonDepFoo is registered"));
 			}
 		}
 
@@ -803,7 +803,7 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 
 			var ex = Assert.Throws<InvalidOperationException>(() => _provider.Verify());
 			Assert.That(ex.Message,
-				Does.StartWith("The configuration is invalid. Creating the instance for type Foo failed. The constructor of type Foo contains the parameter with name 'bar' and type IBar that is not registered."));
+				Does.StartWith("The configuration is invalid. Creating the instance for type Foo failed. The constructor of type Foo contains the parameter with name 'bar' and type IBar, but IBar is not registered."));
 		}
 
 		[Test]

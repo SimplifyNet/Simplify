@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.DI SimpleInjector provider</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.8.1</Version>
+		<Version>1.8.2</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.SimpleInjector</RepositoryUrl>
@@ -13,13 +13,14 @@
 		<PackageTags>.NET DI IOC-container-provider</PackageTags>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade to SimpleInjector 4.8.1
+			* Upgrade to Simplify.DI 4.0.1
+			* Upgrade to SimpleInjector 4.9.0
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.SimpleInjector.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.0" />
-		<PackageReference Include="SimpleInjector" Version="4.8.1" />
+		<PackageReference Include="Simplify.DI" Version="4.0.1" />
+		<PackageReference Include="SimpleInjector" Version="4.9.0" />
 	</ItemGroup>
 </Project>
