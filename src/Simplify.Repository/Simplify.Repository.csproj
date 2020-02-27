@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Repository, unit of work and related patterns interfaces</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.3</Version>
+		<Version>1.4</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Repository</RepositoryUrl>
@@ -13,10 +13,7 @@
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 		<PackageReleaseNotes>
 			New
-			* Unit of work CommitAsync and RollbackAsync
-			Removed
-			* IAutoUnitOfWork deleted
-			* Repository GetSingleByIDExclusive removed
+			* TransactRepository added
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.xml</DocumentationFile>
