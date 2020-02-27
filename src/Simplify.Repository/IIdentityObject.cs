@@ -11,6 +11,6 @@
 		/// <value>
 		/// The identifier.
 		/// </value>
-		int ID { get; }
+		int ID { get; set; }
 	}
 }
