@@ -46,7 +46,7 @@ namespace Simplify.Pipelines.Processing
 
 			foreach (var stage in _stages)
 			{
-				var result = !stage.Execute(item);
+				var result = stage.Execute(item);
 
 				OnStageExecuted?.Invoke(stage.GetType(), item, result);
 
