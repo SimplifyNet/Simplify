@@ -3,14 +3,14 @@ using System.Reflection;
 using NHibernate.Cfg;
 using NHibernate.Mapping;
 
-namespace FIS.Database
+namespace Simplify.FluentNHibernate
 {
 	/// <summary>
 	/// Provides NHibernate configuration extensions
 	/// </summary>
 	public static class NHibernateConfigurationExtensions
 	{
-		private static readonly PropertyInfo TableMappingsProperty =
+		private static readonly PropertyInfo _tableMappingsProperty =
 			typeof(Configuration).GetProperty("TableMappings", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
 		/// <summary>
@@ -21,7 +21,7 @@ namespace FIS.Database
 		{
 			configuration.BuildMappings();
 
-			var tables = (ICollection<Table>)TableMappingsProperty.GetValue(configuration, null);
+			var tables = (ICollection<Table>)_tableMappingsProperty.GetValue(configuration, null);
 
 			foreach (var table in tables)
 			{
