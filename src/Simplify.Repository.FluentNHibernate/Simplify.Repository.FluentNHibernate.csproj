@@ -12,16 +12,15 @@
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 		<PackageReleaseNotes>
-			Upgrades according to Simplify.Repository 1.3.0
-			* Unit of work async Commit/Rollback methods
-			Other
-			* Obsolete methods removed
+			Updates
+			* Upgrade to Simplify.FluentNHibernate 2.1
+			* Upgrade to Simplify.Repository 1.4.1 (PR#80)
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.FluentNHibernate" Version="2.0.0" />
+		<PackageReference Include="Simplify.FluentNHibernate" Version="2.1.0" />
 		<PackageReference Include="Simplify.Repository" Version="1.4.1" />
 	</ItemGroup>
 </Project>
