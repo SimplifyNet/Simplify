@@ -1,8 +1,8 @@
-﻿using FluentNHibernate.Conventions;
+﻿using System.Linq;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
-using System.Linq;
 
-namespace Simplify.FluentNHibernate.Convetions
+namespace Simplify.FluentNHibernate.Conventions
 {
 	/// <summary>
 	/// Provides foreign key constraint naming for ManyToMany and ManyToOne relations
@@ -10,9 +10,9 @@ namespace Simplify.FluentNHibernate.Convetions
 	public class ForeignKeyConstraintNameConvention : IHasManyToManyConvention, IReferenceConvention
 	{
 		/// <summary>
-		/// Withes the foreign key constraint name convention.
+		/// Adds the foreign key constraint name convention.
 		///
-		/// Note: For 'HasMany' with 'Element' foreign key constraint name should be set by 'ForeignKeyConstraintName'
+		/// Note: 'HasMany' with 'Element' foreign key constraint name is not supported, it should be set manually by 'ForeignKeyConstraintName'
 		/// </summary>
 		/// <returns></returns>
 		public static ForeignKeyConstraintNameConvention WithConstraintNameConvention()

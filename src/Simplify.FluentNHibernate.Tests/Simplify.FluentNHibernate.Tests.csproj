@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net462</TargetFramework>
+		<LangVersion>8.0</LangVersion>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.FluentNHibernate unit tests</Description>

@@ -13,7 +13,7 @@
 		<PackageTags>.NET FluentNHibernate ORM</PackageTags>
 		<PackageReleaseNotes>
 			New
-			* Added ForeignKeyConstraintNameConvetion (#82)
+			* Added ForeignKeyConstraintNameConvention (#82)
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.FluentNHibernate.xml</DocumentationFile>

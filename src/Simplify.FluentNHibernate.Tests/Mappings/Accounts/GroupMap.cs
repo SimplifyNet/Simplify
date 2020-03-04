@@ -18,7 +18,7 @@ namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts
 
 			HasMany(x => x.Privileges)
 				.KeyColumn("GroupID")
-				.ForeignKeyConstraintName("FK_UsersPrivileges_GroupID")
+				.ForeignKeyConstraintName("FK_Custom_UsersPrivileges_GroupID")
 				.Table("GroupsPrivileges")
 				.Element("Type");
 		}
