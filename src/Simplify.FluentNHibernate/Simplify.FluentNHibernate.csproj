@@ -13,7 +13,8 @@
 		<PackageTags>.NET FluentNHibernate ORM</PackageTags>
 		<PackageReleaseNotes>
 			New
-			* Added ForeignKeyConstraintNameConvention (#82)
+			* Configuration extension method to create indexes for foreign keys (#81)
+			* Foreign key constraint name convention (#82)
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.FluentNHibernate.xml</DocumentationFile>

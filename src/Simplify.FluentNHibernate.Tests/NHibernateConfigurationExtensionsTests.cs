@@ -9,10 +9,10 @@ using NUnit.Framework;
 using Simplify.FluentNHibernate.Conventions;
 using Simplify.FluentNHibernate.Tests.Mappings.Accounts;
 
-namespace Simplify.FluentNHibernate.Tests.Conventions
+namespace Simplify.FluentNHibernate.Tests
 {
 	[TestFixture]
-	public class ForeignKeyConstraintNameConventionTests : SessionExtensionsTestsBase
+	public class NHibernateConfigurationExtensionsTests : SessionExtensionsTestsBase
 	{
 		private SchemaUpdate _schemaUpdate;
 
@@ -23,14 +23,15 @@ namespace Simplify.FluentNHibernate.Tests.Conventions
 
 			Configuration config = null;
 			configuration.ExposeConfiguration(c => config = c);
-
 			configuration.BuildSessionFactory();
+
+			config.CreateIndexesForForeignKeys();
 
 			_schemaUpdate = new SchemaUpdate(config);
 		}
 
 		[Test]
-		public void UpdateSchema_WithForeignKeyConstraintNameConvention_ConstraintNamesGeneratedByConvention()
+		public void UpdateSchema_WithCreateIndexesForForeignKeys_IndexesCreated()
 		{
 			// Act
 
@@ -40,15 +41,15 @@ namespace Simplify.FluentNHibernate.Tests.Conventions
 			// Assert
 
 			var result = sw.ToString();
-			var matches = Regex.Matches(result, @"FK\w+");
-			var constraints = (from Match match in matches select match.Value).ToList();
+			var matches = Regex.Matches(result, @"IDX\w+");
+			var indexes = (from Match match in matches select match.Value).ToList();
 
-			Assert.AreEqual(5, constraints.Count);
-			Assert.AreEqual("FK_UsersGroups_UserID", constraints[0]);
-			Assert.AreEqual("FK_UsersGroups_GroupID", constraints[1]);
-			Assert.AreEqual("FK_Custom_UsersPrivileges_GroupID", constraints[2]);
-			Assert.AreEqual("FK_User_OrganizationID", constraints[3]);
-			Assert.AreEqual("FK_UsersPrivileges_UserID", constraints[4]);
+			Assert.AreEqual(5, indexes.Count);
+			Assert.AreEqual("IDX_FK_UsersGroups_UserID", indexes[0]);
+			Assert.AreEqual("IDX_FK_UsersGroups_GroupID", indexes[1]);
+			Assert.AreEqual("IDX_FK_Custom_UsersPrivileges_GroupID", indexes[2]);
+			Assert.AreEqual("IDX_FK_User_OrganizationID", indexes[3]);
+			Assert.AreEqual("IDX_FK_UsersPrivileges_UserID", indexes[4]);
 		}
 
 		private static FluentConfiguration CreateConfiguration()
