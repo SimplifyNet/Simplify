@@ -5,20 +5,15 @@
 		<Product>Simplify</Product>
 		<Description>Simplifies FluentNHibernate connection configuration and allows you to write data-base queries with lambda expressions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>2.0</Version>
+		<Version>2.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.FluentNHibernate</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo64x64.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.FluentNHibernate</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>.NET FluentNHibernate ORM</PackageTags>
 		<PackageReleaseNotes>
-			Breaking Changes
-			* GetSingleObject methods unified with GetObject
 			New
-			* Session/StatelessSession Async operations
-			* LongCount and LongCountAsync Session/StatelessSession methods
-			Updates
-			* SchemaExporter now is  FluentConfiguration extension method
+			* Added ForeignKeyConstraintNameConvetion (#82)
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.FluentNHibernate.xml</DocumentationFile>
