@@ -14,6 +14,7 @@ before_build:
 build:
   project: src/Simplify.sln
   publish_nuget: true
+  publish_nuget_symbols: true
   parallel: true
   verbosity: minimal
 
