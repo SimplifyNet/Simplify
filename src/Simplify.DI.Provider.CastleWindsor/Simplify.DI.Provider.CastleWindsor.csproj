@@ -8,8 +8,7 @@
 		<Version>1.6</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.CastleWindsor</RepositoryUrl>
-		<RepositoryType>GIT</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container-provider</PackageTags>
 		<PackageReleaseNotes>
 			Updates
@@ -17,6 +16,9 @@
 			* Upgrade to Castle.Windsor 5.0.1
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.CastleWindsor.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>

@@ -8,14 +8,16 @@
 		<Version>1.1.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Extensions</RepositoryUrl>
-		<RepositoryType>GIT</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET system-extensions</PackageTags>
 		<PackageReleaseNotes>
 			* Added .NET Standard 1.0 support
 			* Upgrade to .NET Framework 4.5.2
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Extensions.xml</DocumentationFile>
 	</PropertyGroup>
 </Project>

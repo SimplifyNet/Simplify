@@ -6,7 +6,6 @@
 		<Description>Simplify.DI.Provider.CastleWindsor unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.3</Version>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />

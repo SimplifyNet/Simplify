@@ -6,7 +6,6 @@
 		<Description>Simplify.DI unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<Version>1.2</Version>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
