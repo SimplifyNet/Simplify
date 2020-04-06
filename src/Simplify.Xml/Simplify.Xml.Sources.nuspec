@@ -12,10 +12,9 @@
 		<description>XML extensions.</description>
 		<summary>XML extensions</summary>
 		<releaseNotes>
-			New Features
-			* RemoveAllXmlNamespaces added
 			Updates
-			* OuterXml/InnerXml for XNode elements instead of just XElements
+			* Nullable enable
+			* C# 8 Support
 		</releaseNotes>
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
