@@ -20,14 +20,14 @@ namespace Simplify.Xml
 		/// <returns></returns>
 		public static string Serialize<T>(IList<T> items)
 		{
-			using(var memoryStream = new MemoryStream())
-			{
-				var serializer = new XmlSer.XmlSerializer(typeof(List<T>));
-				serializer.Serialize(memoryStream, items);
+			using var memoryStream = new MemoryStream();
+			var serializer = new XmlSer.XmlSerializer(typeof(List<T>));
 
-				memoryStream.Position = 0;
-				return new StreamReader(memoryStream).ReadToEnd();
-			}			
+			serializer.Serialize(memoryStream, items);
+
+			memoryStream.Position = 0;
+
+			return new StreamReader(memoryStream).ReadToEnd();
 		}
 
 		/// <summary>
@@ -38,15 +38,13 @@ namespace Simplify.Xml
 		/// <returns></returns>
 		public static XElement ToXElement<T>(T obj)
 		{
-			using (var memoryStream = new MemoryStream())
-			{
-				using (TextWriter streamWriter = new StreamWriter(memoryStream))
-				{
-					var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
-					xmlSerializer.Serialize(streamWriter, obj);
-					return XElement.Parse(Encoding.UTF8.GetString(memoryStream.ToArray()));
-				}
-			}
+			using var memoryStream = new MemoryStream();
+			using TextWriter streamWriter = new StreamWriter(memoryStream);
+			var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
+
+			xmlSerializer.Serialize(streamWriter, obj);
+
+			return XElement.Parse(Encoding.UTF8.GetString(memoryStream.ToArray()));
 		}
 
 		/// <summary>
@@ -57,11 +55,10 @@ namespace Simplify.Xml
 		/// <returns></returns>
 		public static T FromXElement<T>(XElement xElement)
 		{
-			using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xElement.ToString())))
-			{
-				var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
-				return (T)xmlSerializer.Deserialize(memoryStream);
-			}
+			using var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xElement.ToString()));
+			var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
+
+			return (T)xmlSerializer.Deserialize(memoryStream);
 		}
 	}
 }
