@@ -20,5 +20,6 @@ namespace Simplify.FluentNHibernate.Tests.Entities.Accounts
 		public virtual IList<Group> Groups { get; set; }
 
 		public virtual Organization Organization { get; set; }
+		public virtual Employee Employee { get; set; }
 	}
 }

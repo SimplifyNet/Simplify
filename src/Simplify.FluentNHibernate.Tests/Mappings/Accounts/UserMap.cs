@@ -17,6 +17,8 @@ namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts
 			Map(x => x.EMail);
 			Map(x => x.LastActivityTime);
 
+			HasOne(x => x.Employee).Cascade.All();
+
 			HasManyToMany(x => x.Groups)
 				.Table("UsersGroups");
 
