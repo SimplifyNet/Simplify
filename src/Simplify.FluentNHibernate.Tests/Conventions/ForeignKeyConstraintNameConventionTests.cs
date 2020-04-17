@@ -1,13 +1,13 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using Simplify.FluentNHibernate.Conventions;
 using Simplify.FluentNHibernate.Tests.Mappings.Accounts;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Simplify.FluentNHibernate.Tests.Conventions
 {

@@ -1,6 +1,6 @@
-﻿using FluentNHibernate.Conventions;
+﻿using System.Linq;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
-using System.Linq;
 
 namespace Simplify.FluentNHibernate.Conventions
 {
