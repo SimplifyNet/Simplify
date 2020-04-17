@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using FluentNHibernate.Conventions;
+﻿using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
+using System.Linq;
 
 namespace Simplify.FluentNHibernate.Conventions
 {
 	/// <summary>
 	/// Provides foreign key constraint naming for ManyToMany and ManyToOne relations
 	/// </summary>
-	public class ForeignKeyConstraintNameConvention : IHasManyToManyConvention, IReferenceConvention
+	public class ForeignKeyConstraintNameConvention : IHasManyToManyConvention, IReferenceConvention, IHasOneConvention
 	{
 		/// <summary>
 		/// Adds the foreign key constraint name convention.
@@ -42,6 +42,16 @@ namespace Simplify.FluentNHibernate.Conventions
 				GetForeignConstraintName(
 					instance.TableName,
 					instance.Relationship.Columns.First().Name));
+		}
+
+		/// <summary>
+		/// Applies the IOneToOneInstance instance.
+		/// </summary>
+		/// <param name="instance">The instance.</param>
+		/// <exception cref="System.NotImplementedException"></exception>
+		public void Apply(IOneToOneInstance instance)
+		{
+			instance.ForeignKey(GetForeignConstraintName(instance.EntityType.Name, instance.Name));
 		}
 
 		private static string GetForeignConstraintName(string targetTableName, string sourceTableColumnName)
