@@ -21,7 +21,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Wcf.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.0" />
+		<PackageReference Include="Simplify.DI" Version="4.0.2" />
 		<Reference Include="System.ServiceModel" />
 		<Reference Include="System.ServiceModel.Activation" />
 	</ItemGroup>
