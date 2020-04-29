@@ -1,19 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard1.3;net452</TargetFrameworks>
+		<TargetFrameworks>netstandard1.3;netstandard2.0;net452</TargetFrameworks>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.DI SimpleInjector provider</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.8.3</Version>
+		<Version>1.8.4</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container-provider</PackageTags>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade to Simplify.DI 4.0.2
-			* Upgrade to SimpleInjector 4.9.1
+			* Upgrade to Simplify.DI 4.0.3
+			* Upgrade to SimpleInjector 4.10.2
+			New
+			* .NET Standard 2 exact support
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -22,7 +24,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.SimpleInjector.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.2" />
+		<PackageReference Include="Simplify.DI" Version="4.0.3" />
 		<PackageReference Include="SimpleInjector" Version="4.10.2" />
 	</ItemGroup>
 </Project>
