@@ -5,15 +5,14 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.Repository FluentNHibernate implementation</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.2.1</Version>
+		<Version>1.2.2</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade to Simplify.FluentNHibernate 2.1
-			* Upgrade to Simplify.Repository 1.4.1 (PR#80)
+			* Upgrade to Simplify.FluentNHibernate 2.2
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
