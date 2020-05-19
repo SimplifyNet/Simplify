@@ -21,7 +21,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="DryIoc" Version="4.1.4" PrivateAssets="All" />
+		<PackageReference Include="DryIoc" Version="4.2.0" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
