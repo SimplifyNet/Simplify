@@ -4,11 +4,11 @@ docker build -t simplify.scheduler.simpleapp .
 
 # run
 
-docker run -d --name "simplify.scheduler.simpleapp" simplify.scheduler.simpleapp
+docker run -ti --name "simplify.scheduler.simpleapp" simplify.scheduler.simpleapp
 
-# kill
+# stop
 
-docker kill simplify.scheduler.simpleapp
+Ctrl + C
 
 # logs
 
