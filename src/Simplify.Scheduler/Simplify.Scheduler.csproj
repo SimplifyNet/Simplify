@@ -5,17 +5,16 @@
 		<Product>Simplify</Product>
 		<Description>Scheduler framework with DI</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0-pre05</Version>
+		<Version>1.0</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Scheduler</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Scheduler</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET Scheduler DI</PackageTags>
 		<PackageReleaseNotes>
-			Bug fixes
-			* Crontab timer period set to 1000 msec (#38)
-			Updates
-			* Microsoft.Extensions.Configuration upgrade to 3.1.0
+			Updates (changes from 1.0.0-pre05)
+			* Microsoft.Extensions.Configuration upgrade to 3.1.5
+			* Simplify.DI upgrade to 4.0.4
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -25,8 +24,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="ncrontab" Version="3.3.1" />
-		<PackageReference Include="Simplify.DI" Version="4.0.0" />
+		<PackageReference Include="Simplify.DI" Version="4.0.4" />
 		<PackageReference Include="Simplify.System" Version="1.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.5" />
 	</ItemGroup>
 </Project>
