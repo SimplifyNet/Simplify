@@ -12,7 +12,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET Scheduler DI</PackageTags>
 		<PackageReleaseNotes>
-			Updates
+			Updates (changes from 1.0.0-pre05)
 			* Microsoft.Extensions.Configuration upgrade to 3.1.5
 			* Simplify.DI upgrade to 4.0.4
 		</PackageReleaseNotes>
