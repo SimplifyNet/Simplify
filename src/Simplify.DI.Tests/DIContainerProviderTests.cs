@@ -25,19 +25,20 @@ namespace Simplify.DI.Tests
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Resolve<NonDepFoo>());
 			Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
-			Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root NonDepFoo"));
+			Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root"));
+			Assert.That(ex.Message, Does.Contain("NonDepFoo"));
 		}
 
 		[Test]
 		public void ScopedResolve_NotRegistered_ContainerException()
 		{
 			// Act & Assert
-			using (var scope = _provider.BeginLifetimeScope())
-			{
-				var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<NonDepFoo>());
-				Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
-				Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root NonDepFoo"));
-			}
+			using var scope = _provider.BeginLifetimeScope();
+
+			var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<NonDepFoo>());
+			Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
+			Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root"));
+			Assert.That(ex.Message, Does.Contain("NonDepFoo"));
 		}
 
 		[Test]
