@@ -25,7 +25,7 @@ namespace Simplify.DI.Tests
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Resolve<NonDepFoo>());
 			Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
-			Assert.That(ex.Message, Does.Contain("NonDepFoo (IsResolutionCall)"));
+			Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root NonDepFoo"));
 		}
 
 		[Test]
@@ -36,7 +36,7 @@ namespace Simplify.DI.Tests
 			{
 				var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<NonDepFoo>());
 				Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
-				Assert.That(ex.Message, Does.Contain("NonDepFoo (IsResolutionCall)"));
+				Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root NonDepFoo"));
 			}
 		}
 
