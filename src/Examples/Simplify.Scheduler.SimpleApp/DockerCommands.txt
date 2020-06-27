@@ -1,0 +1,15 @@
+﻿# build
+
+docker build -t simplify.scheduler.simpleapp .
+
+# run
+
+docker run -d --name "simplify.scheduler.simpleapp" simplify.scheduler.simpleapp
+
+# kill
+
+docker kill simplify.scheduler.simpleapp
+
+# logs
+
+docker logs simplify.scheduler.simpleapp
