@@ -453,7 +453,7 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 				// Act && Assert
 
 				var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
-				Assert.That(ex.Message, Does.StartWith("A lifestyle mismatch has been detected. Foo (Async Scoped) depends on IBar implemented by Bar (Transient)."));
+				Assert.That(ex.Message, Does.Contain("[Lifestyle Mismatch] Foo (Async Scoped) depends on IBar implemented by Bar (Transient)"));
 			}
 		}
 
@@ -561,14 +561,13 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 			_provider.Register<IBar, Bar>();
 			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			using (var scope = _provider.BeginLifetimeScope())
-			{
-				// Act && Assert
+			using var scope = _provider.BeginLifetimeScope();
 
-				var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
-				Assert.That(ex.Message,
-					Does.StartWith("A lifestyle mismatch has been detected. Foo (Singleton) depends on IBar implemented by Bar (Async Scoped)."));
-			}
+			// Act && Assert
+
+			var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
+			Assert.That(ex.Message,
+				Does.Contain("[Lifestyle Mismatch] Foo (Singleton) depends on IBar implemented by Bar (Async Scoped)."));
 		}
 
 		// Note: this behavior check is not available
@@ -625,14 +624,13 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 			_provider.Register<IBar, Bar>(LifetimeType.Transient);
 			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			using (var scope = _provider.BeginLifetimeScope())
-			{
-				// Act && Assert
+			using var scope = _provider.BeginLifetimeScope();
 
-				var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
-				Assert.That(ex.Message,
-					Does.StartWith("A lifestyle mismatch has been detected. Foo (Singleton) depends on IBar implemented by Bar (Transient)."));
-			}
+			// Act && Assert
+
+			var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
+			Assert.That(ex.Message,
+				Does.Contain("[Lifestyle Mismatch] Foo (Singleton) depends on IBar implemented by Bar (Transient)."));
 		}
 
 		// Note: this behavior check is not available
