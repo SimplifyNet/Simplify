@@ -1,6 +1,5 @@
 ﻿using FluentNHibernate.Cfg;
 using Microsoft.Extensions.Configuration;
-using Simplify.FluentNHibernate.Examples.Database.Mappings;
 using Simplify.Repository.FluentNHibernate;
 
 namespace Simplify.FluentNHibernate.Examples.Database
@@ -14,8 +13,8 @@ namespace Simplify.FluentNHibernate.Examples.Database
 
 		public override FluentConfiguration CreateConfiguration()
 		{
-			FluentConfiguration.InitializeFromConfigMsSql(ConfigSectionName);
-			FluentConfiguration.AddMappingsFromAssemblyOf<UserMap>();
+			FluentConfiguration.InitializeFromConfigMsSql(Configuration, ConfigSectionName);
+			FluentConfiguration.AddMappingsFromAssemblyOf<ExampleSessionFactoryBuilder>();
 
 			return FluentConfiguration;
 		}
