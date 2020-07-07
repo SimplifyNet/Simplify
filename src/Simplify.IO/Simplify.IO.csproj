@@ -15,7 +15,6 @@
 			* .NET Framework 4.5.2 support dropped
 			New Features
 			* .NET Framework 4.6.2 support added
-			* .NET Standard 2.0 support
 			Updates
 			* Upgrade to System.IO.Abstractions 6.0.38
 		</PackageReleaseNotes>
