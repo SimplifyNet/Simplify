@@ -23,6 +23,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Castle.Windsor" Version="5.0.1" />
-		<PackageReference Include="Simplify.DI" Version="4.0.0" />
+		<PackageReference Include="Simplify.DI" Version="4.0.4" />
 	</ItemGroup>
 </Project>
