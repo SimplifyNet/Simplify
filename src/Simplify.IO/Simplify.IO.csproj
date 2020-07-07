@@ -1,17 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>IO helper functions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1</Version>
+		<Version>1.2</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET IO</PackageTags>
 		<PackageReleaseNotes>
+			Breaking Changes
+			* .NET Framework 4.5.2 support dropped
 			New Features
+			* .NET Framework 4.6.2 support added
 			* .NET Standard 2.0 support
 			Updates
 			* Upgrade to System.IO.Abstractions 6.0.38
@@ -23,6 +26,6 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.IO.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="System.IO.Abstractions" Version="6.0.38" />
+		<PackageReference Include="System.IO.Abstractions" Version="12.0.4" />
 	</ItemGroup>
 </Project>
