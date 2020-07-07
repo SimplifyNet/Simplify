@@ -1,5 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
 using System.Reflection;
+using NUnit.Framework;
 
 namespace Simplify.System.Tests
 {
@@ -9,7 +10,7 @@ namespace Simplify.System.Tests
 		[Test]
 		public void AssemblyInfo_GetCurrentAssemblyInfo_InformationIsCorrect()
 		{
-			var assemblyInfo = new AssemblyInfo(Assembly.GetAssembly((typeof(AssemblyInfoTests))));
+			var assemblyInfo = new AssemblyInfo(Assembly.GetAssembly(typeof(AssemblyInfoTests)) ?? throw new InvalidOperationException());
 
 			Assert.AreEqual("Alexander Krylkov", assemblyInfo.CompanyName);
 			Assert.AreEqual("Licensed under LGPL", assemblyInfo.Copyright);
