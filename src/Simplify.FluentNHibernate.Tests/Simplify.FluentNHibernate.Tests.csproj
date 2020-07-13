@@ -13,7 +13,7 @@
 		<PackageReference Include="coverlet.msbuild" Version="2.9.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
 		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
 		<PackageReference Include="System.Data.SQLite" Version="1.0.113.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
 		<ProjectReference Include="..\Simplify.FluentNHibernate\Simplify.FluentNHibernate.csproj" />
