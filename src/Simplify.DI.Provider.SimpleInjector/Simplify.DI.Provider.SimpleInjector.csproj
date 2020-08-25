@@ -22,7 +22,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.SimpleInjector.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.4" />
+		<PackageReference Include="Simplify.DI" Version="4.0.6" />
 		<PackageReference Include="SimpleInjector" Version="5.0.1" />
 	</ItemGroup>
 </Project>
