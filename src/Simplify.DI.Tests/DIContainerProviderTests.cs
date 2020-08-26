@@ -24,9 +24,8 @@ namespace Simplify.DI.Tests
 			// Act & Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Resolve<NonDepFoo>());
-			Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
-			Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root"));
-			Assert.That(ex.Message, Does.Contain("NonDepFoo"));
+			Assert.That(ex.Message, Does.StartWith("code: Error.UnableToResolveUnknownService"));
+			Assert.That(ex.Message, Does.Contain("Unable to resolve Resolution root NonDepFoo"));
 		}
 
 		[Test]
@@ -36,9 +35,8 @@ namespace Simplify.DI.Tests
 			using var scope = _provider.BeginLifetimeScope();
 
 			var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<NonDepFoo>());
-			Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
-			Assert.That(ex.Message, Does.Contain("UnableToResolveUnknownService; message: Unable to resolve Resolution root"));
-			Assert.That(ex.Message, Does.Contain("NonDepFoo"));
+			Assert.That(ex.Message, Does.StartWith("code: Error.UnableToResolveUnknownService"));
+			Assert.That(ex.Message, Does.Contain("Unable to resolve Resolution root NonDepFoo"));
 		}
 
 		[Test]
@@ -50,7 +48,7 @@ namespace Simplify.DI.Tests
 			// Act & Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Resolve<NonDepFoo>());
-			Assert.That(ex.Message, Does.StartWith("code: NoCurrentScope"));
+			Assert.That(ex.Message, Does.StartWith("code: Error.NoCurrentScope"));
 		}
 
 		[Test]
@@ -566,7 +564,7 @@ namespace Simplify.DI.Tests
 				// Act && Assert
 
 				var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-				Assert.That(ex.Message, Does.Contain("code: DependencyHasShorterReuseLifespan"));
+				Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
 			}
 		}
 
@@ -799,7 +797,7 @@ namespace Simplify.DI.Tests
 			// Act && Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Verify());
-			Assert.That(ex.Message, Does.StartWith("code: UnableToResolveUnknownService"));
+			Assert.That(ex.Message, Does.StartWith("code: Error.UnableToResolveUnknownService"));
 			Assert.That(ex.Message, Does.Contain("IBar as parameter \"bar\""));
 		}
 
@@ -851,7 +849,7 @@ namespace Simplify.DI.Tests
 			// Act && Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Verify());
-			Assert.That(ex.Message, Does.Contain("code: DependencyHasShorterReuseLifespan"));
+			Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
 		}
 
 		// Note: this behavior check is not available
