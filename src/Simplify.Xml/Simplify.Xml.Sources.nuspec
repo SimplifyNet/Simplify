@@ -12,9 +12,10 @@
 		<description>XML extensions.</description>
 		<summary>XML extensions</summary>
 		<releaseNotes>
+			New
+			* Explicit .NET Core 3.1 support
 			Updates
-			* Nullable enable
-			* C# 8 Support
+			* nullable enable related checks
 		</releaseNotes>
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>

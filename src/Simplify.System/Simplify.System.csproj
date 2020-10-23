@@ -1,22 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net452</TargetFrameworks>
 		<LangVersion>8.0</LangVersion>
 		<Nullable>enable</Nullable>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
+
+		<Version>1.2.2</Version>
+		<PackageReleaseNotes>
+			New
+			* Explicit .NET Core 3.1 support
+			Updates
+			* nullable enable related checks
+		</PackageReleaseNotes>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Core classes for applications and libraries</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.2.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET</PackageTags>
-		<PackageReleaseNotes></PackageReleaseNotes>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
 	</PropertyGroup>
 </Project>

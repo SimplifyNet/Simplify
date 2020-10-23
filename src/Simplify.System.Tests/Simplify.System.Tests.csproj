@@ -3,11 +3,13 @@
 		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
 		<LangVersion>8.0</LangVersion>
 		<Nullable>enable</Nullable>
+
+		<Version>1.1</Version>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.System unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />

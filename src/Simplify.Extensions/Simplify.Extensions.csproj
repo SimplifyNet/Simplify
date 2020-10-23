@@ -1,23 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard1.0;net452</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard1.0;netcoreapp3.1;net452</TargetFrameworks>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Extensions.xml</DocumentationFile>
+
+		<Version>1.1.2</Version>
+		<PackageReleaseNotes>
+			New
+			* Added .NET Standard 2.0 support, .NET Core 3.1 explicit support
+		</PackageReleaseNotes>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Extensions for system classes</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET system-extensions</PackageTags>
-		<PackageReleaseNotes>
-			* Added .NET Standard 1.0 support
-			* Upgrade to .NET Framework 4.5.2
-		</PackageReleaseNotes>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Extensions.xml</DocumentationFile>
 	</PropertyGroup>
 </Project>
