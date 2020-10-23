@@ -1,9 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net452</TargetFrameworks>
 		<LangVersion>8.0</LangVersion>
 		<Nullable>enable</Nullable>
-		<Version>1.1.1</Version>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Xml.xml</DocumentationFile>
+
+		<Version>1.1.2</Version>
+		<PackageReleaseNotes>
+			New
+			* Explicit .NET Core 3.1 support
+			Updates
+			* nullable enable related checks
+		</PackageReleaseNotes>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>XML extensions</Description>
@@ -12,16 +25,8 @@
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET XML</PackageTags>
-		<PackageReleaseNotes>
-			* OuterXml/InnerXml for XNode elements instead of just XElements
-			+ RemoveAllXmlNamespaces added
-		</PackageReleaseNotes>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Xml.xml</DocumentationFile>
 	</PropertyGroup>
+
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
 		<Reference Include="System.Xml" />
 		<Reference Include="System.Xml.Linq" />
