@@ -28,6 +28,6 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Templates.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.Xml.Sources" Version="1.1" PrivateAssets="All" />
+		<PackageReference Include="Simplify.Xml.Sources" Version="1.1.2" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
