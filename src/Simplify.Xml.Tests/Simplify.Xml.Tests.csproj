@@ -18,10 +18,10 @@
 		<EmbeddedResource Include="TestData\XmlWithoutNamespaces..xml" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.*" />
+		<PackageReference Include="NUnit" Version="3.12.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
 		<PackageReference Include="Simplify.Templates" Version="2.0.0" />
 		<ProjectReference Include="..\Simplify.Xml\Simplify.Xml.csproj" />
 	</ItemGroup>

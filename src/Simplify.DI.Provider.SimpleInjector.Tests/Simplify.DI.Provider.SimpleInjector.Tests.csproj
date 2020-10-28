@@ -8,10 +8,10 @@
 		<Version>1.3.2</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.*" />
+		<PackageReference Include="NUnit" Version="3.12.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
 		<ProjectReference Include="..\Simplify.DI.Provider.SimpleInjector\Simplify.DI.Provider.SimpleInjector.csproj" />
 		<ProjectReference Include="..\Simplify.DI.TestsTypes\Simplify.DI.TestsTypes.csproj" />
 	</ItemGroup>
