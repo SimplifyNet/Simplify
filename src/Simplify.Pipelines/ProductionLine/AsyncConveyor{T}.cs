@@ -48,7 +48,7 @@ namespace Simplify.Pipelines.ProductionLine
 				OnStageExecuted?.Invoke(stage.GetType(), item);
 			}
 
-			return Task.CompletedTask;
+			return Task.Delay(0);
 		}
 	}
 }
