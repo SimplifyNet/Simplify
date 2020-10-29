@@ -5,14 +5,14 @@
 		<Product>Simplify</Product>
 		<Description>Pipelines processing, validation patterns</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>0.8</Version>
+		<Version>0.8.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET pipelines</PackageTags>
 		<PackageReleaseNotes>
-			New
-			* Asynchronous conveyor
+			Bug fix
+			* Asynchronous conveyor sequential processing
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>

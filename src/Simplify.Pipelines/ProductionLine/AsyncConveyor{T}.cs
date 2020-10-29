@@ -37,16 +37,18 @@ namespace Simplify.Pipelines.ProductionLine
 		/// Executes the specified item thru conveyor.
 		/// </summary>
 		/// <param name="item">The item.</param>
-		public async Task Execute(T item)
+		public Task Execute(T item)
 		{
 			OnConveyorStart?.Invoke(item);
 
 			foreach (var stage in _stages)
 			{
-				await stage.Execute(item);
+				stage.Execute(item).ConfigureAwait(false).GetAwaiter().GetResult();
 
 				OnStageExecuted?.Invoke(stage.GetType(), item);
 			}
+
+			return Task.Delay(0);
 		}
 	}
 }

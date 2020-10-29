@@ -5,14 +5,14 @@
 		<Product>Simplify</Product>
 		<Description>Simplify DI common interface for IOC containers</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>4.0.7</Version>
+		<Version>4.0.8</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container</PackageTags>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade internal DryIoc to v4.3.2 (PR#179)
+			* Upgrade internal DryIoc to v4.5.1 (PR#208)
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -21,7 +21,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="DryIoc" Version="4.3.2" PrivateAssets="All" />
+		<PackageReference Include="DryIoc" Version="4.5.1" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
