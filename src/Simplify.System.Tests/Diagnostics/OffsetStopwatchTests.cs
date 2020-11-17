@@ -26,5 +26,24 @@ namespace Simplify.System.Tests.Diagnostics
 			Assert.AreEqual(0, stopwatch.Elapsed.Minutes);
 			Assert.AreEqual(2, stopwatch.Elapsed.Seconds);
 		}
+
+		[Test]
+		public void OffsetStopwatch_WithoutOffset_ElapsedTimeWithoutOffset()
+		{
+			// Arrange
+			var stopwatch = new OffsetStopwatch();
+
+			// Act
+
+			stopwatch.Start();
+			Thread.Sleep(2000);
+			stopwatch.Stop();
+
+			// Assert
+
+			Assert.AreEqual(0, stopwatch.Elapsed.Hours);
+			Assert.AreEqual(0, stopwatch.Elapsed.Minutes);
+			Assert.AreEqual(2, stopwatch.Elapsed.Seconds);
+		}
 	}
 }
