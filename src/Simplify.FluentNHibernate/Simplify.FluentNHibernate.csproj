@@ -5,7 +5,7 @@
 		<Product>Simplify</Product>
 		<Description>Simplifies FluentNHibernate connection configuration and allows you to write data-base queries with lambda expressions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>2.3.1</Version>
+		<Version>2.4</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.FluentNHibernate</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo64x64.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -13,6 +13,7 @@
 		<PackageReleaseNotes>
 			Updates
 			* Upgrade to FluentNHibernate 3.1.* (PR#217)
+			* Obsolete OracleClientConfiguration usage refactored to new alternatives
 		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
