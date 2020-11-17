@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp3.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.DI.Provider.SimpleInjector unit tests</Description>
@@ -9,7 +9,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.*" />
 		<PackageReference Include="NUnit" Version="3.12.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
 		<ProjectReference Include="..\Simplify.DI.Provider.SimpleInjector\Simplify.DI.Provider.SimpleInjector.csproj" />

@@ -13,9 +13,7 @@
 		<summary>Core classes for applications and libraries.</summary>
 		<releaseNotes>
 			New
-			* Explicit .NET Core 3.1 support
-			Updates
-			* nullable enable related checks
+			* OffsetStopwatch class (class with ability to add existing value to elapsed time) (#221)
 		</releaseNotes>
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
@@ -26,6 +24,10 @@
 		</dependencies>
 	</metadata>
 	<files>
+		<file src="Diagnostics/OffsetStopwatch.cs"
+			target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
+		<file src="ApplicationEnvironment.cs"
+			target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="content/App_Packages/Simplify.System.Sources.$version$/ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="AssemblyInfo.cs" target="content/App_Packages/Simplify.System.Sources.$version$/AssemblyInfo.cs" />

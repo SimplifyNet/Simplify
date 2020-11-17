@@ -28,7 +28,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigOracleClient(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -53,7 +53,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigOracleClient(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -67,9 +67,9 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigOracleClient(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<OracleClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
 		{
-			var clientConfiguration = OracleClientConfiguration.Oracle10.ConnectionString(c =>
+			var clientConfiguration = OracleDataClientConfiguration.Oracle10.ConnectionString(c =>
 				c.Server(settings.ServerName)
 					.Port(settings.Port ?? 1521)
 					.Instance(settings.DataBaseName)
@@ -169,7 +169,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigOracleOdpNet(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleManagedDataClientConfiguration> additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -196,7 +196,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigOracleOdpNet(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleManagedDataClientConfiguration> additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -210,9 +210,9 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigOracleOdpNet(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<OracleClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleManagedDataClientConfiguration> additionalClientConfiguration = null)
 		{
-			var clientConfiguration = OracleClientConfiguration.Oracle10.ConnectionString(c => c
+			var clientConfiguration = OracleManagedDataClientConfiguration.Oracle10.ConnectionString(c => c
 					.Server(settings.ServerName)
 					.Port(settings.Port ?? 1521)
 					.Instance(settings.DataBaseName)
