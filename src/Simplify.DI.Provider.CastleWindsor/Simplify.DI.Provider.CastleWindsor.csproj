@@ -22,7 +22,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.CastleWindsor.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Castle.Windsor" Version="5.0.1" />
+		<PackageReference Include="Castle.Windsor" Version="5.1.0" />
 		<PackageReference Include="Simplify.DI" Version="4.0.0" />
 	</ItemGroup>
 </Project>
