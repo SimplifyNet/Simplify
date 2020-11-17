@@ -1,11 +1,12 @@
+using System;
 using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.Setup;
 using Simplify.DI.Provider.DryIoc;
-using System;
 
 namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester
 {
@@ -32,7 +33,7 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Teste
 			return DIContainer.Current.IntegrateWithMicrosoftDependencyInjectionAndVerify(services);
 		}
 
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
