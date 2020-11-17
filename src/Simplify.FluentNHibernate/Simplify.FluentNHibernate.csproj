@@ -22,7 +22,7 @@
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.FluentNHibernate.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="FluentNHibernate" Version="3.0.*" />
+		<PackageReference Include="FluentNHibernate" Version="3.1.*" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
 	</ItemGroup>
 </Project>
