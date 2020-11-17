@@ -24,6 +24,10 @@
 		</dependencies>
 	</metadata>
 	<files>
+		<file src="Diagnostics/OffsetStopwatch.cs"
+			target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
+		<file src="ApplicationEnvironment.cs"
+			target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="content/App_Packages/Simplify.System.Sources.$version$/ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="AssemblyInfo.cs" target="content/App_Packages/Simplify.System.Sources.$version$/AssemblyInfo.cs" />
