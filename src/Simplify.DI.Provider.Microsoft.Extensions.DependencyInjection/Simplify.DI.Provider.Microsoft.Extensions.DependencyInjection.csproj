@@ -23,6 +23,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.DI" Version="4.0.4" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
 	</ItemGroup>
 </Project>
