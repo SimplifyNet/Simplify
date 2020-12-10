@@ -1,24 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;netstandard2.0;netstandard1.0;net452</TargetFrameworks>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>Simplify DI common interface for IOC containers</Description>
-		<Copyright>Licensed under LGPL</Copyright>
-		<Version>4.0.8</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET DI IOC-container</PackageTags>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade internal DryIoc to v4.5.1 (PR#208)
-		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.xml</DocumentationFile>
+
+		<Version>4.0.9</Version>
+		<PackageReleaseNotes>
+			Updates
+			* Upgrade internal DryIoc to v4.5.2 (PR#208)
+		</PackageReleaseNotes>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Simplify DI common interface for IOC containers</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET DI IOC-container</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="DryIoc" Version="4.5.2" PrivateAssets="All" />
