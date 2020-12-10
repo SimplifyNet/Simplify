@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-	<ItemGroup>
+	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
