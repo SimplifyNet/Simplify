@@ -10,7 +10,7 @@
 		<Version>4.0.9</Version>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade internal DryIoc to v4.5.2 (PR#208)
+			* Upgrade internal DryIoc to v4.5.2 (PR#228)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
