@@ -1,26 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.IO.xml</DocumentationFile>
+
+		<Version>1.2.1</Version>
+		<PackageReleaseNotes>
+			Updates
+				* Upgrade to System.IO.Abstractions 13.2.5 (PR#231)
+		</PackageReleaseNotes>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>IO helper functions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1</Version>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.IO</RepositoryUrl>
-		<RepositoryType>GIT</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET IO</PackageTags>
-		<PackageReleaseNotes>
-			New Features
-			* .NET Standard 2.0 support
-			Updates
-			* Upgrade to System.IO.Abstractions 6.0.38
-		</PackageReleaseNotes>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.IO.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="System.IO.Abstractions" Version="6.0.38" />
+		<PackageReference Include="System.IO.Abstractions" Version="13.2.5" />
 	</ItemGroup>
 </Project>

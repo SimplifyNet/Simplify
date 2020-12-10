@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Simplify.FluentNHibernate.Examples.Domain.Location;
 
 namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
 {
@@ -24,11 +25,11 @@ namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
 			return item;
 		}
 
-		public void SetUserCity(int userID, int cityID)
+		public void SetUserCity(IUser user, ICity city)
 		{
 			_unitOfWork.BeginTransaction();
 
-			_baseService.SetUserCity(userID, cityID);
+			_baseService.SetUserCity(user, city);
 
 			_unitOfWork.Commit();
 		}

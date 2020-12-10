@@ -4,13 +4,28 @@ namespace Simplify.Pipelines.Processing
 	/// Represent pipeline
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public interface IPipeline<in T>
+	public interface IPipeline<T>
 	{
 		/// <summary>
-		/// Process args through pipeline.
+		/// Occurs when pipeline is about to execute.
 		/// </summary>
-		/// <param name="args">The arguments.</param>
+		event PipelineAction<T> OnPipelineStart;
+
+		/// <summary>
+		/// Occurs when pipeline has finished it's execution.
+		/// </summary>
+		event PipelineAction<T> OnPipelineEnd;
+
+		/// <summary>
+		/// Occurs when pipeline stage has finished it's execution.
+		/// </summary>
+		event PipelineStageAction<T> OnStageExecuted;
+
+		/// <summary>
+		/// Process item through pipeline.
+		/// </summary>
+		/// <param name="item">The item for execution.</param>
 		/// <returns></returns>
-		bool Execute(T args);
+		bool Execute(T item);
 	}
 }

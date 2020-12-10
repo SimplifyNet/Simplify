@@ -1,7 +1,7 @@
 ﻿namespace Simplify.Repository
 {
 	/// <summary>
-	/// Represent object with name
+	/// Represent object with name and identifier
 	/// </summary>
 	public interface INamedObject : IIdentityObject
 	{

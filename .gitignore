@@ -35,6 +35,7 @@ x64/
 *.vspscc
 *.vssscc
 .builds
+out/
 
 # Visual C++ cache files
 ipch/
@@ -108,4 +109,13 @@ UpgradeLog*.XML
 
 Logs.log
 
+# Temp VS files ignore
 .vs
+
+# Temp test SQLite databases ignore
+*.sqlite
+
+# Coverage files ignore
+
+*lcov.info
+lcov*.info

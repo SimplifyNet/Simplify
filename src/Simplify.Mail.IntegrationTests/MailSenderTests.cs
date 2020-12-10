@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Simplify.Mail.IntegrationTests
 {
@@ -11,6 +12,12 @@ namespace Simplify.Mail.IntegrationTests
 		public void SendSimpleTestEmail()
 		{
 			MailSender.Default.Send("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
+		}
+
+		[Test]
+		public Task SendSimpleAsyncTestEmail()
+		{
+			return MailSender.Default.SendAsync("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
 		}
 	}
 }

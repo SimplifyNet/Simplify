@@ -15,5 +15,16 @@
 			"kind": "build",
 			"isDefault": true
 		}
+	},
+	{
+		"label": "Test with coverage",
+		"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
+		"type": "shell",
+		"problemMatcher": "$msCompile",
+		"group":
+		{
+			"kind": "test",
+			"isDefault": true
+		}
 	}]
 }

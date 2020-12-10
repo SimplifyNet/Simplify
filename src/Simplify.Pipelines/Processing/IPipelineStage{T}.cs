@@ -9,8 +9,8 @@
 		/// <summary>
 		/// Executes the stage.
 		/// </summary>
-		/// <param name="args">The arguments.</param>
+		/// <param name="item">The item for execution.</param>
 		/// <returns></returns>
-		bool Execute(T args);
+		bool Execute(T item);
 	}
 }

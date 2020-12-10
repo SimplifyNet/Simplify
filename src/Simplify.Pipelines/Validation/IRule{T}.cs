@@ -23,7 +23,7 @@
 		bool Check(T item);
 
 		/// <summary>
-		/// Perfrom some action in case of invalid rule status.
+		/// Perform some action in case of invalid rule status.
 		/// </summary>
 		void GenerateInvalidAction();
 	}

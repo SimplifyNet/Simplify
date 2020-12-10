@@ -22,7 +22,7 @@ namespace Simplify.DI.Provider.SimpleInjector
 					   Options =
 					   {
 						   DefaultScopedLifestyle = new AsyncScopedLifestyle(),
-						   ResolveUnregisteredConcreteTypes = false
+						   UseStrictLifestyleMismatchBehavior = true
 					   }
 				   });
 

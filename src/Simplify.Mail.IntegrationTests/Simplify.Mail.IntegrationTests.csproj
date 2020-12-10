@@ -5,13 +5,12 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.Mail integration tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>0.1</Version>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<Version>0.2</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
-		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.*" />
+		<PackageReference Include="NUnit" Version="3.12.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
 		<ProjectReference Include="..\Simplify.Mail\Simplify.Mail.csproj" />
 	</ItemGroup>
 </Project>

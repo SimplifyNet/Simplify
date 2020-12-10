@@ -1,5 +1,6 @@
 {
 	"dotnet-test-explorer.testProjectPath": "src/**/*Tests.csproj",
+	"dotnet-test-explorer.testArguments": "/p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info",
 	"cSpell.words": [
 		"SMTP",
 		"localizable",

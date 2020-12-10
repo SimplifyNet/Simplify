@@ -24,20 +24,21 @@ namespace Simplify.DI.Tests
 			// Act & Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Resolve<NonDepFoo>());
-			Assert.That(ex.Message, Does.StartWith("Unable to resolve"));
-			Assert.That(ex.Message, Does.Contain("NonDepFoo IsResolutionCall"));
+			Assert.That(ex.Message, Does.StartWith("code: Error.UnableToResolveUnknownService"));
+			Assert.That(ex.Message, Does.Contain("Unable to resolve resolution root"));
+			Assert.That(ex.Message, Does.Contain("NonDepFoo"));
 		}
 
 		[Test]
 		public void ScopedResolve_NotRegistered_ContainerException()
 		{
 			// Act & Assert
-			using (var scope = _provider.BeginLifetimeScope())
-			{
-				var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<NonDepFoo>());
-				Assert.That(ex.Message, Does.StartWith("Unable to resolve"));
-				Assert.That(ex.Message, Does.Contain("NonDepFoo IsResolutionCall"));
-			}
+			using var scope = _provider.BeginLifetimeScope();
+
+			var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<NonDepFoo>());
+			Assert.That(ex.Message, Does.StartWith("code: Error.UnableToResolveUnknownService"));
+			Assert.That(ex.Message, Does.Contain("Unable to resolve resolution root"));
+			Assert.That(ex.Message, Does.Contain("NonDepFoo"));
 		}
 
 		[Test]
@@ -49,7 +50,7 @@ namespace Simplify.DI.Tests
 			// Act & Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Resolve<NonDepFoo>());
-			Assert.That(ex.Message, Does.StartWith("No current scope is available: probably you are registering to, or resolving from outside of the scope."));
+			Assert.That(ex.Message, Does.StartWith("code: Error.NoCurrentScope"));
 		}
 
 		[Test]
@@ -565,7 +566,7 @@ namespace Simplify.DI.Tests
 				// Act && Assert
 
 				var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-				Assert.That(ex.Message, Does.Contain("IBar as parameter \"bar\" IsSingletonOrDependencyOfSingleton reuse Scoped {Lifespan=100} lifespan shorter than its parent's: singleton"));
+				Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
 			}
 		}
 
@@ -798,7 +799,7 @@ namespace Simplify.DI.Tests
 			// Act && Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Verify());
-			Assert.That(ex.Message, Does.StartWith("Unable to resolve"));
+			Assert.That(ex.Message, Does.StartWith("code: Error.UnableToResolveUnknownService"));
 			Assert.That(ex.Message, Does.Contain("IBar as parameter \"bar\""));
 		}
 
@@ -850,7 +851,7 @@ namespace Simplify.DI.Tests
 			// Act && Assert
 
 			var ex = Assert.Throws<ContainerException>(() => _provider.Verify());
-			Assert.That(ex.Message, Does.Contain("IBar as parameter \"bar\" IsSingletonOrDependencyOfSingleton reuse Scoped {Lifespan=100} lifespan shorter than its parent's: singleton"));
+			Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
 		}
 
 		// Note: this behavior check is not available

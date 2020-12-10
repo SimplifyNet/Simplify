@@ -16,6 +16,19 @@ namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts
 			Map(x => x.Password);
 			Map(x => x.EMail);
 			Map(x => x.LastActivityTime);
+
+			HasOne(x => x.Employee).Cascade.All();
+
+			HasManyToMany(x => x.Groups)
+				.Table("UsersGroups");
+
+			HasMany(x => x.Privileges)
+				.KeyColumn("UserID")
+				.ForeignKeyConstraintName("FK_UsersPrivileges_UserID")
+				.Table("UsersPrivileges")
+				.Element("Type");
+
+			References(x => x.Organization);
 		}
 	}
 }

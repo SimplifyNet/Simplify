@@ -1,7 +1,7 @@
 ﻿namespace Simplify.Repository.FluentNHibernate
 {
 	/// <summary>
-	/// Provides object with name
+	/// Provides object with name and identifier
 	/// </summary>
 	public class NamedObject : IdentityObject, INamedObject
 	{

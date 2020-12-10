@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Simplify.Xml
@@ -40,10 +41,15 @@ namespace Simplify.Xml
 		public static string RemoveAllXmlNamespaces(this string xmlData)
 		{
 			const string xmlnsPattern = "\\s+xmlns\\s*(:\\w)?\\s*=\\s*\\\"(?<url>[^\\\"]*)\\\"";
-			var matchCol = Regex.Matches(xmlData, xmlnsPattern);
+			var matchCollection = Regex.Matches(xmlData, xmlnsPattern);
 
-			foreach (Match m in matchCol)
+			foreach (Match? m in matchCollection)
+			{
+				if (m == null)
+					throw new InvalidOperationException("Match collection item is null");
+
 				xmlData = xmlData.Replace(m.ToString(), "");
+			}
 
 			return xmlData;
 		}

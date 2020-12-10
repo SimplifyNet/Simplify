@@ -27,7 +27,7 @@ namespace Simplify.System
 		/// <exception cref="ArgumentNullException">value</exception>
 		public static IAssemblyInfo Entry
 		{
-			get => _entryAssemblyInfo ??= new AssemblyInfo(Assembly.GetEntryAssembly());
+			get => _entryAssemblyInfo ??= new AssemblyInfo(Assembly.GetEntryAssembly() ?? throw new InvalidOperationException());
 			set => _entryAssemblyInfo = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -37,7 +37,7 @@ namespace Simplify.System
 		/// <value>
 		/// The version.
 		/// </value>
-		public Version Version => _infoAssembly.GetName().Version;
+		public Version Version => _infoAssembly.GetName().Version ?? throw new InvalidOperationException();
 
 		/// <summary>
 		/// Gets the assembly title.
@@ -59,7 +59,7 @@ namespace Simplify.System
 						return titleAttribute.Title;
 				}
 
-				return global::System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+				return global::System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase ?? throw new InvalidOperationException());
 			}
 		}
 

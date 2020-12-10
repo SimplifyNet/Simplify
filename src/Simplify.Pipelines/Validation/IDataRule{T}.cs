@@ -6,7 +6,7 @@
 	/// <typeparam name="TData">The type of the data.</typeparam>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TResult">The type of the result.</typeparam>
-	/// <seealso cref="Simplify.Pipelines.Validation.IRule{T, TResult}" />
+	/// <seealso cref="IRule{T, TResult}" />
 	public interface IDataRule<out TData, in T, out TResult> : IRule<T, TResult>
 	{
 		/// <summary>
