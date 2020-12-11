@@ -561,13 +561,12 @@ namespace Simplify.DI.Tests
 			_provider.Register<IBar, Bar>();
 			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			using (var scope = _provider.BeginLifetimeScope())
-			{
-				// Act && Assert
+			// Act && Assert
 
-				var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-				Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
-			}
+			using var scope = _provider.BeginLifetimeScope();
+
+			var ex = Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
+			Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
 		}
 
 		// Note: this behavior check is not available
@@ -579,11 +578,10 @@ namespace Simplify.DI.Tests
 		//	_provider.Register<IBar, Bar>();
 		//	_provider.Register<IFoo>(r => new Foo(r.Resolve<IBar>()), LifetimeType.Singleton);
 
-		//	using (var scope = _provider.BeginLifetimeScope())
-		//	{
-		//		// Act && Assert
-		//		Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-		//	}
+		//	// Act && Assert
+
+		//	using var scope = _provider.BeginLifetimeScope();
+		//	Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
 		//}
 
 		[Test]
@@ -625,11 +623,10 @@ namespace Simplify.DI.Tests
 		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
 		//	_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-		//	using (var scope = _provider.BeginLifetimeScope())
-		//	{
-		//		// Act && Assert
-		//		Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-		//	}
+		//	// Act && Assert
+
+		//	using var scope = _provider.BeginLifetimeScope();
+		//	Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
 		//}
 
 		[Test]
@@ -671,11 +668,9 @@ namespace Simplify.DI.Tests
 		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
 		//	_provider.Register<IFoo>(r => new Foo(r.Resolve<IBar>()), LifetimeType.Singleton);
 
-		//	using (var scope = _provider.BeginLifetimeScope())
-		//	{
-		//		// Act && Assert
-		//		Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-		//	}
+		//	// Act && Assert
+		//	using var scope = _provider.BeginLifetimeScope();
+		//	Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
 		//}
 
 		[Test]
@@ -803,7 +798,7 @@ namespace Simplify.DI.Tests
 			Assert.That(ex.Message, Does.Contain("IBar as parameter \"bar\""));
 		}
 
-		// Note: this behavior check is not available
+		//	Note: this behavior check is not available
 		//[Test]
 		//public void Verify_ScopedDependsOnTransient_ContainerException()
 		//{
