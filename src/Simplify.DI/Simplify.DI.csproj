@@ -7,10 +7,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.xml</DocumentationFile>
 
-		<Version>4.0.9</Version>
+		<Version>4.0.10</Version>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade internal DryIoc to v4.5.2 (PR#228)
+			* Upgrade internal DryIoc to v4.6 (PR#232)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
