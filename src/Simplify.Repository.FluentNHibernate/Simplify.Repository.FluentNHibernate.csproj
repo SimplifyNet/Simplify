@@ -8,10 +8,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
 
-		<Version>1.2.4</Version>
+		<Version>1.3-pre01</Version>
 		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Simplify.FluentNHibernate 2.4
+			New
+			* Record base classes (#237)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
