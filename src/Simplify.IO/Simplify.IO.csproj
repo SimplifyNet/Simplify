@@ -23,6 +23,6 @@
 		<PackageTags>.NET IO</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="System.IO.Abstractions" Version="13.2.5" />
+		<PackageReference Include="System.IO.Abstractions" Version="13.2.8" />
 	</ItemGroup>
 </Project>
