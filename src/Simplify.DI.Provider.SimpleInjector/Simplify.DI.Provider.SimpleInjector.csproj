@@ -1,28 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard1.3;netstandard2.0;net452</TargetFrameworks>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>Simplify.DI SimpleInjector provider</Description>
-		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.9</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET DI IOC-container-provider</PackageTags>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Simplify.DI 4.0.4
-			* Upgrade to SimpleInjector 5.0.1 (PR#138)
-		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.SimpleInjector.xml</DocumentationFile>
+
+		<Version>1.9.1</Version>
+		<PackageReleaseNotes>
+			Updates
+			* Upgrade to Simplify.DI 4.0.10 (Floating version set)
+			* Upgrade to SimpleInjector 5.2.0 (PR#225), floating version set
+		</PackageReleaseNotes>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Simplify.DI SimpleInjector provider</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET DI IOC-container-provider</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.4" />
-		<PackageReference Include="SimpleInjector" Version="5.2.0" />
+		<PackageReference Include="Simplify.DI" Version="4.0.*" />
+		<PackageReference Include="SimpleInjector" Version="5.2.*" />
 	</ItemGroup>
 </Project>
