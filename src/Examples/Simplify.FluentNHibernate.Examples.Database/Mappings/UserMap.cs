@@ -8,8 +8,6 @@ namespace Simplify.FluentNHibernate.Examples.Database.Mappings
 	{
 		public UserMap()
 		{
-			Table("Users");
-
 			Map(x => x.Password);
 
 			Map(x => x.EMail);

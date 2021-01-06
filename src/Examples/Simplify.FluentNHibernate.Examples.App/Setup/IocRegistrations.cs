@@ -4,13 +4,13 @@ namespace Simplify.FluentNHibernate.Examples.App.Setup
 {
 	public static class IocRegistrations
 	{
-		public static IDIContainerProvider Register()
+		public static IDIContainerProvider RegisterSimplifyFluentNHibernateExamplesApp(this IDIContainerProvider provider)
 		{
-			DIContainer.Current.RegisterConfiguration()
+			provider.RegisterConfiguration()
 				.RegisterDatabase()
 				.RegisterInfrastructure();
 
-			return DIContainer.Current;
+			return provider;
 		}
 	}
 }
