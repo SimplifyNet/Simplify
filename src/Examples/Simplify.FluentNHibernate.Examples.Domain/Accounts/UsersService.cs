@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Simplify.FluentNHibernate.Examples.Domain.Location;
 using Simplify.Repository;
 
@@ -11,6 +12,13 @@ namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
 		public UsersService(IGenericRepository<IUser> repository)
 		{
 			_repository = repository;
+		}
+
+		public async Task<int> CreateUserAsync(IUser user)
+		{
+			var result = await _repository.AddAsync(user);
+
+			return (int)result;
 		}
 
 		public IUser GetUser(string userName)

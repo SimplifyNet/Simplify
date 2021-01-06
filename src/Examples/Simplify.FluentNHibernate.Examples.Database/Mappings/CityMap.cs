@@ -10,7 +10,6 @@ namespace Simplify.FluentNHibernate.Examples.Database.Mappings
 			Table("Cities");
 
 			HasMany<CityName>(x => x.CityNames)
-				.KeyColumn("CityID")
 				.Inverse()
 				.Cascade.All()
 				.Cascade.AllDeleteOrphan();

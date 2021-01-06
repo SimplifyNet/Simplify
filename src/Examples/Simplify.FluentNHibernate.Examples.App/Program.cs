@@ -10,13 +10,12 @@ namespace Simplify.FluentNHibernate.Examples.App
 		private static void Main(string[] args)
 		{
 			// IOC container setup
+			DIContainer.Current.RegisterSimplifyFluentNHibernateExamplesApp()
+				.Verify();
 
-			//DIContainer.Current = new SimpleInjectorDIProvider();
-
-			IocRegistrations.Register().Verify();
+			// App launch
 
 			var scope = DIContainer.Current.BeginLifetimeScope();
-
 			scope.Resolver.Resolve<ArgsHandler>().ProcessArgs(args);
 
 			Console.ReadLine();
