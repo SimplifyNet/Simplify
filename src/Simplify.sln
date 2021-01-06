@@ -141,6 +141,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.Scheduler.SimpleAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.FluentNHibernate.Examples.App", "Examples\Simplify.FluentNHibernate.Examples.App\Simplify.FluentNHibernate.Examples.App.csproj", "{1A825EB4-13D4-45D0-9925-C6AADC3D47EF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.FluentNHibernate.Examples.Database.IntegrationTests", "Examples\Simplify.FluentNHibernate.Examples.Database.IntegrationTests\Simplify.FluentNHibernate.Examples.Database.IntegrationTests.csproj", "{A772A1FC-2AF8-4411-883D-3646339009BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -331,6 +333,10 @@ Global
 		{1A825EB4-13D4-45D0-9925-C6AADC3D47EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A825EB4-13D4-45D0-9925-C6AADC3D47EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A825EB4-13D4-45D0-9925-C6AADC3D47EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A772A1FC-2AF8-4411-883D-3646339009BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A772A1FC-2AF8-4411-883D-3646339009BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A772A1FC-2AF8-4411-883D-3646339009BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A772A1FC-2AF8-4411-883D-3646339009BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -387,6 +393,7 @@ Global
 		{AF1B478A-E87C-40E4-904A-E3C7208C6E89} = {2D619A98-03A6-434F-B8CA-4473D4F8C52A}
 		{09BC064D-3174-4FDE-B87F-0F21BA067A5D} = {2D057C2A-06BD-48F2-A075-B6EC42D39007}
 		{1A825EB4-13D4-45D0-9925-C6AADC3D47EF} = {2D057C2A-06BD-48F2-A075-B6EC42D39007}
+		{A772A1FC-2AF8-4411-883D-3646339009BE} = {2D057C2A-06BD-48F2-A075-B6EC42D39007}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {466E8FF6-456A-4262-A9ED-5E88DB8DCB08}

@@ -5,7 +5,6 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.FluentNHibernate database mappings examples</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0.4</Version>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>

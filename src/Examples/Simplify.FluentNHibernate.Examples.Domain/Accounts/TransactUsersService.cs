@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Tasks;
 using Simplify.FluentNHibernate.Examples.Domain.Location;
 
 namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
@@ -12,6 +13,17 @@ namespace Simplify.FluentNHibernate.Examples.Domain.Accounts
 		{
 			_baseService = baseService;
 			_unitOfWork = unitOfWork;
+		}
+
+		public async Task<int> CreateUserAsync(IUser user)
+		{
+			_unitOfWork.BeginTransaction();
+
+			var result = await _baseService.CreateUserAsync(user);
+
+			await _unitOfWork.CommitAsync();
+
+			return result;
 		}
 
 		public IUser GetUser(string userName)

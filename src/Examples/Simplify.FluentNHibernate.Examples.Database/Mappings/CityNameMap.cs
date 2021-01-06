@@ -9,7 +9,7 @@ namespace Simplify.FluentNHibernate.Examples.Database.Mappings
 		{
 			Table("CitiesNames");
 
-			References<City>(x => x.City, "CityID");
+			References<City>(x => x.City);
 			Map(x => x.Language);
 		}
 	}
