@@ -4,6 +4,8 @@
 		<LangVersion>8.0</LangVersion>
 		<Nullable>enable</Nullable>
 
+		<Version>1.2</Version>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.System unit tests</Description>
