@@ -1,24 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>Classes for working with assembly resource files (localizable string table)</Description>
-		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0.1</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET assembly-resources</PackageTags>
-		<PackageReleaseNotes>
-			+ .NET Standard 2.0 Support
-			* Upgrade to .NET Framework 4.5.2
-			- CustomComponentResourceManager removed
-		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Resources.xml</DocumentationFile>
+
+		<Version>1.0.1</Version>
+		<PackageReleaseNotes>
+			+ .NET Standard 2.0 Support
+			* Upgrade to .NET Framework 4.5.2
+			- CustomComponentResourceManager removed
+		</PackageReleaseNotes>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Classes for working with assembly resource files (localizable string table)</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET assembly-resources</PackageTags>
 	</PropertyGroup>
 </Project>

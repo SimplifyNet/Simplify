@@ -6,12 +6,13 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.String.xml</DocumentationFile>
-	
+
 		<Version>1.2.1</Version>
 		<PackageReleaseNotes>
 			Bug fixes
 			* ValidateMobilePhone phone length validation fix
 		</PackageReleaseNotes>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>String operations/validation functions</Description>
