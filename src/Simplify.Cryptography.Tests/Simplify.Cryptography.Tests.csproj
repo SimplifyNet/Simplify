@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+
+		<Version>1.0.1</Version>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.Cryptography unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0.1</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />

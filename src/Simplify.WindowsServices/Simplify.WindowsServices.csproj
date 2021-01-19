@@ -1,31 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net462</TargetFrameworks>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>Windows services framework with DI</Description>
-		<Copyright>Licensed under LGPL</Copyright>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.WindowsServices.xml</DocumentationFile>
+
 		<Version>2.12</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.WindowsServices</RepositoryUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET windows-service DI</PackageTags>
 		<PackageReleaseNotes>
 			Bug fixes
 			* Crontab timer period set to 1000 msec (#38)
 			Updates
 			* Microsoft.Extensions.Configuration upgrade to 3.1.0
 		</PackageReleaseNotes>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.WindowsServices.xml</DocumentationFile>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Windows services framework with DI</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.WindowsServices</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET windows-service DI</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="ncrontab" Version="3.3.1" />
-		<PackageReference Include="Simplify.DI" Version="4.0.0" />
+		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 		<PackageReference Include="Simplify.System" Version="1.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
 		<Reference Include="System.Configuration" />

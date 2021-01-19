@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<IsPackable>false</IsPackable>
+		<OutputType>Exe</OutputType>
 		<Authors>Alexander Krylkov</Authors>
+
+		<Version>0.1</Version>
+
 		<Product>Simplify</Product>
 		<Description>Simplify.FluentNHibernate, Simplify.Repository, Simplify.Repository.FluentNHibernate minimal example application</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>0.1</Version>
-		<IsPackable>false</IsPackable>
-		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Simplify.FluentNHibernate.Examples.Database\Simplify.FluentNHibernate.Examples.Database.csproj" />

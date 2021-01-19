@@ -2,24 +2,26 @@
 	<PropertyGroup>
 		<TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>System.Windows.Forms additional controls</Description>
-		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.1.1</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET pipelines</PackageTags>
-		<PackageReleaseNotes>
-			Updates
-			* .NET Core target framework upgrade to .NET Core 3.1
-		</PackageReleaseNotes>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Windows.Forms.xml</DocumentationFile>
+
+		<Version>1.1.1</Version>
+		<PackageReleaseNotes>
+			Updates
+			* .NET Core target framework upgrade to .NET Core 3.1
+		</PackageReleaseNotes>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>System.Windows.Forms additional controls</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET pipelines</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.Resources" Version="1.0.1" />

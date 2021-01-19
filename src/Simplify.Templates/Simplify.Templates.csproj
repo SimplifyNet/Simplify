@@ -3,15 +3,13 @@
 		<TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
 		<LangVersion>8.0</LangVersion>
 		<Nullable>enable</Nullable>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>Text templates engine</Description>
-		<Copyright>Licensed under LGPL</Copyright>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Templates.xml</DocumentationFile>
+
 		<Version>2.0</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET Templates</PackageTags>
 		<PackageReleaseNotes>
 			Breaking Changes
 			* Rewrite of `Template` class, build functionality moved to `TemplateBuilder` class
@@ -21,11 +19,15 @@
 			Other
 			* System.IO.Abstractions dependency drop
 		</PackageReleaseNotes>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Templates.xml</DocumentationFile>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Text templates engine</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET Templates</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.Xml.Sources" Version="1.1" PrivateAssets="All" />

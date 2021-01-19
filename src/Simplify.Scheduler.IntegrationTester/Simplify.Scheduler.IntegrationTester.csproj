@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<IsPackable>false</IsPackable>
+
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.Scheduler integration tester</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.0</Version>
-		<OutputType>Exe</OutputType>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
