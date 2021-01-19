@@ -23,7 +23,7 @@
 		<PackageTags>.NET DI IOC-container</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.12" />
+		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 		<Reference Include="System.ServiceModel" />
 		<Reference Include="System.ServiceModel.Activation" />
 	</ItemGroup>

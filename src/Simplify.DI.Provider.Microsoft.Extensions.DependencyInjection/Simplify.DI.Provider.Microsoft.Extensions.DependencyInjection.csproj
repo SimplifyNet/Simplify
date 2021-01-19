@@ -24,7 +24,7 @@
 		</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.12" />
+		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
 	</ItemGroup>
 </Project>
