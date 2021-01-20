@@ -5,7 +5,6 @@
 		<version>$version$</version>
 		<title>Simplify.System.Sources</title>
 		<authors>Alexander Krylkov</authors>
-		<owners>Alexander Krylkov</owners>
 		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -24,10 +23,8 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Diagnostics/OffsetStopwatch.cs"
-			target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
-		<file src="ApplicationEnvironment.cs"
-			target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
+		<file src="Diagnostics/OffsetStopwatch.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
+		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="content/App_Packages/Simplify.System.Sources.$version$/ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="AssemblyInfo.cs" target="content/App_Packages/Simplify.System.Sources.$version$/AssemblyInfo.cs" />
