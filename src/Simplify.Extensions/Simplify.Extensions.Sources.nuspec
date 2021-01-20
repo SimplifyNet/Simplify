@@ -5,7 +5,6 @@
 		<version>$version$</version>
 		<title>Simplify.Extensions.Sources</title>
 		<authors>Alexander Krylkov</authors>
-		<owners>Alexander Krylkov</owners>
 		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Extensions</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -23,6 +22,10 @@
 		<file src="DateTimeExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\DateTimeExtensions.cs" />
 		<file src="DoubleExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/DoubleExtensions.cs" />
 		<file src="DoubleExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\DoubleExtensions.cs" />
+		<file src="IConcurrentResource.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/IConcurrentResource.cs" />
+		<file src="IConcurrentResource.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\IConcurrentResource.cs" />
+		<file src="ObservableCollectionExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/ObservableCollectionExtensions.cs" />
+		<file src="ObservableCollectionExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\ObservableCollectionExtensions.cs" />
 		<file src="StringExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/StringExtensions.cs" />
 		<file src="StringExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\StringExtensions.cs" />
 	</files>
