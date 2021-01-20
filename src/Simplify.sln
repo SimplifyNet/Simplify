@@ -143,6 +143,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.FluentNHibernate.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.FluentNHibernate.Examples.Database.IntegrationTests", "Examples\Simplify.FluentNHibernate.Examples.Database.IntegrationTests\Simplify.FluentNHibernate.Examples.Database.IntegrationTests.csproj", "{A772A1FC-2AF8-4411-883D-3646339009BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{B2CDEA39-00C4-4285-9730-EA6C50011D20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplify.Wpf", "Simplify.Wpf\Simplify.Wpf.csproj", "{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -337,6 +341,10 @@ Global
 		{A772A1FC-2AF8-4411-883D-3646339009BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A772A1FC-2AF8-4411-883D-3646339009BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A772A1FC-2AF8-4411-883D-3646339009BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -394,6 +402,7 @@ Global
 		{09BC064D-3174-4FDE-B87F-0F21BA067A5D} = {2D057C2A-06BD-48F2-A075-B6EC42D39007}
 		{1A825EB4-13D4-45D0-9925-C6AADC3D47EF} = {2D057C2A-06BD-48F2-A075-B6EC42D39007}
 		{A772A1FC-2AF8-4411-883D-3646339009BE} = {2D057C2A-06BD-48F2-A075-B6EC42D39007}
+		{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B} = {B2CDEA39-00C4-4285-9730-EA6C50011D20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {466E8FF6-456A-4262-A9ED-5E88DB8DCB08}
