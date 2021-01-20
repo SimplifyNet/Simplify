@@ -12,7 +12,7 @@ namespace Simplify.Extensions.Tests
 		}
 
 		[Test]
-		public void TryToDateTimeExact_WrongValue_COnvertedCorrectly()
+		public void TryToDateTimeExact_WrongValue_ConvertedCorrectly()
 		{
 			// Assign
 			const string str = "test";
@@ -22,7 +22,7 @@ namespace Simplify.Extensions.Tests
 		}
 
 		[Test]
-		public void TryToDateTimeExact_CorrectValue_COnvertedCorrectly()
+		public void TryToDateTimeExact_CorrectValue_ConvertedCorrectly()
 		{
 			// Assign
 			const string str = "12.03.13";
