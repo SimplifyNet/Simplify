@@ -9,7 +9,7 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Extensions.xml</DocumentationFile>
 
-		<Version>1.1.2</Version>
+		<Version>1.2.0</Version>
 		<PackageReleaseNotes>
 			New
 			* Added .NET Standard 2.0 support, .NET Core 3.1 explicit support
