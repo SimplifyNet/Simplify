@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using Simplify.Extensions;
 
-#nullable enable
-
 public class ConcurrentObservableCollection<T> : ObservableCollection<T>, IConcurrentResource
 {
 	private readonly object _locker = new();
