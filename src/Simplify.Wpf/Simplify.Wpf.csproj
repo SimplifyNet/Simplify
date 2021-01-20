@@ -24,7 +24,9 @@
 		<PackageTags>.NET WPF</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="PresentationFramework" Version="4.6.0" />
 		<PackageReference Include="Simplify.Extensions" Version="1.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="PresentationFramework" />
 	</ItemGroup>
 </Project>
