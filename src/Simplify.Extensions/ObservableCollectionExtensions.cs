@@ -26,8 +26,11 @@ namespace Simplify.Extensions
 			var array = items as T[] ?? items?.ToArray();
 			if (array is null || array.Length == 0) return collection;
 
-			foreach (var item in array.Where(x => x is not null))
-				collection.Add(item!);
+			Invoke(collection, () =>
+			{
+				foreach (var item in array.Where(x => x is not null))
+					collection.Add(item!);
+			});
 
 			return collection;
 		}
@@ -46,7 +49,7 @@ namespace Simplify.Extensions
 
 		#endregion AddRange
 
-		#region RefreshItems
+		#region RefreshItems/RefreshIndices
 
 		/// <summary>
 		/// Refreshes multiple items by indices in the collection
@@ -62,14 +65,17 @@ namespace Simplify.Extensions
 			var array = indices as int[] ?? indices?.ToArray();
 			if (array is null || array.Length == 0) return collection;
 
-			foreach (var index in array.Where(i => i >= 0 && i < collection.Count))
+			Invoke(collection, () =>
 			{
-				var item = collection.ElementAt(index);
-				if (item is null)
-					continue;
-				collection.RemoveAt(index);
-				collection.Insert(index, item);
-			}
+				foreach (var index in array.Where(i => i >= 0 && i < collection.Count))
+				{
+					var item = collection.ElementAt(index);
+					if (item is null)
+						continue;
+					collection.RemoveAt(index);
+					collection.Insert(index, item);
+				}
+			});
 
 			return collection;
 		}
@@ -100,14 +106,17 @@ namespace Simplify.Extensions
 			var array = items as T[] ?? items?.ToArray();
 			if (array is null || array.Length == 0) return collection;
 
-			foreach (var item in array.Where(x => x is not null))
+			Invoke(collection, () =>
 			{
-				var index = collection.IndexOf(item!);
-				if (index < 0 || index >= collection.Count)
-					continue;
-				collection.RemoveAt(index);
-				collection.Insert(index, item!);
-			}
+				foreach (var item in array.Where(x => x is not null))
+				{
+					var index = collection.IndexOf(item!);
+					if (index < 0 || index >= collection.Count)
+						continue;
+					collection.RemoveAt(index);
+					collection.Insert(index, item!);
+				}
+			});
 
 			return collection;
 		}
@@ -124,6 +133,14 @@ namespace Simplify.Extensions
 			return collection.RefreshItems(items.AsEnumerable());
 		}
 
-		#endregion RefreshItems
+		#endregion RefreshItems/RefreshIndices
+
+		private static void Invoke(object obj, Action action)
+		{
+			if (obj is IConcurrentResource c)
+				c.InvokeConcurrently(action);
+			else
+				action();
+		}
 	}
 }
