@@ -33,7 +33,7 @@ namespace Simplify.Extensions.Tests
 			// Assert
 
 			Assert.IsNotNull(time);
-			Assert.AreEqual(12, time.Value.Day);
+			Assert.AreEqual(12, time!.Value.Day);
 			Assert.AreEqual(3, time.Value.Month);
 			Assert.AreEqual(2013, time.Value.Year);
 		}
