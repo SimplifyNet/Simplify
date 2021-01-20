@@ -3,6 +3,7 @@
 		<TargetFrameworks>netstandard2.0;netstandard1.0;netcoreapp3.1;net452</TargetFrameworks>
 		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
+
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -12,7 +13,7 @@
 		<Version>1.2.0</Version>
 		<PackageReleaseNotes>
 			New
-			* Added .NET Standard 2.0 support, .NET Core 3.1 explicit support
+			* Extend ObservableCollection with AddRange and RefreshItems methods (#249)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
