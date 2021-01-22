@@ -8,24 +8,9 @@ namespace Simplify.System
 	public interface IAssemblyInfo
 	{
 		/// <summary>
-		/// Gets the assembly version.
+		/// Gets the company name of the assembly.
 		/// </summary>
-		Version Version { get; }
-
-		/// <summary>
-		/// Gets the assembly title.
-		/// </summary>
-		string Title { get; }
-
-		/// <summary>
-		/// Gets the product name of the assembly.
-		/// </summary>
-		string ProductName { get; }
-
-		/// <summary>
-		/// Gets the description of the assembly.
-		/// </summary>
-		string Description { get; }
+		string CompanyName { get; }
 
 		/// <summary>
 		/// Gets the copyright information of the assembly.
@@ -33,8 +18,23 @@ namespace Simplify.System
 		string Copyright { get; }
 
 		/// <summary>
-		/// Gets the company name of the assembly.
+		/// Gets the description of the assembly.
 		/// </summary>
-		string CompanyName { get; }
+		string Description { get; }
+
+		/// <summary>
+		/// Gets the product name of the assembly.
+		/// </summary>
+		string ProductName { get; }
+
+		/// <summary>
+		/// Gets the assembly title.
+		/// </summary>
+		string Title { get; }
+
+		/// <summary>
+		/// Gets the assembly version.
+		/// </summary>
+		Version Version { get; }
 	}
 }
