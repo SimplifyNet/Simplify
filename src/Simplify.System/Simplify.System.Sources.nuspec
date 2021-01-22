@@ -24,16 +24,16 @@
 	</metadata>
 	<files>
 		<file src="Diagnostics/OffsetStopwatch.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
-		<file src="Extensions/BytesExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/Extensions/BytesExtensions.cs" />
-		<file src="Extensions/BytesExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\Extensions\BytesExtensions.cs" />
-		<file src="Extensions/DateTimeExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/Extensions/DateTimeExtensions.cs" />
-		<file src="Extensions/DateTimeExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\Extensions\DateTimeExtensions.cs" />
-		<file src="Extensions/DoubleExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/Extensions/DoubleExtensions.cs" />
-		<file src="Extensions/DoubleExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\Extensions\DoubleExtensions.cs" />
-		<file src="Extensions/ObservableCollectionExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/Extensions/ObservableCollectionExtensions.cs" />
-		<file src="Extensions/ObservableCollectionExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\Extensions\ObservableCollectionExtensions.cs" />
-		<file src="Extensions/StringExtensions.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/Extensions/StringExtensions.cs" />
-		<file src="Extensions/StringExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\Extensions\StringExtensions.cs" />
+		<file src="Extensions/BytesExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/BytesExtensions.cs" />
+		<file src="Extensions/BytesExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\BytesExtensions.cs" />
+		<file src="Extensions/DateTimeExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/DateTimeExtensions.cs" />
+		<file src="Extensions/DateTimeExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\DateTimeExtensions.cs" />
+		<file src="Extensions/DoubleExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/DoubleExtensions.cs" />
+		<file src="Extensions/DoubleExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\DoubleExtensions.cs" />
+		<file src="Extensions/ObservableCollectionExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/ObservableCollectionExtensions.cs" />
+		<file src="Extensions/ObservableCollectionExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\ObservableCollectionExtensions.cs" />
+		<file src="Extensions/StringExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/StringExtensions.cs" />
+		<file src="Extensions/StringExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\StringExtensions.cs" />
 		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="content/App_Packages/Simplify.System.Sources.$version$/ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
@@ -43,8 +43,8 @@
 		<file src="ConfigurationException.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ConfigurationException.cs" />
 		<file src="IAssemblyInfo.cs" target="content/App_Packages/Simplify.System.Sources.$version$/IAssemblyInfo.cs" />
 		<file src="IAssemblyInfo.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\IAssemblyInfo.cs" />
-		<file src="IConcurrentResource.cs" target="content/App_Packages/Simplify.Extensions.Sources.$version$/IConcurrentResource.cs" />
-		<file src="IConcurrentResource.cs" target="contentFiles\cs\any\App_Packages\Simplify.Extensions.Sources.$version$\IConcurrentResource.cs" />
+		<file src="IConcurrentResource.cs" target="content/App_Packages/Simplify.System.Sources.$version$/IConcurrentResource.cs" />
+		<file src="IConcurrentResource.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\IConcurrentResource.cs" />
 		<file src="ITimeProvider.cs" target="content/App_Packages/Simplify.System.Sources.$version$/ITimeProvider.cs" />
 		<file src="ITimeProvider.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ITimeProvider.cs" />
 		<file src="TimeProvider.cs" target="content/App_Packages/Simplify.System.Sources.$version$/TimeProvider.cs" />
