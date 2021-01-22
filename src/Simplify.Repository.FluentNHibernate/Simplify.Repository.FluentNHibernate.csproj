@@ -7,10 +7,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
 
-		<Version>1.2.4</Version>
+		<Version>1.2.5</Version>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade to Simplify.FluentNHibernate 2.4
+			* Upgrade to Simplify.FluentNHibernate 2.5 (PR#253)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -23,7 +23,7 @@
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.0" />
+		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.*" />
 		<PackageReference Include="Simplify.Repository" Version="1.4.*" />
 	</ItemGroup>
 </Project>
