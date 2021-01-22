@@ -23,7 +23,7 @@
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.FluentNHibernate" Version="2.4.0" />
+		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.0" />
 		<PackageReference Include="Simplify.Repository" Version="1.4.*" />
 	</ItemGroup>
 </Project>
