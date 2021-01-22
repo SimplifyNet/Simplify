@@ -12,7 +12,7 @@
 		<Version>1.4</Version>
 		<PackageReleaseNotes>
 			New
-			* Extensions from Simplify.Extensions (#255)
+			* Move extensions from the Simplify.Extensions to the Simplify.System project (#255)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
