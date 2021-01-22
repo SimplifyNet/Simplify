@@ -24,6 +24,7 @@
 	</metadata>
 	<files>
 		<file src="Diagnostics/OffsetStopwatch.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
+		<file src="Diagnostics/OffsetStopwatch.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Diagnostics\OffsetStopwatch.cs" />
 		<file src="Extensions/BytesExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/BytesExtensions.cs" />
 		<file src="Extensions/BytesExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\BytesExtensions.cs" />
 		<file src="Extensions/DateTimeExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/DateTimeExtensions.cs" />
