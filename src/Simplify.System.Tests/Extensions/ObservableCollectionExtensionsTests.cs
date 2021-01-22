@@ -2,8 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using NUnit.Framework;
+using Simplify.System.Extensions;
 
-namespace Simplify.Extensions.Tests
+namespace Simplify.System.Tests.Extensions
 {
 	[TestFixture]
 	public class ObservableCollectionExtensionsTests
