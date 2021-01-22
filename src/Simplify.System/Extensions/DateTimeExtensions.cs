@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Simplify.Extensions
+namespace Simplify.System.Extensions
 {
 	/// <summary>
 	/// Provides extensions for the DateTime struct
