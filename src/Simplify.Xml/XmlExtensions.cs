@@ -15,7 +15,7 @@ namespace Simplify.Xml
 		#region Get
 
 		/// <summary>
-		/// Gets the child element using XPath 1.0 specification
+		/// Gets the descendant element using XPath 1.0 specification
 		/// </summary>
 		/// <param name="node">XElement</param>
 		/// <param name="xpath">XPath 1.0</param>
@@ -26,7 +26,7 @@ namespace Simplify.Xml
 		}
 
 		/// <summary>
-		/// Gets the child element using XPath 1.0 specification
+		/// Gets the descendant element using XPath 1.0 specification
 		/// </summary>
 		/// <param name="node">XElement</param>
 		/// <param name="xpath">XPath 1.0</param>
@@ -46,7 +46,7 @@ namespace Simplify.Xml
 		#region GetMany
 
 		/// <summary>
-		/// Gets the collection of child elements using XPath 1.0 specification
+		/// Gets the collection of descendant elements using XPath 1.0 specification
 		/// </summary>
 		/// <param name="node">XNode</param>
 		/// <param name="xpath">XPath 1.0</param>
@@ -57,7 +57,7 @@ namespace Simplify.Xml
 		}
 
 		/// <summary>
-		/// Gets the collection of child elements using XPath 1.0 specification
+		/// Gets the collection of descendant elements using XPath 1.0 specification
 		/// </summary>
 		/// <param name="node">XNode</param>
 		/// <param name="xpath">XPath 1.0</param>
