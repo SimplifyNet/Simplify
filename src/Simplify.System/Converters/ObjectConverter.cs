@@ -10,11 +10,6 @@ namespace Simplify.System.Converters
 	public class ObjectConverter<TSource, TDestination> : IObjectConverter<TSource, TDestination>
 	{
 		/// <summary>
-		/// Func delegate that converts source to destination
-		/// </summary>
-		protected readonly Func<TSource?, TDestination?> ConvertFunc;
-
-		/// <summary>
 		/// Creates instance of ObjectConverter
 		/// </summary>
 		/// <param name="convertFunc">Func delegate that converts source to destination</param>
@@ -22,6 +17,18 @@ namespace Simplify.System.Converters
 		{
 			ConvertFunc = convertFunc ?? throw new ArgumentNullException(nameof(convertFunc), "Convert delegate cannot be null");
 		}
+
+		/// <summary>
+		/// Creates instance of ObjectConverter with uninitialized ConvertFunc
+		/// </summary>
+		protected ObjectConverter()
+		{
+		}
+
+		/// <summary>
+		/// Func delegate that converts source to destination
+		/// </summary>
+		protected Func<TSource?, TDestination?>? ConvertFunc { get; set; }
 
 		/// <summary>
 		/// Implicitly provides Convert method as Func delegate
@@ -39,7 +46,9 @@ namespace Simplify.System.Converters
 		/// <returns>Destination object</returns>
 		public virtual TDestination? Convert(TSource? source)
 		{
-			return ConvertFunc(source);
+			return ConvertFunc is null
+				? throw new ArgumentNullException(nameof(ConvertFunc), "Convert delegate is null")
+				: ConvertFunc(source);
 		}
 
 		/// <summary>

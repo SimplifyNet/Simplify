@@ -18,10 +18,19 @@ namespace Simplify.System.Converters
 		/// <summary>
 		/// Creates instance of ChainedObjectConverter
 		/// </summary>
-		/// <param name="convertFunc"></param>
-		/// <param name="preConvertFunc"></param>
+		/// <param name="convertFunc">Func delegate that converts source to destination</param>
+		/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
 		public ChainedObjectConverter(Func<TSource?, TDestination?> convertFunc, Func<TSource?, TDestination?>? preConvertFunc = null)
 			: base(convertFunc)
+		{
+			PreConvertFunc = preConvertFunc;
+		}
+
+		/// <summary>
+		/// Creates instance of ChainedObjectConverter with uninitialized ConvertFunc
+		/// </summary>
+		/// <param name="preConvertFunc"></param>
+		protected ChainedObjectConverter(Func<TSource?, TDestination?>? preConvertFunc = null)
 		{
 			PreConvertFunc = preConvertFunc;
 		}
