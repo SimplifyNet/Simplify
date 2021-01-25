@@ -31,4 +31,8 @@
 		<Reference Include="System.Xml" />
 		<Reference Include="System.Xml.Linq" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Simplify.System\Simplify.System.csproj" />
+	</ItemGroup>
 </Project>
