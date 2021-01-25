@@ -13,7 +13,7 @@ namespace Simplify.System.Converters
 		/// Creates instance of ObjectConverter
 		/// </summary>
 		/// <param name="convertFunc">Func delegate that converts source to destination</param>
-		public ObjectConverter(Func<TSource?, TDestination?> convertFunc)
+		public ObjectConverter(Func<TSource, TDestination> convertFunc)
 		{
 			ConvertFunc = convertFunc ?? throw new ArgumentNullException(nameof(convertFunc), "Convert delegate cannot be null");
 		}
@@ -28,13 +28,13 @@ namespace Simplify.System.Converters
 		/// <summary>
 		/// Func delegate that converts source to destination
 		/// </summary>
-		protected Func<TSource?, TDestination?>? ConvertFunc { get; set; }
+		protected Func<TSource, TDestination>? ConvertFunc { get; set; }
 
 		/// <summary>
 		/// Implicitly provides Convert method as Func delegate
 		/// </summary>
 		/// <param name="converter"></param>
-		public static implicit operator Func<TSource?, TDestination?>(ObjectConverter<TSource, TDestination> converter)
+		public static implicit operator Func<TSource, TDestination>(ObjectConverter<TSource, TDestination> converter)
 		{
 			return converter.AsFunc();
 		}
@@ -44,7 +44,7 @@ namespace Simplify.System.Converters
 		/// </summary>
 		/// <param name="source">Source object</param>
 		/// <returns>Destination object</returns>
-		public virtual TDestination? Convert(TSource? source)
+		public virtual TDestination Convert(TSource source)
 		{
 			return ConvertFunc is null
 				? throw new ArgumentNullException(nameof(ConvertFunc), "Convert delegate is null")
@@ -55,7 +55,7 @@ namespace Simplify.System.Converters
 		/// Provides Convert method as Func delegate
 		/// </summary>
 		/// <returns>Func delegate</returns>
-		public virtual Func<TSource?, TDestination?> AsFunc()
+		public virtual Func<TSource, TDestination> AsFunc()
 		{
 			return Convert;
 		}

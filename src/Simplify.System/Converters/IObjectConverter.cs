@@ -14,12 +14,12 @@ namespace Simplify.System.Converters
 		/// </summary>
 		/// <param name="source">Source object</param>
 		/// <returns>Destination object</returns>
-		TDestination? Convert(TSource? source);
+		TDestination Convert(TSource source);
 
 		/// <summary>
 		/// Provides Convert method as Func delegate
 		/// </summary>
 		/// <returns>Func delegate</returns>
-		Func<TSource?, TDestination?> AsFunc();
+		Func<TSource, TDestination> AsFunc();
 	}
 }

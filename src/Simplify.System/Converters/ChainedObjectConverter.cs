@@ -13,14 +13,14 @@ namespace Simplify.System.Converters
 		/// <summary>
 		/// Func delegate that converts source to destination before the main converter delegate
 		/// </summary>
-		protected readonly Func<TSource?, TDestination?>? PreConvertFunc;
+		protected readonly Func<TSource, TDestination>? PreConvertFunc;
 
 		/// <summary>
 		/// Creates instance of ChainedObjectConverter
 		/// </summary>
 		/// <param name="convertFunc">Func delegate that converts source to destination</param>
 		/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
-		public ChainedObjectConverter(Func<TSource?, TDestination?> convertFunc, Func<TSource?, TDestination?>? preConvertFunc = null)
+		public ChainedObjectConverter(Func<TSource, TDestination> convertFunc, Func<TSource, TDestination>? preConvertFunc = null)
 			: base(convertFunc)
 		{
 			PreConvertFunc = preConvertFunc;
@@ -30,7 +30,7 @@ namespace Simplify.System.Converters
 		/// Creates instance of ChainedObjectConverter with uninitialized ConvertFunc
 		/// </summary>
 		/// <param name="preConvertFunc"></param>
-		protected ChainedObjectConverter(Func<TSource?, TDestination?>? preConvertFunc = null)
+		protected ChainedObjectConverter(Func<TSource, TDestination>? preConvertFunc = null)
 		{
 			PreConvertFunc = preConvertFunc;
 		}
@@ -40,7 +40,7 @@ namespace Simplify.System.Converters
 		/// </summary>
 		/// <param name="source">Source object</param>
 		/// <returns>Destination object</returns>
-		public override TDestination? Convert(TSource? source)
+		public override TDestination Convert(TSource source)
 		{
 			return PreConvertFunc is null
 				? base.Convert(source)

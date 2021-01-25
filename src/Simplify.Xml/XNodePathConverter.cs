@@ -8,7 +8,7 @@ namespace Simplify.Xml
 	/// <summary>
 	/// Provides XNode to XElement converter that resolves xpath by using XPath 1.0
 	/// </summary>
-	public class XNodePathConverter : ChainedObjectConverter<XNode, XElement>
+	public class XNodePathConverter : ChainedObjectConverter<XNode?, XElement?>
 	{
 		/// <summary>
 		/// XPath 1.0
