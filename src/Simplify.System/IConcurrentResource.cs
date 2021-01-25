@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Simplify.Extensions
+namespace Simplify.System
 {
 	/// <summary>
 	/// Describes concurrent resource shared among threads

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Simplify.Extensions
+namespace Simplify.System.Extensions
 {
 	/// <summary>
 	/// Provides extensions for the ObservableCollection

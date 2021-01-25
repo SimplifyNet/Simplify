@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using Simplify.System.Extensions;
 
-namespace Simplify.Extensions.Tests
+namespace Simplify.System.Tests.Extensions
 {
 	[TestFixture]
 	public class DateTimeExtensionsTests
@@ -9,7 +11,7 @@ namespace Simplify.Extensions.Tests
 		public void TrimMilliseconds_DateTime_MillisecondsTrimmed()
 		{
 			// Act
-			var result = new System.DateTime(2015, 02, 03, 14, 22, 13, 456).TrimMilliseconds();
+			var result = new DateTime(2015, 02, 03, 14, 22, 13, 456).TrimMilliseconds();
 
 			// Assert
 			Assert.AreEqual(0, result.Millisecond);

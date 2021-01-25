@@ -8,15 +8,15 @@ namespace Simplify.System
 	public static class ApplicationEnvironment
 	{
 		/// <summary>
-		/// The environment variable name
-		/// </summary>
-		public const string EnvironmentVariableName = "ASPNETCORE_ENVIRONMENT";
-
-		/// <summary>
 		/// The default environment name
 		/// </summary>
 		// ReSharper disable once InconsistentNaming
 		public const string DefaultEnvironmentName = "Production";
+
+		/// <summary>
+		/// The environment variable name
+		/// </summary>
+		public const string EnvironmentVariableName = "ASPNETCORE_ENVIRONMENT";
 
 		private static string? _name;
 

@@ -8,14 +8,6 @@ namespace Simplify.System
 	public interface ITimeProvider
 	{
 		/// <summary>
-		/// Gets the current UTC time.
-		/// </summary>
-		/// <value>
-		/// The current UTC time.
-		/// </value>
-		DateTime UtcNow { get; }
-
-		/// <summary>
 		/// Gets the current time.
 		/// </summary>
 		/// <value>
@@ -30,5 +22,13 @@ namespace Simplify.System
 		/// The today date without time.
 		/// </value>
 		DateTime Today { get; }
+
+		/// <summary>
+		/// Gets the current UTC time.
+		/// </summary>
+		/// <value>
+		/// The current UTC time.
+		/// </value>
+		DateTime UtcNow { get; }
 	}
 }
