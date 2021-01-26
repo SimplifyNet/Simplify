@@ -9,10 +9,12 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
 
-		<Version>1.4</Version>
+		<Version>1.5</Version>
 		<PackageReleaseNotes>
 			New
-			* Move extensions from the Simplify.Extensions to the Simplify.System project (#255)
+			* Customizable and chained object-to-object converters (#256)
+			Updates
+			* Environment checks in ApplicationEnvironment
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>

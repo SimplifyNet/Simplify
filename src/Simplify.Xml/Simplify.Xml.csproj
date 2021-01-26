@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net452</TargetFrameworks>
-		<LangVersion>8.0</LangVersion>
+		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -9,12 +9,11 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Xml.xml</DocumentationFile>
 
-		<Version>1.1.2</Version>
+		<Version>1.2.0</Version>
 		<PackageReleaseNotes>
 			New
-			* Explicit .NET Core 3.1 support
-			Updates
-			* nullable enable related checks
+			* XNode extensions Get and GetMany
+			* XNodePathConverter
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -30,5 +29,9 @@
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
 		<Reference Include="System.Xml" />
 		<Reference Include="System.Xml.Linq" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Simplify.System\Simplify.System.csproj" />
 	</ItemGroup>
 </Project>
