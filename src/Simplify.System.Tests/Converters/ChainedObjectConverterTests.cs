@@ -33,7 +33,7 @@ namespace Simplify.System.Tests.Converters
 			// Act & Assert
 			Assert.AreEqual(converter.Convert(null), null);
 			Assert.AreEqual(converter.Convert(new object()), "System.Object");
-			Assert.AreEqual(converter.Convert(new DateTime()), "01.01.0001 00:00:00");
+			Assert.AreEqual(converter.Convert(new string('A', 5)), "AAAAA");
 			Assert.AreEqual(converter.Convert("778899"), "778899");
 		}
 
