@@ -10,10 +10,14 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Core classes for applications and libraries.</description>
 		<summary>Core classes for applications and libraries.</summary>
+
 		<releaseNotes>
 			New
-			* Move extensions from the Simplify.Extensions to the Simplify.System project (#255)
+			* Customizable and chained object-to-object converters (#256)
+			Updates
+			* Environment checks in ApplicationEnvironment
 		</releaseNotes>
+
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
 		<tags>.NET</tags>
@@ -23,6 +27,12 @@
 		</dependencies>
 	</metadata>
 	<files>
+		<file src="Converters/ChainedObjectConverter.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Converters/ChainedObjectConverter.cs" />
+		<file src="Converters/ChainedObjectConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Converters\ChainedObjectConverter.cs" />
+		<file src="Converters/IObjectConverter.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Converters/IObjectConverter.cs" />
+		<file src="Converters/IObjectConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Converters\IObjectConverter.cs" />
+		<file src="Converters/ObjectConverter.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Converters/ObjectConverter.cs" />
+		<file src="Converters/ObjectConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Converters\ObjectConverter.cs" />
 		<file src="Diagnostics/OffsetStopwatch.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Diagnostics/OffsetStopwatch.cs" />
 		<file src="Diagnostics/OffsetStopwatch.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Diagnostics\OffsetStopwatch.cs" />
 		<file src="Extensions/BytesExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/BytesExtensions.cs" />
@@ -35,7 +45,6 @@
 		<file src="Extensions/ObservableCollectionExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\ObservableCollectionExtensions.cs" />
 		<file src="Extensions/StringExtensions.cs" target="content/App_Packages/Simplify.System.Sources.$version$/Extensions/StringExtensions.cs" />
 		<file src="Extensions/StringExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\Extensions\StringExtensions.cs" />
-		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="content/App_Packages/Simplify.System.Sources.$version$/ApplicationEnvironment.cs" />
 		<file src="ApplicationEnvironment.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\ApplicationEnvironment.cs" />
 		<file src="AssemblyInfo.cs" target="content/App_Packages/Simplify.System.Sources.$version$/AssemblyInfo.cs" />

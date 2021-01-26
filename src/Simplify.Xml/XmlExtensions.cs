@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace Simplify.Xml
 {
@@ -9,17 +12,67 @@ namespace Simplify.Xml
 	/// </summary>
 	public static class XmlExtensions
 	{
+		#region Get
+
 		/// <summary>
-		/// Gets the outer XML string of an XNode (inner XML and itself).
+		/// Gets the descendant element using XPath 1.0 specification
 		/// </summary>
-		/// <param name="element">The element.</param>
-		/// <returns></returns>
-		public static string OuterXml(this XNode element)
+		/// <param name="node">XElement</param>
+		/// <param name="xpath">XPath 1.0</param>
+		/// <returns>XElement</returns>
+		public static XElement? Get(this XNode? node, string xpath)
 		{
-			var xReader = element.CreateReader();
-			xReader.MoveToContent();
-			return xReader.ReadOuterXml();
+			return node.Get(xpath, null);
 		}
+
+		/// <summary>
+		/// Gets the descendant element using XPath 1.0 specification
+		/// </summary>
+		/// <param name="node">XElement</param>
+		/// <param name="xpath">XPath 1.0</param>
+		/// <param name="resolver">IXmlNamespaceResolver</param>
+		/// <returns>XElement</returns>
+		public static XElement? Get(this XNode? node, string xpath, IXmlNamespaceResolver? resolver)
+		{
+			return node is null || string.IsNullOrWhiteSpace(xpath)
+				? null
+				: resolver is null
+					? node.XPathSelectElement(xpath)
+					: node.XPathSelectElement(xpath, resolver);
+		}
+
+		#endregion Get
+
+		#region GetMany
+
+		/// <summary>
+		/// Gets the collection of descendant elements using XPath 1.0 specification
+		/// </summary>
+		/// <param name="node">XNode</param>
+		/// <param name="xpath">XPath 1.0</param>
+		/// <returns>XElement</returns>
+		public static IEnumerable<XElement> GetMany(this XNode? node, string xpath)
+		{
+			return node.GetMany(xpath, null);
+		}
+
+		/// <summary>
+		/// Gets the collection of descendant elements using XPath 1.0 specification
+		/// </summary>
+		/// <param name="node">XNode</param>
+		/// <param name="xpath">XPath 1.0</param>
+		/// <param name="resolver">IXmlNamespaceResolver</param>
+		/// <returns>XElement</returns>
+		public static IEnumerable<XElement> GetMany(this XNode? node, string xpath, IXmlNamespaceResolver? resolver)
+		{
+			return node is null || string.IsNullOrWhiteSpace(xpath)
+				? new List<XElement>()
+				: resolver is null
+					? node.XPathSelectElements(xpath)
+					: node.XPathSelectElements(xpath, resolver);
+		}
+
+		#endregion GetMany
 
 		/// <summary>
 		/// Gets the inner XML string of an XNode.
@@ -31,6 +84,18 @@ namespace Simplify.Xml
 			var xReader = element.CreateReader();
 			xReader.MoveToContent();
 			return xReader.ReadInnerXml();
+		}
+
+		/// <summary>
+		/// Gets the outer XML string of an XNode (inner XML and itself).
+		/// </summary>
+		/// <param name="element">The element.</param>
+		/// <returns></returns>
+		public static string OuterXml(this XNode element)
+		{
+			var xReader = element.CreateReader();
+			xReader.MoveToContent();
+			return xReader.ReadOuterXml();
 		}
 
 		/// <summary>

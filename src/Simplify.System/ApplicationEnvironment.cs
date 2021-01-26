@@ -21,6 +21,21 @@ namespace Simplify.System
 		private static string? _name;
 
 		/// <summary>
+		/// Checks the application environment is Production
+		/// </summary>
+		public static bool IsProduction => Name == "Production";
+
+		/// <summary>
+		/// Checks the application environment is Development
+		/// </summary>
+		public static bool IsDevelopment => Name == "Development";
+
+		/// <summary>
+		/// Checks the application environment is Staging
+		/// </summary>
+		public static bool IsStaging => Name == "Staging";
+
+		/// <summary>
 		/// Gets or sets the current environment name.
 		/// </summary>
 		/// <value>
