@@ -21,11 +21,12 @@
 		<language>en-US</language>
 		<tags>.NET XML</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.5.2" />
-			<group targetFramework=".NETStandard2.0" />
-		</dependencies>
-		<dependencies>
-			<dependency id="Simplify.System.Sources" version="1.5.0" />
+			<group targetFramework=".NETFramework4.5.2">
+				<dependency id="Simplify.System.Sources" version="1.5.0" />
+			</group>
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="Simplify.System.Sources" version="1.5.0" />
+			</group>
 		</dependencies>
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="System.Xml" />
