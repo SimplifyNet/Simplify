@@ -51,7 +51,7 @@ namespace Simplify.Xml
 		/// <param name="node">XNode</param>
 		/// <param name="xpath">XPath 1.0</param>
 		/// <returns>XElement</returns>
-		public static IEnumerable<XElement>? GetMany(this XNode? node, string xpath)
+		public static IEnumerable<XElement> GetMany(this XNode? node, string xpath)
 		{
 			return node.GetMany(xpath, null);
 		}
@@ -63,10 +63,10 @@ namespace Simplify.Xml
 		/// <param name="xpath">XPath 1.0</param>
 		/// <param name="resolver">IXmlNamespaceResolver</param>
 		/// <returns>XElement</returns>
-		public static IEnumerable<XElement>? GetMany(this XNode? node, string xpath, IXmlNamespaceResolver? resolver)
+		public static IEnumerable<XElement> GetMany(this XNode? node, string xpath, IXmlNamespaceResolver? resolver)
 		{
 			return node is null || string.IsNullOrWhiteSpace(xpath)
-				? null
+				? new List<XElement>()
 				: resolver is null
 					? node.XPathSelectElements(xpath)
 					: node.XPathSelectElements(xpath, resolver);
