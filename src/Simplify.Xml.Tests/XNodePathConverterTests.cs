@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 // ReSharper disable ConvertToLocalFunction
 // ReSharper disable NotAccessedVariable
-// ReSharper disable PossibleMultipleEnumeration
 
 namespace Simplify.Xml.Tests
 {
@@ -19,7 +18,7 @@ namespace Simplify.Xml.Tests
 		{
 			// Arrange
 
-			XNodePathConverter body = new XNodePathConverter("root/body");
+			var body = new XNodePathConverter("root/body");
 			Func<XNode, XElement> func = x => x.Get("root/body");
 
 			// Act & Assert
@@ -28,9 +27,9 @@ namespace Simplify.Xml.Tests
 			Assert.AreEqual((string)new XNodePathConverter("item", body).AsFunc()(_doc), "Value");
 			Assert.AreEqual((string)new XNodePathConverter("item", func).AsFunc()(_doc), "Value");
 
-			Assert.AreEqual((string)new XNodePathConverter("root/body/colors").AsFunc()(_doc).GetMany("c")?.ElementAt(1), "green");
-			Assert.AreEqual((string)new XNodePathConverter("colors", body).AsFunc()(_doc).GetMany("c")?.ElementAt(0), "red");
-			Assert.AreEqual((string)new XNodePathConverter("colors", func).AsFunc()(_doc).GetMany("c")?.ElementAt(0), "red");
+			Assert.AreEqual((string)new XNodePathConverter("root/body/colors").AsFunc()(_doc).GetMany("c").ElementAt(1), "green");
+			Assert.AreEqual((string)new XNodePathConverter("colors", body).AsFunc()(_doc).GetMany("c").ElementAt(0), "red");
+			Assert.AreEqual((string)new XNodePathConverter("colors", func).AsFunc()(_doc).GetMany("c").ElementAt(0), "red");
 		}
 
 		[Test]
@@ -38,7 +37,7 @@ namespace Simplify.Xml.Tests
 		{
 			// Arrange
 
-			XNodePathConverter body = new XNodePathConverter("root/body");
+			var body = new XNodePathConverter("root/body");
 			Func<XNode, XElement> func = x => x.Get("root/body");
 
 			// Act & Assert
@@ -47,9 +46,9 @@ namespace Simplify.Xml.Tests
 			Assert.AreEqual((string)XNodePathConverter.AsFunc("item", body)(_doc), "Value");
 			Assert.AreEqual((string)XNodePathConverter.AsFunc("item", func)(_doc), "Value");
 
-			Assert.AreEqual((string)XNodePathConverter.AsFunc("root/body/colors")(_doc).GetMany("c")?.ElementAt(1), "green");
-			Assert.AreEqual((string)XNodePathConverter.AsFunc("colors", body)(_doc).GetMany("c")?.ElementAt(0), "red");
-			Assert.AreEqual((string)XNodePathConverter.AsFunc("colors", func)(_doc).GetMany("c")?.ElementAt(1), "green");
+			Assert.AreEqual((string)XNodePathConverter.AsFunc("root/body/colors")(_doc).GetMany("c").ElementAt(1), "green");
+			Assert.AreEqual((string)XNodePathConverter.AsFunc("colors", body)(_doc).GetMany("c").ElementAt(0), "red");
+			Assert.AreEqual((string)XNodePathConverter.AsFunc("colors", func)(_doc).GetMany("c").ElementAt(1), "green");
 		}
 
 		[Test]
@@ -57,7 +56,7 @@ namespace Simplify.Xml.Tests
 		{
 			// Arrange
 
-			XNodePathConverter body = new XNodePathConverter("root/body");
+			var body = new XNodePathConverter("root/body");
 			Func<XNode, XElement> func = x => x.Get("root/body");
 
 			// Act & Assert
@@ -66,9 +65,9 @@ namespace Simplify.Xml.Tests
 			Assert.AreEqual((string)new XNodePathConverter("item", body).Convert(_doc), "Value");
 			Assert.AreEqual((string)new XNodePathConverter("item", func).Convert(_doc), "Value");
 
-			Assert.AreEqual((string)new XNodePathConverter("root/body/colors").Convert(_doc).GetMany("c")?.ElementAt(1), "green");
-			Assert.AreEqual((string)new XNodePathConverter("colors", body).Convert(_doc).GetMany("c")?.ElementAt(0), "red");
-			Assert.AreEqual((string)new XNodePathConverter("colors", func).Convert(_doc).GetMany("c")?.ElementAt(1), "green");
+			Assert.AreEqual((string)new XNodePathConverter("root/body/colors").Convert(_doc).GetMany("c").ElementAt(1), "green");
+			Assert.AreEqual((string)new XNodePathConverter("colors", body).Convert(_doc).GetMany("c").ElementAt(0), "red");
+			Assert.AreEqual((string)new XNodePathConverter("colors", func).Convert(_doc).GetMany("c").ElementAt(1), "green");
 		}
 
 		[Test]
@@ -76,7 +75,7 @@ namespace Simplify.Xml.Tests
 		{
 			// Arrange
 
-			XNodePathConverter body = new XNodePathConverter("root/body");
+			var body = new XNodePathConverter("root/body");
 			Func<XNode, XElement> func = x => x.Get("root/body");
 
 			// Act & Assert
@@ -85,9 +84,9 @@ namespace Simplify.Xml.Tests
 			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "item", body), "Value");
 			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "item", func), "Value");
 
-			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "root/body/colors").GetMany("c")?.ElementAt(0), "red");
-			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "colors", body).GetMany("c")?.ElementAt(1), "green");
-			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "colors", func).GetMany("c")?.ElementAt(0), "red");
+			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "root/body/colors").GetMany("c").ElementAt(0), "red");
+			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "colors", body).GetMany("c").ElementAt(1), "green");
+			Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "colors", func).GetMany("c").ElementAt(0), "red");
 		}
 
 		[Test]

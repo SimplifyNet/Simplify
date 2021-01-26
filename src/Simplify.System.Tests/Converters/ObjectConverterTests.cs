@@ -16,6 +16,7 @@ namespace Simplify.System.Tests.Converters
 			var converter = new ObjectConverter<char, string>(chr => chr.ToString());
 
 			// Act & Assert
+
 			Assert.IsInstanceOf<Func<char, string>>(converter.AsFunc());
 			Assert.IsInstanceOf<Func<char, string>>((Func<char, string>)converter);
 		}
@@ -33,6 +34,7 @@ namespace Simplify.System.Tests.Converters
 			var converter = new ObjectConverter<string, int>(int.Parse);
 
 			// Act & Assert
+
 			Assert.AreEqual(converter.Convert("14"), 14);
 			Assert.AreEqual(converter.Convert("99"), 99);
 		}

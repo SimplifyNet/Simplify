@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using Simplify.System.Converters;
 
+// ReSharper disable ObjectCreationAsStatement
+
 namespace Simplify.System.Tests.Converters
 {
 	[TestFixture]
@@ -14,6 +16,7 @@ namespace Simplify.System.Tests.Converters
 			var converter = new ChainedObjectConverter<object?, string?>(obj => obj?.ToString());
 
 			// Act & Assert
+
 			Assert.IsInstanceOf<Func<object?, string?>>(converter.AsFunc());
 			Assert.IsInstanceOf<Func<object?, string?>>((Func<object?, string?>)converter);
 		}
@@ -31,6 +34,7 @@ namespace Simplify.System.Tests.Converters
 			var converter = new ChainedObjectConverter<object?, string?>(obj => obj?.ToString());
 
 			// Act & Assert
+
 			Assert.AreEqual(converter.Convert(null), null);
 			Assert.AreEqual(converter.Convert(new object()), "System.Object");
 			Assert.AreEqual(converter.Convert(new string('A', 5)), "AAAAA");
@@ -45,6 +49,7 @@ namespace Simplify.System.Tests.Converters
 			var converter2 = new ChainedObjectConverter<object?, string?>(obj => $"{obj} : {obj?.ToString()?.Length}", converter1);
 
 			// Act & Assert
+
 			Assert.AreEqual(converter2.Convert(null), "NULL : 4");
 			Assert.AreEqual(converter2.Convert(new object()), "Object : 6");
 			Assert.AreEqual(converter2.Convert(new DateTime()), "DateTime : 8");
