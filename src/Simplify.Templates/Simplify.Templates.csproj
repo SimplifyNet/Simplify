@@ -30,6 +30,6 @@
 		<PackageTags>.NET Templates</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.Xml.Sources" Version="1.1" PrivateAssets="All" />
+		<PackageReference Include="Simplify.Xml.Sources" Version="1.2.0" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
