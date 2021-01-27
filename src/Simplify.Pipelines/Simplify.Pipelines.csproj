@@ -7,10 +7,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Pipelines.xml</DocumentationFile>
 
-		<Version>0.8.1</Version>
+		<Version>0.9</Version>
 		<PackageReleaseNotes>
-			Bug fix
-			* Asynchronous conveyor sequential processing
+			New
+			* Resulting pipeline events
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>

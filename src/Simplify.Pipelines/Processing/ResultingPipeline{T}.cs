@@ -22,6 +22,21 @@ namespace Simplify.Pipelines.Processing
 		}
 
 		/// <summary>
+		/// Occurs when pipeline has finished it's execution.
+		/// </summary>
+		public event PipelineAction<T> OnPipelineEnd;
+
+		/// <summary>
+		/// Occurs when pipeline is about to execute.
+		/// </summary>
+		public event PipelineAction<T> OnPipelineStart;
+
+		/// <summary>
+		/// Occurs when pipeline stage has finished it's execution.
+		/// </summary>
+		public event PipelineStageAction<T> OnStageExecuted;
+
+		/// <summary>
 		/// Gets the error result.
 		/// </summary>
 		/// <value>
@@ -36,12 +51,23 @@ namespace Simplify.Pipelines.Processing
 		/// <returns></returns>
 		public bool Execute(T item)
 		{
+			OnPipelineStart?.Invoke(item);
+
 			foreach (var stage in _stages)
-				if (!stage.Execute(item))
-				{
-					ErrorResult = stage.ErrorResult;
-					return false;
-				}
+			{
+				var result = stage.Execute(item);
+
+				OnStageExecuted?.Invoke(stage.GetType(), item, result);
+
+				if (result)
+					continue;
+
+				ErrorResult = stage.ErrorResult;
+
+				return false;
+			}
+
+			OnPipelineEnd?.Invoke(item);
 
 			return true;
 		}
