@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net452</TargetFrameworks>
-		<LangVersion>8.0</LangVersion>
+		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -9,10 +9,12 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
 
-		<Version>1.3</Version>
+		<Version>1.5</Version>
 		<PackageReleaseNotes>
 			New
-			* OffsetStopwatch class (class with ability to add existing value to elapsed time) (#221)
+			* Customizable and chained object-to-object converters (#256)
+			Updates
+			* Environment checks in ApplicationEnvironment
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
