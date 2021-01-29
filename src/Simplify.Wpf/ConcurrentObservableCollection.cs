@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
-using Simplify.Extensions;
+using Simplify.System;
 
 public class ConcurrentObservableCollection<T> : ObservableCollection<T>, IConcurrentResource
 {
