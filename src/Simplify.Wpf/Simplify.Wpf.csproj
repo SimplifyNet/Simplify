@@ -11,7 +11,8 @@
 
 		<Version>1.0</Version>
 		<PackageReleaseNotes>
-			Initial release
+			ObservableCollection synchronization extensions.
+			SynchronizedObservableCollection class.
 		</PackageReleaseNotes>
 
 		<Authors>Simplify community</Authors>
