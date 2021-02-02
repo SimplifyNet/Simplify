@@ -35,10 +35,11 @@ namespace Simplify.System.Tests
 			Assert.NotNull(obj);
 		}
 
+#if RELEASE
+
 		[Test]
 		public void GetInstanceMultipleTimes_GcCollectBetween_CreatesDifferentInstances()
 		{
-#if RELEASE
 			// Arrange
 
 			var singleton = new WeakSingleton<TestClass>();
@@ -56,8 +57,9 @@ namespace Simplify.System.Tests
 
 			Assert.NotNull(obj);
 			Assert.AreEqual(obj.Value, "Default");
-#endif
 		}
+
+#endif
 
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
