@@ -7,10 +7,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.IO.xml</DocumentationFile>
 
-		<Version>1.2.1</Version>
+		<Version>1.2.2</Version>
 		<PackageReleaseNotes>
 			Updates
-				* Upgrade to System.IO.Abstractions 13.2.5 (PR#231)
+			* Upgrade to System.IO.Abstractions 13.2.*
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -23,6 +23,6 @@
 		<PackageTags>.NET IO</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="System.IO.Abstractions" Version="13.2.5" />
+		<PackageReference Include="System.IO.Abstractions" Version="13.2.*" />
 	</ItemGroup>
 </Project>

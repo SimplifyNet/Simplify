@@ -7,12 +7,12 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.WindowsServices.xml</DocumentationFile>
 
-		<Version>2.12</Version>
+		<Version>2.12.1</Version>
 		<PackageReleaseNotes>
-			Bug fixes
-			* Crontab timer period set to 1000 msec (#38)
-			Updates
-			* Microsoft.Extensions.Configuration upgrade to 3.1.0
+			* ncrontab upgrade to 3.3.*
+			* Simplify.DI upgrade to 4.0.*
+			* Simplify.System upgrade to 1.6.*
+			* Microsoft.Extensions.Configuration upgrade to 3.1.*
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -26,10 +26,12 @@
 		<PackageTags>.NET windows-service DI</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="ncrontab" Version="3.3.1" />
+		<PackageReference Include="ncrontab" Version="3.3.*" />
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
-		<PackageReference Include="Simplify.System" Version="1.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
+		<PackageReference Include="Simplify.System" Version="1.2.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
+	</ItemGroup>
+	<ItemGroup>
 		<Reference Include="System.Configuration" />
 		<Reference Include="System.Configuration.Install" />
 		<Reference Include="System.ServiceProcess" />

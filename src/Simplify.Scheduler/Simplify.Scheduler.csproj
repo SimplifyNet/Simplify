@@ -7,11 +7,13 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Scheduler.xml</DocumentationFile>
 
-		<Version>1.0</Version>
+		<Version>1.0.1</Version>
 		<PackageReleaseNotes>
-			Updates (changes from 1.0.0-pre05)
-			* Microsoft.Extensions.Configuration upgrade to 3.1.5
-			* Simplify.DI upgrade to 4.0.4
+			Updates 
+			* ncrontab upgrade to 3.3.*
+			* Simplify.DI upgrade to 4.0.*
+			* Simplify.System upgrade to 1.6.*
+			* Microsoft.Extensions.Configuration upgrade to 3.1.*
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -25,9 +27,9 @@
 		<PackageTags>.NET Scheduler DI</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="ncrontab" Version="3.3.1" />
+		<PackageReference Include="ncrontab" Version="3.3.*" />
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
-		<PackageReference Include="Simplify.System" Version="1.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.5" />
+		<PackageReference Include="Simplify.System" Version="1.6.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
 	</ItemGroup>
 </Project>
