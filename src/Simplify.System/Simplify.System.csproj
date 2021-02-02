@@ -9,12 +9,10 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
 
-		<Version>1.5</Version>
+		<Version>1.6</Version>
 		<PackageReleaseNotes>
 			New
-			* Customizable and chained object-to-object converters (#256)
-			Updates
-			* Environment checks in ApplicationEnvironment
+			* WeakSingleton (#254)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>

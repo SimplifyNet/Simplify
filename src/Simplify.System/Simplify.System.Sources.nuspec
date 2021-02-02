@@ -61,5 +61,7 @@
 		<file src="TimeProvider.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\TimeProvider.cs" />
 		<file src="SystemTimeProvider.cs" target="content/App_Packages/Simplify.System.Sources.$version$/SystemTimeProvider.cs" />
 		<file src="SystemTimeProvider.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\SystemTimeProvider.cs" />
+		<file src="WeakSingleton.cs" target="content/App_Packages/Simplify.System.Sources.$version$/WeakSingleton.cs" />
+		<file src="WeakSingleton.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\WeakSingleton.cs" />
 	</files>
 </package>
