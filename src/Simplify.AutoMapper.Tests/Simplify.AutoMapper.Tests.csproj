@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
+
+		<Authors>Simplify community</Authors>
+		<Product>Simplify</Product>
+		<Description>Simplify.AutoMapper unit tests</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.*" />
+		<PackageReference Include="NUnit" Version="3.13.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
+		<ProjectReference Include="..\Simplify.AutoMapper\Simplify.AutoMapper.csproj" />
+	</ItemGroup>
+</Project>
