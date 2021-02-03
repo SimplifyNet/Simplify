@@ -33,7 +33,8 @@ namespace Simplify.AutoMapper.Tests.Extensions
 			// Act & Assert
 
 			Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
-					.ForMember(d => d.Type, o => o.MapFrom(s => s.Category))));
+					.ForMember(d => d.Type, o => o.MapFrom(s => s.Category))
+					.ForMember(d => d.Source, o => o.Ignore())));
 			Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
 		}
 
