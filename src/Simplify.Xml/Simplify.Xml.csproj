@@ -32,6 +32,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Simplify.System" Version="1.5.*" />
+		<PackageReference Include="Simplify.System" Version="1.6.*" />
 	</ItemGroup>
 </Project>
