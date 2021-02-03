@@ -11,7 +11,8 @@
 
 		<Version>1.0</Version>
 		<PackageReleaseNotes>
-			Initial project
+			CreateMap extension for the IProfileExpression
+			MapTo overloaded extensions for the IMappingExpression
 		</PackageReleaseNotes>
 
 		<Authors>Simplify community</Authors>
