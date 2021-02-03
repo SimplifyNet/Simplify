@@ -10,10 +10,12 @@
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Simplify.AutoMapper\Simplify.AutoMapper.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.*" />
 		<PackageReference Include="NUnit" Version="3.13.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
-		<ProjectReference Include="..\Simplify.AutoMapper\Simplify.AutoMapper.csproj" />
 	</ItemGroup>
 </Project>

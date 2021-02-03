@@ -7,7 +7,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.System.xml</DocumentationFile>
+		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.AutoMapper.xml</DocumentationFile>
 
 		<Version>1.0</Version>
 		<PackageReleaseNotes>
@@ -17,9 +17,9 @@
 
 		<Authors>Simplify community</Authors>
 		<Product>Simplify</Product>
-		<Description>Extension for the AutoMapper</Description>
+		<Description>Extensions for the AutoMapper</Description>
 		<Copyright>Licensed under LGPL</Copyright>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET</PackageTags>
