@@ -7,12 +7,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.WindowsServices.xml</DocumentationFile>
 
-		<Version>2.12.1</Version>
+		<Version>2.13</Version>
 		<PackageReleaseNotes>
-			* ncrontab upgrade to 3.3.*
-			* Simplify.DI upgrade to 4.0.*
-			* Simplify.System upgrade to 1.6.*
-			* Microsoft.Extensions.Configuration upgrade to 3.1.*
+			New
+			* MultitaskServiceHandler make ShutdownInProcess public (#269)
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>

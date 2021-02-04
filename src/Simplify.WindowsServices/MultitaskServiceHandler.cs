@@ -23,8 +23,6 @@ namespace Simplify.WindowsServices
 		private readonly IDictionary<IServiceJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<IServiceJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
-		private bool _shutdownInProcess;
-
 		private IServiceJobFactory _serviceJobFactory;
 		private ICommandLineProcessor _commandLineProcessor;
 
@@ -51,6 +49,14 @@ namespace Simplify.WindowsServices
 		/// Occurs when job is finished.
 		/// </summary>
 		public event JobEventHandler OnJobFinish;
+
+		/// <summary>
+		/// Gets a value indicating whether handler shutdown is in process.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if handler shutdown is in process; otherwise, <c>false</c>.
+		/// </value>
+		public bool ShutdownInProcess { get; private set; }
 
 		/// <summary>
 		/// Gets or sets the service job factory.
@@ -225,7 +231,7 @@ namespace Simplify.WindowsServices
 		/// </summary>
 		protected override void OnStop()
 		{
-			_shutdownInProcess = true;
+			ShutdownInProcess = true;
 			Task[] itemsToWait;
 
 			lock (_workingJobsTasks)
@@ -262,7 +268,7 @@ namespace Simplify.WindowsServices
 
 			lock (_workingJobsTasks)
 			{
-				if (_shutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
+				if (ShutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
 					return;
 
 				_jobTaskID++;

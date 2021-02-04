@@ -21,8 +21,6 @@ namespace Simplify.Scheduler
 		private readonly IDictionary<ISchedulerJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<ISchedulerJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
-		private bool _shutdownInProcess;
-
 		private ISchedulerJobFactory _schedulerJobFactory;
 
 		/// <summary>
@@ -48,6 +46,14 @@ namespace Simplify.Scheduler
 		/// Occurs when job is finished.
 		/// </summary>
 		public event JobEventHandler OnJobFinish;
+
+		/// <summary>
+		/// Gets a value indicating whether handler shutdown is in process.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if handler shutdown is in process; otherwise, <c>false</c>.
+		/// </value>
+		public bool ShutdownInProcess { get; private set; }
 
 		/// <summary>
 		/// Gets the name of the application.
@@ -138,7 +144,7 @@ namespace Simplify.Scheduler
 		{
 			Console.WriteLine("Scheduler stopping, waiting for jobs to finish...");
 
-			_shutdownInProcess = true;
+			ShutdownInProcess = true;
 			Task[] itemsToWait;
 
 			lock (_workingJobsTasks)
@@ -191,7 +197,7 @@ namespace Simplify.Scheduler
 
 			lock (_workingJobsTasks)
 			{
-				if (_shutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
+				if (ShutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
 					return;
 
 				_jobTaskID++;
