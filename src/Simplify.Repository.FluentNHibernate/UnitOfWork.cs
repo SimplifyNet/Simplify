@@ -12,10 +12,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// Initializes a new instance of the <see cref="UnitOfWork"/> class.
 		/// </summary>
 		/// <param name="sessionFactory">The session factory.</param>
-		public UnitOfWork(ISessionFactory sessionFactory)
-		{
-			Session = sessionFactory.OpenSession();
-		}
+		public UnitOfWork(ISessionFactory sessionFactory) => Session = sessionFactory.OpenSession();
 
 		/// <summary>
 		/// Gets the session.
@@ -23,7 +20,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <value>
 		/// The session.
 		/// </value>
-		public ISession Session { get; private set; }
+		public ISession Session { get; }
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -43,8 +40,7 @@ namespace Simplify.Repository.FluentNHibernate
 			if (!disposing)
 				return;
 
-			Session?.Dispose();
-			Session = null;
+			Session.Dispose();
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Simplify.Repository.FluentNHibernate
 	/// <seealso cref="IUnitOfWork" />
 	public class TransactStatelessUnitOfWork : StatelessUnitOfWork, ITransactUnitOfWork
 	{
-		private ITransaction _transaction;
+		private ITransaction? _transaction;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
@@ -44,7 +44,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
 		public void Commit()
 		{
-			if (!_transaction.IsActive)
+			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			_transaction.Commit();
@@ -57,7 +57,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
 		public async Task CommitAsync()
 		{
-			if (!_transaction.IsActive)
+			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			await _transaction.CommitAsync();
@@ -69,7 +69,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		public virtual void Rollback()
 		{
-			if (_transaction.IsActive)
+			if (_transaction != null && _transaction.IsActive)
 				_transaction.Rollback();
 		}
 
@@ -77,9 +77,9 @@ namespace Simplify.Repository.FluentNHibernate
 		/// Rollbacks transaction asynchronously.
 		/// </summary>
 		/// <returns></returns>
-		public Task RollbackAsync()
-		{
-			return _transaction.IsActive ? _transaction.RollbackAsync() : Task.Delay(0);
-		}
+		public Task RollbackAsync() =>
+			_transaction != null && _transaction.IsActive
+				? _transaction.RollbackAsync()
+				: Task.CompletedTask;
 	}
 }

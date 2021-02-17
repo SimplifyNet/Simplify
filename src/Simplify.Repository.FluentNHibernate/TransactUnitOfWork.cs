@@ -10,7 +10,7 @@ namespace Simplify.Repository.FluentNHibernate
 	/// </summary>
 	public class TransactUnitOfWork : UnitOfWork, ITransactUnitOfWork
 	{
-		private ITransaction _transaction;
+		private ITransaction? _transaction;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TransactUnitOfWork"/> class.
@@ -24,10 +24,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// Begins the transaction.
 		/// </summary>
 		/// <param name="isolationLevel">The isolation level.</param>
-		public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-		{
-			_transaction = Session.BeginTransaction(isolationLevel);
-		}
+		public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) => _transaction = Session.BeginTransaction(isolationLevel);
 
 		/// <summary>
 		/// Commits transaction.
@@ -35,7 +32,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
 		public virtual void Commit()
 		{
-			if (!_transaction.IsActive)
+			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			_transaction.Commit();
@@ -48,7 +45,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
 		public Task CommitAsync()
 		{
-			if (!_transaction.IsActive)
+			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			return _transaction.CommitAsync();
@@ -59,7 +56,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		public virtual void Rollback()
 		{
-			if (_transaction.IsActive)
+			if (_transaction != null && _transaction.IsActive)
 				_transaction.Rollback();
 		}
 
@@ -67,9 +64,9 @@ namespace Simplify.Repository.FluentNHibernate
 		/// Rollbacks transaction asynchronously.
 		/// </summary>
 		/// <returns></returns>
-		public Task RollbackAsync()
-		{
-			return _transaction.IsActive ? _transaction.RollbackAsync() : Task.Delay(0);
-		}
+		public Task RollbackAsync() =>
+			_transaction != null && _transaction.IsActive
+				? _transaction.RollbackAsync()
+				: Task.CompletedTask;
 	}
 }

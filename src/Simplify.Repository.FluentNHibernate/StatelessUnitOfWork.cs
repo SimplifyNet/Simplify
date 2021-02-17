@@ -24,7 +24,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <value>
 		/// The session.
 		/// </value>
-		public IStatelessSession Session { get; private set; }
+		public IStatelessSession Session { get; }
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
@@ -45,7 +45,6 @@ namespace Simplify.Repository.FluentNHibernate
 				return;
 
 			Session?.Dispose();
-			Session = null;
 		}
 	}
 }

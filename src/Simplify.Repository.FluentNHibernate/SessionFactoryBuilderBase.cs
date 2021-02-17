@@ -31,7 +31,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <value>
 		/// The instance.
 		/// </value>
-		public ISessionFactory Instance { get; private set; }
+		public ISessionFactory? Instance { get; private set; }
 
 		/// <summary>
 		/// Gets the configuration.
@@ -78,9 +78,6 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
-		public virtual void Dispose()
-		{
-			Instance?.Dispose();
-		}
+		public virtual void Dispose() => Instance?.Dispose();
 	}
 }
