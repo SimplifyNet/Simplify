@@ -134,7 +134,8 @@ namespace Simplify.Repository
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public IList<T> GetMultipleByQuery(Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+		public IList<T> GetMultipleByQuery(Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -151,7 +152,8 @@ namespace Simplify.Repository
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public async Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+		public async Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -170,7 +172,8 @@ namespace Simplify.Repository
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public IList<T> GetPaged(int pageIndex, int itemsPerPage, Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+		public IList<T> GetPaged(int pageIndex, int itemsPerPage, Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -189,7 +192,8 @@ namespace Simplify.Repository
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		public async Task<IList<T>> GetPagedAsync(int pageIndex, int itemsPerPage, Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+		public async Task<IList<T>> GetPagedAsync(int pageIndex, int itemsPerPage, Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -205,7 +209,7 @@ namespace Simplify.Repository
 		/// </summary>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public int GetCount(Expression<Func<T, bool>> query = null)
+		public int GetCount(Expression<Func<T, bool>>? query = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -221,7 +225,7 @@ namespace Simplify.Repository
 		/// </summary>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public async Task<int> GetCountAsync(Expression<Func<T, bool>> query = null)
+		public async Task<int> GetCountAsync(Expression<Func<T, bool>>? query = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -237,7 +241,7 @@ namespace Simplify.Repository
 		/// </summary>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public long GetLongCount(Expression<Func<T, bool>> query = null)
+		public long GetLongCount(Expression<Func<T, bool>>? query = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
@@ -253,7 +257,7 @@ namespace Simplify.Repository
 		/// </summary>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public async Task<long> GetLongCountAsync(Expression<Func<T, bool>> query = null)
+		public async Task<long> GetLongCountAsync(Expression<Func<T, bool>>? query = null)
 		{
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
