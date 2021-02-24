@@ -12,7 +12,8 @@ namespace Simplify.Repository.FluentNHibernate
 		/// Initializes a new instance of the <see cref="UnitOfWork"/> class.
 		/// </summary>
 		/// <param name="sessionFactory">The session factory.</param>
-		public UnitOfWork(ISessionFactory sessionFactory) => Session = sessionFactory.OpenSession();
+		public UnitOfWork(ISessionFactory sessionFactory) =>
+			Session = sessionFactory.OpenSession() ?? throw new InvalidOperationException("Error opening session");
 
 		/// <summary>
 		/// Gets the session.
