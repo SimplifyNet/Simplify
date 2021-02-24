@@ -147,6 +147,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.AutoMapper", "Simp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.AutoMapper.Tests", "Simplify.AutoMapper.Tests\Simplify.AutoMapper.Tests.csproj", "{FCACA243-27B5-4619-97FB-A8C8D0E0A7F2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.Repository.FluentNHibernate.Tests", "Simplify.Repository.FluentNHibernate.Tests\Simplify.Repository.FluentNHibernate.Tests.csproj", "{780397EC-2DC7-486C-9490-242F3B37EBFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -345,6 +347,10 @@ Global
 		{FCACA243-27B5-4619-97FB-A8C8D0E0A7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCACA243-27B5-4619-97FB-A8C8D0E0A7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCACA243-27B5-4619-97FB-A8C8D0E0A7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{780397EC-2DC7-486C-9490-242F3B37EBFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780397EC-2DC7-486C-9490-242F3B37EBFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780397EC-2DC7-486C-9490-242F3B37EBFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780397EC-2DC7-486C-9490-242F3B37EBFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -403,6 +409,7 @@ Global
 		{0C1DF149-F9ED-471A-8EBF-B212A9CA7C5B} = {B2CDEA39-00C4-4285-9730-EA6C50011D20}
 		{6C606F7C-481C-4DB1-8EAB-FB663ED057B3} = {BE884D4D-951E-438C-84C6-01F92713E5ED}
 		{FCACA243-27B5-4619-97FB-A8C8D0E0A7F2} = {BE884D4D-951E-438C-84C6-01F92713E5ED}
+		{780397EC-2DC7-486C-9490-242F3B37EBFD} = {F43AE642-DC80-4BE0-93BD-8B718950C8BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {466E8FF6-456A-4262-A9ED-5E88DB8DCB08}
