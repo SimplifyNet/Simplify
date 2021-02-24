@@ -13,10 +13,8 @@ namespace Simplify.Repository.FluentNHibernate
 		/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
 		/// </summary>
 		/// <param name="sessionFactory">The session factory.</param>
-		public StatelessUnitOfWork(ISessionFactory sessionFactory)
-		{
-			Session = sessionFactory.OpenStatelessSession();
-		}
+		public StatelessUnitOfWork(ISessionFactory sessionFactory) =>
+			Session = sessionFactory.OpenStatelessSession() ?? throw new InvalidOperationException("Error opening session, session is null");
 
 		/// <summary>
 		/// Gets the session.
@@ -44,7 +42,7 @@ namespace Simplify.Repository.FluentNHibernate
 			if (!disposing)
 				return;
 
-			Session?.Dispose();
+			Session.Dispose();
 		}
 	}
 }

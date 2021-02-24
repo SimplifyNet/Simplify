@@ -13,7 +13,7 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		/// <param name="sessionFactory">The session factory.</param>
 		public UnitOfWork(ISessionFactory sessionFactory) =>
-			Session = sessionFactory.OpenSession() ?? throw new InvalidOperationException("Error opening session");
+			Session = sessionFactory.OpenSession() ?? throw new InvalidOperationException("Error opening session, session is null");
 
 		/// <summary>
 		/// Gets the session.
