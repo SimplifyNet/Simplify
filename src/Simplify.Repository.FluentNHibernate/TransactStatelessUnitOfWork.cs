@@ -22,20 +22,17 @@ namespace Simplify.Repository.FluentNHibernate
 		}
 
 		/// <summary>
-		/// Gets a value indicating whether this instance is transaction active.
+		/// Gets a value indicating whether UoW's transaction is active.
 		/// </summary>
 		/// <value>
-		///   <c>true</c> if this instance is transaction active; otherwise, <c>false</c>.
+		///  <c>true</c> if UoW's transaction active; otherwise, <c>false</c>.
 		/// </value>
 		public bool IsTransactionActive => _transaction != null;
 
 		/// <summary>
 		/// Begins the transaction.
 		/// </summary>
-		public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-		{
-			_transaction = Session.BeginTransaction(isolationLevel);
-		}
+		public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) => _transaction = Session.BeginTransaction(isolationLevel);
 
 		/// <summary>
 		/// Commits transaction.
@@ -90,6 +87,20 @@ namespace Simplify.Repository.FluentNHibernate
 			await _transaction.RollbackAsync();
 			_transaction.Dispose();
 			_transaction = null;
+		}
+
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!disposing)
+				return;
+
+			_transaction?.Dispose();
+
+			base.Dispose(disposing);
 		}
 	}
 }

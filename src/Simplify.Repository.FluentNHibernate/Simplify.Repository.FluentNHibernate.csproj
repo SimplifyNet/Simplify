@@ -25,7 +25,9 @@
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Simplify.Repository\Simplify.Repository.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.*" />
-		<PackageReference Include="Simplify.Repository" Version="1.4.*" />
 	</ItemGroup>
 </Project>

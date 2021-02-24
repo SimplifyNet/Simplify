@@ -21,6 +21,14 @@ namespace Simplify.Repository.FluentNHibernate
 		}
 
 		/// <summary>
+		/// Gets a value indicating whether UoW's transaction is active.
+		/// </summary>
+		/// <value>
+		///  <c>true</c> if UoW's transaction active; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsTransactionActive => _transaction != null;
+
+		/// <summary>
 		/// Begins the transaction.
 		/// </summary>
 		/// <param name="isolationLevel">The isolation level.</param>
@@ -36,6 +44,8 @@ namespace Simplify.Repository.FluentNHibernate
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			_transaction.Commit();
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
@@ -43,12 +53,14 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		/// <returns></returns>
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
-		public Task CommitAsync()
+		public async Task CommitAsync()
 		{
 			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
-			return _transaction.CommitAsync();
+			await _transaction.CommitAsync();
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
@@ -56,17 +68,40 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		public virtual void Rollback()
 		{
-			if (_transaction != null && _transaction.IsActive)
-				_transaction.Rollback();
+			if (_transaction == null || !_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			_transaction.Rollback();
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
 		/// Rollbacks transaction asynchronously.
 		/// </summary>
 		/// <returns></returns>
-		public Task RollbackAsync() =>
-			_transaction != null && _transaction.IsActive
-				? _transaction.RollbackAsync()
-				: Task.CompletedTask;
+		public async Task RollbackAsync()
+		{
+			if (_transaction == null || !_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			await _transaction.RollbackAsync();
+			_transaction.Dispose();
+			_transaction = null;
+		}
+
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!disposing)
+				return;
+
+			_transaction?.Dispose();
+
+			base.Dispose(disposing);
+		}
 	}
 }

@@ -30,9 +30,24 @@ namespace Simplify.Repository.FluentNHibernate.Tests
 
 			// Act
 
+			// 1
+
 			uow.BeginTransaction();
 			await uow.Session.GetAsync<User>(1);
 			await uow.CommitAsync();
+
+			// 2
+
+			uow.BeginTransaction();
+			await uow.Session.GetAsync<User>(1);
+			await uow.CommitAsync();
+
+			// 3
+
+			uow.BeginTransaction();
+			await uow.Session.GetAsync<User>(1);
+
+			// Cleanup
 			uow.Dispose();
 		}
 
