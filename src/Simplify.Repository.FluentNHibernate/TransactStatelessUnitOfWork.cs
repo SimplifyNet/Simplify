@@ -27,14 +27,13 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <value>
 		///   <c>true</c> if this instance is transaction active; otherwise, <c>false</c>.
 		/// </value>
-		public bool IsTransactionActive { get; private set; }
+		public bool IsTransactionActive => _transaction != null;
 
 		/// <summary>
 		/// Begins the transaction.
 		/// </summary>
 		public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
 		{
-			IsTransactionActive = true;
 			_transaction = Session.BeginTransaction(isolationLevel);
 		}
 
@@ -48,7 +47,8 @@ namespace Simplify.Repository.FluentNHibernate
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			_transaction.Commit();
-			IsTransactionActive = false;
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
@@ -61,7 +61,8 @@ namespace Simplify.Repository.FluentNHibernate
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			await _transaction.CommitAsync();
-			IsTransactionActive = false;
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
@@ -69,17 +70,26 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		public virtual void Rollback()
 		{
-			if (_transaction != null && _transaction.IsActive)
-				_transaction.Rollback();
+			if (_transaction == null || !_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			_transaction.Rollback();
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
 		/// Rollbacks transaction asynchronously.
 		/// </summary>
 		/// <returns></returns>
-		public Task RollbackAsync() =>
-			_transaction != null && _transaction.IsActive
-				? _transaction.RollbackAsync()
-				: Task.CompletedTask;
+		public async Task RollbackAsync()
+		{
+			if (_transaction == null || !_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			await _transaction.RollbackAsync();
+			_transaction.Dispose();
+			_transaction = null;
+		}
 	}
 }

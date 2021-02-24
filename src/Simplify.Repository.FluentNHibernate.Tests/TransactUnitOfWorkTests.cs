@@ -25,10 +25,14 @@ namespace Simplify.Repository.FluentNHibernate.Tests
 		[Test]
 		public async Task UnitOfWorkLifetimeTest()
 		{
+			// Arrange
 			var uow = new TestUnitOfWork(_sessionFactory);
 
-			await uow.Session.GetAsync<User>(1);
+			// Act
 
+			uow.BeginTransaction();
+			await uow.Session.GetAsync<User>(1);
+			await uow.CommitAsync();
 			uow.Dispose();
 		}
 
