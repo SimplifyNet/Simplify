@@ -28,6 +28,7 @@
 		<ProjectReference Include="..\Simplify.Repository\Simplify.Repository.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="Simplify.DI" Version="4.0.13" />
 		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.*" />
 	</ItemGroup>
 </Project>
