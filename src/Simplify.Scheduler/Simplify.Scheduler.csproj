@@ -1,16 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Scheduler.xml</DocumentationFile>
 
-		<Version>1.1</Version>
+		<Version>1.1.1</Version>
 		<PackageReleaseNotes>
-			New
-			* SchedulerJobsHandler make ShutdownInProcess public (#269)
+			Updates
+			* Simplify.DI bump to 4.0.14
+			* Code refactoring
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>

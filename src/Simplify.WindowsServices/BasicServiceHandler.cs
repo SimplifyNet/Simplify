@@ -19,7 +19,7 @@ namespace Simplify.WindowsServices
 		/// <param name="startupArgs">The startup arguments.</param>
 		public BasicServiceHandler(bool automaticallyRegisterUserType = false,
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 		{
 			var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
 			ServiceName = assemblyInfo.Title;

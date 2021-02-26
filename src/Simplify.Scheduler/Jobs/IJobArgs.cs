@@ -19,6 +19,6 @@
 		/// <value>
 		/// The job startup arguments.
 		/// </value>
-		object StartupArgs { get; }
+		object? StartupArgs { get; }
 	}
 }

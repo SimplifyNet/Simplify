@@ -23,8 +23,8 @@ namespace Simplify.WindowsServices
 		private readonly IDictionary<IServiceJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<IServiceJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
-		private IServiceJobFactory _serviceJobFactory;
-		private ICommandLineProcessor _commandLineProcessor;
+		private IServiceJobFactory? _serviceJobFactory;
+		private ICommandLineProcessor? _commandLineProcessor;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultitaskServiceHandler" /> class.
@@ -38,17 +38,17 @@ namespace Simplify.WindowsServices
 		/// <summary>
 		/// Occurs when exception thrown.
 		/// </summary>
-		public event ServiceExceptionEventHandler OnException;
+		public event ServiceExceptionEventHandler? OnException;
 
 		/// <summary>
 		/// Occurs when the job start.
 		/// </summary>
-		public event JobEventHandler OnJobStart;
+		public event JobEventHandler? OnJobStart;
 
 		/// <summary>
 		/// Occurs when job is finished.
 		/// </summary>
-		public event JobEventHandler OnJobFinish;
+		public event JobEventHandler? OnJobFinish;
 
 		/// <summary>
 		/// Gets a value indicating whether handler shutdown is in process.
@@ -67,7 +67,7 @@ namespace Simplify.WindowsServices
 		/// <exception cref="ArgumentNullException">value</exception>
 		public IServiceJobFactory ServiceJobFactory
 		{
-			get => _serviceJobFactory ?? (_serviceJobFactory = new ServiceJobFactory(ServiceName));
+			get => _serviceJobFactory ??= new ServiceJobFactory(ServiceName);
 			set => _serviceJobFactory = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -77,7 +77,7 @@ namespace Simplify.WindowsServices
 		/// <exception cref="ArgumentNullException"></exception>
 		public ICommandLineProcessor CommandLineProcessor
 		{
-			get => _commandLineProcessor ?? (_commandLineProcessor = new CommandLineProcessor());
+			get => _commandLineProcessor ??= new CommandLineProcessor();
 			set => _commandLineProcessor = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -89,10 +89,10 @@ namespace Simplify.WindowsServices
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
-		public void AddJob<T>(string configurationSectionName = null,
+		public void AddJob<T>(string? configurationSectionName = null,
 			string invokeMethodName = "Run",
 			bool automaticallyRegisterUserType = false,
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			if (automaticallyRegisterUserType)
@@ -113,10 +113,10 @@ namespace Simplify.WindowsServices
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		public void AddJob<T>(IConfiguration configuration,
-			string configurationSectionName = null,
+			string? configurationSectionName = null,
 			string invokeMethodName = "Run",
 			bool automaticallyRegisterUserType = false,
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			if (automaticallyRegisterUserType)
@@ -160,7 +160,7 @@ namespace Simplify.WindowsServices
 		/// <param name="startupArgs">The startup arguments.</param>
 		public void AddBasicJob<T>(bool automaticallyRegisterUserType = false,
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			if (automaticallyRegisterUserType)
@@ -175,7 +175,7 @@ namespace Simplify.WindowsServices
 		/// Starts the windows-service.
 		/// </summary>
 		/// <param name="args">The arguments.</param>
-		public bool Start(string[] args = null)
+		public bool Start(string[]? args = null)
 		{
 			var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
 
@@ -187,6 +187,15 @@ namespace Simplify.WindowsServices
 				case ProcessCommandLineResult.NoArguments:
 					ServiceBase.Run(this);
 					break;
+
+				case ProcessCommandLineResult.UndefinedParameters:
+					break;
+
+				case ProcessCommandLineResult.CommandLineActionExecuted:
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 
 			return true;
@@ -253,6 +262,9 @@ namespace Simplify.WindowsServices
 		private void OnCronTimerTick(object state)
 		{
 			var job = (ICrontabServiceJob)state;
+
+			if (job.CrontabProcessor == null)
+				throw new InvalidOperationException($"{nameof(job.CrontabProcessor)} is null");
 
 			if (!job.CrontabProcessor.IsMatching())
 				return;

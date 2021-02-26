@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Simplify.System;
-using System.Reflection;
 
 namespace Simplify.Scheduler
 {
@@ -21,7 +21,7 @@ namespace Simplify.Scheduler
 		public SingleTaskScheduler(IConfiguration configuration,
 			string configurationSectionName = "JobSettings",
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 		{
 			var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
 			AppName = assemblyInfo.Title;

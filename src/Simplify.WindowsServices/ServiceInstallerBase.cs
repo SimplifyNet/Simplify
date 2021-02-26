@@ -8,6 +8,8 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Simplify.System;
 
+#nullable disable
+
 namespace Simplify.WindowsServices
 {
 	/// <summary>

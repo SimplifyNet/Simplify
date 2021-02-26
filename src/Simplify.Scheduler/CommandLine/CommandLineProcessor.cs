@@ -13,7 +13,7 @@ namespace Simplify.Scheduler.CommandLine
 		/// </summary>
 		/// <param name="args">The arguments.</param>
 		/// <returns></returns>
-		public virtual ProcessCommandLineResult ProcessCommandLineArguments(string[] args)
+		public virtual ProcessCommandLineResult ProcessCommandLineArguments(string[]? args)
 		{
 			if (args == null || args.Length == 0)
 				return ProcessCommandLineResult.NoArguments;
@@ -36,12 +36,9 @@ namespace Simplify.Scheduler.CommandLine
 		/// </summary>
 		/// <param name="args">The arguments.</param>
 		/// <returns></returns>
-		public virtual CommandLineAction ParseCommandLineArguments(string[] args)
-		{
-			if (args[0] == "skip")
-				return CommandLineAction.SkipScheduler;
-
-			return CommandLineAction.UndefinedAction;
-		}
+		public virtual CommandLineAction ParseCommandLineArguments(string[] args) =>
+			args[0] == "skip"
+				? CommandLineAction.SkipScheduler
+				: CommandLineAction.UndefinedAction;
 	}
 }

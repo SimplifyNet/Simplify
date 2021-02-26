@@ -24,7 +24,7 @@ namespace Simplify.WindowsServices.Jobs
 			JobClassType = typeof(T);
 			JobArgs = args ?? throw new ArgumentNullException(nameof(args));
 
-			BuildInvokeMethodInfo(invokeMethodName);
+			InvokeMethodInfo = BuildInvokeMethodInfo(invokeMethodName);
 		}
 
 		/// <summary>
@@ -74,19 +74,16 @@ namespace Simplify.WindowsServices.Jobs
 		{
 		}
 
-		private void BuildInvokeMethodInfo(string invokeMethodName)
+		private MethodInfo BuildInvokeMethodInfo(string invokeMethodName)
 		{
-			InvokeMethodInfo = JobClassType.GetMethod(invokeMethodName);
+			var invokeMethodInfo = JobClassType.GetMethod(invokeMethodName) ?? throw new ServiceInitializationException($"Method {invokeMethodName} not found in class {JobClassType.Name}");
 
-			if (InvokeMethodInfo == null)
-				throw new ServiceInitializationException($"Method {invokeMethodName} not found in class {JobClassType.Name}");
-
-			var methodParameters = InvokeMethodInfo.GetParameters();
+			var methodParameters = invokeMethodInfo.GetParameters();
 
 			if (!methodParameters.Any())
 			{
 				InvokeMethodParameterType = InvokeMethodParameterType.Parameterless;
-				return;
+				return invokeMethodInfo;
 			}
 
 			if (methodParameters[0].ParameterType == typeof(string))
@@ -94,6 +91,8 @@ namespace Simplify.WindowsServices.Jobs
 
 			if (methodParameters[0].ParameterType == typeof(IJobArgs))
 				InvokeMethodParameterType = InvokeMethodParameterType.Args;
+
+			return invokeMethodInfo;
 		}
 	}
 }

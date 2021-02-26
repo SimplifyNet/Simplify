@@ -13,7 +13,7 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 		private const int CronTimerPeriod = 1000;
 
 		private readonly ICrontabProcessorFactory _crontabProcessorFactory;
-		private Timer _timer;
+		private Timer? _timer;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CrontabServiceJob{T}" /> class.
@@ -44,12 +44,12 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 		/// <summary>
 		/// Occurs on cron timer tick.
 		/// </summary>
-		public event TimerCallback OnCronTimerTick;
+		public event TimerCallback? OnCronTimerTick;
 
 		/// <summary>
 		/// Occurs on interval timer tick.
 		/// </summary>
-		public event TimerCallback OnStartWork;
+		public event TimerCallback? OnStartWork;
 
 		/// <summary>
 		/// Gets the settings.
@@ -65,7 +65,7 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 		/// <value>
 		/// The crontab processor.
 		/// </value>
-		public ICrontabProcessor CrontabProcessor { get; private set; }
+		public ICrontabProcessor? CrontabProcessor { get; private set; }
 
 		/// <summary>
 		/// Starts this job timer.
@@ -75,7 +75,7 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 		{
 			if (!string.IsNullOrEmpty(Settings.CrontabExpression))
 			{
-				CrontabProcessor = _crontabProcessorFactory.Create(Settings.CrontabExpression);
+				CrontabProcessor = _crontabProcessorFactory.Create(Settings.CrontabExpression!);
 				CrontabProcessor.CalculateNextOccurrences();
 
 				_timer = new Timer(OnCronTimerTick ?? throw new InvalidOperationException("OnCronTimerTick is not assigned"),

@@ -12,7 +12,7 @@ namespace Simplify.WindowsServices.Jobs
 		/// </summary>
 		/// <param name="serviceName">Name of the service.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
-		public JobArgs(string serviceName, object startupArgs)
+		public JobArgs(string serviceName, object? startupArgs)
 		{
 			if (string.IsNullOrEmpty(serviceName)) throw new ArgumentException("Value cannot be null or empty.", nameof(serviceName));
 
@@ -34,6 +34,6 @@ namespace Simplify.WindowsServices.Jobs
 		/// <value>
 		/// The job startup arguments.
 		/// </value>
-		public object StartupArgs { get; }
+		public object? StartupArgs { get; }
 	}
 }

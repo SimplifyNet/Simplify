@@ -18,7 +18,7 @@
 		/// <value>
 		/// The crontab expression.
 		/// </value>
-		public string CrontabExpression { get; protected set; }
+		public string? CrontabExpression { get; protected set; }
 
 		/// <summary>
 		/// Gets the scheduler processing interval (sec).

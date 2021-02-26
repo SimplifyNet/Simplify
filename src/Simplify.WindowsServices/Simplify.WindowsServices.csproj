@@ -1,16 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net462</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.WindowsServices.xml</DocumentationFile>
 
-		<Version>2.13</Version>
+		<Version>2.13.1</Version>
 		<PackageReleaseNotes>
-			New
-			* MultitaskServiceHandler make ShutdownInProcess public (#269)
+			Updates
+			* Simplify.DI bump to 4.0.14
+			* Simplify.System bump to 1.6
+			* Code refactoring
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -26,7 +30,7 @@
 	<ItemGroup>
 		<PackageReference Include="ncrontab" Version="3.3.*" />
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
-		<PackageReference Include="Simplify.System" Version="1.2.*" />
+		<PackageReference Include="Simplify.System" Version="1.6.*" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
 	</ItemGroup>
 	<ItemGroup>

@@ -12,7 +12,7 @@ namespace Simplify.Scheduler.Jobs
 		/// </summary>
 		/// <param name="appName">Name of the application.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
-		public JobArgs(string appName, object startupArgs)
+		public JobArgs(string appName, object? startupArgs)
 		{
 			if (string.IsNullOrEmpty(appName)) throw new ArgumentException("Value cannot be null or empty.", nameof(appName));
 
@@ -34,6 +34,6 @@ namespace Simplify.Scheduler.Jobs
 		/// <value>
 		/// The job startup arguments.
 		/// </value>
-		public object StartupArgs { get; }
+		public object? StartupArgs { get; }
 	}
 }

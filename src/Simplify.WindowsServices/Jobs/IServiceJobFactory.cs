@@ -16,7 +16,7 @@ namespace Simplify.WindowsServices.Jobs
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
 		IServiceJob CreateServiceJob<T>(string invokeMethodName,
-			object startupArgs);
+			object? startupArgs);
 
 		/// <summary>
 		/// Creates the service job.
@@ -26,9 +26,9 @@ namespace Simplify.WindowsServices.Jobs
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
-		ICrontabServiceJob CreateCrontabServiceJob<T>(string configurationSectionName,
+		ICrontabServiceJob CreateCrontabServiceJob<T>(string? configurationSectionName,
 			string invokeMethodName,
-			object startupArgs);
+			object? startupArgs);
 
 		/// <summary>
 		/// Creates the service job.
@@ -40,8 +40,8 @@ namespace Simplify.WindowsServices.Jobs
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
 		ICrontabServiceJob CreateCrontabServiceJob<T>(IConfiguration configuration,
-			string configurationSectionName,
+			string? configurationSectionName,
 			string invokeMethodName,
-			object startupArgs);
+			object? startupArgs);
 	}
 }

@@ -31,7 +31,7 @@ namespace Simplify.WindowsServices.Jobs
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
 		public IServiceJob CreateServiceJob<T>(string invokeMethodName,
-			object startupArgs)
+			object? startupArgs)
 		{
 			return new ServiceJob<T>(invokeMethodName, CreateJobArgs(startupArgs));
 		}
@@ -44,9 +44,9 @@ namespace Simplify.WindowsServices.Jobs
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
-		public ICrontabServiceJob CreateCrontabServiceJob<T>(string configurationSectionName,
+		public ICrontabServiceJob CreateCrontabServiceJob<T>(string? configurationSectionName,
 			string invokeMethodName,
-			object startupArgs)
+			object? startupArgs)
 		{
 			return new CrontabServiceJob<T>(
 				new ConfigurationManagerBasedServiceJobSettings(FormatConfigurationSectionName<T>(configurationSectionName)),
@@ -65,9 +65,9 @@ namespace Simplify.WindowsServices.Jobs
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
 		public ICrontabServiceJob CreateCrontabServiceJob<T>(IConfiguration configuration,
-			string configurationSectionName,
+			string? configurationSectionName,
 			string invokeMethodName,
-			object startupArgs)
+			object? startupArgs)
 		{
 			return new CrontabServiceJob<T>(
 				new ConfigurationBasedServiceJobSetting(configuration, FormatConfigurationSectionName<T>(configurationSectionName)),
@@ -76,7 +76,7 @@ namespace Simplify.WindowsServices.Jobs
 				CreateJobArgs(startupArgs));
 		}
 
-		private static string FormatConfigurationSectionName<T>(string configurationSectionName)
+		private static string FormatConfigurationSectionName<T>(string? configurationSectionName)
 		{
 			if (configurationSectionName != null)
 				return configurationSectionName;
@@ -85,7 +85,7 @@ namespace Simplify.WindowsServices.Jobs
 			return type.Name + "Settings";
 		}
 
-		private IJobArgs CreateJobArgs(object startupArgs)
+		private IJobArgs CreateJobArgs(object? startupArgs)
 		{
 			return new JobArgs(_serviceName, startupArgs);
 		}

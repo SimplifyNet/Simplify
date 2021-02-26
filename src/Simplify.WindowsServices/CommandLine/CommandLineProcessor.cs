@@ -8,7 +8,7 @@ namespace Simplify.WindowsServices.CommandLine
 	/// <seealso cref="Simplify.WindowsServices.CommandLine.ICommandLineProcessor" />
 	public class CommandLineProcessor : ICommandLineProcessor
 	{
-		private IInstallationController _installationController;
+		private IInstallationController? _installationController;
 
 		/// <summary>
 		/// Gets or sets the current installation controller.
@@ -16,7 +16,7 @@ namespace Simplify.WindowsServices.CommandLine
 		/// <exception cref="ArgumentNullException"></exception>
 		public IInstallationController InstallationController
 		{
-			get => _installationController ?? (_installationController = new InstallationController());
+			get => _installationController ??= new InstallationController();
 			set => _installationController = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -25,7 +25,7 @@ namespace Simplify.WindowsServices.CommandLine
 		/// </summary>
 		/// <param name="args">The arguments.</param>
 		/// <returns></returns>
-		public virtual ProcessCommandLineResult ProcessCommandLineArguments(string[] args)
+		public virtual ProcessCommandLineResult ProcessCommandLineArguments(string[]? args)
 		{
 			if (args == null || args.Length == 0)
 				return ProcessCommandLineResult.NoArguments;
@@ -60,16 +60,13 @@ namespace Simplify.WindowsServices.CommandLine
 		/// <returns></returns>
 		public virtual CommandLineAction ParseCommandLineArguments(string[] args)
 		{
-			if (args[0] == "install")
-				return CommandLineAction.InstallService;
-
-			if (args[0] == "uninstall")
-				return CommandLineAction.UninstallService;
-
-			if (args[0] == "console")
-				return CommandLineAction.RunAsConsole;
-
-			return CommandLineAction.UndefinedAction;
+			return args[0] switch
+			{
+				"install" => CommandLineAction.InstallService,
+				"uninstall" => CommandLineAction.UninstallService,
+				"console" => CommandLineAction.RunAsConsole,
+				_ => CommandLineAction.UndefinedAction
+			};
 		}
 	}
 }
