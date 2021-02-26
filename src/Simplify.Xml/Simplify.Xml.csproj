@@ -9,11 +9,10 @@
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Xml.xml</DocumentationFile>
 
-		<Version>1.2.0</Version>
+		<Version>1.2.1</Version>
 		<PackageReleaseNotes>
-			New
-			* XNode extensions Get and GetMany
-			* XNodePathConverter
+			Updates
+			* Simplify.System bump to 1.6
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
@@ -32,6 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Simplify.System" Version="1.5.*" />
+		<PackageReference Include="Simplify.System" Version="1.6.*" />
 	</ItemGroup>
 </Project>

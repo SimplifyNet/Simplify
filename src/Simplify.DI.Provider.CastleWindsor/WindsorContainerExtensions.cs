@@ -96,10 +96,7 @@ namespace Simplify.DI.Provider.CastleWindsor
 			return message.ToString();
 		}
 
-		private static string GetNameDescription(ComponentModel componentModel)
-		{
-			return componentModel.ComponentName.SetByUser ? componentModel.ComponentName.Name : componentModel.ToString();
-		}
+		private static string GetNameDescription(ComponentModel componentModel) => componentModel.ComponentName.SetByUser ? componentModel.ComponentName.Name : componentModel.ToString();
 
 		private static TResult[] ConvertAll<T, TResult>(this T[] items, Func<T, TResult> converter)
 		{

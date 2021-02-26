@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard1.3;netstandard2.0;net452</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.SimpleInjector.xml</DocumentationFile>
 
-		<Version>1.9.1</Version>
+		<Version>1.9.2</Version>
 		<PackageReleaseNotes>
 			Updates
-			* Upgrade to Simplify.DI 4.0.10 (Floating version set)
-			* Upgrade to SimpleInjector 5.2.0 (PR#225), floating version set
+			* Upgrade to Simplify.DI 4.0.14
+			* Upgrade to SimpleInjector 5.2.1
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
