@@ -30,9 +30,6 @@ namespace Simplify.DI.Provider.DryIoc
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
-		public void Dispose()
-		{
-			_context.Dispose();
-		}
+		public void Dispose() => _context.Dispose();
 	}
 }
