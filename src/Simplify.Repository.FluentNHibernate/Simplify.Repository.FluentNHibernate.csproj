@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
 
-		<Version>1.2.5</Version>
+		<Version>1.3-pre03</Version>
 		<PackageReleaseNotes>
 			Updates
 			* Upgrade to Simplify.FluentNHibernate 2.5 (PR#253)
@@ -23,7 +25,10 @@
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Simplify.Repository\Simplify.Repository.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Simplify.DI" Version="4.0.13" />
 		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.*" />
-		<PackageReference Include="Simplify.Repository" Version="1.4.*" />
 	</ItemGroup>
 </Project>

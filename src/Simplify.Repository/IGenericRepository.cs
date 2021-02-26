@@ -61,7 +61,7 @@ namespace Simplify.Repository
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		IList<T> GetMultipleByQuery(Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IQueryable<T>> customProcessing = null);
+		IList<T> GetMultipleByQuery(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 		/// <summary>
 		/// Gets the multiple objects by query asynchronously.
@@ -69,7 +69,7 @@ namespace Simplify.Repository
 		/// <param name="query">The query.</param>
 		/// <param name="customProcessing">The custom processing.</param>
 		/// <returns></returns>
-		Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IQueryable<T>> customProcessing = null);
+		Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 		/// <summary>
 		/// Gets the multiple paged elements list.
@@ -81,8 +81,8 @@ namespace Simplify.Repository
 		/// <returns></returns>
 		IList<T> GetPaged(int pageIndex,
 			int itemsPerPage,
-			Expression<Func<T, bool>> query = null,
-			Func<IQueryable<T>, IQueryable<T>> customProcessing = null);
+			Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 		/// <summary>
 		/// Gets the multiple paged elements list asynchronously.
@@ -94,32 +94,32 @@ namespace Simplify.Repository
 		/// <returns></returns>
 		Task<IList<T>> GetPagedAsync(int pageIndex,
 			int itemsPerPage,
-			Expression<Func<T, bool>> query = null,
-			Func<IQueryable<T>, IQueryable<T>> customProcessing = null);
+			Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 		/// <summary>
 		/// Gets the number of elements.
 		/// </summary>
 		/// <param name="query">The query.</param>
-		int GetCount(Expression<Func<T, bool>> query = null);
+		int GetCount(Expression<Func<T, bool>>? query = null);
 
 		/// <summary>
 		/// Gets the number of elements asynchronously.
 		/// </summary>
 		/// <param name="query">The query.</param>
-		Task<int> GetCountAsync(Expression<Func<T, bool>> query = null);
+		Task<int> GetCountAsync(Expression<Func<T, bool>>? query = null);
 
 		/// <summary>
 		/// Gets the long number of elements.
 		/// </summary>
 		/// <param name="query">The query.</param>
-		long GetLongCount(Expression<Func<T, bool>> query = null);
+		long GetLongCount(Expression<Func<T, bool>>? query = null);
 
 		/// <summary>
 		/// Gets the long number of elements asynchronously.
 		/// </summary>
 		/// <param name="query">The query.</param>
-		Task<long> GetLongCountAsync(Expression<Func<T, bool>> query = null);
+		Task<long> GetLongCountAsync(Expression<Func<T, bool>>? query = null);
 
 		/// <summary>
 		/// Adds the object.
