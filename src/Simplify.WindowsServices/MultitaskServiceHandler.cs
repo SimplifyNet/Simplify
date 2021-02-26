@@ -133,10 +133,8 @@ namespace Simplify.WindowsServices
 		/// <typeparam name="T"></typeparam>
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		public void AddJob<T>(bool automaticallyRegisterUserType)
-			where T : class
-		{
+			where T : class =>
 			AddJob<T>(null, "Run", automaticallyRegisterUserType);
-		}
 
 		/// <summary>
 		/// Adds the service job.
@@ -146,10 +144,8 @@ namespace Simplify.WindowsServices
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		public void AddJob<T>(IConfiguration configuration,
 			bool automaticallyRegisterUserType)
-			where T : class
-		{
+			where T : class =>
 			AddJob<T>(configuration, null, "Run", automaticallyRegisterUserType);
-		}
 
 		/// <summary>
 		/// Adds the basic service job.
@@ -319,16 +315,15 @@ namespace Simplify.WindowsServices
 
 		private void RunScoped(IServiceJobRepresentation job)
 		{
-			using (var scope = DIContainer.Current.BeginLifetimeScope())
-			{
-				var jobObject = scope.Resolver.Resolve(job.JobClassType);
+			using var scope = DIContainer.Current.BeginLifetimeScope();
 
-				OnJobStart?.Invoke(job);
+			var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
-				InvokeJobMethod(job, jobObject);
+			OnJobStart?.Invoke(job);
 
-				OnJobFinish?.Invoke(job);
-			}
+			InvokeJobMethod(job, jobObject);
+
+			OnJobFinish?.Invoke(job);
 		}
 
 		private void RunBasicJob(IServiceJobRepresentation job)

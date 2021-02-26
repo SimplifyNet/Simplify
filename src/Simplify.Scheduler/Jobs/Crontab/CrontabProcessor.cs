@@ -58,10 +58,7 @@ namespace Simplify.Scheduler.Jobs.Crontab
 		/// <summary>
 		/// Calculates the next occurrences.
 		/// </summary>
-		public void CalculateNextOccurrences()
-		{
-			CalculateNextOccurrences(TimeProvider.Current.Now);
-		}
+		public void CalculateNextOccurrences() => CalculateNextOccurrences(TimeProvider.Current.Now);
 
 		/// <summary>
 		/// Calculates the next occurrences.
@@ -93,9 +90,6 @@ namespace Simplify.Scheduler.Jobs.Crontab
 		/// Determines whether current time is matching next occurrence.
 		/// </summary>
 		/// <returns></returns>
-		public bool IsMatching()
-		{
-			return IsMatching(TimeProvider.Current.Now);
-		}
+		public bool IsMatching() => IsMatching(TimeProvider.Current.Now);
 	}
 }

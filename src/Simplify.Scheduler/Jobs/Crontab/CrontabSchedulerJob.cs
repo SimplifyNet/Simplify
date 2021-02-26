@@ -93,10 +93,7 @@ namespace Simplify.Scheduler.Jobs.Crontab
 		/// <summary>
 		/// Stops and disposes job timer.
 		/// </summary>
-		public override void Stop()
-		{
-			Dispose();
-		}
+		public override void Stop() => Dispose();
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

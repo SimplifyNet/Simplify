@@ -85,9 +85,6 @@ namespace Simplify.WindowsServices.Jobs
 			return type.Name + "Settings";
 		}
 
-		private IJobArgs CreateJobArgs(object? startupArgs)
-		{
-			return new JobArgs(_serviceName, startupArgs);
-		}
+		private IJobArgs CreateJobArgs(object? startupArgs) => new JobArgs(_serviceName, startupArgs);
 	}
 }

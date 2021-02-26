@@ -237,16 +237,15 @@ namespace Simplify.Scheduler
 
 		private void RunScoped(ISchedulerJobRepresentation job)
 		{
-			using (var scope = DIContainer.Current.BeginLifetimeScope())
-			{
-				var jobObject = scope.Resolver.Resolve(job.JobClassType);
+			using var scope = DIContainer.Current.BeginLifetimeScope();
 
-				OnJobStart?.Invoke(job);
+			var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
-				InvokeJobMethod(job, jobObject);
+			OnJobStart?.Invoke(job);
 
-				OnJobFinish?.Invoke(job);
-			}
+			InvokeJobMethod(job, jobObject);
+
+			OnJobFinish?.Invoke(job);
 		}
 
 		private void RunBasicJob(ISchedulerJobRepresentation job)

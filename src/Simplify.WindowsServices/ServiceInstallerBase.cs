@@ -95,10 +95,7 @@ namespace Simplify.WindowsServices
 		/// <param name="account">Account type under which to run this service</param>
 		/// <param name="userName">User name under which to run this service</param>
 		/// <param name="password">Password under which to run this service</param>
-		public ServiceInstallerBase(string description, string displayName, string serviceName, ServiceAccount account, string userName, string password)
-		{
-			Initialize(description, displayName, serviceName, account, userName, password);
-		}
+		public ServiceInstallerBase(string description, string displayName, string serviceName, ServiceAccount account, string userName, string password) => Initialize(description, displayName, serviceName, account, userName, password);
 
 		/// <summary>
 		/// Perform the installation of service (used by system)
@@ -115,23 +112,14 @@ namespace Simplify.WindowsServices
 			base.Install(stateSaver);
 		}
 
-		private static ServiceAccount TryParseServiceAccountFieldData(string data)
-		{
-			switch (data)
+		private static ServiceAccount TryParseServiceAccountFieldData(string data) =>
+			data switch
 			{
-				case "NetworkService":
-					return ServiceAccount.NetworkService;
-
-				case "LocalSystem":
-					return ServiceAccount.LocalSystem;
-
-				case "User":
-					return ServiceAccount.User;
-
-				default:
-					return ServiceAccount.LocalService;
-			}
-		}
+				"NetworkService" => ServiceAccount.NetworkService,
+				"LocalSystem" => ServiceAccount.LocalSystem,
+				"User" => ServiceAccount.User,
+				_ => ServiceAccount.LocalService
+			};
 
 		private void Initialize(string description, string displayName, string serviceName, ServiceAccount account,
 			string userName, string password)
@@ -179,9 +167,6 @@ namespace Simplify.WindowsServices
 			_serviceAccount = !IsRunAsUserSet() ? TryParseServiceAccountFieldData(serviceAccount) : ServiceAccount.User;
 		}
 
-		private bool IsRunAsUserSet()
-		{
-			return !string.IsNullOrEmpty(_userName) && !string.IsNullOrEmpty(_password);
-		}
+		private bool IsRunAsUserSet() => !string.IsNullOrEmpty(_userName) && !string.IsNullOrEmpty(_password);
 	}
 }

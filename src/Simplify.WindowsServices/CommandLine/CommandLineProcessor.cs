@@ -44,6 +44,12 @@ namespace Simplify.WindowsServices.CommandLine
 
 				case CommandLineAction.RunAsConsole:
 					return ProcessCommandLineResult.SkipServiceStart;
+
+				case CommandLineAction.UndefinedAction:
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 
 			Console.WriteLine($"Undefined service parameters: '{string.Concat(args)}'");
