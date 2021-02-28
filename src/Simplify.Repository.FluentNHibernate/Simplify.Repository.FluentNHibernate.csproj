@@ -9,16 +9,10 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
 
-		<Version>1.3</Version>
+		<Version>1.4</Version>
 		<PackageReleaseNotes>
 			New
-			* Add TransactGenericRepository (#273)
-			* Add property to ITransactUnitOfWork and TransactUnitOfWork indicating that transaction is open #272 (#272)
-			* SimplifyDIRegistratorExtensions for TransactGenericRepository
-			Updates
-			* Refactoring to nullable
-			Fixes
-			* Unit of work transaction dispose added
+			* SimplifyDIRegistratorExtensions for TransactGenericRepository with explicit UoW impementation parameter to get session from
 		</PackageReleaseNotes>
 
 		<Authors>Alexander Krylkov</Authors>
