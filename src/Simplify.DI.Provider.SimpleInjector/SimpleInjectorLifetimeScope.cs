@@ -32,9 +32,6 @@ namespace Simplify.DI.Provider.SimpleInjector
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
-		public void Dispose()
-		{
-			_scope.Dispose();
-		}
+		public void Dispose() => _scope.Dispose();
 	}
 }

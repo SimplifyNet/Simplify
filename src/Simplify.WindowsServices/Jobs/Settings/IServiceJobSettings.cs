@@ -11,7 +11,7 @@
 		/// <value>
 		/// The crontab expression.
 		/// </value>
-		string CrontabExpression { get; }
+		string? CrontabExpression { get; }
 
 		/// <summary>
 		/// Gets the service processing interval (sec).

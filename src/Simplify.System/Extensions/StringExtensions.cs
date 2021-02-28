@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Simplify.Extensions
+namespace Simplify.System.Extensions
 {
 	/// <summary>
 	/// Provides extensions for the string class

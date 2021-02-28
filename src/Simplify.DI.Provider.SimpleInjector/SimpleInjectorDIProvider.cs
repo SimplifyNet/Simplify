@@ -9,22 +9,21 @@ namespace Simplify.DI.Provider.SimpleInjector
 	/// </summary>
 	public class SimpleInjectorDIProvider : IDIContainerProvider
 	{
-		private Container _container;
+		private Container? _container;
 
 		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public Container Container
 		{
-			get => _container ??
-				   (_container = new Container
-				   {
-					   Options =
-					   {
-						   DefaultScopedLifestyle = new AsyncScopedLifestyle(),
-						   UseStrictLifestyleMismatchBehavior = true
-					   }
-				   });
+			get => _container ??= new Container
+			{
+				Options =
+				{
+					DefaultScopedLifestyle = new AsyncScopedLifestyle(),
+					UseStrictLifestyleMismatchBehavior = true
+				}
+			};
 
 			set => _container = value ?? throw new ArgumentNullException(nameof(value));
 		}
@@ -34,10 +33,7 @@ namespace Simplify.DI.Provider.SimpleInjector
 		/// </summary>
 		/// <param name="serviceType">Type of the service.</param>
 		/// <returns></returns>
-		public object Resolve(Type serviceType)
-		{
-			return Container.GetInstance(serviceType);
-		}
+		public object Resolve(Type serviceType) => Container.GetInstance(serviceType);
 
 		/// <summary>
 		/// Registers the specified service type with corresponding implementation type.
@@ -60,6 +56,9 @@ namespace Simplify.DI.Provider.SimpleInjector
 				case LifetimeType.Transient:
 					Container.Register(serviceType, implementationType, Lifestyle.Transient);
 					break;
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(lifetimeType), lifetimeType, null);
 			}
 
 			return this;
@@ -86,6 +85,9 @@ namespace Simplify.DI.Provider.SimpleInjector
 				case LifetimeType.Transient:
 					Container.Register(serviceType, () => instanceCreator(this), Lifestyle.Transient);
 					break;
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(lifetimeType), lifetimeType, null);
 			}
 
 			return this;
@@ -95,25 +97,16 @@ namespace Simplify.DI.Provider.SimpleInjector
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope()
-		{
-			return new SimpleInjectorLifetimeScope(this);
-		}
+		public ILifetimeScope BeginLifetimeScope() => new SimpleInjectorLifetimeScope(this);
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
 		/// </summary>
-		public void Dispose()
-		{
-			_container?.Dispose();
-		}
+		public void Dispose() => _container?.Dispose();
 
 		/// <summary>
 		/// Performs container objects graph verification
 		/// </summary>
-		public void Verify()
-		{
-			Container.Verify();
-		}
+		public void Verify() => Container.Verify();
 	}
 }

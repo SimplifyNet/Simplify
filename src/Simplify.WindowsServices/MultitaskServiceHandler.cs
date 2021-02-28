@@ -23,10 +23,8 @@ namespace Simplify.WindowsServices
 		private readonly IDictionary<IServiceJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<IServiceJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
-		private bool _shutdownInProcess;
-
-		private IServiceJobFactory _serviceJobFactory;
-		private ICommandLineProcessor _commandLineProcessor;
+		private IServiceJobFactory? _serviceJobFactory;
+		private ICommandLineProcessor? _commandLineProcessor;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultitaskServiceHandler" /> class.
@@ -40,17 +38,25 @@ namespace Simplify.WindowsServices
 		/// <summary>
 		/// Occurs when exception thrown.
 		/// </summary>
-		public event ServiceExceptionEventHandler OnException;
+		public event ServiceExceptionEventHandler? OnException;
 
 		/// <summary>
 		/// Occurs when the job start.
 		/// </summary>
-		public event JobEventHandler OnJobStart;
+		public event JobEventHandler? OnJobStart;
 
 		/// <summary>
 		/// Occurs when job is finished.
 		/// </summary>
-		public event JobEventHandler OnJobFinish;
+		public event JobEventHandler? OnJobFinish;
+
+		/// <summary>
+		/// Gets a value indicating whether handler shutdown is in process.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if handler shutdown is in process; otherwise, <c>false</c>.
+		/// </value>
+		public bool ShutdownInProcess { get; private set; }
 
 		/// <summary>
 		/// Gets or sets the service job factory.
@@ -61,7 +67,7 @@ namespace Simplify.WindowsServices
 		/// <exception cref="ArgumentNullException">value</exception>
 		public IServiceJobFactory ServiceJobFactory
 		{
-			get => _serviceJobFactory ?? (_serviceJobFactory = new ServiceJobFactory(ServiceName));
+			get => _serviceJobFactory ??= new ServiceJobFactory(ServiceName);
 			set => _serviceJobFactory = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -71,7 +77,7 @@ namespace Simplify.WindowsServices
 		/// <exception cref="ArgumentNullException"></exception>
 		public ICommandLineProcessor CommandLineProcessor
 		{
-			get => _commandLineProcessor ?? (_commandLineProcessor = new CommandLineProcessor());
+			get => _commandLineProcessor ??= new CommandLineProcessor();
 			set => _commandLineProcessor = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -83,10 +89,10 @@ namespace Simplify.WindowsServices
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
-		public void AddJob<T>(string configurationSectionName = null,
+		public void AddJob<T>(string? configurationSectionName = null,
 			string invokeMethodName = "Run",
 			bool automaticallyRegisterUserType = false,
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			if (automaticallyRegisterUserType)
@@ -107,10 +113,10 @@ namespace Simplify.WindowsServices
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		public void AddJob<T>(IConfiguration configuration,
-			string configurationSectionName = null,
+			string? configurationSectionName = null,
 			string invokeMethodName = "Run",
 			bool automaticallyRegisterUserType = false,
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			if (automaticallyRegisterUserType)
@@ -127,10 +133,8 @@ namespace Simplify.WindowsServices
 		/// <typeparam name="T"></typeparam>
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		public void AddJob<T>(bool automaticallyRegisterUserType)
-			where T : class
-		{
+			where T : class =>
 			AddJob<T>(null, "Run", automaticallyRegisterUserType);
-		}
 
 		/// <summary>
 		/// Adds the service job.
@@ -140,10 +144,8 @@ namespace Simplify.WindowsServices
 		/// <param name="automaticallyRegisterUserType">if set to <c>true</c> then user type T will be registered in DIContainer with transient lifetime.</param>
 		public void AddJob<T>(IConfiguration configuration,
 			bool automaticallyRegisterUserType)
-			where T : class
-		{
+			where T : class =>
 			AddJob<T>(configuration, null, "Run", automaticallyRegisterUserType);
-		}
 
 		/// <summary>
 		/// Adds the basic service job.
@@ -154,7 +156,7 @@ namespace Simplify.WindowsServices
 		/// <param name="startupArgs">The startup arguments.</param>
 		public void AddBasicJob<T>(bool automaticallyRegisterUserType = false,
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			if (automaticallyRegisterUserType)
@@ -169,7 +171,7 @@ namespace Simplify.WindowsServices
 		/// Starts the windows-service.
 		/// </summary>
 		/// <param name="args">The arguments.</param>
-		public bool Start(string[] args = null)
+		public bool Start(string[]? args = null)
 		{
 			var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
 
@@ -181,6 +183,15 @@ namespace Simplify.WindowsServices
 				case ProcessCommandLineResult.NoArguments:
 					ServiceBase.Run(this);
 					break;
+
+				case ProcessCommandLineResult.UndefinedParameters:
+					break;
+
+				case ProcessCommandLineResult.CommandLineActionExecuted:
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 
 			return true;
@@ -225,7 +236,7 @@ namespace Simplify.WindowsServices
 		/// </summary>
 		protected override void OnStop()
 		{
-			_shutdownInProcess = true;
+			ShutdownInProcess = true;
 			Task[] itemsToWait;
 
 			lock (_workingJobsTasks)
@@ -248,6 +259,9 @@ namespace Simplify.WindowsServices
 		{
 			var job = (ICrontabServiceJob)state;
 
+			if (job.CrontabProcessor == null)
+				throw new InvalidOperationException($"{nameof(job.CrontabProcessor)} is null");
+
 			if (!job.CrontabProcessor.IsMatching())
 				return;
 
@@ -262,7 +276,7 @@ namespace Simplify.WindowsServices
 
 			lock (_workingJobsTasks)
 			{
-				if (_shutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
+				if (ShutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
 					return;
 
 				_jobTaskID++;
@@ -301,16 +315,15 @@ namespace Simplify.WindowsServices
 
 		private void RunScoped(IServiceJobRepresentation job)
 		{
-			using (var scope = DIContainer.Current.BeginLifetimeScope())
-			{
-				var jobObject = scope.Resolver.Resolve(job.JobClassType);
+			using var scope = DIContainer.Current.BeginLifetimeScope();
 
-				OnJobStart?.Invoke(job);
+			var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
-				InvokeJobMethod(job, jobObject);
+			OnJobStart?.Invoke(job);
 
-				OnJobFinish?.Invoke(job);
-			}
+			InvokeJobMethod(job, jobObject);
+
+			OnJobFinish?.Invoke(job);
 		}
 
 		private void RunBasicJob(IServiceJobRepresentation job)

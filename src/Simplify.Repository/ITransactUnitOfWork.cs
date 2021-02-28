@@ -9,6 +9,14 @@ namespace Simplify.Repository
 	public interface ITransactUnitOfWork : IUnitOfWork
 	{
 		/// <summary>
+		/// Gets a value indicating whether UoW's transaction is active.
+		/// </summary>
+		/// <value>
+		///  <c>true</c> if UoW's transaction active; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsTransactionActive { get; }
+
+		/// <summary>
 		/// Begins the transaction.
 		/// </summary>
 		/// <param name="isolationLevel">The isolation level.</param>

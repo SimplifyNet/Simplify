@@ -10,9 +10,6 @@
 		/// </summary>
 		/// <param name="crontabExpression">The crontab expression.</param>
 		/// <returns></returns>
-		public ICrontabProcessor Create(string crontabExpression)
-		{
-			return new CrontabProcessor(crontabExpression);
-		}
+		public ICrontabProcessor Create(string crontabExpression) => new CrontabProcessor(crontabExpression);
 	}
 }

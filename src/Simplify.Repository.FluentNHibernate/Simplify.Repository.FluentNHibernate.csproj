@@ -1,27 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
-		<Description>Simplify.Repository FluentNHibernate implementation</Description>
-		<Copyright>Licensed under LGPL</Copyright>
-		<Version>1.2.4</Version>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<PackageTags>.NET Repository UoW Model</PackageTags>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Simplify.FluentNHibernate 2.4
-		</PackageReleaseNotes>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.Repository.FluentNHibernate.xml</DocumentationFile>
+
+		<Version>1.4</Version>
+		<PackageReleaseNotes>
+			New
+			* SimplifyDIRegistratorExtensions for TransactGenericRepository with explicit UoW impementation parameter to get session from
+		</PackageReleaseNotes>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Simplify.Repository FluentNHibernate implementation</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET Repository UoW Model</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.FluentNHibernate" Version="2.4.0" />
-		<PackageReference Include="Simplify.Repository" Version="1.4.*" />
+		<ProjectReference Include="..\Simplify.Repository\Simplify.Repository.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Simplify.DI" Version="4.0.*" />
+		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.*" />
 	</ItemGroup>
 </Project>

@@ -18,14 +18,6 @@ namespace Simplify.System.Diagnostics
 		}
 
 		/// <summary>
-		/// Gets the offset.
-		/// </summary>
-		/// <value>
-		/// The offset.
-		/// </value>
-		public TimeSpan Offset { get; private set; }
-
-		/// <summary>
 		/// Gets the total elapsed time measured by the current instance.
 		/// </summary>
 		public new TimeSpan Elapsed => base.Elapsed.Add(Offset);
@@ -39,6 +31,14 @@ namespace Simplify.System.Diagnostics
 		/// Gets the total elapsed time measured by the current instance, in timer ticks.
 		/// </summary>
 		public new long ElapsedTicks => base.ElapsedTicks + Offset.Ticks;
+
+		/// <summary>
+		/// Gets the offset.
+		/// </summary>
+		/// <value>
+		/// The offset.
+		/// </value>
+		public TimeSpan Offset { get; private set; }
 
 		/// <summary>
 		/// Creates the new timer and starts it immediately.

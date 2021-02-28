@@ -32,12 +32,64 @@ namespace Simplify.System
 		}
 
 		/// <summary>
-		/// Gets the assembly version.
+		/// Gets the company name of the assembly.
 		/// </summary>
 		/// <value>
-		/// The version.
+		/// The name of the company.
 		/// </value>
-		public Version Version => _infoAssembly.GetName().Version ?? throw new InvalidOperationException();
+		public string CompanyName
+		{
+			get
+			{
+				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+				return attributes.Length == 0 ? "" : ((AssemblyCompanyAttribute)attributes[0]).Company;
+			}
+		}
+
+		/// <summary>
+		/// Gets the copyright information of the assembly.
+		/// </summary>
+		/// <value>
+		/// The copyright holder.
+		/// </value>
+		public string Copyright
+		{
+			get
+			{
+				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+				return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+			}
+		}
+
+		/// <summary>
+		/// Gets the description of the assembly.
+		/// </summary>
+		/// <value>
+		/// The description.
+		/// </value>
+		public string Description
+		{
+			get
+			{
+				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+				return attributes.Length == 0 ? "" : ((AssemblyDescriptionAttribute)attributes[0]).Description;
+			}
+		}
+
+		/// <summary>
+		/// Gets the product name of the assembly.
+		/// </summary>
+		/// <value>
+		/// The name of the product.
+		/// </value>
+		public string ProductName
+		{
+			get
+			{
+				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+				return attributes.Length == 0 ? "" : ((AssemblyProductAttribute)attributes[0]).Product;
+			}
+		}
 
 		/// <summary>
 		/// Gets the assembly title.
@@ -64,63 +116,11 @@ namespace Simplify.System
 		}
 
 		/// <summary>
-		/// Gets the product name of the assembly.
+		/// Gets the assembly version.
 		/// </summary>
 		/// <value>
-		/// The name of the product.
+		/// The version.
 		/// </value>
-		public string ProductName
-		{
-			get
-			{
-				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-				return attributes.Length == 0 ? "" : ((AssemblyProductAttribute)attributes[0]).Product;
-			}
-		}
-
-		/// <summary>
-		/// Gets the description of the assembly.
-		/// </summary>
-		/// <value>
-		/// The description.
-		/// </value>
-		public string Description
-		{
-			get
-			{
-				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-				return attributes.Length == 0 ? "" : ((AssemblyDescriptionAttribute)attributes[0]).Description;
-			}
-		}
-
-		/// <summary>
-		/// Gets the copyright information of the assembly.
-		/// </summary>
-		/// <value>
-		/// The copyright holder.
-		/// </value>
-		public string Copyright
-		{
-			get
-			{
-				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-				return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-			}
-		}
-
-		/// <summary>
-		/// Gets the company name of the assembly.
-		/// </summary>
-		/// <value>
-		/// The name of the company.
-		/// </value>
-		public string CompanyName
-		{
-			get
-			{
-				var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-				return attributes.Length == 0 ? "" : ((AssemblyCompanyAttribute)attributes[0]).Company;
-			}
-		}
+		public Version Version => _infoAssembly.GetName().Version ?? throw new InvalidOperationException();
 	}
 }

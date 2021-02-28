@@ -8,14 +8,14 @@ namespace Simplify.DI.Provider.DryIoc
 	/// </summary>
 	public class DryIocDIProvider : IDIContainerProvider
 	{
-		private IContainer _container;
+		private IContainer? _container;
 
 		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public IContainer Container
 		{
-			get => _container ?? (_container = new Container());
+			get => _container ??= new Container();
 			set => _container = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -24,10 +24,7 @@ namespace Simplify.DI.Provider.DryIoc
 		/// </summary>
 		/// <param name="serviceType">Type of the service.</param>
 		/// <returns></returns>
-		public object Resolve(Type serviceType)
-		{
-			return Container.Resolve(serviceType);
-		}
+		public object Resolve(Type serviceType) => Container.Resolve(serviceType);
 
 		/// <summary>
 		/// Registers the specified service type with corresponding implementation type.
@@ -93,18 +90,12 @@ namespace Simplify.DI.Provider.DryIoc
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope()
-		{
-			return new DryIocLifetimeScope(this);
-		}
+		public ILifetimeScope BeginLifetimeScope() => new DryIocLifetimeScope(this);
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
 		/// </summary>
-		public void Dispose()
-		{
-			_container?.Dispose();
-		}
+		public void Dispose() => _container?.Dispose();
 
 		/// <summary>
 		/// Performs container objects graph verification

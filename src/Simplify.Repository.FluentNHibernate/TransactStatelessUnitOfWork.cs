@@ -11,7 +11,7 @@ namespace Simplify.Repository.FluentNHibernate
 	/// <seealso cref="IUnitOfWork" />
 	public class TransactStatelessUnitOfWork : StatelessUnitOfWork, ITransactUnitOfWork
 	{
-		private ITransaction _transaction;
+		private ITransaction? _transaction;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
@@ -22,21 +22,17 @@ namespace Simplify.Repository.FluentNHibernate
 		}
 
 		/// <summary>
-		/// Gets a value indicating whether this instance is transaction active.
+		/// Gets a value indicating whether UoW's transaction is active.
 		/// </summary>
 		/// <value>
-		///   <c>true</c> if this instance is transaction active; otherwise, <c>false</c>.
+		///  <c>true</c> if UoW's transaction active; otherwise, <c>false</c>.
 		/// </value>
-		public bool IsTransactionActive { get; private set; }
+		public bool IsTransactionActive => _transaction != null;
 
 		/// <summary>
 		/// Begins the transaction.
 		/// </summary>
-		public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-		{
-			IsTransactionActive = true;
-			_transaction = Session.BeginTransaction(isolationLevel);
-		}
+		public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) => _transaction = Session.BeginTransaction(isolationLevel);
 
 		/// <summary>
 		/// Commits transaction.
@@ -44,11 +40,12 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
 		public void Commit()
 		{
-			if (!_transaction.IsActive)
+			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			_transaction.Commit();
-			IsTransactionActive = false;
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
@@ -57,11 +54,12 @@ namespace Simplify.Repository.FluentNHibernate
 		/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
 		public async Task CommitAsync()
 		{
-			if (!_transaction.IsActive)
+			if (_transaction == null || !_transaction.IsActive)
 				throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 			await _transaction.CommitAsync();
-			IsTransactionActive = false;
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
@@ -69,17 +67,40 @@ namespace Simplify.Repository.FluentNHibernate
 		/// </summary>
 		public virtual void Rollback()
 		{
-			if (_transaction.IsActive)
-				_transaction.Rollback();
+			if (_transaction == null || !_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			_transaction.Rollback();
+			_transaction.Dispose();
+			_transaction = null;
 		}
 
 		/// <summary>
 		/// Rollbacks transaction asynchronously.
 		/// </summary>
 		/// <returns></returns>
-		public Task RollbackAsync()
+		public async Task RollbackAsync()
 		{
-			return _transaction.IsActive ? _transaction.RollbackAsync() : Task.Delay(0);
+			if (_transaction == null || !_transaction.IsActive)
+				throw new InvalidOperationException("Oops! We don't have an active transaction");
+
+			await _transaction.RollbackAsync();
+			_transaction.Dispose();
+			_transaction = null;
+		}
+
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!disposing)
+				return;
+
+			_transaction?.Dispose();
+
+			base.Dispose(disposing);
 		}
 	}
 }

@@ -33,6 +33,6 @@ namespace Simplify.WindowsServices.Jobs.Crontab
 		/// <value>
 		/// The crontab processor.
 		/// </value>
-		ICrontabProcessor CrontabProcessor { get; }
+		ICrontabProcessor? CrontabProcessor { get; }
 	}
 }

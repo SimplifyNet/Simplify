@@ -1,6 +1,6 @@
-﻿using Simplify.Scheduler.CommandLine;
-using System;
+﻿using System;
 using System.Threading;
+using Simplify.Scheduler.CommandLine;
 
 namespace Simplify.Scheduler
 {
@@ -9,17 +9,14 @@ namespace Simplify.Scheduler
 	/// </summary>
 	public class MultitaskScheduler : SchedulerJobsHandler
 	{
-		private readonly AutoResetEvent _closing = new AutoResetEvent(false);
+		private readonly AutoResetEvent _closing = new(false);
 
-		private ICommandLineProcessor _commandLineProcessor;
+		private ICommandLineProcessor? _commandLineProcessor;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultitaskScheduler" /> class.
 		/// </summary>
-		public MultitaskScheduler()
-		{
-			Console.CancelKeyPress += StopJobs;
-		}
+		public MultitaskScheduler() => Console.CancelKeyPress += StopJobs;
 
 		/// <summary>
 		/// Gets or sets the current command line processor.
@@ -27,7 +24,7 @@ namespace Simplify.Scheduler
 		/// <exception cref="ArgumentNullException"></exception>
 		public ICommandLineProcessor CommandLineProcessor
 		{
-			get => _commandLineProcessor ?? (_commandLineProcessor = new CommandLineProcessor());
+			get => _commandLineProcessor ??= new CommandLineProcessor();
 			set => _commandLineProcessor = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -35,7 +32,7 @@ namespace Simplify.Scheduler
 		/// Starts the scheduler
 		/// </summary>
 		/// <param name="args">The arguments.</param>
-		public bool Start(string[] args = null)
+		public bool Start(string[]? args = null)
 		{
 			var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
 
@@ -47,6 +44,15 @@ namespace Simplify.Scheduler
 				case ProcessCommandLineResult.NoArguments:
 					StartAndWait();
 					break;
+
+				case ProcessCommandLineResult.UndefinedParameters:
+					break;
+
+				case ProcessCommandLineResult.CommandLineActionExecuted:
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 
 			return true;

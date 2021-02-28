@@ -24,7 +24,7 @@ namespace Simplify.Scheduler.Jobs
 			JobClassType = typeof(T);
 			JobArgs = args ?? throw new ArgumentNullException(nameof(args));
 
-			BuildInvokeMethodInfo(invokeMethodName);
+			InvokeMethodInfo = BuildInvokeMethodInfo(invokeMethodName);
 		}
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace Simplify.Scheduler.Jobs
 		/// <value>
 		/// The invoke method information.
 		/// </value>
-		public MethodInfo InvokeMethodInfo { get; private set; }
+		public MethodInfo InvokeMethodInfo { get; }
 
 		/// <summary>
 		/// Gets the type of the invoke method parameter.
@@ -74,19 +74,16 @@ namespace Simplify.Scheduler.Jobs
 		{
 		}
 
-		private void BuildInvokeMethodInfo(string invokeMethodName)
+		private MethodInfo BuildInvokeMethodInfo(string invokeMethodName)
 		{
-			InvokeMethodInfo = JobClassType.GetMethod(invokeMethodName);
+			var invokeMethodInfo = JobClassType.GetMethod(invokeMethodName) ?? throw new SchedulerInitializationException($"Method {invokeMethodName} not found in class {JobClassType.Name}");
 
-			if (InvokeMethodInfo == null)
-				throw new SchedulerInitializationException($"Method {invokeMethodName} not found in class {JobClassType.Name}");
-
-			var methodParameters = InvokeMethodInfo.GetParameters();
+			var methodParameters = invokeMethodInfo.GetParameters();
 
 			if (!methodParameters.Any())
 			{
 				InvokeMethodParameterType = InvokeMethodParameterType.Parameterless;
-				return;
+				return invokeMethodInfo;
 			}
 
 			if (methodParameters[0].ParameterType == typeof(string))
@@ -94,6 +91,8 @@ namespace Simplify.Scheduler.Jobs
 
 			if (methodParameters[0].ParameterType == typeof(IJobArgs))
 				InvokeMethodParameterType = InvokeMethodParameterType.Args;
+
+			return invokeMethodInfo;
 		}
 	}
 }

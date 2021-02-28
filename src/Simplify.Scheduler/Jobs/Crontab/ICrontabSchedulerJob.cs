@@ -1,6 +1,6 @@
-using Simplify.Scheduler.Jobs.Settings;
 using System;
 using System.Threading;
+using Simplify.Scheduler.Jobs.Settings;
 
 namespace Simplify.Scheduler.Jobs.Crontab
 {
@@ -12,12 +12,12 @@ namespace Simplify.Scheduler.Jobs.Crontab
 		/// <summary>
 		/// Occurs on cron timer tick.
 		/// </summary>
-		event TimerCallback OnCronTimerTick;
+		event TimerCallback? OnCronTimerTick;
 
 		/// <summary>
 		/// Occurs on interval timer tick.
 		/// </summary>
-		event TimerCallback OnStartWork;
+		event TimerCallback? OnStartWork;
 
 		/// <summary>
 		/// Gets the settings.
@@ -33,6 +33,6 @@ namespace Simplify.Scheduler.Jobs.Crontab
 		/// <value>
 		/// The crontab processor.
 		/// </value>
-		ICrontabProcessor CrontabProcessor { get; }
+		ICrontabProcessor? CrontabProcessor { get; }
 	}
 }

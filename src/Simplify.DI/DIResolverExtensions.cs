@@ -11,9 +11,6 @@
 		/// <typeparam name="T"></typeparam>
 		/// <param name="resolver">The DI resolver.</param>
 		/// <returns></returns>
-		public static T Resolve<T>(this IDIResolver resolver)
-		{
-			return (T)resolver.Resolve(typeof(T));
-		}
+		public static T Resolve<T>(this IDIResolver resolver) => (T)resolver.Resolve(typeof(T));
 	}
 }

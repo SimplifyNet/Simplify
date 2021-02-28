@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using Simplify.System.Extensions;
 
-namespace Simplify.Extensions.Tests
+namespace Simplify.System.Tests.Extensions
 {
 	[TestFixture]
 	public class StringExtensionsTests
@@ -12,17 +13,7 @@ namespace Simplify.Extensions.Tests
 		}
 
 		[Test]
-		public void TryToDateTimeExact_WrongValue_COnvertedCorrectly()
-		{
-			// Assign
-			const string str = "test";
-
-			// Act & Assert
-			Assert.IsNull(str.TryToDateTimeExact("dd.MM.yy"));
-		}
-
-		[Test]
-		public void TryToDateTimeExact_CorrectValue_COnvertedCorrectly()
+		public void TryToDateTimeExact_CorrectValue_ConvertedCorrectly()
 		{
 			// Assign
 			const string str = "12.03.13";
@@ -33,9 +24,19 @@ namespace Simplify.Extensions.Tests
 			// Assert
 
 			Assert.IsNotNull(time);
-			Assert.AreEqual(12, time.Value.Day);
+			Assert.AreEqual(12, time!.Value.Day);
 			Assert.AreEqual(3, time.Value.Month);
 			Assert.AreEqual(2013, time.Value.Year);
+		}
+
+		[Test]
+		public void TryToDateTimeExact_WrongValue_ConvertedCorrectly()
+		{
+			// Assign
+			const string str = "test";
+
+			// Act & Assert
+			Assert.IsNull(str.TryToDateTimeExact("dd.MM.yy"));
 		}
 	}
 }

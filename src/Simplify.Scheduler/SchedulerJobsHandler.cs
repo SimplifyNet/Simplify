@@ -21,9 +21,7 @@ namespace Simplify.Scheduler
 		private readonly IDictionary<ISchedulerJobRepresentation, ILifetimeScope> _workingBasicJobs = new Dictionary<ISchedulerJobRepresentation, ILifetimeScope>();
 
 		private long _jobTaskID;
-		private bool _shutdownInProcess;
-
-		private ISchedulerJobFactory _schedulerJobFactory;
+		private ISchedulerJobFactory? _schedulerJobFactory;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultitaskScheduler" /> class.
@@ -37,17 +35,25 @@ namespace Simplify.Scheduler
 		/// <summary>
 		/// Occurs when exception thrown.
 		/// </summary>
-		public event SchedulerExceptionEventHandler OnException;
+		public event SchedulerExceptionEventHandler? OnException;
 
 		/// <summary>
 		/// Occurs when the job start.
 		/// </summary>
-		public event JobEventHandler OnJobStart;
+		public event JobEventHandler? OnJobStart;
 
 		/// <summary>
 		/// Occurs when job is finished.
 		/// </summary>
-		public event JobEventHandler OnJobFinish;
+		public event JobEventHandler? OnJobFinish;
+
+		/// <summary>
+		/// Gets a value indicating whether handler shutdown is in process.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if handler shutdown is in process; otherwise, <c>false</c>.
+		/// </value>
+		public bool ShutdownInProcess { get; private set; }
 
 		/// <summary>
 		/// Gets the name of the application.
@@ -66,7 +72,7 @@ namespace Simplify.Scheduler
 		/// <exception cref="ArgumentNullException">value</exception>
 		public ISchedulerJobFactory SchedulerJobFactory
 		{
-			get => _schedulerJobFactory ?? (_schedulerJobFactory = new SchedulerJobFactory(AppName));
+			get => _schedulerJobFactory ??= new SchedulerJobFactory(AppName);
 			set => _schedulerJobFactory = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -79,9 +85,9 @@ namespace Simplify.Scheduler
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		public void AddJob<T>(IConfiguration configuration,
-			string configurationSectionName = null,
+			string? configurationSectionName = null,
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			var job = SchedulerJobFactory.CreateCrontabJob<T>(configuration, configurationSectionName, invokeMethodName, startupArgs);
@@ -96,7 +102,7 @@ namespace Simplify.Scheduler
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		public void AddBasicJob<T>(string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 			where T : class
 		{
 			var job = SchedulerJobFactory.CreateJob<T>(invokeMethodName, startupArgs);
@@ -138,7 +144,7 @@ namespace Simplify.Scheduler
 		{
 			Console.WriteLine("Scheduler stopping, waiting for jobs to finish...");
 
-			_shutdownInProcess = true;
+			ShutdownInProcess = true;
 			Task[] itemsToWait;
 
 			lock (_workingJobsTasks)
@@ -156,13 +162,15 @@ namespace Simplify.Scheduler
 		// ReSharper disable once FlagArgument
 		protected virtual void Dispose(bool disposing)
 		{
-			if (disposing)
-				foreach (var basicJobItem in _workingBasicJobs)
-				{
-					OnJobFinish?.Invoke(basicJobItem.Key);
+			if (!disposing)
+				return;
 
-					basicJobItem.Value.Dispose();
-				}
+			foreach (var basicJobItem in _workingBasicJobs)
+			{
+				OnJobFinish?.Invoke(basicJobItem.Key);
+
+				basicJobItem.Value.Dispose();
+			}
 		}
 
 		private void InitializeJob(ICrontabSchedulerJob job)
@@ -176,6 +184,9 @@ namespace Simplify.Scheduler
 		private void OnCronTimerTick(object state)
 		{
 			var job = (ICrontabSchedulerJob)state;
+
+			if (job.CrontabProcessor == null)
+				throw new InvalidOperationException($"{nameof(job.CrontabProcessor)} is null");
 
 			if (!job.CrontabProcessor.IsMatching())
 				return;
@@ -191,7 +202,7 @@ namespace Simplify.Scheduler
 
 			lock (_workingJobsTasks)
 			{
-				if (_shutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
+				if (ShutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
 					return;
 
 				_jobTaskID++;
@@ -226,16 +237,15 @@ namespace Simplify.Scheduler
 
 		private void RunScoped(ISchedulerJobRepresentation job)
 		{
-			using (var scope = DIContainer.Current.BeginLifetimeScope())
-			{
-				var jobObject = scope.Resolver.Resolve(job.JobClassType);
+			using var scope = DIContainer.Current.BeginLifetimeScope();
 
-				OnJobStart?.Invoke(job);
+			var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
-				InvokeJobMethod(job, jobObject);
+			OnJobStart?.Invoke(job);
 
-				OnJobFinish?.Invoke(job);
-			}
+			InvokeJobMethod(job, jobObject);
+
+			OnJobFinish?.Invoke(job);
 		}
 
 		private void RunBasicJob(ISchedulerJobRepresentation job)

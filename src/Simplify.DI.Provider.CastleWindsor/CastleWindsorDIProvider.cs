@@ -9,14 +9,14 @@ namespace Simplify.DI.Provider.CastleWindsor
 	/// </summary>
 	public class CastleWindsorDIProvider : IDIContainerProvider
 	{
-		private IWindsorContainer _container;
+		private IWindsorContainer? _container;
 
 		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public IWindsorContainer Container
 		{
-			get => _container ?? (_container = new WindsorContainer());
+			get => _container ??= new WindsorContainer();
 			set => _container = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
@@ -25,10 +25,7 @@ namespace Simplify.DI.Provider.CastleWindsor
 		/// </summary>
 		/// <param name="serviceType">Type of the service.</param>
 		/// <returns></returns>
-		public object Resolve(Type serviceType)
-		{
-			return Container.Resolve(serviceType);
-		}
+		public object Resolve(Type serviceType) => Container.Resolve(serviceType);
 
 		/// <summary>
 		/// Registers the specified service type with corresponding implementation type.
@@ -51,6 +48,9 @@ namespace Simplify.DI.Provider.CastleWindsor
 				case LifetimeType.Transient:
 					Container.Register(Component.For(serviceType).ImplementedBy(implementationType).LifestyleTransient());
 					break;
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(lifetimeType), lifetimeType, null);
 			}
 
 			return this;
@@ -67,16 +67,19 @@ namespace Simplify.DI.Provider.CastleWindsor
 			switch (lifetimeType)
 			{
 				case LifetimeType.PerLifetimeScope:
-					Container.Register(Component.For(serviceType).UsingFactoryMethod(c => instanceCreator(this)).LifestyleScoped());
+					Container.Register(Component.For(serviceType).UsingFactoryMethod(() => instanceCreator(this)).LifestyleScoped());
 					break;
 
 				case LifetimeType.Singleton:
-					Container.Register(Component.For(serviceType).UsingFactoryMethod(c => instanceCreator(this)).LifestyleSingleton());
+					Container.Register(Component.For(serviceType).UsingFactoryMethod(() => instanceCreator(this)).LifestyleSingleton());
 					break;
 
 				case LifetimeType.Transient:
-					Container.Register(Component.For(serviceType).UsingFactoryMethod(c => instanceCreator(this)).LifestyleTransient());
+					Container.Register(Component.For(serviceType).UsingFactoryMethod(() => instanceCreator(this)).LifestyleTransient());
 					break;
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(lifetimeType), lifetimeType, null);
 			}
 
 			return this;
@@ -86,25 +89,16 @@ namespace Simplify.DI.Provider.CastleWindsor
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope()
-		{
-			return new CastleWindsorLifetimeScope(this);
-		}
+		public ILifetimeScope BeginLifetimeScope() => new CastleWindsorLifetimeScope(this);
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
 		/// </summary>
-		public void Dispose()
-		{
-			_container?.Dispose();
-		}
+		public void Dispose() => _container?.Dispose();
 
 		/// <summary>
 		/// Performs container objects graph verification
 		/// </summary>
-		public void Verify()
-		{
-			Container.CheckForPotentiallyMisconfiguredComponents();
-		}
+		public void Verify() => Container.CheckForPotentiallyMisconfiguredComponents();
 	}
 }

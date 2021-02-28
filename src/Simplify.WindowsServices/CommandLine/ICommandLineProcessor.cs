@@ -10,6 +10,6 @@
 		/// </summary>
 		/// <param name="args">The arguments.</param>
 		/// <returns></returns>
-		ProcessCommandLineResult ProcessCommandLineArguments(string[] args);
+		ProcessCommandLineResult ProcessCommandLineArguments(string[]? args);
 	}
 }

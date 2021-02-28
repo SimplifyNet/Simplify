@@ -15,7 +15,7 @@ namespace Simplify.Scheduler.Jobs
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
-		ISchedulerJob CreateJob<T>(string invokeMethodName, object startupArgs);
+		ISchedulerJob CreateJob<T>(string invokeMethodName, object? startupArgs);
 
 		/// <summary>
 		/// Creates the crontab based scheduler job.
@@ -27,8 +27,8 @@ namespace Simplify.Scheduler.Jobs
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
 		ICrontabSchedulerJob CreateCrontabJob<T>(IConfiguration configuration,
-			string configurationSectionName,
+			string? configurationSectionName,
 			string invokeMethodName,
-			object startupArgs);
+			object? startupArgs);
 	}
 }

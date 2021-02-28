@@ -5,24 +5,28 @@
 		<version>$version$</version>
 		<title>Simplify.Xml.Sources</title>
 		<authors>Alexander Krylkov</authors>
-		<owners>Alexander Krylkov</owners>
 		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>XML extensions.</description>
 		<summary>XML extensions</summary>
+
 		<releaseNotes>
 			New
-			* Explicit .NET Core 3.1 support
-			Updates
-			* nullable enable related checks
+			* XNode extensions Get and GetMany
+			* XNodePathConverter
 		</releaseNotes>
+
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
 		<tags>.NET XML</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.5.2" />
-			<group targetFramework=".NETStandard2.0" />
+			<group targetFramework=".NETFramework4.5.2">
+				<dependency id="Simplify.System" version="1.6.0" />
+			</group>
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="Simplify.System" version="1.6.0" />
+			</group>
 		</dependencies>
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="System.Xml" />
@@ -34,5 +38,7 @@
 		<file src="XmlExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\XmlExtensions.cs" />
 		<file src="XmlSerializer.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/XmlSerializer.cs" />
 		<file src="XmlSerializer.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\XmlSerializer.cs" />
+		<file src="XNodePathConverter.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/XNodePathConverter.cs" />
+		<file src="XNodePathConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\XNodePathConverter.cs" />
 	</files>
 </package>

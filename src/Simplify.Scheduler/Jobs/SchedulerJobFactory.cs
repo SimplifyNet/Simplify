@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using Microsoft.Extensions.Configuration;
 using Simplify.Scheduler.Jobs.Crontab;
 using Simplify.Scheduler.Jobs.Settings.Impl;
-using System;
 
 namespace Simplify.Scheduler.Jobs
 {
@@ -30,11 +30,7 @@ namespace Simplify.Scheduler.Jobs
 		/// <param name="invokeMethodName">Name of the invoke method.</param>
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
-		public ISchedulerJob CreateJob<T>(string invokeMethodName,
-			object startupArgs)
-		{
-			return new SchedulerJob<T>(invokeMethodName, CreateJobArgs(startupArgs));
-		}
+		public ISchedulerJob CreateJob<T>(string invokeMethodName, object? startupArgs) => new SchedulerJob<T>(invokeMethodName, CreateJobArgs(startupArgs));
 
 		/// <summary>
 		/// Creates the crontab-based scheduler job.
@@ -46,9 +42,9 @@ namespace Simplify.Scheduler.Jobs
 		/// <param name="startupArgs">The startup arguments.</param>
 		/// <returns></returns>
 		public ICrontabSchedulerJob CreateCrontabJob<T>(IConfiguration configuration,
-			string configurationSectionName,
+			string? configurationSectionName,
 			string invokeMethodName,
-			object startupArgs)
+			object? startupArgs)
 		{
 			return new CrontabSchedulerJob<T>(
 				new ConfigurationBasedSchedulerJobSetting(configuration, FormatConfigurationSectionName<T>(configurationSectionName)),
@@ -57,7 +53,7 @@ namespace Simplify.Scheduler.Jobs
 				CreateJobArgs(startupArgs));
 		}
 
-		private static string FormatConfigurationSectionName<T>(string configurationSectionName)
+		private static string FormatConfigurationSectionName<T>(string? configurationSectionName)
 		{
 			if (configurationSectionName != null)
 				return configurationSectionName;
@@ -66,9 +62,6 @@ namespace Simplify.Scheduler.Jobs
 			return type.Name + "Settings";
 		}
 
-		private IJobArgs CreateJobArgs(object startupArgs)
-		{
-			return new JobArgs(_appName, startupArgs);
-		}
+		private IJobArgs CreateJobArgs(object? startupArgs) => new JobArgs(_appName, startupArgs);
 	}
 }

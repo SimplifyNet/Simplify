@@ -16,7 +16,7 @@ namespace Simplify.Repository
 		/// <returns>
 		///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
 		/// </returns>
-		public new virtual bool Equals(object x, object y)
+		public new virtual bool Equals(object? x, object? y)
 		{
 			if (x == null || y == null)
 				return false;
@@ -34,9 +34,6 @@ namespace Simplify.Repository
 		/// <returns>
 		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
 		/// </returns>
-		public int GetHashCode(object obj)
-		{
-			return obj.GetHashCode();
-		}
+		public int GetHashCode(object obj) => obj.GetHashCode();
 	}
 }

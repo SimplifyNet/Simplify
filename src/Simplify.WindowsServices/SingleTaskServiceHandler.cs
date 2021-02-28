@@ -21,7 +21,7 @@ namespace Simplify.WindowsServices
 		public SingleTaskServiceHandler(bool automaticallyRegisterUserType = false,
 			string configurationSectionName = "ServiceSettings",
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 		{
 			var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
 			ServiceName = assemblyInfo.Title;
@@ -41,7 +41,7 @@ namespace Simplify.WindowsServices
 			bool automaticallyRegisterUserType = false,
 			string configurationSectionName = "ServiceSettings",
 			string invokeMethodName = "Run",
-			object startupArgs = null)
+			object? startupArgs = null)
 		{
 			var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
 			ServiceName = assemblyInfo.Title;
