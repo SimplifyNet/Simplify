@@ -899,11 +899,8 @@ namespace Simplify.DI.Provider.Autofac.Tests
 		{
 			// Assign
 
-			//_provider.Register<Bar>(LifetimeType.Singleton);
 			_provider.Register<IBar, Bar>(LifetimeType.Singleton);
 			_provider.Register<IFoo, Foo>(LifetimeType.Transient);
-
-			//var a = _provider.Resolve<Bar>();
 
 			// Act && Assert
 			Assert.DoesNotThrow(() => _provider.Verify());
