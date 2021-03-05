@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Autofac.Core;
 using NUnit.Framework;
 using Simplify.DI.TestsTypes;
 
@@ -801,9 +801,9 @@ namespace Simplify.DI.Provider.Autofac.Tests
 
 			// Act && Assert
 
-			var ex = Assert.Throws<InvalidOperationException>(() => _provider.Verify());
-			Assert.That(ex.Message,
-				Does.StartWith("The configuration is invalid. Creating the instance for type Foo failed. The constructor of type Foo contains the parameter with name 'bar' and type IBar, but IBar is not registered."));
+			var ex = Assert.Throws<DependencyResolutionException>(() => _provider.Verify());
+
+			Assert.That(ex!.Message, Does.StartWith("An exception was thrown while activating Simplify.DI.TestsTypes.Foo"));
 		}
 
 		[Test]
@@ -899,8 +899,11 @@ namespace Simplify.DI.Provider.Autofac.Tests
 		{
 			// Assign
 
+			//_provider.Register<Bar>(LifetimeType.Singleton);
 			_provider.Register<IBar, Bar>(LifetimeType.Singleton);
 			_provider.Register<IFoo, Foo>(LifetimeType.Transient);
+
+			//var a = _provider.Resolve<Bar>();
 
 			// Act && Assert
 			Assert.DoesNotThrow(() => _provider.Verify());

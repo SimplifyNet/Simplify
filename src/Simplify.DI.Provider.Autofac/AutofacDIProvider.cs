@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using Autofac.Core.Lifetime;
 
 namespace Simplify.DI.Provider.Autofac
 {
@@ -110,6 +111,19 @@ namespace Simplify.DI.Provider.Autofac
 		/// <summary>
 		/// Performs container objects graph verification
 		/// </summary>
-		public void Verify() => throw new NotImplementedException();
+		public void Verify()
+		{
+			using var scope = BeginLifetimeScope();
+
+			foreach (var componentRegistration in Container.ComponentRegistry.Registrations)
+			{
+				// Exclude Autofac internal types
+				if (componentRegistration.Activator.LimitType == typeof(LifetimeScope))
+					continue;
+
+				foreach (var service in componentRegistration.Services)
+					scope.Resolver.Resolve(service.GetAutofacServiceType());
+			}
+		}
 	}
 }
