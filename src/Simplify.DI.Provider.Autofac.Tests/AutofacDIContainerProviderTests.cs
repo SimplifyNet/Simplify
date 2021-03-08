@@ -1,4 +1,5 @@
 ﻿using Autofac.Core;
+using Autofac.Core.Registration;
 using NUnit.Framework;
 using Simplify.DI.TestsTypes;
 
@@ -21,10 +22,7 @@ namespace Simplify.DI.Provider.Autofac.Tests
 		public void Resolve_NotRegistered_ActivationException()
 		{
 			// Act & Assert
-
-			// TODO
-			//var ex = Assert.Throws<ActivationException>(() => _provider.Resolve<NonDepFoo>());
-			//Assert.That(ex.Message, Does.StartWith("No registration for type NonDepFoo could be found. Make sure NonDepFoo is registered"));
+			Assert.Throws<ComponentNotRegisteredException>(() => _provider.Resolve<NonDepFoo>());
 		}
 
 		[Test]
@@ -34,24 +32,20 @@ namespace Simplify.DI.Provider.Autofac.Tests
 
 			using var scope = _provider.BeginLifetimeScope();
 
-			// TODO
-			//var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<NonDepFoo>());
-			//Assert.That(ex.Message, Does.StartWith("No registration for type NonDepFoo could be found. Make sure NonDepFoo is registered"));
+			Assert.Throws<ComponentNotRegisteredException>(() => scope.Resolver.Resolve<NonDepFoo>());
 		}
 
-		[Test]
-		public void Resolve_ScopeRegisteredAndRequestedOutsideOfTheScope_ActivationException()
-		{
-			// Assign
-			_provider.Register<NonDepFoo>();
+		// Note: not applicable, because root container is also a scope
+		//[Test]
+		//public void Resolve_ScopeRegisteredAndRequestedOutsideOfTheScope_ActivationException()
+		//{
+		//	// Assign
+		//	_provider.Register<NonDepFoo>();
 
-			// Act & Assert
+		//	// Act & Assert
 
-			// TODO
-			//var ex = Assert.Throws<ActivationException>(() => _provider.Resolve<NonDepFoo>());
-			//Assert.That(ex.Message,
-			//Does.StartWith("NonDepFoo is registered using the 'Async Scoped' lifestyle, but the instance is requested outside the context of an active (Async Scoped) scope."));
-		}
+		//	var ex = Assert.Throws<Exception>(() => _provider.Resolve<NonDepFoo>());
+		//}
 
 		[Test]
 		public void ScopedResolve_ScopeRegistered_Resolved()
@@ -441,21 +435,20 @@ namespace Simplify.DI.Provider.Autofac.Tests
 			Assert.AreEqual(foo.Bar, fooSecond.Bar);
 		}
 
-		[Test]
-		public void ScopedResolve_ScopedDependsOnTransient_ActivationException()
-		{
-			// Assign
+		// Note: this behavior check is not available
+		//[Test]
+		//public void ScopedResolve_ScopedDependsOnTransient_ActivationException()
+		//{
+		//	// Assign
 
-			_provider.Register<IBar, Bar>(LifetimeType.Transient);
-			_provider.Register<IFoo, Foo>();
+		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
+		//	_provider.Register<IFoo, Foo>();
 
-			using var scope = _provider.BeginLifetimeScope();
-			// Act && Assert
+		//	using var scope = _provider.BeginLifetimeScope();
+		//	// Act && Assert
 
-			// TODO
-			//var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
-			//Assert.That(ex.Message, Does.Contain("[Lifestyle Mismatch] Foo (Async Scoped) depends on IBar implemented by Bar (Transient)"));
-		}
+		//	Assert.Throws<Exception>(() => scope.Resolver.Resolve<IFoo>());
+		//}
 
 		// Note: this behavior check is not available
 		//[Test]
@@ -466,11 +459,10 @@ namespace Simplify.DI.Provider.Autofac.Tests
 		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
 		//	_provider.Register<IFoo>(r => new Foo(r.Resolve<IBar>()));
 
-		//	using (var scope = _provider.BeginLifetimeScope())
-		//	{
-		//		// Act && Assert
-		//		Assert.Throws<DiagnosticVerificationException>(() => scope.Resolver.Resolve<IFoo>());
-		//	}
+		//	using var scope = _provider.BeginLifetimeScope();
+
+		//	// Act && Assert
+		//	Assert.Throws<Exception>(() => scope.Resolver.Resolve<IFoo>());
 		//}
 
 		[Test]
@@ -553,23 +545,21 @@ namespace Simplify.DI.Provider.Autofac.Tests
 			Assert.AreEqual(bar, barSecond);
 		}
 
-		[Test]
-		public void ScopedResolve_SingletonDependsOnScoped_ActivationException()
-		{
-			// Assign
+		// Note: this behavior check is not available
+		//[Test]
+		//public void ScopedResolve_SingletonDependsOnScoped_ActivationException()
+		//{
+		//	// Assign
 
-			_provider.Register<IBar, Bar>();
-			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
+		//	_provider.Register<IBar, Bar>();
+		//	_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			using var scope = _provider.BeginLifetimeScope();
+		//	using var scope = _provider.BeginLifetimeScope();
 
-			// Act && Assert
+		//	// Act && Assert
 
-			// TODO
-			//var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
-			//Assert.That(ex.Message,
-			//Does.Contain("[Lifestyle Mismatch] Foo (Singleton) depends on IBar implemented by Bar (Async Scoped)."));
-		}
+		//	Assert.Throws<Exception>(() => scope.Resolver.Resolve<IFoo>());
+		//}
 
 		// Note: this behavior check is not available
 		//[Test]
@@ -580,11 +570,10 @@ namespace Simplify.DI.Provider.Autofac.Tests
 		//	_provider.Register<IBar, Bar>();
 		//	_provider.Register<IFoo>(r => new Foo(r.Resolve<IBar>()), LifetimeType.Singleton);
 
-		//	using (var scope = _provider.BeginLifetimeScope())
-		//	{
-		//		// Act && Assert
-		//		Assert.Throws<DiagnosticVerificationException>(() => scope.Resolver.Resolve<IFoo>());
-		//	}
+		//	using var scope = _provider.BeginLifetimeScope();
+
+		//	// Act && Assert
+		//	Assert.Throws<Exception>(() => scope.Resolver.Resolve<IFoo>());
 		//}
 
 		[Test]
@@ -617,23 +606,21 @@ namespace Simplify.DI.Provider.Autofac.Tests
 			Assert.AreEqual(foo.Bar, fooThird.Bar);
 		}
 
-		[Test]
-		public void ScopedResolve_SingletonDependsOnTransient_ActivationException()
-		{
-			// Assign
+		// Note: this behavior check is not available
+		//[Test]
+		//public void ScopedResolve_SingletonDependsOnTransient_ActivationException()
+		//{
+		//	// Assign
 
-			_provider.Register<IBar, Bar>(LifetimeType.Transient);
-			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
+		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
+		//	_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			using var scope = _provider.BeginLifetimeScope();
+		//	using var scope = _provider.BeginLifetimeScope();
 
-			// Act && Assert
+		//	// Act && Assert
 
-			// TODO
-			//var ex = Assert.Throws<ActivationException>(() => scope.Resolver.Resolve<IFoo>());
-			//Assert.That(ex.Message,
-			//Does.Contain("[Lifestyle Mismatch] Foo (Singleton) depends on IBar implemented by Bar (Transient)."));
-		}
+		//	Assert.Throws<Exception>(() => scope.Resolver.Resolve<IFoo>());
+		//}
 
 		// Note: this behavior check is not available
 		//[Test]
@@ -806,21 +793,19 @@ namespace Simplify.DI.Provider.Autofac.Tests
 			Assert.That(ex!.Message, Does.StartWith("An exception was thrown while activating Simplify.DI.TestsTypes.Foo"));
 		}
 
-		[Test]
-		public void Verify_ScopedDependsOnTransient_DiagnosticVerificationException()
-		{
-			// Assign
+		// Note: this behavior check is not available
+		//[Test]
+		//public void Verify_ScopedDependsOnTransient_DiagnosticVerificationException()
+		//{
+		//	// Assign
 
-			_provider.Register<IBar, Bar>(LifetimeType.Transient);
-			_provider.Register<IFoo, Foo>();
+		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
+		//	_provider.Register<IFoo, Foo>();
 
-			// Act && Assert
+		//	// Act && Assert
 
-			// TODO
-			//var ex = Assert.Throws<DiagnosticVerificationException>(() => _provider.Verify());
-			//Assert.That(ex.Message, Does.Contain("The configuration is invalid. The following diagnostic warnings were reported:"));
-			//Assert.That(ex.Message, Does.Contain("-[Lifestyle Mismatch] Foo (Async Scoped) depends on IBar implemented by Bar (Transient)."));
-		}
+		//	Assert.Throws<Exception>(() => _provider.Verify());
+		//}
 
 		// Note: this behavior check is not available
 		//[Test]
@@ -833,9 +818,7 @@ namespace Simplify.DI.Provider.Autofac.Tests
 
 		//	// Act && Assert
 
-		//	var ex = Assert.Throws<DiagnosticVerificationException>(() => _provider.Verify());
-		//	Assert.That(ex.Message, Does.Contain("The configuration is invalid. The following diagnostic warnings were reported:"));
-		//	Assert.That(ex.Message, Does.Contain("-[Lifestyle Mismatch] Foo (Async Scoped) depends on IBar implemented by Bar (Transient)."));
+		//	Assert.Throws<Exception>(() => _provider.Verify());
 		//}
 
 		[Test]
@@ -862,37 +845,33 @@ namespace Simplify.DI.Provider.Autofac.Tests
 			Assert.DoesNotThrow(() => _provider.Verify());
 		}
 
-		[Test]
-		public void Verify_SingletonDependsOnScoped_DiagnosticVerificationException()
-		{
-			// Assign
+		// Note: this behavior check is not available
+		//[Test]
+		//public void Verify_SingletonDependsOnScoped_DiagnosticVerificationException()
+		//{
+		//	// Assign
 
-			_provider.Register<IBar, Bar>();
-			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
+		//	_provider.Register<IBar, Bar>();
+		//	_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			// Act && Assert
+		//	// Act && Assert
 
-			// TODO
-			//var ex = Assert.Throws<DiagnosticVerificationException>(() => _provider.Verify());
-			//Assert.That(ex.Message, Does.Contain("The configuration is invalid. The following diagnostic warnings were reported:"));
-			//Assert.That(ex.Message, Does.Contain("-[Lifestyle Mismatch] Foo (Singleton) depends on IBar implemented by Bar (Async Scoped)."));
-		}
+		//	var ex = Assert.Throws<Exception>(() => _provider.Verify());
+		//}
 
-		[Test]
-		public void Verify_SingletonDependsOnTransient_ContainerException()
-		{
-			// Assign
+		// Note: this behavior check is not available
+		//[Test]
+		//public void Verify_SingletonDependsOnTransient_ContainerException()
+		//{
+		//	// Assign
 
-			_provider.Register<IBar, Bar>(LifetimeType.Transient);
-			_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
+		//	_provider.Register<IBar, Bar>(LifetimeType.Transient);
+		//	_provider.Register<IFoo, Foo>(LifetimeType.Singleton);
 
-			// Act && Assert
+		//	// Act && Assert
 
-			// TODO
-			//var ex = Assert.Throws<DiagnosticVerificationException>(() => _provider.Verify());
-			//Assert.That(ex.Message, Does.Contain("The configuration is invalid. The following diagnostic warnings were reported:"));
-			//Assert.That(ex.Message, Does.Contain("-[Lifestyle Mismatch] Foo (Singleton) depends on IBar implemented by Bar (Transient)."));
-		}
+		//	Assert.Throws<Exception>(() => _provider.Verify());
+		//}
 
 		[Test]
 		public void Verify_TransientDependsOnSingleton_NoExceptions()
