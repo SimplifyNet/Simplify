@@ -20,7 +20,7 @@
 		<Description>Simplify.Repository FluentNHibernate implementation</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET Repository UoW Model</PackageTags>
 	</PropertyGroup>
@@ -30,5 +30,8 @@
 	<ItemGroup>
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 		<PackageReference Include="Simplify.FluentNHibernate" Version="2.5.*" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 </Project>

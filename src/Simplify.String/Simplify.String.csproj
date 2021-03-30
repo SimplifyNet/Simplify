@@ -18,8 +18,11 @@
 		<Description>String operations/validation functions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET</PackageTags>
 	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
 </Project>

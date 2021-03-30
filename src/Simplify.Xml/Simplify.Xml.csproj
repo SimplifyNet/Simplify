@@ -20,7 +20,7 @@
 		<Description>XML extensions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET XML</PackageTags>
 	</PropertyGroup>
@@ -32,5 +32,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Simplify.System" Version="1.6.*" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 </Project>
