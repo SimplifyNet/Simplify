@@ -21,7 +21,7 @@
 		<Description>Scheduler framework with DI</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Scheduler</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Scheduler</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET Scheduler DI</PackageTags>
@@ -31,5 +31,8 @@
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 		<PackageReference Include="Simplify.System" Version="1.6.*" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 </Project>
