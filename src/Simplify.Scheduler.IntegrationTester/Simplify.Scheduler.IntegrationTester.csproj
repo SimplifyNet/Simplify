@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
 		<OutputType>Exe</OutputType>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<IsPackable>false</IsPackable>
 
 		<Authors>Alexander Krylkov</Authors>

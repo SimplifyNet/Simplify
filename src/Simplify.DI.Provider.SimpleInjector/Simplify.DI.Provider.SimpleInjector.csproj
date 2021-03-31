@@ -3,11 +3,10 @@
 		<TargetFrameworks>netstandard1.3;netstandard2.0;net452</TargetFrameworks>
 		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<DocumentationFile>bin\Any CPU\$(Configuration)\$(TargetFramework)\Simplify.DI.Provider.SimpleInjector.xml</DocumentationFile>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
 		<Version>1.9.3</Version>
 		<PackageReleaseNotes>

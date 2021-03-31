@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<TargetFrameworks>net462</TargetFrameworks>
 		<OutputType>Exe</OutputType>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<IsPackable>false</IsPackable>
 
 		<Authors>Alexander Krylkov</Authors>
