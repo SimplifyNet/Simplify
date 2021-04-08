@@ -4,4 +4,4 @@
 
 ### Changed
 
-- Internal DryIOC bump to 4.7.5 (PR#280)
+- Internal DryIoc bump to 4.7.5 (PR#280)
