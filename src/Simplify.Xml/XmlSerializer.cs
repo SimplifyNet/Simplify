@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
@@ -38,6 +39,9 @@ namespace Simplify.Xml
 		/// <returns></returns>
 		public static XElement ToXElement<T>(T obj)
 		{
+			if (obj == null)
+				throw new ArgumentNullException(nameof(obj));
+
 			using var memoryStream = new MemoryStream();
 			using TextWriter streamWriter = new StreamWriter(memoryStream);
 			var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
@@ -58,7 +62,7 @@ namespace Simplify.Xml
 			using var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xElement.ToString()));
 			var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
 
-			return (T)xmlSerializer.Deserialize(memoryStream);
+			return (T)xmlSerializer.Deserialize(memoryStream)!;
 		}
 	}
 }
