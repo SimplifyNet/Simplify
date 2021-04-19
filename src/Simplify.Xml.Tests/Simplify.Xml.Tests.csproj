@@ -2,18 +2,13 @@
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
 
-		<Authors>Alexander Krylkov</Authors>
+		<Authors>Simplify community</Authors>
 		<Product>Simplify</Product>
 		<Description>Simplify.Xml unit tests</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="TestData\XmlWithNamespaces.xml" />
-		<None Remove="TestData\XmlWithoutNamespaces..xml" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="TestData\XmlWithNamespaces.xml" />
-		<EmbeddedResource Include="TestData\XmlWithoutNamespaces..xml" />
+		<ProjectReference Include="..\Simplify.Xml\Simplify.Xml.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
@@ -21,6 +16,13 @@
 		<PackageReference Include="NUnit" Version="3.13.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.*" />
 		<PackageReference Include="Simplify.Templates" Version="2.0.0" />
-		<ProjectReference Include="..\Simplify.Xml\Simplify.Xml.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="TestData\XmlWithNamespaces.xml" />
+		<None Remove="TestData\XmlWithoutNamespaces..xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="TestData\XmlWithNamespaces.xml" />
+		<EmbeddedResource Include="TestData\XmlWithoutNamespaces..xml" />
 	</ItemGroup>
 </Project>
