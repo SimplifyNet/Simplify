@@ -4,7 +4,7 @@
 		<id>Simplify.Xml.Sources</id>
 		<version>$version$</version>
 		<title>Simplify.Xml.Sources</title>
-		<Authors>Simplify community</Authors>
+		<authors>Simplify community</authors>
 		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Xml</projectUrl>
 		<icon>images\icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
