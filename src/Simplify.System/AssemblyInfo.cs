@@ -111,7 +111,7 @@ namespace Simplify.System
 						return titleAttribute.Title;
 				}
 
-				return global::System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase ?? throw new InvalidOperationException());
+				return global::System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location ?? throw new InvalidOperationException());
 			}
 		}
 

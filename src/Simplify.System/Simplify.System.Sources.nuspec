@@ -6,17 +6,12 @@
 		<title>Simplify.System.Sources</title>
 		<authors>Alexander Krylkov</authors>
 		<projectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.System</projectUrl>
-		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
+		<icon>images\icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Core classes for applications and libraries.</description>
 		<summary>Core classes for applications and libraries.</summary>
 
-		<releaseNotes>
-			New
-			* Customizable and chained object-to-object converters (#256)
-			Updates
-			* Environment checks in ApplicationEnvironment
-		</releaseNotes>
+		<releaseNotes>See CHANGELOG.md for details</releaseNotes>
 
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
@@ -63,5 +58,7 @@
 		<file src="SystemTimeProvider.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\SystemTimeProvider.cs" />
 		<file src="WeakSingleton.cs" target="content/App_Packages/Simplify.System.Sources.$version$/WeakSingleton.cs" />
 		<file src="WeakSingleton.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\WeakSingleton.cs" />
+		<file src="..\..\images\icon.png" target="images\" />
+		<file src="CHANGELOG.md" target="\" />
 	</files>
 </package>
