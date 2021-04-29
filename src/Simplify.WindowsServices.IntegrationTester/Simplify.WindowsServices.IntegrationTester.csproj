@@ -13,7 +13,7 @@
 		<ProjectReference Include="..\Simplify.WindowsServices\Simplify.WindowsServices.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.*" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="System.Configuration" />
