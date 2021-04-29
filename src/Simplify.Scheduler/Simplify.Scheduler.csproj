@@ -30,7 +30,7 @@
 		<PackageReference Include="ncrontab" Version="3.3.*" />
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 		<PackageReference Include="Simplify.System" Version="1.6.*" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.*" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
