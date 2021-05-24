@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 using Simplify.Scheduler.CommandLine;
+using Simplify.System;
 
 namespace Simplify.Scheduler
 {
@@ -16,7 +18,13 @@ namespace Simplify.Scheduler
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultitaskScheduler" /> class.
 		/// </summary>
-		public MultitaskScheduler() => Console.CancelKeyPress += StopJobs;
+		public MultitaskScheduler()
+		{
+			var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
+			AppName = assemblyInfo.Title;
+
+			Console.CancelKeyPress += StopJobs;
+		}
 
 		/// <summary>
 		/// Gets or sets the current command line processor.
