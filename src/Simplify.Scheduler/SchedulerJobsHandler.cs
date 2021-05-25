@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Simplify.DI;
 using Simplify.Scheduler.Jobs;
 using Simplify.Scheduler.Jobs.Crontab;
+using Simplify.Scheduler.Jobs.Settings;
 using Simplify.System;
 
 namespace Simplify.Scheduler
@@ -91,6 +92,23 @@ namespace Simplify.Scheduler
 			where T : class
 		{
 			var job = SchedulerJobFactory.CreateCrontabJob<T>(configuration, configurationSectionName, invokeMethodName, startupArgs);
+
+			InitializeJob(job);
+		}
+
+		/// <summary>
+		/// Adds the job.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="settings">The settings.</param>
+		/// <param name="invokeMethodName">Name of the invoke method.</param>
+		/// <param name="startupArgs">The startup arguments.</param>
+		public void AddJob<T>(ISchedulerJobSettings settings,
+			string invokeMethodName = "Run",
+			object? startupArgs = null)
+			where T : class
+		{
+			var job = SchedulerJobFactory.CreateCrontabJob<T>(settings, invokeMethodName, startupArgs);
 
 			InitializeJob(job);
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Simplify.Scheduler.Jobs.Crontab;
+using Simplify.Scheduler.Jobs.Settings;
 using Simplify.Scheduler.Jobs.Settings.Impl;
 
 namespace Simplify.Scheduler.Jobs
@@ -44,14 +45,27 @@ namespace Simplify.Scheduler.Jobs
 		public ICrontabSchedulerJob CreateCrontabJob<T>(IConfiguration configuration,
 			string? configurationSectionName,
 			string invokeMethodName,
-			object? startupArgs)
-		{
-			return new CrontabSchedulerJob<T>(
+			object? startupArgs) =>
+			new CrontabSchedulerJob<T>(
 				new ConfigurationBasedSchedulerJobSetting(configuration, FormatConfigurationSectionName<T>(configurationSectionName)),
 				new CrontabProcessorFactory(),
 				invokeMethodName,
 				CreateJobArgs(startupArgs));
-		}
+
+		/// <summary>
+		/// Creates the crontab based scheduler job.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="settings">The settings.</param>
+		/// <param name="invokeMethodName">Name of the invoke method.</param>
+		/// <param name="startupArgs">The startup arguments.</param>
+		/// <returns></returns>
+		public ICrontabSchedulerJob CreateCrontabJob<T>(ISchedulerJobSettings settings, string invokeMethodName, object? startupArgs) =>
+			new CrontabSchedulerJob<T>(
+				settings,
+				new CrontabProcessorFactory(),
+				invokeMethodName,
+				CreateJobArgs(startupArgs));
 
 		private static string FormatConfigurationSectionName<T>(string? configurationSectionName)
 		{
