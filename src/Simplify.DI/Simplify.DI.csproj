@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp3.1;netstandard2.0;netstandard1.0;net452</TargetFrameworks>
+		<TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0;netstandard1.0;net452</TargetFrameworks>
 		<LangVersion>9.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
@@ -9,7 +9,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>4.0.18</Version>
+		<Version>4.0.19</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
