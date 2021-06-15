@@ -5,9 +5,6 @@ namespace Simplify.Scheduler.IntegrationTester
 {
 	public class DisposableDependency : IDisposable
 	{
-		public void Dispose()
-		{
-			Trace.WriteLine("Disposable dependency disposed");
-		}
+		public void Dispose() => Trace.WriteLine("Disposable dependency disposed");
 	}
 }

@@ -26,9 +26,6 @@ namespace Simplify.Scheduler.IntegrationTester
 			_isRunning = false;
 		}
 
-		public void Dispose()
-		{
-			Trace.WriteLine("EverySecondProcessor disposed");
-		}
+		public void Dispose() => Trace.WriteLine("EverySecondProcessor disposed");
 	}
 }

@@ -13,8 +13,8 @@ namespace Simplify.WindowsServices.IntegrationTester
 			Debugger.Launch();
 #endif
 
-			IocRegistrations.Register();
-			DIContainer.Current.Verify();
+			DIContainer.Current.RegisterAll()
+				.Verify();
 
 			using (var handler = new MultitaskServiceHandler())
 			{
@@ -35,14 +35,8 @@ namespace Simplify.WindowsServices.IntegrationTester
 				scope.Resolver.Resolve<BasicTaskProcessor>().Run();
 		}
 
-		private static void HandlerOnJobStart(Jobs.IServiceJobRepresentation representation)
-		{
-			Trace.WriteLine("Job started: " + representation.JobClassType.Name);
-		}
+		private static void HandlerOnJobStart(Jobs.IServiceJobRepresentation representation) => Trace.WriteLine("Job started: " + representation.JobClassType.Name);
 
-		private static void HandlerOnJobFinish(Jobs.IServiceJobRepresentation representation)
-		{
-			Trace.WriteLine("Job finished: " + representation.JobClassType.Name);
-		}
+		private static void HandlerOnJobFinish(Jobs.IServiceJobRepresentation representation) => Trace.WriteLine("Job finished: " + representation.JobClassType.Name);
 	}
 }

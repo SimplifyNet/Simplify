@@ -10,10 +10,7 @@
 		/// Initializes a new instance of the <see cref="ChainHandler{T}"/> class.
 		/// </summary>
 		/// <param name="successor">The successor handler.</param>
-		protected ChainHandler(ChainHandler<T> successor = null)
-		{
-			Successor = successor;
-		}
+		protected ChainHandler(ChainHandler<T> successor = null) => Successor = successor;
 
 		/// <summary>
 		/// Gets the successor handler.
@@ -27,9 +24,6 @@
 		/// Executes the handler.
 		/// </summary>
 		/// <param name="args">The arguments.</param>
-		public virtual void Execute(T args)
-		{
-			Successor?.Execute(args);
-		}
+		public virtual void Execute(T args) => Successor?.Execute(args);
 	}
 }

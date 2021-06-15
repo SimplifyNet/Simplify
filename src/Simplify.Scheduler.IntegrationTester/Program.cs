@@ -10,8 +10,8 @@ namespace Simplify.Scheduler.IntegrationTester
 		{
 			// IOC container setup
 
-			IocRegistrations.Register();
-			DIContainer.Current.Verify();
+			DIContainer.Current.RegisterAll()
+				.Verify();
 
 			// Using scheduler
 
@@ -35,14 +35,8 @@ namespace Simplify.Scheduler.IntegrationTester
 				scope.Resolver.Resolve<BasicTaskProcessor>().Run();
 		}
 
-		private static void HandlerOnJobStart(Jobs.ISchedulerJobRepresentation representation)
-		{
-			Console.WriteLine("Job started: " + representation.JobClassType.Name);
-		}
+		private static void HandlerOnJobStart(Jobs.ISchedulerJobRepresentation representation) => Console.WriteLine("Job started: " + representation.JobClassType.Name);
 
-		private static void HandlerOnJobFinish(Jobs.ISchedulerJobRepresentation representation)
-		{
-			Console.WriteLine("Job finished: " + representation.JobClassType.Name);
-		}
+		private static void HandlerOnJobFinish(Jobs.ISchedulerJobRepresentation representation) => Console.WriteLine("Job finished: " + representation.JobClassType.Name);
 	}
 }

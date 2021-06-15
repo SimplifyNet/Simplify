@@ -10,7 +10,8 @@ namespace Simplify.Scheduler.SimpleApp
 		{
 			// IOC container setup
 
-			IocRegistrations.Register().Verify();
+			IocRegistrations.Register()
+				.Verify();
 
 			// Using scheduler
 

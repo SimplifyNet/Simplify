@@ -7,26 +7,26 @@ namespace Simplify.Scheduler.IntegrationTester.Setup
 	{
 		public static IConfiguration Configuration { get; private set; }
 
-		public static void Register()
+		public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
 		{
-			RegisterConfiguration();
+			provider.RegisterConfiguration()
+				.Register<DisposableDependency>()
+				.Register<OneSecondStepProcessor>()
+				.Register<TwoSecondStepProcessor>()
+				.Register<OneMinuteStepCrontabProcessor>()
+				.Register<TwoParallelTasksProcessor>()
+				.Register<BasicTaskProcessor>();
 
-			DIContainer.Current.Register<DisposableDependency>();
-
-			DIContainer.Current.Register<OneSecondStepProcessor>();
-			DIContainer.Current.Register<TwoSecondStepProcessor>();
-			DIContainer.Current.Register<OneMinuteStepCrontabProcessor>();
-			DIContainer.Current.Register<TwoParallelTasksProcessor>();
-			DIContainer.Current.Register<BasicTaskProcessor>();
+			return provider;
 		}
 
-		private static void RegisterConfiguration()
+		private static IDIRegistrator RegisterConfiguration(this IDIRegistrator registrator)
 		{
 			Configuration = new ConfigurationBuilder()
 				.AddJsonFile("appsettings.json", false)
 				.Build();
 
-			DIContainer.Current.Register(p => Configuration, LifetimeType.Singleton);
+			return registrator.Register(p => Configuration, LifetimeType.Singleton);
 		}
 	}
 }

@@ -9,10 +9,7 @@ namespace Simplify.Scheduler.IntegrationTester
 
 		private readonly DisposableDependency _dependency;
 
-		public BasicTaskProcessor(DisposableDependency dependency)
-		{
-			_dependency = dependency;
-		}
+		public BasicTaskProcessor(DisposableDependency dependency) => _dependency = dependency;
 
 		public void Run()
 		{
