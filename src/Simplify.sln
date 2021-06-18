@@ -155,6 +155,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.DI.Provider.Autofa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.DI.Provider.Autofac.Tests", "Simplify.DI.Provider.Autofac.Tests\Simplify.DI.Provider.Autofac.Tests.csproj", "{4E99B24A-570B-4BF0-BC1F-2CF5E8633BEF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.FluentNHibernate.FrameworkTests", "Simplify.FluentNHibernate.FrameworkTests\Simplify.FluentNHibernate.FrameworkTests.csproj", "{256F5682-C5D7-4989-834B-7370090DCA97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -365,6 +367,10 @@ Global
 		{4E99B24A-570B-4BF0-BC1F-2CF5E8633BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E99B24A-570B-4BF0-BC1F-2CF5E8633BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E99B24A-570B-4BF0-BC1F-2CF5E8633BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256F5682-C5D7-4989-834B-7370090DCA97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256F5682-C5D7-4989-834B-7370090DCA97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256F5682-C5D7-4989-834B-7370090DCA97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256F5682-C5D7-4989-834B-7370090DCA97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -427,6 +433,7 @@ Global
 		{82342810-9DA9-4616-BF0C-7958E6F605B5} = {AF1B478A-E87C-40E4-904A-E3C7208C6E89}
 		{C4CFFE8A-9E6A-4603-97DC-C03E5E5FD1CF} = {82342810-9DA9-4616-BF0C-7958E6F605B5}
 		{4E99B24A-570B-4BF0-BC1F-2CF5E8633BEF} = {82342810-9DA9-4616-BF0C-7958E6F605B5}
+		{256F5682-C5D7-4989-834B-7370090DCA97} = {3072924D-3E52-45C0-860F-C9A3838158C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {466E8FF6-456A-4262-A9ED-5E88DB8DCB08}

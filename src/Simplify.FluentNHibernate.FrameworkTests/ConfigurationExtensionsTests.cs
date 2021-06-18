@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using NHibernate.Dialect;
 using NUnit.Framework;
 
-namespace Simplify.FluentNHibernate.Tests
+namespace Simplify.FluentNHibernate.FrameworkTests
 {
 	[TestFixture]
 	public class ConfigurationExtensionsTests
