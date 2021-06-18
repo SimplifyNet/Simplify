@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<LangVersion>9.0</LangVersion>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Simplify.EntityFramework.Tests unit tests</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Simplify.EntityFramework\Simplify.EntityFramework.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
+		<PackageReference Include="coverlet.msbuild" Version="3.0.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.*" />
+		<PackageReference Include="NUnit" Version="3.13.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.0.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.*" />
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.*" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Mappings\" />
+	</ItemGroup>
+</Project>
