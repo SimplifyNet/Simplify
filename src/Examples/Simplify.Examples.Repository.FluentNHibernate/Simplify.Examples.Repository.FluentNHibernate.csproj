@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<IsPackable>false</IsPackable>
+
+		<Authors>Alexander Krylkov</Authors>
+		<Product>Simplify</Product>
+		<Description>Simplify.FluentNHibernate database mappings examples</Description>
+		<Copyright>Licensed under LGPL</Copyright>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Simplify.Repository.FluentNHibernate\Simplify.Repository.FluentNHibernate.csproj" />
+		<ProjectReference Include="..\Simplify.Examples.Repository.Domain\Simplify.Examples.Repository.Domain.csproj" />
+	</ItemGroup>
+</Project>

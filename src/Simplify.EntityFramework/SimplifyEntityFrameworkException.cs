@@ -3,7 +3,7 @@
 namespace Simplify.EntityFramework
 {
 	/// <summary>
-	/// Provides Simplify.FluentNHibernate related exception
+	/// Provides Simplify.EntityFramework related exception
 	/// </summary>
 	/// <seealso cref="Exception" />
 	public class SimplifyEntityFrameworkException : Exception

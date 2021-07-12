@@ -1,0 +1,10 @@
+{
+	"profiles":
+	{
+		"Simplify.FluentNHibernate.Examples.App":
+		{
+			"commandName": "Project",
+			"commandLineArgs": "TestUsr"
+		}
+	}
+}
