@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.0] - 2021-07-15
+
+### Added
+
+- Event to subscribe on lifetime scope creation (#303)
+
 ## [4.0.20] - 2021-07-06
 
 ### Dependencies

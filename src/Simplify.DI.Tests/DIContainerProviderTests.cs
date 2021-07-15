@@ -16,8 +16,27 @@ namespace Simplify.DI.Tests
 			_provider = new DryIocDIProvider();
 		}
 
-		#region Existence tests
+		[Test]
+		public void BeginLifetimeScope_WithOnBeginLifetimeScopeEventSubscribed_EventFired()
+		{
+			// Arrange
 
+			var eventFired = false;
+
+			_provider.OnBeginLifetimeScope += delegate(ILifetimeScope scope)
+			{
+				eventFired = true;
+			};
+
+			// Act
+			using var scope = _provider.BeginLifetimeScope();
+
+			// Assert
+			Assert.IsTrue(eventFired);
+		}
+
+		#region Existence tests
+	
 		[Test]
 		public void Resolve_NotRegistered_ContainerException()
 		{

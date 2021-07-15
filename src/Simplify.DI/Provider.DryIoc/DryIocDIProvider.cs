@@ -20,6 +20,11 @@ namespace Simplify.DI.Provider.DryIoc
 		}
 
 		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+		/// <summary>
 		/// Resolves the specified service type.
 		/// </summary>
 		/// <param name="serviceType">Type of the service.</param>
@@ -90,7 +95,14 @@ namespace Simplify.DI.Provider.DryIoc
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope() => new DryIocLifetimeScope(this);
+		public ILifetimeScope BeginLifetimeScope()
+		{
+			var scope =  new DryIocLifetimeScope(this);
+
+			OnBeginLifetimeScope?.Invoke(scope);
+
+			return scope;
+		}
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
