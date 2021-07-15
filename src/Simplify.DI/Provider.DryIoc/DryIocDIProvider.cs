@@ -11,6 +11,11 @@ namespace Simplify.DI.Provider.DryIoc
 		private IContainer? _container;
 
 		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public IContainer Container
@@ -18,11 +23,6 @@ namespace Simplify.DI.Provider.DryIoc
 			get => _container ??= new Container();
 			set => _container = value ?? throw new ArgumentNullException(nameof(value));
 		}
-
-		/// <summary>
-		/// Occurs when the lifetime scope is opened
-		/// </summary>
-		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
 
 		/// <summary>
 		/// Resolves the specified service type.
@@ -97,7 +97,7 @@ namespace Simplify.DI.Provider.DryIoc
 		/// <returns></returns>
 		public ILifetimeScope BeginLifetimeScope()
 		{
-			var scope =  new DryIocLifetimeScope(this);
+			var scope = new DryIocLifetimeScope(this);
 
 			OnBeginLifetimeScope?.Invoke(scope);
 

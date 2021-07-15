@@ -23,7 +23,7 @@ namespace Simplify.DI.Tests
 
 			var eventFired = false;
 
-			_provider.OnBeginLifetimeScope += delegate(ILifetimeScope scope)
+			_provider.OnBeginLifetimeScope += delegate
 			{
 				eventFired = true;
 			};
@@ -36,7 +36,7 @@ namespace Simplify.DI.Tests
 		}
 
 		#region Existence tests
-	
+
 		[Test]
 		public void Resolve_NotRegistered_ContainerException()
 		{
