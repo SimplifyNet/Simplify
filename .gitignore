@@ -119,3 +119,6 @@ Logs.log
 
 *lcov.info
 lcov*.info
+
+# Jetbrains Rider folder ignore
+.idea
