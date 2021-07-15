@@ -16,6 +16,22 @@ namespace Simplify.DI.Provider.SimpleInjector.Tests
 			_provider = new SimpleInjectorDIProvider();
 		}
 
+		[Test]
+		public void BeginLifetimeScope_WithOnBeginLifetimeScopeEventSubscribed_EventFired()
+		{
+			// Arrange
+
+			var eventFired = false;
+
+			_provider.OnBeginLifetimeScope += delegate { eventFired = true; };
+
+			// Act
+			using var scope = _provider.BeginLifetimeScope();
+
+			// Assert
+			Assert.IsTrue(eventFired);
+		}
+
 		#region Existence tests
 
 		[Test]
