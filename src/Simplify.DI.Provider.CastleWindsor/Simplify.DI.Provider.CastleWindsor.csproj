@@ -9,12 +9,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.6.2</Version>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Simplify.DI 4.0.14
-			* Upgrade to Castle.Windsor 5.1.1
-		</PackageReleaseNotes>
+		<Version>1.6.3</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -24,12 +19,15 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container-provider</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.CastleWindsor/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Castle.Windsor" Version="5.1.*" />
+		<PackageReference Include="Castle.Windsor" Version="5.1.1" />
 		<PackageReference Include="Simplify.DI" Version="4.0.*" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
