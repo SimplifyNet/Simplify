@@ -8,13 +8,18 @@ namespace Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection
 	/// </summary>
 	public class MicrosoftDependencyInjectionDIProvider : IDIContainerProvider
 	{
-		private IServiceCollection _services;
-		private IServiceProvider _serviceProvider;
+		private IServiceCollection? _services;
+		private IServiceProvider? _serviceProvider;
 
 		/// <summary>
 		/// <c>true</c> to perform check verifying that scoped services never gets resolved from root provider; otherwise <c>false</c>.
 		/// </summary>
 		public bool ValidateScopes { get; set; } = true;
+
+		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
 
 		/// <summary>
 		/// The IOC container registrations
@@ -106,7 +111,11 @@ namespace Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection
 		/// <returns></returns>
 		public ILifetimeScope BeginLifetimeScope()
 		{
-			return new MicrosoftDependencyInjectionILifetimeScope(this);
+			var scope = new MicrosoftDependencyInjectionILifetimeScope(this);
+
+			OnBeginLifetimeScope?.Invoke(scope);
+
+			return scope;
 		}
 
 		/// <summary>

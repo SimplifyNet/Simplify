@@ -12,6 +12,11 @@ namespace Simplify.DI.Provider.CastleWindsor
 		private IWindsorContainer? _container;
 
 		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public IWindsorContainer Container
@@ -89,7 +94,14 @@ namespace Simplify.DI.Provider.CastleWindsor
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope() => new CastleWindsorLifetimeScope(this);
+		public ILifetimeScope BeginLifetimeScope()
+		{
+			var scope = new CastleWindsorLifetimeScope(this);
+
+			OnBeginLifetimeScope?.Invoke(scope);
+
+			return scope;
+		}
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.

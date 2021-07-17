@@ -13,6 +13,11 @@ namespace Simplify.DI.Provider.Autofac
 		private IContainer? _container;
 
 		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+		/// <summary>
 		/// The IOC container builder
 		/// </summary>
 		public ContainerBuilder ContainerBuilder
@@ -101,7 +106,14 @@ namespace Simplify.DI.Provider.Autofac
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope() => new AutofacLifetimeScope(this);
+		public ILifetimeScope BeginLifetimeScope()
+		{
+			var scope = new AutofacLifetimeScope(this);
+
+			OnBeginLifetimeScope?.Invoke(scope);
+
+			return scope;
+		}
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
