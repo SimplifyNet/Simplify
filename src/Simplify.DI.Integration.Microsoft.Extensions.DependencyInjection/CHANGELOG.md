@@ -4,4 +4,5 @@
 
 ### Dependencies
 
-- Internal DryIoc bump to 4.8.1 (PR#301)
+- Simplify.DI Bump to 4.1
+- Microsoft.Extensions.DependencyInjection bump to 5.0.2 (PR#302)
