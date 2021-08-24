@@ -18,6 +18,8 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET pipelines</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Windows.Forms/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.Resources" Version="1.0.1" />
