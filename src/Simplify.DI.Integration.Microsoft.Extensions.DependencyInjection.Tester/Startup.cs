@@ -26,11 +26,11 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Teste
 
 			DIContainer.Current = container;
 
-			// Registrations using `services`
-			services.Register();
+			// Registrations using Microsoft.Extensions.DependencyInjection
+			services.RegisterAll();
 
-			// Registrations using `DIContainer.Current`
-			IocRegistrations.Register();
+			// Registrations using Simplify.DI
+			DIContainer.Current.RegisterAll();
 
 			return DIContainer.Current.IntegrateWithMicrosoftDependencyInjectionAndVerify(services);
 		}
