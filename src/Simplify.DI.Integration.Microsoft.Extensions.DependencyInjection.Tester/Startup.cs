@@ -19,7 +19,9 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Teste
 			var container = new DryIocDIProvider
 			{
 				Container = new Container()
-					.With(rules => rules.With(FactoryMethod.ConstructorWithResolvableArguments))
+					.With(rules =>
+						rules.With(FactoryMethod.ConstructorWithResolvableArguments)
+						.WithoutThrowOnRegisteringDisposableTransient())
 			};
 
 			DIContainer.Current = container;
