@@ -21,7 +21,7 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Teste
 				Container = new Container()
 					.With(rules =>
 						rules.With(FactoryMethod.ConstructorWithResolvableArguments)
-						.WithoutThrowOnRegisteringDisposableTransient())
+							.WithoutThrowOnRegisteringDisposableTransient())
 			};
 
 			DIContainer.Current = container;
@@ -32,7 +32,12 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Teste
 			// Registrations using Simplify.DI
 			DIContainer.Current.RegisterAll();
 
+			// Unresolved types fix
+
+			DIContainer.Current.Register<IHttpContextAccessor, HttpContextAccessor>(LifetimeType.Singleton);
+
 			return DIContainer.Current.IntegrateWithMicrosoftDependencyInjectionAndVerify(services);
+			// return DIContainer.Current.IntegrateWithMicrosoftDependencyInjection(services);
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
