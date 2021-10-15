@@ -23,7 +23,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.Autofac/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Autofac" Version="6.2.0" />
+		<PackageReference Include="Autofac" Version="6.3.0" />
 		<PackageReference Include="Simplify.DI" Version="4.1.*" />
 	</ItemGroup>
 	<ItemGroup>
