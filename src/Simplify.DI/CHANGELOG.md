@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.1] - 2021-10-15
+
+### Dependencies
+
+- Internal DryIoc bump to 4.8.2 (PR#312)
+
 ## [4.1.0] - 2021-07-15
 
 ### Added
