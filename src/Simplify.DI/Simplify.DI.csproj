@@ -23,7 +23,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="DryIoc" Version="4.8.2" PrivateAssets="All" />
+		<PackageReference Include="DryIoc" Version="4.8.3" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
