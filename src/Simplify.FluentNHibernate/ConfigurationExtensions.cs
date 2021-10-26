@@ -1,10 +1,9 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
-using Microsoft.Extensions.Configuration;
 using NHibernate.Driver;
-
 using Simplify.FluentNHibernate.Drivers;
 using Simplify.FluentNHibernate.Settings;
 using Simplify.FluentNHibernate.Settings.Impl;
@@ -358,7 +357,7 @@ namespace Simplify.FluentNHibernate
 				.Server(settings.ServerName)
 				.Database(settings.DataBaseName)
 				.Username(settings.UserName)
-				.Password(settings.UserPassword));
+				.Password(settings.UserPassword ?? throw new ArgumentNullException(nameof(settings.UserPassword))));
 
 			additionalClientConfiguration?.Invoke(clientConfiguration);
 
