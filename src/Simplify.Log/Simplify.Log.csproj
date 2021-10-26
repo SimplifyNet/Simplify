@@ -1,19 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net462</TargetFrameworks>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
+		<TargetFrameworks>net50;netstandard2.0</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.6.2</Version>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Microsoft.Extensions.Configuration 3.1.*
-			* Upgrade to System.IO.Abstractions 13.2.*
-		</PackageReleaseNotes>
+		<Version>2.0</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -23,15 +18,15 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET logger</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Log/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.*" />
-		<PackageReference Include="System.IO.Abstractions" Version="13.2.*" />
-		<Reference Include="System.Configuration" />
-		<Reference Include="System.ServiceModel" />
-		<Reference Include="System.Web" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+		<PackageReference Include="System.IO.Abstractions" Version="13.2.47" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
