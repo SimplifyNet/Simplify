@@ -9,7 +9,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.*" />
 		<PackageReference Include="NUnit" Version="3.13.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.0.*" />
 		<ProjectReference Include="..\Simplify.DI.Provider.SimpleInjector\Simplify.DI.Provider.SimpleInjector.csproj" />
