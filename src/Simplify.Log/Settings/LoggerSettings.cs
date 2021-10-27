@@ -28,7 +28,7 @@ namespace Simplify.Log.Settings
 		public const LoggerPathType DefaultPathType = LoggerPathType.Relative;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ConfigurationManagerBasedLoggerSettings"/> class.
+		/// Initializes a new instance of the <see cref="LoggerSettings"/> class.
 		/// </summary>
 		/// <param name="maxFileSize">Maximum size of the file.</param>
 		/// <param name="fileName">Name of the file.</param>

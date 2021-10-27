@@ -1,14 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Simplify.Log.Settings;
-using Simplify.Log.Settings.Impl;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Abstractions;
 using System.Reflection;
-using System.ServiceModel;
 using System.Web;
+using Microsoft.Extensions.Configuration;
+using Simplify.Log.Settings;
+using Simplify.Log.Settings.Impl;
 
 namespace Simplify.Log
 {
@@ -18,21 +17,9 @@ namespace Simplify.Log
 	public class Logger : ILogger
 	{
 		private static Lazy<IFileSystem> _fileSystem = new Lazy<IFileSystem>(() => new FileSystem());
-		private static Lazy<ILogger> _defaultLogger = new Lazy<ILogger>(() => new Logger(LoggerSettings.DefaultConfigSectionName));
 
 		private readonly object _locker = new object();
 		private string _currentLogFileName;
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Logger"/> class.
-		/// </summary>
-		/// <param name="configSectionName">Name of the configuration section in the configuration file.</param>
-		public Logger(string configSectionName = LoggerSettings.DefaultConfigSectionName)
-		{
-			Settings = new ConfigurationManagerBasedLoggerSettings(configSectionName);
-
-			Initialize();
-		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Logger" /> class.
@@ -59,25 +46,6 @@ namespace Simplify.Log
 			Settings = new LoggerSettings(maxFileSize, fileName, pathType, showTraceOutput);
 
 			Initialize();
-		}
-
-		/// <summary>
-		/// Gets or sets the default logger instance.
-		/// </summary>
-		/// <value>
-		/// The default logger instance.
-		/// </value>
-		/// <exception cref="ArgumentNullException">value</exception>
-		public static ILogger Default
-		{
-			get => _defaultLogger.Value;
-			set
-			{
-				if (value == null)
-					throw new ArgumentNullException(nameof(value));
-
-				_defaultLogger = new Lazy<ILogger>(() => value);
-			}
 		}
 
 		/// <summary>
@@ -231,10 +199,6 @@ namespace Simplify.Log
 		{
 			if (Settings.PathType == LoggerPathType.FullPath)
 				_currentLogFileName = Settings.FileName;
-			else if (HttpContext.Current != null)
-				_currentLogFileName = $"{HttpContext.Current.Request.PhysicalApplicationPath}{Settings.FileName}";
-			else if (OperationContext.Current != null)
-				_currentLogFileName = $"{System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath}{Settings.FileName}";
 			else
 				_currentLogFileName = $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{Settings.FileName}";
 		}
