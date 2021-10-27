@@ -17,6 +17,7 @@ namespace Simplify.FluentNHibernate
 		public override SqlString OnPrepareStatement(SqlString sql)
 		{
 			Trace.WriteLine($"SQL executed: '{sql}'");
+
 			return sql;
 		}
 	}

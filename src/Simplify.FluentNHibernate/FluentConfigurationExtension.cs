@@ -18,7 +18,7 @@ namespace Simplify.FluentNHibernate
 		{
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-			Configuration config = null;
+			Configuration? config = null;
 			configuration.ExposeConfiguration(c => config = c);
 			var factory = configuration.BuildSessionFactory();
 
@@ -32,15 +32,15 @@ namespace Simplify.FluentNHibernate
 		/// <param name="configuration">The configuration.</param>
 		/// <param name="configurationAddons">The configuration addition setup.</param>
 		/// <exception cref="ArgumentNullException">configuration</exception>
-		public static void UpdateSchema(this FluentConfiguration configuration, Action<Configuration> configurationAddons = null)
+		public static void UpdateSchema(this FluentConfiguration configuration, Action<Configuration>? configurationAddons = null)
 		{
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-			Configuration config = null;
+			Configuration? config = null;
 			configuration.ExposeConfiguration(c => config = c);
 			configuration.BuildSessionFactory();
 
-			configurationAddons?.Invoke(config);
+			configurationAddons?.Invoke(config!);
 
 			var updater = new SchemaUpdate(config);
 			updater.Execute(true, true);

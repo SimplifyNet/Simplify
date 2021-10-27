@@ -27,7 +27,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigOracleClient(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -52,7 +52,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigOracleClient(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -66,7 +66,7 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigOracleClient(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			var clientConfiguration = OracleDataClientConfiguration.Oracle10.ConnectionString(c =>
 				c.Server(settings.ServerName)
@@ -96,7 +96,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigOracleOdpNetNative(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -123,7 +123,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigOracleOdpNetNative(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -137,7 +137,7 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigOracleOdpNetNative(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<OracleDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			var clientConfiguration = OracleDataClientConfiguration.Oracle10.ConnectionString(c => c
 					.Server(settings.ServerName)
@@ -168,7 +168,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigOracleOdpNet(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleManagedDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -195,7 +195,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigOracleOdpNet(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<OracleManagedDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -209,7 +209,7 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigOracleOdpNet(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<OracleManagedDataClientConfiguration> additionalClientConfiguration = null)
+			Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null)
 		{
 			var clientConfiguration = OracleManagedDataClientConfiguration.Oracle10.ConnectionString(c => c
 					.Server(settings.ServerName)
@@ -240,7 +240,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigMySql(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<MySQLConfiguration> additionalClientConfiguration = null)
+			Action<MySQLConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -267,7 +267,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigMySql(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<MySQLConfiguration> additionalClientConfiguration = null)
+			Action<MySQLConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -281,7 +281,7 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigMySql(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<MySQLConfiguration> additionalClientConfiguration = null)
+			Action<MySQLConfiguration>? additionalClientConfiguration = null)
 		{
 			var clientConfiguration = MySQLConfiguration.Standard.ConnectionString(c => c
 				.Server(settings.ServerName)
@@ -310,7 +310,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigMsSql(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<MsSqlConfiguration> additionalClientConfiguration = null)
+			Action<MsSqlConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -337,7 +337,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigMsSql(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<MsSqlConfiguration> additionalClientConfiguration = null)
+			Action<MsSqlConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -351,7 +351,7 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigMsSql(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<MsSqlConfiguration> additionalClientConfiguration = null)
+			Action<MsSqlConfiguration>? additionalClientConfiguration = null)
 		{
 			var clientConfiguration = MsSqlConfiguration.MsSql2008.ConnectionString(c => c
 				.Server(settings.ServerName)
@@ -380,7 +380,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigPostgreSql(this FluentConfiguration fluentConfiguration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<PostgreSQLConfiguration> additionalClientConfiguration = null)
+			Action<PostgreSQLConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
@@ -407,7 +407,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigPostgreSql(this FluentConfiguration fluentConfiguration,
 			IConfiguration configuration,
 			string configSectionName = "DatabaseConnectionSettings",
-			Action<PostgreSQLConfiguration> additionalClientConfiguration = null)
+			Action<PostgreSQLConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -421,7 +421,7 @@ namespace Simplify.FluentNHibernate
 
 		private static void InitializeFromConfigPostgreSql(FluentConfiguration fluentConfiguration,
 			DbConnectionSettings settings,
-			Action<PostgreSQLConfiguration> additionalClientConfiguration = null)
+			Action<PostgreSQLConfiguration>? additionalClientConfiguration = null)
 		{
 			var clientConfiguration = PostgreSQLConfiguration.PostgreSQL82.ConnectionString(c => c
 				.Host(settings.ServerName)
@@ -457,7 +457,7 @@ namespace Simplify.FluentNHibernate
 		public static FluentConfiguration InitializeFromConfigSqLite(this FluentConfiguration fluentConfiguration,
 			string fileName,
 			bool showSql = false,
-			Action<SQLiteConfiguration> additionalClientConfiguration = null)
+			Action<SQLiteConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 			if (fileName == null) throw new ArgumentNullException(nameof(fileName));
@@ -487,7 +487,7 @@ namespace Simplify.FluentNHibernate
 		/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 		public static FluentConfiguration InitializeFromConfigSqLiteInMemory(this FluentConfiguration fluentConfiguration,
 			bool showSql = false,
-			Action<SQLiteConfiguration> additionalClientConfiguration = null)
+			Action<SQLiteConfiguration>? additionalClientConfiguration = null)
 		{
 			if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
