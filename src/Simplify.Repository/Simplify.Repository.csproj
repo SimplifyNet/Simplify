@@ -9,14 +9,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.5</Version>
-		<PackageReleaseNotes>
-			New
-			* Add TransactGenericRepository (#273)
-			* Add property to ITransactUnitOfWork  indicating that transaction is open (#272)
-			Updates
-			* refactoring to nullable
-		</PackageReleaseNotes>
+		<Version>1.6</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -26,6 +19,8 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET Repository UoW Model</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Repository/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Data.Common" Version="4.3.0" />

@@ -10,9 +10,6 @@ namespace Simplify.Repository.FluentNHibernate.Mappings
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NamedObjectMap{T}"/> class.
 		/// </summary>
-		public NamedObjectMap()
-		{
-			Map(x => x.Name).Not.Nullable();
-		}
+		public NamedObjectMap() => Map(x => x.Name).Not.Nullable();
 	}
 }

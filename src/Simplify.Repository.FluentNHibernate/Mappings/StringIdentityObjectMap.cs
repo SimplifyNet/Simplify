@@ -3,15 +3,15 @@ using FluentNHibernate.Mapping;
 namespace Simplify.Repository.FluentNHibernate.Mappings
 {
 	/// <summary>
-	/// Identity object mapping
+	/// String identity object mapping
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class IdentityObjectMap<T> : ClassMap<T>
-		where T : IIdentityObject
+	public class StringIdentityObjectMap<T> : ClassMap<T>
+		where T : IStringIdentityObject
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="IdentityObjectMap{T}"/> class.
 		/// </summary>
-		public IdentityObjectMap() => Id(x => x.ID);
+		public StringIdentityObjectMap() => Id(x => x.ID);
 	}
 }
