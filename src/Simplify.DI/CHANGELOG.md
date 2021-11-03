@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.1.3] - 2021-11-03
+
+### Changed
+
+- DryIOC container verification when Singleton delegate depends on Scoped will throw exceptions
+
+### Dependencies
+
+- Internal DryIoc bump to 4.8.4 (PR#316)
+
 ## [4.1.2] - 2021-10-25
 
 ### Dependencies

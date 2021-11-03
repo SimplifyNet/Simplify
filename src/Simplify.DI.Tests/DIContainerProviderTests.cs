@@ -588,49 +588,18 @@ namespace Simplify.DI.Tests
 			Assert.That(ex.Message, Does.Contain("code: Error.DependencyHasShorterReuseLifespan"));
 		}
 
-		// Note: this behavior check is not available
-		//[Test]
-		//public void ScopedResolve_SingletonDelegateDependsOnScoped_ContainerException()
-		//{
-		//	// Assign
-
-		//	_provider.Register<IBar, Bar>();
-		//	_provider.Register<IFoo>(r => new Foo(r.Resolve<IBar>()), LifetimeType.Singleton);
-
-		//	// Act && Assert
-
-		//	using var scope = _provider.BeginLifetimeScope();
-		//	Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
-		//}
-
 		[Test]
-		public void ScopedResolve_SingletonDelegateDependsOnScoped_ScopedReusedAsSingleton()
+		public void ScopedResolve_SingletonDelegateDependsOnScoped_ContainerException()
 		{
 			// Assign
 
 			_provider.Register<IBar, Bar>();
 			_provider.Register<IFoo>(r => new Foo(r.Resolve<IBar>()), LifetimeType.Singleton);
 
-			IFoo foo;
-			IFoo fooSecond;
-			IFoo fooThird;
+			// Act && Assert
 
-			using (var scope = _provider.BeginLifetimeScope())
-			{
-				foo = scope.Resolver.Resolve<IFoo>();
-				fooSecond = scope.Resolver.Resolve<IFoo>();
-			}
-
-			using (var scope = _provider.BeginLifetimeScope())
-				fooThird = scope.Resolver.Resolve<IFoo>();
-
-			Assert.IsNotNull(foo);
-
-			Assert.AreEqual(foo, fooSecond);
-			Assert.AreEqual(foo, fooThird);
-
-			Assert.AreEqual(foo.Bar, fooSecond.Bar);
-			Assert.AreEqual(foo.Bar, fooThird.Bar);
+			using var scope = _provider.BeginLifetimeScope();
+			Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
 		}
 
 		// Note: this behavior check is not available
