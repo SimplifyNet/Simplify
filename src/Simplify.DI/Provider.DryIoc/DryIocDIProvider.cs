@@ -11,6 +11,11 @@ namespace Simplify.DI.Provider.DryIoc
 		private IContainer? _container;
 
 		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public IContainer Container
@@ -90,7 +95,14 @@ namespace Simplify.DI.Provider.DryIoc
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope() => new DryIocLifetimeScope(this);
+		public ILifetimeScope BeginLifetimeScope()
+		{
+			var scope = new DryIocLifetimeScope(this);
+
+			OnBeginLifetimeScope?.Invoke(scope);
+
+			return scope;
+		}
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.

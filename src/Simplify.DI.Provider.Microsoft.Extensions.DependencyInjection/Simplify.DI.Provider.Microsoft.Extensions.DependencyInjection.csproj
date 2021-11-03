@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
 		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.3.2</Version>
+		<Version>1.4</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -17,17 +19,15 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container-provider</PackageTags>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Simplify.DI 4.0.9
-			* Upgrade to Microsoft.Extensions.DependencyInjection 3.1.9
-		</PackageReleaseNotes>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.*" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+		<PackageReference Include="Simplify.DI" Version="4.1.*" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

@@ -19,18 +19,25 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Teste
 			var container = new DryIocDIProvider
 			{
 				Container = new Container()
-					.With(rules => rules.With(FactoryMethod.ConstructorWithResolvableArguments))
+					.With(rules =>
+						rules.With(FactoryMethod.ConstructorWithResolvableArguments)
+							.WithoutThrowOnRegisteringDisposableTransient())
 			};
 
 			DIContainer.Current = container;
 
-			// Registrations using `services`
-			services.Register();
+			// Registrations using Microsoft.Extensions.DependencyInjection
+			services.RegisterAll();
 
-			// Registrations using `DIContainer.Current`
-			IocRegistrations.Register();
+			// Registrations using Simplify.DI
+			DIContainer.Current.RegisterAll();
+
+			// Unresolved types fix
+
+			DIContainer.Current.Register<IHttpContextAccessor, HttpContextAccessor>(LifetimeType.Singleton);
 
 			return DIContainer.Current.IntegrateWithMicrosoftDependencyInjectionAndVerify(services);
+			// return DIContainer.Current.IntegrateWithMicrosoftDependencyInjection(services);
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,4 +1,23 @@
 {
 	"version": "0.2.0",
-	"configurations": []
+	"configurations": [
+	{
+		"name": "Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester Launch",
+		"type": "coreclr",
+		"request": "launch",
+		"preLaunchTask": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
+		"program": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net5.0/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.dll",
+		"cwd": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net5.0/",
+		"internalConsoleOptions": "openOnSessionStart",
+		"serverReadyAction":
+		{
+			"action": "openExternally",
+			"pattern": "Now listening on",
+			"uriFormat": "http://localhost:5000/status"
+		},
+		"env":
+		{
+			"ASPNETCORE_ENVIRONMENT": "Development"
+		}
+	}]
 }

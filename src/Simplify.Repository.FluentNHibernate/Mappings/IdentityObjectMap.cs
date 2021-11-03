@@ -12,9 +12,6 @@ namespace Simplify.Repository.FluentNHibernate.Mappings
 		/// <summary>
 		/// Initializes a new instance of the <see cref="IdentityObjectMap{T}"/> class.
 		/// </summary>
-		public IdentityObjectMap()
-		{
-			Id(x => x.ID);
-		}
+		public IdentityObjectMap() => Id(x => x.ID);
 	}
 }

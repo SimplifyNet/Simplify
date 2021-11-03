@@ -2,9 +2,11 @@
 {
 	public static class IocRegistrations
 	{
-		public static void Register()
+		public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
 		{
-			DIContainer.Current.Register<Dependency>();
+			provider.Register<Dependency>();
+
+			return provider;
 		}
 	}
 }

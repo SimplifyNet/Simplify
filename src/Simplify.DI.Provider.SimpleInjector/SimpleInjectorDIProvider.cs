@@ -12,6 +12,11 @@ namespace Simplify.DI.Provider.SimpleInjector
 		private Container? _container;
 
 		/// <summary>
+		/// Occurs when the lifetime scope is opened
+		/// </summary>
+		public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+		/// <summary>
 		/// The IOC container
 		/// </summary>
 		public Container Container
@@ -97,7 +102,14 @@ namespace Simplify.DI.Provider.SimpleInjector
 		/// Begins the lifetime scope.
 		/// </summary>
 		/// <returns></returns>
-		public ILifetimeScope BeginLifetimeScope() => new SimpleInjectorLifetimeScope(this);
+		public ILifetimeScope BeginLifetimeScope()
+		{
+			var scope = new SimpleInjectorLifetimeScope(this);
+
+			OnBeginLifetimeScope?.Invoke(scope);
+
+			return scope;
+		}
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.

@@ -18,7 +18,7 @@
 		/// <value>
 		/// The name of the server.
 		/// </value>
-		public string ServerName { get; protected set; }
+		public string? ServerName { get; protected set; }
 
 		/// <summary>
 		/// Gets the name of the data base.
@@ -26,7 +26,7 @@
 		/// <value>
 		/// The name of the data base.
 		/// </value>
-		public string DataBaseName { get; protected set; }
+		public string? DataBaseName { get; protected set; }
 
 		/// <summary>
 		/// Gets the name of the user.
@@ -34,7 +34,7 @@
 		/// <value>
 		/// The name of the user.
 		/// </value>
-		public string UserName { get; protected set; }
+		public string? UserName { get; protected set; }
 
 		/// <summary>
 		/// Gets the user password.
@@ -42,7 +42,7 @@
 		/// <value>
 		/// The user password.
 		/// </value>
-		public string UserPassword { get; protected set; }
+		public string? UserPassword { get; protected set; }
 
 		/// <summary>
 		/// Gets a value indicating whether all executed SQL request should be shown in trace window

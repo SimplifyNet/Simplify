@@ -21,7 +21,7 @@ namespace Simplify.FluentNHibernate
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
-		public static T GetSingleObject<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static T GetSingleObject<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -38,7 +38,7 @@ namespace Simplify.FluentNHibernate
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
-		public static Task<T> GetSingleObjectAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static Task<T> GetSingleObjectAsync<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -55,7 +55,7 @@ namespace Simplify.FluentNHibernate
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
-		public static T GetSingleObjectCacheable<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static T GetSingleObjectCacheable<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -74,7 +74,7 @@ namespace Simplify.FluentNHibernate
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
-		public static Task<T> GetSingleObjectCacheableAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static Task<T> GetSingleObjectCacheableAsync<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -94,7 +94,7 @@ namespace Simplify.FluentNHibernate
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
 		/// <returns></returns>
-		public static T GetFirstObject<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static T GetFirstObject<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -112,7 +112,7 @@ namespace Simplify.FluentNHibernate
 		/// <param name="session">The NHibernate session.</param>
 		/// <param name="query">Query</param>
 		/// <returns></returns>
-		public static Task<T> GetFirstObjectAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static Task<T> GetFirstObjectAsync<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -138,8 +138,8 @@ namespace Simplify.FluentNHibernate
 		/// List of objects
 		/// </returns>
 		public static IList<T> GetList<T>(this ISession session,
-			Expression<Func<T, bool>> query = null,
-			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -164,8 +164,8 @@ namespace Simplify.FluentNHibernate
 		/// List of objects
 		/// </returns>
 		public static async Task<IList<T>> GetListAsync<T>(this ISession session,
-			Expression<Func<T, bool>> query = null,
-			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -192,8 +192,8 @@ namespace Simplify.FluentNHibernate
 		public static IList<T> GetListPaged<T>(this ISession session,
 			int pageIndex,
 			int itemsPerPage,
-			Expression<Func<T, bool>> query = null,
-			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -221,8 +221,8 @@ namespace Simplify.FluentNHibernate
 		public static async Task<IList<T>> GetListPagedAsync<T>(this ISession session,
 			int pageIndex,
 			int itemsPerPage,
-			Expression<Func<T, bool>> query = null,
-			Func<IQueryable<T>, IQueryable<T>> customProcessing = null)
+			Expression<Func<T, bool>>? query = null,
+			Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -248,7 +248,7 @@ namespace Simplify.FluentNHibernate
 		/// <param name="session">The session.</param>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public static int GetCount<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static int GetCount<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -266,7 +266,7 @@ namespace Simplify.FluentNHibernate
 		/// <param name="session">The session.</param>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public static Task<int> GetCountAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static Task<int> GetCountAsync<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -284,7 +284,7 @@ namespace Simplify.FluentNHibernate
 		/// <param name="session">The session.</param>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public static long GetLongCount<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static long GetLongCount<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();
@@ -302,7 +302,7 @@ namespace Simplify.FluentNHibernate
 		/// <param name="session">The session.</param>
 		/// <param name="query">The query.</param>
 		/// <returns></returns>
-		public static Task<long> GetLongCountAsync<T>(this ISession session, Expression<Func<T, bool>> query = null)
+		public static Task<long> GetLongCountAsync<T>(this ISession session, Expression<Func<T, bool>>? query = null)
 			where T : class
 		{
 			var queryable = session.Query<T>();

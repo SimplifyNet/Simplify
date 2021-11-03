@@ -7,11 +7,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.4</Version>
-		<PackageReleaseNotes>
-			Updates
-			* Upgrade to Simplify.DI 4.0
-		</PackageReleaseNotes>
+		<Version>1.5</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -21,13 +17,16 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Wcf/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.0.*" />
+		<PackageReference Include="Simplify.DI" Version="4.1.*" />
 		<Reference Include="System.ServiceModel" />
 		<Reference Include="System.ServiceModel.Activation" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

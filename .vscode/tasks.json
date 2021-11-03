@@ -17,6 +17,16 @@
 		}
 	},
 	{
+		"label": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
+		"command": "dotnet",
+		"type": "process",
+		"args": [
+			"build",
+			"${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.csproj"
+		],
+		"problemMatcher": "$msCompile"
+	},
+	{
 		"label": "Test with coverage",
 		"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
 		"type": "shell",
