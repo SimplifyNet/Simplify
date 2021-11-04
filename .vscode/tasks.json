@@ -27,6 +27,16 @@
 		"problemMatcher": "$msCompile"
 	},
 	{
+		"label": "Build Simplify.Examples.Repository.EntityFramework.App",
+		"command": "dotnet",
+		"type": "process",
+		"args": [
+			"build",
+			"${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/Simplify.Examples.Repository.EntityFramework.App.csproj"
+		],
+		"problemMatcher": "$msCompile"
+	},
+	{
 		"label": "Test with coverage",
 		"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
 		"type": "shell",

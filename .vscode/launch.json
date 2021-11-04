@@ -19,5 +19,19 @@
 		{
 			"ASPNETCORE_ENVIRONMENT": "Development"
 		}
+	},
+	{
+		"name": "Simplify.Examples.Repository.EntityFramework.App Launch",
+		"type": "coreclr",
+		"request": "launch",
+		"preLaunchTask": "Build Simplify.Examples.Repository.EntityFramework.App",
+		"program": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net5.0/Simplify.Examples.Repository.EntityFramework.App.dll",
+		"cwd": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net5.0/",
+		"internalConsoleOptions": "openOnSessionStart",
+		"args": "TestUser",
+		"env":
+		{
+			"ASPNETCORE_ENVIRONMENT": "Development"
+		}
 	}]
 }
