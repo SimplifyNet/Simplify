@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Simplify.DI;
+using Simplify.EntityFramework;
 using Simplify.Examples.Repository.Domain;
 using Simplify.Examples.Repository.Domain.Accounts;
 using Simplify.Examples.Repository.Domain.Location;
@@ -12,7 +14,7 @@ namespace Simplify.Examples.Repository.EntityFramework.App.Setup
 	{
 		public static IDIRegistrator RegisterDatabase(this IDIRegistrator registrator) =>
 			registrator.Register(r => new DbContextOptionsBuilder()
-					.UseSqlServer().Options, LifetimeType.Singleton)
+					.UseSqlServer(SettingsBasedConnectionString.Build(r.Resolve<IConfiguration>(), "ExampleDatabaseConnectionSettings")).Options, LifetimeType.Singleton)
 				.Register<ExampleDbContext>()
 				.Register<ExampleUnitOfWork>()
 				.Register<IExampleUnitOfWork>(r => r.Resolve<ExampleUnitOfWork>())
