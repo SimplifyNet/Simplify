@@ -23,6 +23,8 @@ namespace Simplify.System.Tests.Extensions
 
 			// Act & Assert
 
+#pragma warning disable CS8604
+
 			Assert.Catch(() => collection!.AddRange(items!), msg);
 			Assert.Catch(() => collection!.AddRange(items.AsEnumerable()), msg);
 			Assert.Catch(() => collection!.RefreshItems(items!), msg);
@@ -43,6 +45,8 @@ namespace Simplify.System.Tests.Extensions
 			Assert.DoesNotThrow(() => collection.RefreshItems(items.AsEnumerable()), msg);
 			Assert.DoesNotThrow(() => collection.RefreshIndices(indices!), msg);
 			Assert.DoesNotThrow(() => collection.RefreshIndices(indices.AsEnumerable()), msg);
+
+#pragma warning restore CS8604
 
 			// Arrange
 
