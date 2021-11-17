@@ -1,6 +1,6 @@
-version: '{build}'
+version: "{build}"
 
-image: Visual Studio 2019
+image: Visual Studio 2022
 
 skip_tags: true
 clone_depth: 1
@@ -24,4 +24,4 @@ test:
       - Integration
 
 deploy_script:
- - ps: .\MakeSourcePackages.ps1
+  - ps: .\MakeSourcePackages.ps1
