@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3] - 2021-11-18
+
+### Added
+
+- Async run method support (#326)
+
 ## [1.2] - 2021-05-25
 
 ### Added

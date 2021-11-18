@@ -9,13 +9,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>2.13.1</Version>
-		<PackageReleaseNotes>
-			Updates
-			* Simplify.DI bump to 4.0.14
-			* Simplify.System bump to 1.6
-			* Code refactoring
-		</PackageReleaseNotes>
+		<Version>2.14</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -26,6 +20,8 @@
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.WindowsServices</RepositoryUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET windows-service DI</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.WindowsServices/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="ncrontab" Version="3.3.*" />
@@ -40,5 +36,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
