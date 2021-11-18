@@ -225,14 +225,17 @@ namespace Simplify.Scheduler
 
 				_jobTaskID++;
 
-				_workingJobsTasks.Add(new CrontabSchedulerJobTask(_jobTaskID, job, Task.Run(() => Run(_jobTaskID, job))));
+				_workingJobsTasks.Add(new CrontabSchedulerJobTask(_jobTaskID, job,
+					Task.Factory.StartNew(Run, new Tuple<long, ICrontabSchedulerJob>(_jobTaskID, job)).Unwrap()));
 			}
 		}
 
 		#region Execution
 
-		private async Task Run(long jobTaskID, ICrontabSchedulerJob job)
+		private async Task Run(object state)
 		{
+			var (jobTaskID, job) = (Tuple<long, ICrontabSchedulerJob>)state;
+
 			try
 			{
 				await RunScoped(job);
