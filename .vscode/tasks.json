@@ -27,6 +27,16 @@
 		"problemMatcher": "$msCompile"
 	},
 	{
+		"label": "Build Simplify.Scheduler.IntegrationTester",
+		"command": "dotnet",
+		"type": "process",
+		"args": [
+			"build",
+			"${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/Simplify.Scheduler.IntegrationTester.csproj"
+		],
+		"problemMatcher": "$msCompile"
+	},
+	{
 		"label": "Test with coverage",
 		"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
 		"type": "shell",
