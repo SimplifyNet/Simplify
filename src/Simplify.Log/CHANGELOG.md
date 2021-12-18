@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1] - 2021-12-18
+
+### Dependencies
+
+- System.IO.Abstractions bump to 14.0.13
+
 ## [2.0.0] - 2021-10-26
 
 ### Removed
