@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.2] - 2022-01-03
+
+### Dependencies
+
+- System.IO.Abstractions bump to 16.0.1 (PR#331)
+
 ## [2.0.1] - 2021-12-18
 
 ### Dependencies
