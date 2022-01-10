@@ -8,7 +8,7 @@ using Simplify.AutoMapper.Tests.TestData;
 namespace Simplify.AutoMapper.Tests.Extensions
 {
 	[TestFixture]
-	public class IMappingExpressionExtensionsTests
+	public class MappingExpressionExtensionsTests
 	{
 		#region SetUp
 

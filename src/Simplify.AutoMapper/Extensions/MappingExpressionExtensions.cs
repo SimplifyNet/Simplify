@@ -7,7 +7,7 @@ namespace Simplify.AutoMapper.Extensions
 	/// <summary>
 	/// Provides extensions for the IMappingExpressionExtensions
 	/// </summary>
-	public static class IMappingExpressionExtensions
+	public static class MappingExpressionExtensions
 	{
 		/// <summary>
 		/// Map destination member using destination and source member expressions

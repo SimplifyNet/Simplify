@@ -6,7 +6,7 @@ using Simplify.AutoMapper.Tests.TestData;
 namespace Simplify.AutoMapper.Tests.Extensions
 {
 	[TestFixture]
-	public class IProfileExpressionExtensionsTests
+	public class ProfileExpressionExtensionsTests
 	{
 		#region SetUp
 
