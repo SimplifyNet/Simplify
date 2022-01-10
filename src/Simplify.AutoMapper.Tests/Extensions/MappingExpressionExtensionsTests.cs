@@ -100,7 +100,7 @@ namespace Simplify.AutoMapper.Tests.Extensions
 			Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 					.MapTo(nullDestinationExpression!, "Category")));
 
-			Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			Assert.Throws<ArgumentException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 					.MapTo(d => null, s => s.Category)));
 		}
 
