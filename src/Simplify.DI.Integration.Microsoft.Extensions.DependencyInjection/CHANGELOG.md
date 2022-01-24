@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] - 2021-11-11
+
+### Dependencies
+
+- Microsoft.Extensions.DependencyInjection bump to 6.0.0 (PR#322)
+
 ## [1.0] - 2021-09-16
 
 ### Changed

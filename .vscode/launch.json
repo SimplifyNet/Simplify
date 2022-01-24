@@ -6,8 +6,8 @@
 		"type": "coreclr",
 		"request": "launch",
 		"preLaunchTask": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
-		"program": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net5.0/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.dll",
-		"cwd": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net5.0/",
+		"program": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net6.0/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.dll",
+		"cwd": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net6.0/",
 		"internalConsoleOptions": "openOnSessionStart",
 		"serverReadyAction":
 		{
@@ -29,6 +29,18 @@
 		"cwd": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net5.0/",
 		"internalConsoleOptions": "openOnSessionStart",
 		"args": "TestUser",
+		"env":
+		{
+			"ASPNETCORE_ENVIRONMENT": "Development"
+		}
+	},
+	{
+		"name": "Simplify.Scheduler.IntegrationTester Launch",
+		"type": "coreclr",
+		"request": "launch",
+		"preLaunchTask": "Build Simplify.Scheduler.IntegrationTester",
+		"program": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/Simplify.Scheduler.IntegrationTester.dll",
+		"cwd": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/",
 		"env":
 		{
 			"ASPNETCORE_ENVIRONMENT": "Development"

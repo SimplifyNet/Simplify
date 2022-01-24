@@ -91,7 +91,7 @@ namespace Simplify.Scheduler
 
 		private void StartAndWait()
 		{
-			StartJobs();
+			StartJobs().Wait();
 
 			Console.WriteLine("Scheduler started. Press Ctrl + C to shut down.");
 

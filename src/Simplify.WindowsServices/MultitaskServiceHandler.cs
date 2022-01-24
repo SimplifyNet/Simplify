@@ -225,7 +225,7 @@ namespace Simplify.WindowsServices
 				job.Start();
 
 				if (!(job is ICrontabServiceJob))
-					RunBasicJob(job);
+					RunBasicJob(job).Wait();
 			}
 
 			base.OnStart(args);
@@ -282,7 +282,7 @@ namespace Simplify.WindowsServices
 				_jobTaskID++;
 
 				_workingJobsTasks.Add(new CrontabServiceJobTask(_jobTaskID, job,
-					Task.Factory.StartNew(Run, new Tuple<long, ICrontabServiceJob>(_jobTaskID, job))));
+					Task.Factory.StartNew(Run, new Tuple<long, ICrontabServiceJob>(_jobTaskID, job)).Unwrap()));
 			}
 		}
 
@@ -292,13 +292,13 @@ namespace Simplify.WindowsServices
 		/// Separate thread entry point for job processing
 		/// </summary>
 		/// <param name="state">The state.</param>
-		private void Run(object state)
+		private async Task Run(object state)
 		{
 			var (jobTaskID, job) = (Tuple<long, ICrontabServiceJob>)state;
 
 			try
 			{
-				RunScoped(job);
+				await RunScoped(job);
 			}
 			catch (Exception e)
 			{
@@ -313,7 +313,7 @@ namespace Simplify.WindowsServices
 			}
 		}
 
-		private void RunScoped(IServiceJobRepresentation job)
+		private async Task RunScoped(IServiceJobRepresentation job)
 		{
 			using var scope = DIContainer.Current.BeginLifetimeScope();
 
@@ -321,12 +321,12 @@ namespace Simplify.WindowsServices
 
 			OnJobStart?.Invoke(job);
 
-			InvokeJobMethod(job, jobObject);
+			await InvokeJobMethod(job, jobObject);
 
 			OnJobFinish?.Invoke(job);
 		}
 
-		private void RunBasicJob(IServiceJobRepresentation job)
+		private async Task RunBasicJob(IServiceJobRepresentation job)
 		{
 			try
 			{
@@ -336,7 +336,7 @@ namespace Simplify.WindowsServices
 
 				OnJobStart?.Invoke(job);
 
-				InvokeJobMethod(job, jobObject);
+				await InvokeJobMethod(job, jobObject);
 
 				_workingBasicJobs.Add(job, scope);
 			}
@@ -349,25 +349,32 @@ namespace Simplify.WindowsServices
 			}
 		}
 
-		private void InvokeJobMethod(IServiceJobRepresentation job, object jobObject)
+		private Task InvokeJobMethod(IServiceJobRepresentation job, object jobObject)
 		{
+			object result;
+
 			switch (job.InvokeMethodParameterType)
 			{
 				case InvokeMethodParameterType.Parameterless:
-					job.InvokeMethodInfo.Invoke(jobObject, null);
+					result = job.InvokeMethodInfo.Invoke(jobObject, null);
 					break;
 
 				case InvokeMethodParameterType.ServiceName:
-					job.InvokeMethodInfo.Invoke(jobObject, new object[] { ServiceName });
+					result = job.InvokeMethodInfo.Invoke(jobObject, new object[] { ServiceName });
 					break;
 
 				case InvokeMethodParameterType.Args:
-					job.InvokeMethodInfo.Invoke(jobObject, new object[] { job.JobArgs });
+					result = job.InvokeMethodInfo.Invoke(jobObject, new object[] { job.JobArgs });
 					break;
 
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+
+			if (result is Task task)
+				return task;
+
+			return Task.CompletedTask;
 		}
 
 		private void FinalizeJob(long jobTaskID, ICrontabServiceJob job)

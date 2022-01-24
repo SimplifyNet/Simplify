@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+		<TargetFramework>net6.0</TargetFramework>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -11,7 +11,7 @@
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.*" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.*" />
 		<PackageReference Include="NUnit" Version="3.13.*" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.0.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.2.*" />
 		<ProjectReference Include="..\Simplify.String\Simplify.String.csproj" />
 	</ItemGroup>
 </Project>

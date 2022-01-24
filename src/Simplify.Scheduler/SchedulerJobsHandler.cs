@@ -140,7 +140,7 @@ namespace Simplify.Scheduler
 		/// <summary>
 		/// Called when scheduler is started, main execution starting point.
 		/// </summary>
-		protected void StartJobs()
+		protected async Task StartJobs()
 		{
 			Console.WriteLine("Starting Scheduler jobs...");
 
@@ -149,7 +149,7 @@ namespace Simplify.Scheduler
 				job.Start();
 
 				if (!(job is ICrontabSchedulerJob))
-					RunBasicJob(job);
+					await RunBasicJob(job);
 			}
 
 			Console.WriteLine("Scheduler jobs started.");
@@ -226,19 +226,19 @@ namespace Simplify.Scheduler
 				_jobTaskID++;
 
 				_workingJobsTasks.Add(new CrontabSchedulerJobTask(_jobTaskID, job,
-					Task.Factory.StartNew(Run, new Tuple<long, ICrontabSchedulerJob>(_jobTaskID, job))));
+					Task.Factory.StartNew(Run, new Tuple<long, ICrontabSchedulerJob>(_jobTaskID, job)).Unwrap()));
 			}
 		}
 
 		#region Execution
 
-		private void Run(object state)
+		private async Task Run(object state)
 		{
 			var (jobTaskID, job) = (Tuple<long, ICrontabSchedulerJob>)state;
 
 			try
 			{
-				RunScoped(job);
+				await RunScoped(job);
 			}
 			catch (Exception e)
 			{
@@ -253,7 +253,7 @@ namespace Simplify.Scheduler
 			}
 		}
 
-		private void RunScoped(ISchedulerJobRepresentation job)
+		private async Task RunScoped(ISchedulerJobRepresentation job)
 		{
 			using var scope = DIContainer.Current.BeginLifetimeScope();
 
@@ -261,12 +261,12 @@ namespace Simplify.Scheduler
 
 			OnJobStart?.Invoke(job);
 
-			InvokeJobMethod(job, jobObject);
+			await InvokeJobMethod(job, jobObject);
 
 			OnJobFinish?.Invoke(job);
 		}
 
-		private void RunBasicJob(ISchedulerJobRepresentation job)
+		private async Task RunBasicJob(ISchedulerJobRepresentation job)
 		{
 			try
 			{
@@ -276,7 +276,7 @@ namespace Simplify.Scheduler
 
 				OnJobStart?.Invoke(job);
 
-				InvokeJobMethod(job, jobObject);
+				await InvokeJobMethod(job, jobObject);
 
 				_workingBasicJobs.Add(job, scope);
 			}
@@ -289,25 +289,32 @@ namespace Simplify.Scheduler
 			}
 		}
 
-		private void InvokeJobMethod(ISchedulerJobRepresentation job, object jobObject)
+		private Task InvokeJobMethod(ISchedulerJobRepresentation job, object jobObject)
 		{
+			object result;
+
 			switch (job.InvokeMethodParameterType)
 			{
 				case InvokeMethodParameterType.Parameterless:
-					job.InvokeMethodInfo.Invoke(jobObject, null);
+					result = job.InvokeMethodInfo.Invoke(jobObject, null);
 					break;
 
 				case InvokeMethodParameterType.AppName:
-					job.InvokeMethodInfo.Invoke(jobObject, new object[] { AppName });
+					result = job.InvokeMethodInfo.Invoke(jobObject, new object[] { AppName });
 					break;
 
 				case InvokeMethodParameterType.Args:
-					job.InvokeMethodInfo.Invoke(jobObject, new object[] { job.JobArgs });
+					result = job.InvokeMethodInfo.Invoke(jobObject, new object[] { job.JobArgs });
 					break;
 
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+
+			if (result is Task task)
+				return task;
+
+			return Task.CompletedTask;
 		}
 
 		private void FinalizeJob(long jobTaskID, ICrontabSchedulerJob job)
