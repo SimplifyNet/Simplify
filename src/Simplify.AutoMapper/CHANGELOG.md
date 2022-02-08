@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2022-02-08
+
+### Dependencies
+
+- AutoMapper bump to 11.0.1 (PR#351)
+
 ## [1.1.0] - 2022-01-10
 
 ### Dependencies
