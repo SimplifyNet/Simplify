@@ -1,6 +1,10 @@
 # Changelog
 
-## [4.2.0] - 2022-04-22
+## [4.2.0] - 2022-04-23
+
+### Removed
+
+- .NET Standard 1.0 support drop
 
 ### Dependencies
 
