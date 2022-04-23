@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.2.0] - 2022-04-23
+
+### Removed
+
+- .NET Standard 1.0 support drop
+
+### Dependencies
+
+- Internal DryIoc bump to 5.0.0 (PR#376)
+
 ## [4.1.7] - 2022-03--27
 
 ### Dependencies
