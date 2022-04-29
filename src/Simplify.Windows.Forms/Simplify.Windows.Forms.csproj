@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0-windows;netcoreapp3.1;net452</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
-		<OutputPath>bin\Any CPU\$(Configuration)\</OutputPath>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
