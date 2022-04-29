@@ -21,7 +21,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Wcf/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.1.*" />
+		<PackageReference Include="Simplify.DI" Version="4.2.*" />
 		<Reference Include="System.ServiceModel" />
 		<Reference Include="System.ServiceModel.Activation" />
 	</ItemGroup>

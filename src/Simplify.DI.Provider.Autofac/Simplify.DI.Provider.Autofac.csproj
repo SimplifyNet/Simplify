@@ -24,7 +24,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.3.0" />
-		<PackageReference Include="Simplify.DI" Version="4.1.*" />
+		<PackageReference Include="Simplify.DI" Version="4.2.*" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
