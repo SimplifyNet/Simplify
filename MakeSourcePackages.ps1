@@ -19,10 +19,6 @@ $systemVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScript
 
 # Packing source packages
 
-src\.nuget\NuGet.exe pack src/Simplify.Xml/Simplify.Xml.Sources.nuspec -Version $xmlVersion
-src\.nuget\NuGet.exe pack src/Simplify.String/Simplify.String.Sources.nuspec -Version $stringVersion
-src\.nuget\NuGet.exe pack src/Simplify.System/Simplify.System.Sources.nuspec -Version $systemVersion
-
-# Publishing to Appveyor artifacts
-
-Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+src\.nuget\NuGet.exe pack src/Simplify.Xml/Simplify.Xml.Sources.nuspec -Version $xmlVersion -OutputDirectory ./src/publish/
+src\.nuget\NuGet.exe pack src/Simplify.String/Simplify.String.Sources.nuspec -Version $stringVersion -OutputDirectory ./src/publish/
+src\.nuget\NuGet.exe pack src/Simplify.System/Simplify.System.Sources.nuspec -Version $systemVersion -OutputDirectory ./src/publish/
