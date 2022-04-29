@@ -28,7 +28,7 @@ jobs:
         run: dotnet build --no-restore -c Release
 
       - name: Perform Unit Testing
-        run: dotnet test --no-build -c Release --verbosity normal
+        run: dotnet test --no-build -c Release --filter TestCategory!=Integration --verbosity normal
 
       - name: Create Package
         run: dotnet pack --no-build -c Release -o ./publish
