@@ -5,13 +5,15 @@ namespace Simplify.Mail.TestConsoleApp.Setup
 {
 	public static class IocRegistrations
 	{
-		public static void Register()
+		public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
 		{
-			DIContainer.Current.Register<IConfiguration>(r => new ConfigurationBuilder()
+			provider.Register<IConfiguration>(r => new ConfigurationBuilder()
 				.AddJsonFile("appsettings.json", false)
-				.Build());
+				.Build())
 
-			DIContainer.Current.Register<IMailSender>(r => new MailSender(r.Resolve<IConfiguration>()));
+			.Register<IMailSender>(r => new MailSender(r.Resolve<IConfiguration>()));
+
+			return provider;
 		}
 	}
 }
