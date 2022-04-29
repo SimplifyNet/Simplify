@@ -31,6 +31,7 @@ jobs:
 
       - name: Create Source Packages
         shell: pwsh
+        working-directory: .
         run: ./MakeSourcePackages.ps1
 
       - name: Create packages artifact
