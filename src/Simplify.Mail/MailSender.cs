@@ -31,7 +31,8 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="configurationSectionName">Name of the configuration section in the *.config configuration file.</param>
 	public MailSender(string configurationSectionName = "MailSenderSettings")
 	{
-		if (string.IsNullOrEmpty(configurationSectionName)) throw new ArgumentNullException(nameof(configurationSectionName));
+		if (string.IsNullOrEmpty(configurationSectionName))
+			throw new ArgumentNullException(nameof(configurationSectionName));
 
 		Settings = new ConfigurationManagedBasedMailSenderSettings(configurationSectionName);
 	}
@@ -86,7 +87,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <exception cref="ArgumentNullException">value</exception>
 	public static IMailSender Default
 	{
-		get => _defaultInstance ?? (_defaultInstance = new MailSender());
+		get => _defaultInstance ??= new MailSender();
 		set => _defaultInstance = value ?? throw new ArgumentNullException(nameof(value));
 	}
 
@@ -148,22 +149,17 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="mailMessage">The mail message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <returns></returns>
-	public Task SendAsync(SmtpClient client, MailMessage mailMessage, string bodyForAntiSpam = null)
-	{
-		return CheckAntiSpamPool(bodyForAntiSpam ?? mailMessage.Body)
+	public Task SendAsync(SmtpClient client, MailMessage mailMessage, string bodyForAntiSpam = null) =>
+		CheckAntiSpamPool(bodyForAntiSpam ?? mailMessage.Body)
 			? Task.Delay(0)
 			: client.SendMailAsync(mailMessage);
-	}
 
 	/// <summary>
 	/// Send single e-mail.
 	/// </summary>
 	/// <param name="mailMessage">The mail message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
-	public void Send(MailMessage mailMessage, string bodyForAntiSpam = null)
-	{
-		Send(SmtpClient, mailMessage, bodyForAntiSpam);
-	}
+	public void Send(MailMessage mailMessage, string bodyForAntiSpam = null) => Send(SmtpClient, mailMessage, bodyForAntiSpam);
 
 	/// <summary>
 	/// Send single e-mail asynchronously.
@@ -171,10 +167,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="mailMessage">The mail message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <returns></returns>
-	public Task SendAsync(MailMessage mailMessage, string bodyForAntiSpam = null)
-	{
-		return SendAsync(SmtpClient, mailMessage, bodyForAntiSpam);
-	}
+	public Task SendAsync(MailMessage mailMessage, string bodyForAntiSpam = null) => SendAsync(SmtpClient, mailMessage, bodyForAntiSpam);
 
 	/// <summary>
 	/// Send single e-mail.
@@ -247,10 +240,8 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
-	public void Send(string from, string to, string subject, string body, string bodyForAntiSpam = null, params Attachment[] attachments)
-	{
+	public void Send(string from, string to, string subject, string body, string bodyForAntiSpam = null, params Attachment[] attachments) =>
 		Send(SmtpClient, from, to, subject, body, bodyForAntiSpam, attachments);
-	}
 
 	/// <summary>
 	/// Sends the asynchronous.
@@ -262,10 +253,8 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">The body for anti spam.</param>
 	/// <param name="attachments">The attachments.</param>
 	/// <returns></returns>
-	public Task SendAsync(string @from, string to, string subject, string body, string bodyForAntiSpam = null, params Attachment[] attachments)
-	{
-		return SendAsync(SmtpClient, from, to, subject, body, bodyForAntiSpam, attachments);
-	}
+	public Task SendAsync(string @from, string to, string subject, string body, string bodyForAntiSpam = null, params Attachment[] attachments) =>
+		SendAsync(SmtpClient, from, to, subject, body, bodyForAntiSpam, attachments);
 
 	/// <summary>
 	/// Send e-mail to multiple recipients in one e-mail.
@@ -360,10 +349,8 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void Send(string fromMailAddress, IList<string> addresses, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments)
-	{
+		params Attachment[] attachments) =>
 		Send(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
-	}
 
 	/// <summary>
 	/// Send e-mail to multiple recipients in one e-mail asynchronously.
@@ -378,10 +365,8 @@ public class MailSender : IMailSender, IDisposable
 	/// Process status, <see langword="true" /> if all messages are processed to sent successfully
 	/// </returns>
 	public Task SendAsync(string fromMailAddress, IList<string> addresses, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments)
-	{
-		return SendAsync(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
-	}
+		params Attachment[] attachments) =>
+		SendAsync(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
 
 	/// <summary>
 	/// Send e-mail to multiple recipients and carbon copy recipients in one e-mail.
