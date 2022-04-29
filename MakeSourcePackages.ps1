@@ -13,9 +13,9 @@ foreach ($file in $files)
 
 # Getting packages versions
 
-$xmlVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScriptRoot/src/Simplify.Xml/bin/Any CPU/Release/netstandard2.0/Simplify.Xml.dll").FileVersion
-$stringVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScriptRoot/src/Simplify.String/bin/Any CPU/Release/net452/Simplify.String.dll").FileVersion
-$systemVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScriptRoot/src/Simplify.System/bin/Any CPU/Release/netstandard2.0/Simplify.System.dll").FileVersion
+$xmlVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScriptRoot/src/Simplify.Xml/binRelease/netstandard2.0/Simplify.Xml.dll").FileVersion
+$stringVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScriptRoot/src/Simplify.String/bin/Release/net452/Simplify.String.dll").FileVersion
+$systemVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSScriptRoot/src/Simplify.System/bin/Release/netstandard2.0/Simplify.System.dll").FileVersion
 
 # Packing source packages
 
