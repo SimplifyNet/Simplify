@@ -7,7 +7,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>2.0.2</Version>
+		<Version>2.0.3</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
