@@ -1,4 +1,6 @@
-﻿namespace Simplify.Pipelines.Processing
+﻿using System;
+
+namespace Simplify.Pipelines.Processing
 {
 	[Obsolete("Please use IConveyorStage with exceptions")]
 	/// <summary>
