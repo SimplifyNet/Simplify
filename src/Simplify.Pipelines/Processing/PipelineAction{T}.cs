@@ -1,5 +1,6 @@
 ﻿namespace Simplify.Pipelines.Processing
 {
+	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Provides pipeline related action delegate
 	/// </summary>

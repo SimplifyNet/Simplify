@@ -18,10 +18,7 @@ namespace Simplify.Pipelines.ProductionLine
 		/// </summary>
 		/// <param name="stages">The stages.</param>
 		/// <exception cref="ArgumentNullException">stages</exception>
-		public AsyncConveyor(IList<IAsyncConveyorStage<T>> stages)
-		{
-			_stages = stages ?? throw new ArgumentNullException(nameof(stages));
-		}
+		public AsyncConveyor(IList<IAsyncConveyorStage<T>> stages) => _stages = stages ?? throw new ArgumentNullException(nameof(stages));
 
 		/// <summary>
 		/// Occurs when conveyor is about to execute.

@@ -1,5 +1,8 @@
-﻿namespace Simplify.Pipelines
+﻿using System;
+
+namespace Simplify.Pipelines
 {
+	[Obsolete]
 	/// <summary>
 	/// Provides chain of responsibility handler base class
 	/// </summary>

@@ -17,19 +17,13 @@ namespace Simplify.Pipelines.Validation
 		/// Initializes a new instance of the <see cref="ValidationPipeline{T, TResult}"/> class.
 		/// </summary>
 		/// <param name="rules">The rules.</param>
-		public ValidationPipeline(IList<IRule<T, TResult>> rules)
-		{
-			_rules = rules;
-		}
+		public ValidationPipeline(IList<IRule<T, TResult>> rules) => _rules = rules;
 
 		/// <summary>
 		/// Validation the specified item through pipeline rules.
 		/// </summary>
 		/// <param name="item">The item.</param>
 		/// <returns></returns>
-		public virtual IList<TResult> Check(T item)
-		{
-			return _rules.Where(x => !x.Check(item)).Select(x => x.InvalidValidationResult).ToList();
-		}
+		public virtual IList<TResult> Check(T item) => _rules.Where(x => !x.Check(item)).Select(x => x.InvalidValidationResult).ToList();
 	}
 }

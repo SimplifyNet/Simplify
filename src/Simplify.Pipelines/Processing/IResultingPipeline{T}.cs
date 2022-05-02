@@ -1,5 +1,8 @@
+using System;
+
 namespace Simplify.Pipelines.Processing
 {
+	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Represent pipeline with processing error result information
 	/// </summary>

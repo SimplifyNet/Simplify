@@ -1,5 +1,6 @@
 ﻿namespace Simplify.Pipelines.Processing
 {
+	[Obsolete("Please use IConveyorStage with exceptions")]
 	/// <summary>
 	/// Represent pipeline stage with processing error result information
 	/// </summary>
