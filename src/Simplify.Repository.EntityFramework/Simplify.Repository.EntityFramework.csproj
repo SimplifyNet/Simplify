@@ -27,7 +27,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.7" />
-		<PackageReference Include="Simplify.DI" Version="4.1.5" />
+		<PackageReference Include="Simplify.DI" Version="4.2.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
