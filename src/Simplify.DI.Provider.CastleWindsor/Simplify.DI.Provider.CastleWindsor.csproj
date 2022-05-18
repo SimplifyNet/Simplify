@@ -22,7 +22,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.CastleWindsor/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Castle.Windsor" Version="5.1.1" />
+		<PackageReference Include="Castle.Windsor" Version="5.1.2" />
 		<PackageReference Include="Simplify.DI" Version="4.1.*" />
 	</ItemGroup>
 	<ItemGroup>
