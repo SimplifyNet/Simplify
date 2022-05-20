@@ -1,9 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
+		<Nullable>enable</Nullable>
+
 		<Description>Simplify.Bus.Impl unit tests</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>

@@ -2,9 +2,8 @@ using System.Threading.Tasks;
 
 namespace Simplify.Bus;
 
-public interface ISenderAsync
+public interface ISenderAsync<in T>
+	where T : ICommand
 {
-	Task Send<T>(T command);
-
-	Task<TResponse> Send<T, TResponse>(T command);
+	Task Send(T command);
 }
