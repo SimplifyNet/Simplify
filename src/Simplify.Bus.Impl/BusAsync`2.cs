@@ -19,7 +19,7 @@ public class BusAsync<T, TEvent> : IBusAsync<T, TEvent>
 
 	public Task Send(T command)
 	{
-		throw new System.NotImplementedException();
+		return _commandHandler.Handle(command);
 	}
 
 	public Task Publish(TEvent @event)

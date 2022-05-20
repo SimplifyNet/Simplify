@@ -9,10 +9,10 @@ public class BusAsync<T, TResponse, TEvent> : IBusAsync<T, TResponse, TEvent>
 	where TResponse : IResponse
 	where TEvent : IEvent
 {
-	private readonly ICommandHandler<T> _commandHandler;
+	private readonly ICommandHandler<T, TResponse> _commandHandler;
 	private readonly IList<IEventHandler<TEvent>>? _eventHandlers;
 
-	public BusAsync(ICommandHandler<T> commandHandler, IList<IEventHandler<TEvent>>? eventHandlers)
+	public BusAsync(ICommandHandler<T, TResponse> commandHandler, IList<IEventHandler<TEvent>>? eventHandlers)
 	{
 		_commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
 		_eventHandlers = eventHandlers;
@@ -20,7 +20,7 @@ public class BusAsync<T, TResponse, TEvent> : IBusAsync<T, TResponse, TEvent>
 
 	public Task<TResponse> Send(T command)
 	{
-		throw new System.NotImplementedException();
+		return _commandHandler.Handle(command);
 	}
 
 	public Task Publish(TEvent @event)

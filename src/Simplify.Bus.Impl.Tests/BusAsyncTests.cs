@@ -35,10 +35,10 @@ public class BusAsyncTests
 		// Assert
 
 		var handler = scope.Resolver.Resolve<CreateUserCommandHandler>();
-		var @event = scope.Resolver.Resolve<CreateUserCommandHandler>();
+		var notifier = scope.Resolver.Resolve<UserCreatedNotifier>();
 
 		Assert.IsTrue(handler.Executed);
-		Assert.IsTrue(handler.Executed);
+		Assert.IsTrue(notifier.Executed);
 	}
 
 	[Test]
