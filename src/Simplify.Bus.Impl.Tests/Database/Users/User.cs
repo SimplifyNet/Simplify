@@ -4,5 +4,5 @@ namespace Simplify.Bus.Impl.Tests.Database.Users;
 
 public class User : IUser
 {
-	public string Name { get; set; }
+	public string? Name { get; set; }
 }

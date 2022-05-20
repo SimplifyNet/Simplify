@@ -18,7 +18,7 @@ public class BusAsyncTests
 
 		var container = new DryIocDIProvider();
 
-		container.RegisterBus<CreateUserCommand, CreateUserCommandHandler, UserCreatedEvent>();
+		container.RegisterBus<CreateUserCommand, CreateUserCommandHandler, UserCreatedEvent>(typeof(UserCreatedNotifier));
 
 		var command = new CreateUserCommand(new User
 		{
@@ -34,7 +34,7 @@ public class BusAsyncTests
 
 		// Assert
 
-		var handler = scope.Resolver.Resolve<CreateUserCommandHandler>();
+		var handler = (CreateUserCommandHandler)scope.Resolver.Resolve<ICommandHandler<CreateUserCommand>>();
 		var notifier = scope.Resolver.Resolve<UserCreatedNotifier>();
 
 		Assert.IsTrue(handler.Executed);
