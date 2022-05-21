@@ -10,23 +10,19 @@ namespace Simplify.Bus.Impl;
 public static class SimplifyDIRegistratorExtensions
 {
 	/// <summary>
-	/// Registers Simplify.Bus into Simplify.DI container.
+	/// Registers Simplify.Bus.
 	/// </summary>
 	/// <param name="registrator">The registrator.</param>
 	/// <returns></returns>
-	public static IDIRegistrator RegisterBus<TCommand, TCommandHandler, TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
+	public static IDIRegistrator RegisterBus<TCommand, TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
 		where TCommand : ICommand
 		where TEvent : IEvent
 	{
 		registrator
-			// .Register<ICommandHandler<TCommand>, TCommandHandler>()
 			.Register<IBusAsync<TCommand, TEvent>, BusAsync<TCommand, TEvent>>();
 
 		if (eventHandlers == null)
 			return registrator;
-
-		// foreach (var item in eventHandlers)
-		// registrator.Register(item);
 
 		registrator.RegisterEventHandlersList<TEvent>(eventHandlers);
 

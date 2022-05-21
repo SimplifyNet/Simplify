@@ -23,7 +23,7 @@ public class BusAsyncTests
 			.Register<ICommandHandler<CreateUserCommand>, CreateUserCommandHandler>()
 			.Register<UserCreatedNotifier>()
 
-			.RegisterBus<CreateUserCommand, CreateUserCommandHandler, UserCreatedEvent>(typeof(UserCreatedNotifier));
+			.RegisterBus<CreateUserCommand, UserCreatedEvent>(typeof(UserCreatedNotifier));
 
 		var command = new CreateUserCommand(new User
 		{
