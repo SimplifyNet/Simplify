@@ -14,12 +14,12 @@ public static class SimplifyDIRegistratorExtensions
 	/// </summary>
 	/// <param name="registrator">The registrator.</param>
 	/// <returns></returns>
-	public static IDIRegistrator RegisterBus<TCommand, TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
-		where TCommand : ICommand
+	public static IDIRegistrator RegisterBus<TRequest, TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
+		where TRequest : IRequest
 		where TEvent : IEvent
 	{
 		registrator
-			.Register<IBusAsync<TCommand, TEvent>, BusAsync<TCommand, TEvent>>();
+			.Register<IBusAsync<TRequest, TEvent>, BusAsync<TRequest, TEvent>>();
 
 		if (eventHandlers == null)
 			return registrator;

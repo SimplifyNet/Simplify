@@ -1,5 +1,5 @@
 namespace Simplify.Bus;
 
-public interface IQuery
+public interface IRequest
 {
 }

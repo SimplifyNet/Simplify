@@ -1,7 +1,7 @@
 namespace Simplify.Bus;
 
-public interface IBusAsync<in T, TResponse, TEvent> : ISenderAsync<T, TResponse>, IPublisherAsync<TEvent>
-	where T : ICommand
+public interface IBusAsync<in TRequest, TResponse, TEvent> : ISenderAsync<TRequest, TResponse>, IPublisherAsync<TEvent>
+	where TRequest : IRequest
 	where TResponse : IResponse
 	where TEvent : IEvent
 {

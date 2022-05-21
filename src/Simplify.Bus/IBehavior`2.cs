@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 
 namespace Simplify.Bus;
 
-public interface IBehavior<T, TResponse>
-	where T : ICommand
+public interface IBehavior<TRequest, TResponse>
+	where TRequest : IRequest
 {
-	Task<TResponse> Handle(T command);
+	Task<TResponse> Handle(TRequest request);
 }

@@ -5,21 +5,21 @@ using System.Threading.Tasks;
 namespace Simplify.Bus.Impl;
 
 public class BusAsync<T, TEvent> : IBusAsync<T, TEvent>
-	where T : ICommand
+	where T : IRequest
 	where TEvent : IEvent
 {
-	private readonly ICommandHandler<T> _commandHandler;
-	private readonly IList<IEventHandler<TEvent>>? _eventHandlers;
+	private readonly IRequestHandler<T> _requestHandler;
+	private readonly IReadOnlyCollection<IEventHandler<TEvent>>? _eventHandlers;
 
-	public BusAsync(ICommandHandler<T> commandHandler, IList<IEventHandler<TEvent>>? eventHandlers)
+	public BusAsync(IRequestHandler<T> requestHandler, IReadOnlyCollection<IEventHandler<TEvent>>? eventHandlers)
 	{
-		_commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
+		_requestHandler = requestHandler ?? throw new ArgumentNullException(nameof(requestHandler));
 		_eventHandlers = eventHandlers;
 	}
 
-	public Task Send(T command)
+	public Task Send(T request)
 	{
-		return _commandHandler.Handle(command);
+		return _requestHandler.Handle(request);
 	}
 
 	public Task Publish(TEvent @event)

@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 
 namespace Simplify.Bus;
 
-public interface IPublisherAsync<T>
-	where T : IEvent
+public interface IPublisherAsync<TEvent>
+	where TEvent : IEvent
 {
-	Task Publish(T @event);
+	Task Publish(TEvent @event);
 }

@@ -4,5 +4,5 @@ namespace Simplify.Bus;
 
 public interface IBehavior
 {
-	Task Handle(object command);
+	Task Handle(object request);
 }

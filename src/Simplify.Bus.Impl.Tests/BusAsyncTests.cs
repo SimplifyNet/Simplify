@@ -20,7 +20,7 @@ public class BusAsyncTests
 		var container = new DryIocDIProvider();
 
 		container
-			.Register<ICommandHandler<CreateUserCommand>, CreateUserCommandHandler>()
+			.Register<IRequestHandler<CreateUserCommand>, CreateUserCommandHandler>()
 			.Register<UserCreatedNotifier>()
 
 			.RegisterBus<CreateUserCommand, UserCreatedEvent>(typeof(UserCreatedNotifier));
@@ -59,7 +59,7 @@ public class BusAsyncTests
 		var container = new DryIocDIProvider();
 
 		container
-			.Register<ICommandHandler<CreateUserCommand>, CreateUserCommandHandler>()
+			.Register<IRequestHandler<CreateUserCommand>, CreateUserCommandHandler>()
 			.Register<UserCreatedNotifier>()
 
 			.Register<IList<IEventHandler<UserCreatedEvent>>>(r => new List<IEventHandler<UserCreatedEvent>>
