@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Simplify.Bus.Impl.Tests.Application.Users.Create;
 using Simplify.Bus.Impl.Tests.Database.Users;
+using Simplify.Bus.Impl.Tests.Infrastructure.Log;
 using Simplify.DI;
 using Simplify.DI.Provider.DryIoc;
 
@@ -18,7 +19,11 @@ public class BusAsyncTests
 
 		var container = new DryIocDIProvider();
 
-		container.RegisterBus<CreateUserCommand, CreateUserCommandHandler, UserCreatedEvent>(typeof(UserCreatedNotifier));
+		container
+			.Register<ICommandHandler<CreateUserCommand>, CreateUserCommandHandler>()
+			.Register<UserCreatedNotifier>()
+
+			.RegisterBus<CreateUserCommand, CreateUserCommandHandler, UserCreatedEvent>(typeof(UserCreatedNotifier));
 
 		var command = new CreateUserCommand(new User
 		{
@@ -34,15 +39,20 @@ public class BusAsyncTests
 
 		// Assert
 
-		var handler = (CreateUserCommandHandler)scope.Resolver.Resolve<ICommandHandler<CreateUserCommand>>();
-		var notifier = scope.Resolver.Resolve<UserCreatedNotifier>();
+		Assert.AreEqual(5, ActionsAuditor.ExecutedActions.Count);
+		Assert.AreEqual(typeof(LoggingBehavior), ActionsAuditor.ExecutedActions[0]);
+		Assert.AreEqual(typeof(CreateUserCommandValidationBehavior), ActionsAuditor.ExecutedActions[1]);
+		Assert.AreEqual(typeof(CreateUserCommandHandler), ActionsAuditor.ExecutedActions[2]);
 
-		Assert.IsTrue(handler.Executed);
-		Assert.IsTrue(notifier.Executed);
+		Assert.IsTrue(ActionsAuditor.ExecutedActions.Contains(typeof(UserCreatedNotifier)));
+		Assert.Greater(ActionsAuditor.ExecutedActions.IndexOf(typeof(UserCreatedNotifier)), 2);
+
+		Assert.IsTrue(ActionsAuditor.ExecutedActions.Contains(typeof(UserCreatedNotifier2)));
+		Assert.Greater(ActionsAuditor.ExecutedActions.IndexOf(typeof(UserCreatedNotifier2)), 2);
 	}
 
 	[Test]
-	public async Task CreateUserCommand_HandlerWithEventAndCustomRegistrations_Executed()
+	public async Task CreateUserCommand_HandlerWithEvent_FullCustomRegistrations_Executed()
 	{
 		// Arrange
 
@@ -72,5 +82,16 @@ public class BusAsyncTests
 		await bus.Send(command);
 
 		// Assert
+
+		Assert.AreEqual(5, ActionsAuditor.ExecutedActions.Count);
+		Assert.AreEqual(typeof(LoggingBehavior), ActionsAuditor.ExecutedActions[0]);
+		Assert.AreEqual(typeof(CreateUserCommandValidationBehavior), ActionsAuditor.ExecutedActions[1]);
+		Assert.AreEqual(typeof(CreateUserCommandHandler), ActionsAuditor.ExecutedActions[2]);
+
+		Assert.IsTrue(ActionsAuditor.ExecutedActions.Contains(typeof(UserCreatedNotifier)));
+		Assert.Greater(ActionsAuditor.ExecutedActions.IndexOf(typeof(UserCreatedNotifier)), 2);
+
+		Assert.IsTrue(ActionsAuditor.ExecutedActions.Contains(typeof(UserCreatedNotifier2)));
+		Assert.Greater(ActionsAuditor.ExecutedActions.IndexOf(typeof(UserCreatedNotifier2)), 2);
 	}
 }

@@ -5,11 +5,9 @@ namespace Simplify.Bus.Impl.Tests.Application.Users.Create
 {
 	public class UserCreatedNotifier : IEventHandler<UserCreatedEvent>
 	{
-		public bool Executed { get; private set; }
-
 		public Task Handle(UserCreatedEvent @event)
 		{
-			Executed = true;
+			ActionsAuditor.ExecutedActions.Add(typeof(UserCreatedNotifier));
 
 			Console.WriteLine($"{nameof(UserCreatedNotifier)} executed");
 

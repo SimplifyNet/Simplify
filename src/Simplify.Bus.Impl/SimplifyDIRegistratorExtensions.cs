@@ -19,25 +19,29 @@ public static class SimplifyDIRegistratorExtensions
 		where TEvent : IEvent
 	{
 		registrator
-			.Register<ICommandHandler<TCommand>, TCommandHandler>()
+			// .Register<ICommandHandler<TCommand>, TCommandHandler>()
 			.Register<IBusAsync<TCommand, TEvent>, BusAsync<TCommand, TEvent>>();
 
 		if (eventHandlers == null)
 			return registrator;
 
-		foreach (var item in eventHandlers)
-			registrator.Register(item);
+		// foreach (var item in eventHandlers)
+		// registrator.Register(item);
 
-		registrator.Register<IList<IEventHandler<TEvent>>>(r =>
-		{
-			var items = new List<IEventHandler<TEvent>>();
-
-			foreach (var item in eventHandlers)
-				items.Add((IEventHandler<TEvent>)r.Resolve(item));
-
-			return items;
-		});
+		registrator.RegisterEventHandlersList<TEvent>(eventHandlers);
 
 		return registrator;
 	}
+
+	private static IDIRegistrator RegisterEventHandlersList<TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
+		where TEvent : IEvent
+		 => registrator.Register<IList<IEventHandler<TEvent>>>(r =>
+			{
+				var items = new List<IEventHandler<TEvent>>();
+
+				foreach (var item in eventHandlers)
+					items.Add((IEventHandler<TEvent>)r.Resolve(item));
+
+				return items;
+			});
 }
