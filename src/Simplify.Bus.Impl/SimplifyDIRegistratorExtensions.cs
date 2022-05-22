@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using DryIoc;
 using Simplify.DI;
 
 namespace Simplify.Bus.Impl;
@@ -9,35 +11,27 @@ namespace Simplify.Bus.Impl;
 /// </summary>
 public static class SimplifyDIRegistratorExtensions
 {
-	/// <summary>
-	/// Registers Simplify.Bus.
-	/// </summary>
-	/// <param name="registrator">The registrator.</param>
-	/// <returns></returns>
-	public static IDIRegistrator RegisterBus<TRequest, TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
-		where TRequest : IRequest
-		where TEvent : IEvent
-	{
-		registrator
-			.Register<IBusAsync<TRequest, TEvent>, BusAsync<TRequest, TEvent>>();
+	public static IDIRegistrator RegisterBus<TRequest>(this IDIRegistrator registrator, params Type[] behaviors) => registrator
+			.Register<IBusAsync<TRequest>, BusAsync<TRequest>>()
+			.RegisterBehaviorsList<TRequest>(behaviors.Where(x => x.ImplementsServiceType(typeof(IBehavior<TRequest>))).ToList());
 
-		if (eventHandlers == null)
-			return registrator;
+	public static IDIRegistrator RegisterBus<TRequest, TResponse>(this IDIRegistrator registrator, params Type[] behaviors) => registrator
+			.Register<IBusAsync<TRequest, TResponse>, BusAsync<TRequest, TResponse>>()
+			.RegisterBehaviorsList<TRequest, TResponse>(behaviors.Where(x => x.ImplementsServiceType(typeof(IBehavior<TRequest, TResponse>))).ToList());
 
-		registrator.RegisterEventHandlersList<TEvent>(eventHandlers);
+	public static IDIRegistrator RegisterEventBus<TEvent>(this IDIRegistrator registrator, params Type[] behaviorAndEventHandlers) => registrator
+			.Register<IEventBusAsync<TEvent>, BusAsync<TEvent>>()
+			.RegisterEventHandlersList<TEvent>(behaviorAndEventHandlers.Where(x => x.ImplementsServiceType(typeof(IEventHandler<TEvent>))).ToList());
 
-		return registrator;
-	}
+	private static IDIRegistrator RegisterBehaviorsList<TRequest>(this IDIRegistrator registrator, ICollection<Type> behaviors)
+		=> registrator.Register<IList<IBehavior<TRequest>>>(r =>
+			behaviors.Select(item => (IBehavior<TRequest>)r.Resolve(item)).ToList());
 
-	private static IDIRegistrator RegisterEventHandlersList<TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers)
-		where TEvent : IEvent
-		 => registrator.Register<IList<IEventHandler<TEvent>>>(r =>
-			{
-				var items = new List<IEventHandler<TEvent>>();
+	private static IDIRegistrator RegisterBehaviorsList<TRequest, TResponse>(this IDIRegistrator registrator, ICollection<Type> behaviors)
+		=> registrator.Register<IList<IBehavior<TRequest, TResponse>>>(r =>
+			behaviors.Select(item => (IBehavior<TRequest, TResponse>)r.Resolve(item)).ToList());
 
-				foreach (var item in eventHandlers)
-					items.Add((IEventHandler<TEvent>)r.Resolve(item));
-
-				return items;
-			});
+	private static IDIRegistrator RegisterEventHandlersList<TEvent>(this IDIRegistrator registrator, ICollection<Type> eventHandlers)
+		=> registrator.Register<IList<IEventHandler<TEvent>>>(r =>
+			eventHandlers.Select(item => (IEventHandler<TEvent>)r.Resolve(item)).ToList());
 }

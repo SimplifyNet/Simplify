@@ -1,7 +1,8 @@
+using System.Threading.Tasks;
+
 namespace Simplify.Bus;
 
-public interface IBusAsync<in TRequest, TEvent> : ISenderAsync<TRequest>, IPublisherAsync<TEvent>
-	where TRequest : IRequest
-	where TEvent : IEvent
+public interface IBusAsync<in TRequest, TResponse>
 {
+	Task<TResponse> Send(TRequest request);
 }

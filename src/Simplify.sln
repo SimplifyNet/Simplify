@@ -175,6 +175,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplify.Bus.Impl", "Simpli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplify.Bus.Impl.Tests", "Simplify.Bus.Impl.Tests\Simplify.Bus.Impl.Tests.csproj", "{E25FFC09-7D8B-4F77-9CBC-A699847833FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplify.Bus.Impl.UsabilityTests", "Simplify.Bus.Impl.UsabilityTests\Simplify.Bus.Impl.UsabilityTests.csproj", "{29D5ECCE-9220-4DB8-B74A-B3DCB54E61A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -417,11 +419,16 @@ Global
 		{E25FFC09-7D8B-4F77-9CBC-A699847833FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E25FFC09-7D8B-4F77-9CBC-A699847833FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E25FFC09-7D8B-4F77-9CBC-A699847833FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D5ECCE-9220-4DB8-B74A-B3DCB54E61A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D5ECCE-9220-4DB8-B74A-B3DCB54E61A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D5ECCE-9220-4DB8-B74A-B3DCB54E61A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D5ECCE-9220-4DB8-B74A-B3DCB54E61A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{29D5ECCE-9220-4DB8-B74A-B3DCB54E61A3} = {D0291F10-D789-11EC-BD5A-3BCB9889B5D3}
 		{E25FFC09-7D8B-4F77-9CBC-A699847833FA} = {D0291F10-D789-11EC-BD5A-3BCB9889B5D3}
 		{ED16FDB9-79ED-46E4-8FF1-0F23E18377DC} = {D0291F10-D789-11EC-BD5A-3BCB9889B5D3}
 		{0187679F-6094-405A-9047-D1EC9D94E118} = {D0291F10-D789-11EC-BD5A-3BCB9889B5D3}

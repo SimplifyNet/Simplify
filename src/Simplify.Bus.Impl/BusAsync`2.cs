@@ -4,26 +4,20 @@ using System.Threading.Tasks;
 
 namespace Simplify.Bus.Impl;
 
-public class BusAsync<T, TEvent> : IBusAsync<T, TEvent>
-	where T : IRequest
-	where TEvent : IEvent
+public class BusAsync<TRequest, TResponse> : IBusAsync<TRequest, TResponse>
 {
-	private readonly IRequestHandler<T> _requestHandler;
-	private readonly IReadOnlyCollection<IEventHandler<TEvent>>? _eventHandlers;
+	private readonly IRequestHandler<TRequest, TResponse> _requestHandler;
+	private readonly IReadOnlyCollection<IBehavior<TRequest, TResponse>>? _behaviors;
 
-	public BusAsync(IRequestHandler<T> requestHandler, IReadOnlyCollection<IEventHandler<TEvent>>? eventHandlers)
+	public BusAsync(IRequestHandler<TRequest, TResponse> requestHandler,
+		IReadOnlyCollection<IBehavior<TRequest, TResponse>>? behaviors = null)
 	{
 		_requestHandler = requestHandler ?? throw new ArgumentNullException(nameof(requestHandler));
-		_eventHandlers = eventHandlers;
+		_behaviors = behaviors;
 	}
 
-	public Task Send(T request)
+	public Task<TResponse> Send(TRequest request)
 	{
 		return _requestHandler.Handle(request);
-	}
-
-	public Task Publish(TEvent @event)
-	{
-		throw new System.NotImplementedException();
 	}
 }
