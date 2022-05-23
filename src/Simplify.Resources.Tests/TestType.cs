@@ -1,8 +1,7 @@
-﻿namespace Simplify.Resources.Tests
+﻿namespace Simplify.Resources.Tests;
+
+public enum TestType
 {
-	public enum TestType
-	{
-		Value1,
-		Value2
-	}
+	Value1,
+	Value2
 }

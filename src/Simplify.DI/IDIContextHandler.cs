@@ -1,19 +1,18 @@
-﻿namespace Simplify.DI
+﻿namespace Simplify.DI;
+
+/// <summary>
+/// Represents DI container scoped context handler
+/// </summary>
+public interface IDIContextHandler
 {
 	/// <summary>
-	/// Represents DI container scoped context handler
+	/// Occurs when the lifetime scope is opened
 	/// </summary>
-	public interface IDIContextHandler
-	{
-		/// <summary>
-		/// Occurs when the lifetime scope is opened
-		/// </summary>
-		event BeginLifetimeScopeEventHandler OnBeginLifetimeScope;
+	event BeginLifetimeScopeEventHandler OnBeginLifetimeScope;
 
-		/// <summary>
-		/// Begins the lifetime scope.
-		/// </summary>
-		/// <returns></returns>
-		ILifetimeScope BeginLifetimeScope();
-	}
+	/// <summary>
+	/// Begins the lifetime scope.
+	/// </summary>
+	/// <returns></returns>
+	ILifetimeScope BeginLifetimeScope();
 }

@@ -1,23 +1,22 @@
-﻿namespace Simplify.WindowsServices.Jobs
+﻿namespace Simplify.WindowsServices.Jobs;
+
+/// <summary>
+/// Provides a job invoke method parameter type
+/// </summary>
+public enum InvokeMethodParameterType
 {
 	/// <summary>
-	/// Provides a job invoke method parameter type
+	/// The parameterless invoke method
 	/// </summary>
-	public enum InvokeMethodParameterType
-	{
-		/// <summary>
-		/// The parameterless invoke method
-		/// </summary>
-		Parameterless,
+	Parameterless,
 
-		/// <summary>
-		/// The invoke method with service name parameter
-		/// </summary>
-		ServiceName,
+	/// <summary>
+	/// The invoke method with service name parameter
+	/// </summary>
+	ServiceName,
 
-		/// <summary>
-		/// The invoke method with job args parameter
-		/// </summary>
-		Args
-	}
+	/// <summary>
+	/// The invoke method with job args parameter
+	/// </summary>
+	Args
 }

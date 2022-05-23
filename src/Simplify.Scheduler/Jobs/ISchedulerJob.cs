@@ -1,18 +1,17 @@
-namespace Simplify.Scheduler.Jobs
+namespace Simplify.Scheduler.Jobs;
+
+/// <summary>
+/// Represent basic scheduler job
+/// </summary>
+public interface ISchedulerJob : ISchedulerJobRepresentation
 {
 	/// <summary>
-	/// Represent basic scheduler job
+	/// Starts this job timer.
 	/// </summary>
-	public interface ISchedulerJob : ISchedulerJobRepresentation
-	{
-		/// <summary>
-		/// Starts this job timer.
-		/// </summary>
-		void Start();
+	void Start();
 
-		/// <summary>
-		/// Stops and disposes job timer.
-		/// </summary>
-		void Stop();
-	}
+	/// <summary>
+	/// Stops and disposes job timer.
+	/// </summary>
+	void Stop();
 }

@@ -1,31 +1,30 @@
-﻿namespace Simplify.Examples.Repository.EntityFramework.App.Infrastructure
+﻿namespace Simplify.Examples.Repository.EntityFramework.App.Infrastructure;
+
+public class ArgsVerifier
 {
-	public class ArgsVerifier
+	private readonly INotifier _notifier;
+
+	public ArgsVerifier(INotifier notifier)
 	{
-		private readonly INotifier _notifier;
+		_notifier = notifier;
+	}
 
-		public ArgsVerifier(INotifier notifier)
+	public bool Verify(string[] args)
+	{
+		if (args.Length == 0)
 		{
-			_notifier = notifier;
+			_notifier.ShowNoArgsMessage();
+
+			return false;
 		}
 
-		public bool Verify(string[] args)
+		if (args.Length > 1)
 		{
-			if (args.Length == 0)
-			{
-				_notifier.ShowNoArgsMessage();
+			_notifier.ShowTooManyArgsMessage();
 
-				return false;
-			}
-
-			if (args.Length > 1)
-			{
-				_notifier.ShowTooManyArgsMessage();
-
-				return false;
-			}
-
-			return true;
+			return false;
 		}
+
+		return true;
 	}
 }

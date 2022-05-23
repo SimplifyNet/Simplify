@@ -1,15 +1,14 @@
-﻿namespace Simplify.WindowsServices.Jobs.Crontab
+﻿namespace Simplify.WindowsServices.Jobs.Crontab;
+
+/// <summary>
+/// Represent crontab processor factory
+/// </summary>
+public interface ICrontabProcessorFactory
 {
 	/// <summary>
-	/// Represent crontab processor factory
+	/// Creates a crontab processor.
 	/// </summary>
-	public interface ICrontabProcessorFactory
-	{
-		/// <summary>
-		/// Creates a crontab processor.
-		/// </summary>
-		/// <param name="crontabExpression">The crontab expression.</param>
-		/// <returns></returns>
-		ICrontabProcessor Create(string crontabExpression);
-	}
+	/// <param name="crontabExpression">The crontab expression.</param>
+	/// <returns></returns>
+	ICrontabProcessor Create(string crontabExpression);
 }

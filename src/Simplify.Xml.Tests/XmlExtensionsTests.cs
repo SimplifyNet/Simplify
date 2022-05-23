@@ -4,168 +4,167 @@ using System.Xml.Linq;
 using NUnit.Framework;
 using Simplify.Templates;
 
-namespace Simplify.Xml.Tests
+namespace Simplify.Xml.Tests;
+
+[TestFixture]
+public class XmlExtensionsTests
 {
-	[TestFixture]
-	public class XmlExtensionsTests
+	private const string ExpectedInner = "<foo>data</foo>";
+	private const string ExpectedOuter = "<test><foo>data</foo></test>";
+	private const string InputString = "<test><foo>data</foo></test>";
+
+	#region Get
+
+	[Test]
+	public void GetDescendant_CorrectXPath_ValuesAreEqual()
 	{
-		private const string ExpectedInner = "<foo>data</foo>";
-		private const string ExpectedOuter = "<test><foo>data</foo></test>";
-		private const string InputString = "<test><foo>data</foo></test>";
+		// Arrange
 
-		#region Get
+		var doc = XDocument.Parse(InputString);
 
-		[Test]
-		public void GetDescendant_CorrectXPath_ValuesAreEqual()
-		{
-			// Arrange
+		// Act & Assert
 
-			var doc = XDocument.Parse(InputString);
+		Assert.AreEqual((string)doc.Root.Get("foo"), "data");
+		Assert.AreEqual((string)doc.Get("test/foo"), "data");
+	}
 
-			// Act & Assert
+	[Test]
+	public void GetDescendant_InvalidXPath_Null()
+	{
+		// Arrange
 
-			Assert.AreEqual((string)doc.Root.Get("foo"), "data");
-			Assert.AreEqual((string)doc.Get("test/foo"), "data");
-		}
+		var doc = XDocument.Parse(InputString);
 
-		[Test]
-		public void GetDescendant_InvalidXPath_Null()
-		{
-			// Arrange
+		// Act & Assert
 
-			var doc = XDocument.Parse(InputString);
+		Assert.Null((string)doc.Root.Get("baaa"));
+		Assert.Null((string)doc.Get("test/baaa"));
+	}
 
-			// Act & Assert
+	[Test]
+	public void GetDescendant_XNodeIsNull_Null()
+	{
+		// Arrange
 
-			Assert.Null((string)doc.Root.Get("baaa"));
-			Assert.Null((string)doc.Get("test/baaa"));
-		}
+		XDocument doc = null;
 
-		[Test]
-		public void GetDescendant_XNodeIsNull_Null()
-		{
-			// Arrange
+		// Act & Assert
 
-			XDocument doc = null;
+		Assert.Null((string)doc.Get("test/foo"));
+	}
 
-			// Act & Assert
+	[Test]
+	public void GetDescendant_XPathIsNullOrWhitespace_ReturnsNull()
+	{
+		// Arrange
 
-			Assert.Null((string)doc.Get("test/foo"));
-		}
+		var doc = XDocument.Parse(InputString);
 
-		[Test]
-		public void GetDescendant_XPathIsNullOrWhitespace_ReturnsNull()
-		{
-			// Arrange
+		// Act & Assert
 
-			var doc = XDocument.Parse(InputString);
+		Assert.Null((string)doc.Root.Get(null!));
+		Assert.Null((string)doc.Root.Get(""));
+		Assert.Null((string)doc.Root.Get("  "));
+	}
 
-			// Act & Assert
+	#endregion Get
 
-			Assert.Null((string)doc.Root.Get(null!));
-			Assert.Null((string)doc.Root.Get(""));
-			Assert.Null((string)doc.Root.Get("  "));
-		}
+	#region GetMany
 
-		#endregion Get
+	[Test]
+	public void GetManyDescendants_CorrectXPath_FilledCollection()
+	{
+		// Arrange
 
-		#region GetMany
+		var doc = XDocument.Parse(InputString);
+		var collection = doc.Root.GetMany("foo");
 
-		[Test]
-		public void GetManyDescendants_CorrectXPath_FilledCollection()
-		{
-			// Arrange
+		// Act & Assert
 
-			var doc = XDocument.Parse(InputString);
-			var collection = doc.Root.GetMany("foo");
+		Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
+		Assert.NotNull(collection);
+		Assert.IsNotEmpty(collection);
+		Assert.AreEqual((string)collection.ElementAt(0), "data");
+	}
 
-			// Act & Assert
+	[Test]
+	public void GetManyDescendants_InvalidXPath_EmptyCollection()
+	{
+		// Arrange
 
-			Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
-			Assert.NotNull(collection);
-			Assert.IsNotEmpty(collection);
-			Assert.AreEqual((string)collection.ElementAt(0), "data");
-		}
+		var doc = XDocument.Parse(InputString);
+		var collection = doc.Root.GetMany("baaaa");
 
-		[Test]
-		public void GetManyDescendants_InvalidXPath_EmptyCollection()
-		{
-			// Arrange
+		// Act & Assert
 
-			var doc = XDocument.Parse(InputString);
-			var collection = doc.Root.GetMany("baaaa");
+		Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
+		Assert.NotNull(collection);
+		Assert.IsEmpty(collection);
+	}
 
-			// Act & Assert
+	[Test]
+	public void GetManyDescendants_XNodeIsNull_EmptyCollection()
+	{
+		// Arrange
 
-			Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
-			Assert.NotNull(collection);
-			Assert.IsEmpty(collection);
-		}
+		XDocument doc = null;
+		// ReSharper disable once ExpressionIsAlwaysNull
+		var collection = doc.GetMany("test/foo");
 
-		[Test]
-		public void GetManyDescendants_XNodeIsNull_EmptyCollection()
-		{
-			// Arrange
+		// Act & Assert
 
-			XDocument doc = null;
-			// ReSharper disable once ExpressionIsAlwaysNull
-			var collection = doc.GetMany("test/foo");
+		Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
+		Assert.NotNull(collection);
+		Assert.IsEmpty(collection);
+	}
 
-			// Act & Assert
+	[Test]
+	public void GetManyDescendants_XPathIsNullOrWhitespace_EmptyCollection()
+	{
+		// Arrange
 
-			Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
-			Assert.NotNull(collection);
-			Assert.IsEmpty(collection);
-		}
+		var doc = XDocument.Parse(InputString);
 
-		[Test]
-		public void GetManyDescendants_XPathIsNullOrWhitespace_EmptyCollection()
-		{
-			// Arrange
+		// Act & Assert
 
-			var doc = XDocument.Parse(InputString);
+		Assert.IsInstanceOf<IEnumerable<XElement>>(doc.Root.GetMany(null!));
+		Assert.NotNull(doc.Root.GetMany(null!));
+		Assert.IsEmpty(doc.Root.GetMany(null!));
+		Assert.NotNull(doc.Root.GetMany(""));
+		Assert.IsEmpty(doc.Root.GetMany(""));
+		Assert.NotNull(doc.Root.GetMany("  "));
+		Assert.IsEmpty(doc.Root.GetMany("  "));
+	}
 
-			// Act & Assert
+	#endregion GetMany
 
-			Assert.IsInstanceOf<IEnumerable<XElement>>(doc.Root.GetMany(null!));
-			Assert.NotNull(doc.Root.GetMany(null!));
-			Assert.IsEmpty(doc.Root.GetMany(null!));
-			Assert.NotNull(doc.Root.GetMany(""));
-			Assert.IsEmpty(doc.Root.GetMany(""));
-			Assert.NotNull(doc.Root.GetMany("  "));
-			Assert.IsEmpty(doc.Root.GetMany("  "));
-		}
+	[Test]
+	public void GetInnerXml_XElement_GettingCorrectly()
+	{
+		// Assign
+		var element = XElement.Parse(InputString);
 
-		#endregion GetMany
+		// Act & Assert
+		Assert.AreEqual(ExpectedInner, element.InnerXml());
+	}
 
-		[Test]
-		public void GetInnerXml_XElement_GettingCorrectly()
-		{
-			// Assign
-			var element = XElement.Parse(InputString);
+	[Test]
+	public void GetOuterXml_XElement_GettingCorrectly()
+	{
+		// Assign
+		var element = XElement.Parse(InputString);
 
-			// Act & Assert
-			Assert.AreEqual(ExpectedInner, element.InnerXml());
-		}
+		// Act & Assert
+		Assert.AreEqual(ExpectedOuter, element.OuterXml());
+	}
 
-		[Test]
-		public void GetOuterXml_XElement_GettingCorrectly()
-		{
-			// Assign
-			var element = XElement.Parse(InputString);
+	[Test]
+	public void RemoveAllXmlNamespaces_XmlStringWithBNamespaces_XmlStringWithoutNamespaces()
+	{
+		// Assign
+		var str = TemplateBuilder.FromCurrentAssembly("TestData.XmlWithNamespaces.xml").Build().Get();
 
-			// Act & Assert
-			Assert.AreEqual(ExpectedOuter, element.OuterXml());
-		}
-
-		[Test]
-		public void RemoveAllXmlNamespaces_XmlStringWithBNamespaces_XmlStringWithoutNamespaces()
-		{
-			// Assign
-			var str = TemplateBuilder.FromCurrentAssembly("TestData.XmlWithNamespaces.xml").Build().Get();
-
-			// Act & Assert
-			Assert.AreEqual(TemplateBuilder.FromCurrentAssembly("TestData.XmlWithoutNamespaces..xml").Build().Get(), str.RemoveAllXmlNamespaces());
-		}
+		// Act & Assert
+		Assert.AreEqual(TemplateBuilder.FromCurrentAssembly("TestData.XmlWithoutNamespaces..xml").Build().Get(), str.RemoveAllXmlNamespaces());
 	}
 }

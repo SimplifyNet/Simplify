@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace Simplify.System
+namespace Simplify.System;
+
+/// <summary>
+/// Provides configuration related errors
+/// </summary>
+/// <seealso cref="Exception" />
+public class ConfigurationException : Exception
 {
 	/// <summary>
-	/// Provides configuration related errors
+	/// Initializes a new instance of the <see cref="ConfigurationException" /> class.
 	/// </summary>
-	/// <seealso cref="Exception" />
-	public class ConfigurationException : Exception
+	/// <param name="message">The message that describes the error.</param>
+	public ConfigurationException(string message) : base(message)
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ConfigurationException" /> class.
-		/// </summary>
-		/// <param name="message">The message that describes the error.</param>
-		public ConfigurationException(string message) : base(message)
-		{
-		}
 	}
 }

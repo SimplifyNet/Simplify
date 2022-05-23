@@ -1,39 +1,39 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Simplify.System.Tests
+namespace Simplify.System.Tests;
+
+[TestFixture]
+public class WeakSingletonTests
 {
-	[TestFixture]
-	public class WeakSingletonTests
+	[Test]
+	public void GetInstance_ExplicitTypeBuilder_CreatesInstanceWithTypeBuilder()
 	{
-		[Test]
-		public void GetInstance_ExplicitTypeBuilder_CreatesInstanceWithTypeBuilder()
-		{
-			// Arrange
+		// Arrange
 
-			var singleton = new WeakSingleton<string>(() => new string("Hello"));
-			string str = null!;
+		var singleton = new WeakSingleton<string>(() => new string("Hello"));
+		string str = null!;
 
-			// Act & Assert
+		// Act & Assert
 
-			Assert.DoesNotThrow(() => str = singleton.Instance);
-			Assert.NotNull(str);
-			Assert.AreEqual(str, "Hello");
-		}
+		Assert.DoesNotThrow(() => str = singleton.Instance);
+		Assert.NotNull(str);
+		Assert.AreEqual(str, "Hello");
+	}
 
-		[Test]
-		public void GetInstance_NullTypeBuilder_CreatesInstanceWithDefaultConstructor()
-		{
-			// Arrange
+	[Test]
+	public void GetInstance_NullTypeBuilder_CreatesInstanceWithDefaultConstructor()
+	{
+		// Arrange
 
-			var singleton = new WeakSingleton<object>();
-			object obj = null!;
+		var singleton = new WeakSingleton<object>();
+		object obj = null!;
 
-			// Act & Assert
+		// Act & Assert
 
-			Assert.DoesNotThrow(() => obj = singleton.Instance);
-			Assert.NotNull(obj);
-		}
+		Assert.DoesNotThrow(() => obj = singleton.Instance);
+		Assert.NotNull(obj);
+	}
 
 #if RELEASE
 
@@ -61,15 +61,14 @@ namespace Simplify.System.Tests
 
 #endif
 
-		[OneTimeSetUp]
-		public void OneTimeSetUp()
-		{
-			GC.Collect();
-		}
+	[OneTimeSetUp]
+	public void OneTimeSetUp()
+	{
+		GC.Collect();
+	}
 
-		private class TestClass
-		{
-			public string Value = "Default";
-		}
+	private class TestClass
+	{
+		public string Value = "Default";
 	}
 }

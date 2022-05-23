@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Simplify.Scheduler.IntegrationTester
+namespace Simplify.Scheduler.IntegrationTester;
+
+public class SimplifySchedulerException : Exception
 {
-	public class SimplifySchedulerException : Exception
+	public SimplifySchedulerException(string message) : base(message)
 	{
-		public SimplifySchedulerException(string message) : base(message)
-		{
-		}
 	}
 }

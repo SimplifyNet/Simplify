@@ -1,42 +1,41 @@
 ﻿using System.Linq;
 using Microsoft.Extensions.Configuration;
 
-namespace Simplify.WindowsServices.Jobs.Settings.Impl
+namespace Simplify.WindowsServices.Jobs.Settings.Impl;
+
+/// <summary>
+/// Provides service job settings based on IConfiguration
+/// </summary>
+public class ConfigurationBasedServiceJobSetting : ServiceJobSettings
 {
 	/// <summary>
-	/// Provides service job settings based on IConfiguration
+	/// Initializes a new instance of the <see cref="ConfigurationBasedServiceJobSetting"/> class.
 	/// </summary>
-	public class ConfigurationBasedServiceJobSetting : ServiceJobSettings
+	public ConfigurationBasedServiceJobSetting(IConfiguration configuration, string configSectionName = "ServiceSettings")
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ConfigurationBasedServiceJobSetting"/> class.
-		/// </summary>
-		public ConfigurationBasedServiceJobSetting(IConfiguration configuration, string configSectionName = "ServiceSettings")
-		{
-			var config = configuration.GetSection(configSectionName);
+		var config = configuration.GetSection(configSectionName);
 
-			if (!config.GetChildren().Any())
-				return;
+		if (!config.GetChildren().Any())
+			return;
 
-			var cleanupOnTaskFinish = config["CleanupOnTaskFinish"];
+		var cleanupOnTaskFinish = config["CleanupOnTaskFinish"];
 
-			if (!string.IsNullOrEmpty(cleanupOnTaskFinish))
-				CleanupOnTaskFinish = bool.Parse(cleanupOnTaskFinish);
+		if (!string.IsNullOrEmpty(cleanupOnTaskFinish))
+			CleanupOnTaskFinish = bool.Parse(cleanupOnTaskFinish);
 
-			var maximumParallelTasksCount = config["MaximumParallelTasksCount"];
+		var maximumParallelTasksCount = config["MaximumParallelTasksCount"];
 
-			if (!string.IsNullOrEmpty(maximumParallelTasksCount))
-				MaximumParallelTasksCount = int.Parse(maximumParallelTasksCount);
+		if (!string.IsNullOrEmpty(maximumParallelTasksCount))
+			MaximumParallelTasksCount = int.Parse(maximumParallelTasksCount);
 
-			CrontabExpression = config["CrontabExpression"];
+		CrontabExpression = config["CrontabExpression"];
 
-			if (!string.IsNullOrEmpty(CrontabExpression))
-				return;
+		if (!string.IsNullOrEmpty(CrontabExpression))
+			return;
 
-			var processingInterval = config["ProcessingInterval"];
+		var processingInterval = config["ProcessingInterval"];
 
-			if (!string.IsNullOrEmpty(processingInterval))
-				ProcessingInterval = int.Parse(processingInterval);
-		}
+		if (!string.IsNullOrEmpty(processingInterval))
+			ProcessingInterval = int.Parse(processingInterval);
 	}
 }
