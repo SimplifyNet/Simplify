@@ -1,43 +1,42 @@
 ﻿using System;
 
-namespace Simplify.Scheduler
+namespace Simplify.Scheduler;
+
+/// <summary>
+/// Scheduler exception delegate
+/// </summary>
+/// <param name="args">The arguments.</param>
+public delegate void SchedulerExceptionEventHandler(SchedulerExceptionArgs args);
+
+/// <summary>
+/// Provides scheduler exception event args
+/// </summary>
+public class SchedulerExceptionArgs
 {
 	/// <summary>
-	/// Scheduler exception delegate
+	/// Initializes a new instance of the <see cref="SchedulerExceptionArgs"/> class.
 	/// </summary>
-	/// <param name="args">The arguments.</param>
-	public delegate void SchedulerExceptionEventHandler(SchedulerExceptionArgs args);
+	/// <param name="appName">Name of the scheduling application.</param>
+	/// <param name="exception">The exception.</param>
+	public SchedulerExceptionArgs(string appName, Exception exception)
+	{
+		AppName = appName;
+		Exception = exception;
+	}
 
 	/// <summary>
-	/// Provides scheduler exception event args
+	/// Gets the name of the application.
 	/// </summary>
-	public class SchedulerExceptionArgs
-	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="SchedulerExceptionArgs"/> class.
-		/// </summary>
-		/// <param name="appName">Name of the scheduling application.</param>
-		/// <param name="exception">The exception.</param>
-		public SchedulerExceptionArgs(string appName, Exception exception)
-		{
-			AppName = appName;
-			Exception = exception;
-		}
+	/// <value>
+	/// The name of the application.
+	/// </value>
+	public string AppName { get; }
 
-		/// <summary>
-		/// Gets the name of the application.
-		/// </summary>
-		/// <value>
-		/// The name of the application.
-		/// </value>
-		public string AppName { get; }
-
-		/// <summary>
-		/// Gets the exception.
-		/// </summary>
-		/// <value>
-		/// The exception.
-		/// </value>
-		public Exception Exception { get; }
-	}
+	/// <summary>
+	/// Gets the exception.
+	/// </summary>
+	/// <value>
+	/// The exception.
+	/// </value>
+	public Exception Exception { get; }
 }

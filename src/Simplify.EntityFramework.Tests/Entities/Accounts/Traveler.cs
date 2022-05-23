@@ -1,11 +1,10 @@
-﻿namespace Simplify.EntityFramework.Tests.Entities.Accounts
+﻿namespace Simplify.EntityFramework.Tests.Entities.Accounts;
+
+public class Traveler
 {
-	public class Traveler
-	{
-		public virtual int ID { get; set; }
+	public virtual int ID { get; set; }
 
-		public virtual string Name { get; set; }
+	public virtual string Name { get; set; }
 
-		public virtual Employee Employee { get; set; }
-	}
+	public virtual Employee Employee { get; set; }
 }

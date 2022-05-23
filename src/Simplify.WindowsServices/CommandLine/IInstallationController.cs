@@ -1,18 +1,17 @@
-﻿namespace Simplify.WindowsServices.CommandLine
+﻿namespace Simplify.WindowsServices.CommandLine;
+
+/// <summary>
+/// Represent windows-service installation controller
+/// </summary>
+public interface IInstallationController
 {
 	/// <summary>
-	/// Represent windows-service installation controller
+	/// Installs the service.
 	/// </summary>
-	public interface IInstallationController
-	{
-		/// <summary>
-		/// Installs the service.
-		/// </summary>
-		void InstallService();
+	void InstallService();
 
-		/// <summary>
-		/// Uninstalls the service.
-		/// </summary>
-		void UninstallService();
-	}
+	/// <summary>
+	/// Uninstalls the service.
+	/// </summary>
+	void UninstallService();
 }

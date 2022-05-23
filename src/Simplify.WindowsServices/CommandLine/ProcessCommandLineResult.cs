@@ -1,28 +1,27 @@
-﻿namespace Simplify.WindowsServices.CommandLine
+﻿namespace Simplify.WindowsServices.CommandLine;
+
+/// <summary>
+/// Result of command line process
+/// </summary>
+public enum ProcessCommandLineResult
 {
 	/// <summary>
-	/// Result of command line process
+	/// The command line contains no arguments
 	/// </summary>
-	public enum ProcessCommandLineResult
-	{
-		/// <summary>
-		/// The command line contains no arguments
-		/// </summary>
-		NoArguments,
+	NoArguments,
 
-		/// <summary>
-		/// The command line contains undefined parameters
-		/// </summary>
-		UndefinedParameters,
+	/// <summary>
+	/// The command line contains undefined parameters
+	/// </summary>
+	UndefinedParameters,
 
-		/// <summary>
-		/// The command line action executed
-		/// </summary>
-		CommandLineActionExecuted,
+	/// <summary>
+	/// The command line action executed
+	/// </summary>
+	CommandLineActionExecuted,
 
-		/// <summary>
-		/// The skip service start
-		/// </summary>
-		SkipServiceStart
-	}
+	/// <summary>
+	/// The skip service start
+	/// </summary>
+	SkipServiceStart
 }

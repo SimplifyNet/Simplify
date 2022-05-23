@@ -1,18 +1,17 @@
-﻿namespace Simplify.Scheduler.CommandLine
+﻿namespace Simplify.Scheduler.CommandLine;
+
+/// <summary>
+/// List of possible action from command line
+/// </summary>
+public enum CommandLineAction
 {
 	/// <summary>
-	/// List of possible action from command line
+	/// The undefined action in command line
 	/// </summary>
-	public enum CommandLineAction
-	{
-		/// <summary>
-		/// The undefined action in command line
-		/// </summary>
-		UndefinedAction,
+	UndefinedAction,
 
-		/// <summary>
-		/// The skip scheduler launch action from command line
-		/// </summary>
-		SkipScheduler
-	}
+	/// <summary>
+	/// The skip scheduler launch action from command line
+	/// </summary>
+	SkipScheduler
 }

@@ -1,6 +1,5 @@
-﻿namespace System.Runtime.CompilerServices
+﻿namespace System.Runtime.CompilerServices;
+
+internal class IsExternalInit
 {
-	internal class IsExternalInit
-	{
-	}
 }

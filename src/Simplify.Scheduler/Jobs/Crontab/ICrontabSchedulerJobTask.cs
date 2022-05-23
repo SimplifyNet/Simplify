@@ -1,25 +1,24 @@
 using System.Threading.Tasks;
 
-namespace Simplify.Scheduler.Jobs.Crontab
+namespace Simplify.Scheduler.Jobs.Crontab;
+
+/// <summary>
+/// Represent crontab scheduler job task
+/// </summary>
+public interface ICrontabSchedulerJobTask
 {
 	/// <summary>
-	/// Represent crontab scheduler job task
+	/// Gets the task identifier.
 	/// </summary>
-	public interface ICrontabSchedulerJobTask
-	{
-		/// <summary>
-		/// Gets the task identifier.
-		/// </summary>
-		long ID { get; }
+	long ID { get; }
 
-		/// <summary>
-		/// Gets the job.
-		/// </summary>
-		ICrontabSchedulerJob Job { get; }
+	/// <summary>
+	/// Gets the job.
+	/// </summary>
+	ICrontabSchedulerJob Job { get; }
 
-		/// <summary>
-		/// Gets the task.
-		/// </summary>
-		Task Task { get; }
-	}
+	/// <summary>
+	/// Gets the task.
+	/// </summary>
+	Task Task { get; }
 }

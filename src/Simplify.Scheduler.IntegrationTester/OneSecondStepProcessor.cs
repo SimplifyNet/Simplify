@@ -2,30 +2,29 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Simplify.Scheduler.IntegrationTester
+namespace Simplify.Scheduler.IntegrationTester;
+
+public class OneSecondStepProcessor : IDisposable
 {
-	public class OneSecondStepProcessor : IDisposable
+	private static bool _isRunning;
+
+	public OneSecondStepProcessor(DisposableDependency dependency)
 	{
-		private static bool _isRunning;
-
-		public OneSecondStepProcessor(DisposableDependency dependency)
-		{
-		}
-
-		public void Run()
-		{
-			if (_isRunning)
-				throw new SimplifySchedulerException("EverySecondProcessor is running a duplicate!");
-
-			_isRunning = true;
-
-			Trace.WriteLine("EverySecondProcessor launched");
-
-			Thread.Sleep(5120);
-
-			_isRunning = false;
-		}
-
-		public void Dispose() => Trace.WriteLine("EverySecondProcessor disposed");
 	}
+
+	public void Run()
+	{
+		if (_isRunning)
+			throw new SimplifySchedulerException("EverySecondProcessor is running a duplicate!");
+
+		_isRunning = true;
+
+		Trace.WriteLine("EverySecondProcessor launched");
+
+		Thread.Sleep(5120);
+
+		_isRunning = false;
+	}
+
+	public void Dispose() => Trace.WriteLine("EverySecondProcessor disposed");
 }

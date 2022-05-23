@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Simplify.Scheduler.SimpleApp
-{
-	public class PeriodicalProcessor : IDisposable
-	{
-		public void Run() => Console.WriteLine("PeriodicalProcessor launched");
+namespace Simplify.Scheduler.SimpleApp;
 
-		public void Dispose() => Console.WriteLine("PeriodicalProcessor disposed");
-	}
+public class PeriodicalProcessor : IDisposable
+{
+	public void Run() => Console.WriteLine("PeriodicalProcessor launched");
+
+	public void Dispose() => Console.WriteLine("PeriodicalProcessor disposed");
 }

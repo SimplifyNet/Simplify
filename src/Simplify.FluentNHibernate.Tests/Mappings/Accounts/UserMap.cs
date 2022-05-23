@@ -1,34 +1,33 @@
 ﻿using FluentNHibernate.Mapping;
 using Simplify.FluentNHibernate.Tests.Entities.Accounts;
 
-namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts
+namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts;
+
+public class UserMap : ClassMap<User>
 {
-	public class UserMap : ClassMap<User>
+	public UserMap()
 	{
-		public UserMap()
-		{
-			Table("Users");
+		Table("Users");
 
-			Id(x => x.ID);
+		Id(x => x.ID);
 
-			Map(x => x.Name);
+		Map(x => x.Name);
 
-			Map(x => x.Password);
-			Map(x => x.EMail);
-			Map(x => x.LastActivityTime);
+		Map(x => x.Password);
+		Map(x => x.EMail);
+		Map(x => x.LastActivityTime);
 
-			HasOne(x => x.Employee).Cascade.All();
+		HasOne(x => x.Employee).Cascade.All();
 
-			HasManyToMany(x => x.Groups)
-				.Table("UsersGroups");
+		HasManyToMany(x => x.Groups)
+			.Table("UsersGroups");
 
-			HasMany(x => x.Privileges)
-				.KeyColumn("UserID")
-				.ForeignKeyConstraintName("FK_UsersPrivileges_UserID")
-				.Table("UsersPrivileges")
-				.Element("Type");
+		HasMany(x => x.Privileges)
+			.KeyColumn("UserID")
+			.ForeignKeyConstraintName("FK_UsersPrivileges_UserID")
+			.Table("UsersPrivileges")
+			.Element("Type");
 
-			References(x => x.Organization);
-		}
+		References(x => x.Organization);
 	}
 }

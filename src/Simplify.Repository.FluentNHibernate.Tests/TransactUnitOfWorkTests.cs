@@ -10,66 +10,65 @@ using Simplify.FluentNHibernate.Conventions;
 using Simplify.Repository.FluentNHibernate.Tests.Entities.Accounts;
 using Simplify.Repository.FluentNHibernate.Tests.Mappings.Accounts;
 
-namespace Simplify.Repository.FluentNHibernate.Tests
+namespace Simplify.Repository.FluentNHibernate.Tests;
+
+public class TransactUnitOfWorkTests
 {
-	public class TransactUnitOfWorkTests
+	private ISessionFactory _sessionFactory;
+
+	[OneTimeSetUp]
+	public void Initialize()
 	{
-		private ISessionFactory _sessionFactory;
+		CreateDatabaseAndSessionFactory(CreateConfiguration());
+	}
 
-		[OneTimeSetUp]
-		public void Initialize()
-		{
-			CreateDatabaseAndSessionFactory(CreateConfiguration());
-		}
+	[Test]
+	public async Task UnitOfWorkLifetimeTest()
+	{
+		// Arrange
+		var uow = new TestUnitOfWork(_sessionFactory);
 
-		[Test]
-		public async Task UnitOfWorkLifetimeTest()
-		{
-			// Arrange
-			var uow = new TestUnitOfWork(_sessionFactory);
+		// Act
 
-			// Act
+		// 1
 
-			// 1
+		uow.BeginTransaction();
+		await uow.Session.GetAsync<User>(1);
+		await uow.CommitAsync();
 
-			uow.BeginTransaction();
-			await uow.Session.GetAsync<User>(1);
-			await uow.CommitAsync();
+		// 2
 
-			// 2
+		uow.BeginTransaction();
+		await uow.Session.GetAsync<User>(1);
+		await uow.CommitAsync();
 
-			uow.BeginTransaction();
-			await uow.Session.GetAsync<User>(1);
-			await uow.CommitAsync();
+		// 3
 
-			// 3
+		uow.BeginTransaction();
+		await uow.Session.GetAsync<User>(1);
 
-			uow.BeginTransaction();
-			await uow.Session.GetAsync<User>(1);
+		// Cleanup
+		uow.Dispose();
+	}
 
-			// Cleanup
-			uow.Dispose();
-		}
+	private static FluentConfiguration CreateConfiguration()
+	{
+		return Fluently.Configure()
+			.InitializeFromConfigSqLite("Test.sqlite", true)
+			.AddMappingsFromAssemblyOf<UserMap>(PrimaryKey.Name.Is(x => "ID"), ForeignKeyConstraintNameConvention.WithConstraintNameConvention());
+	}
 
-		private static FluentConfiguration CreateConfiguration()
-		{
-			return Fluently.Configure()
-				.InitializeFromConfigSqLite("Test.sqlite", true)
-				.AddMappingsFromAssemblyOf<UserMap>(PrimaryKey.Name.Is(x => "ID"), ForeignKeyConstraintNameConvention.WithConstraintNameConvention());
-		}
+	private void CreateDatabaseAndSessionFactory(FluentConfiguration configuration)
+	{
+		Configuration config = null;
+		configuration.ExposeConfiguration(c => config = c);
+		_sessionFactory = configuration.BuildSessionFactory();
 
-		private void CreateDatabaseAndSessionFactory(FluentConfiguration configuration)
-		{
-			Configuration config = null;
-			configuration.ExposeConfiguration(c => config = c);
-			_sessionFactory = configuration.BuildSessionFactory();
+		config.CreateIndexesForForeignKeys();
 
-			config.CreateIndexesForForeignKeys();
+		using var session = _sessionFactory.OpenSession();
 
-			using var session = _sessionFactory.OpenSession();
-
-			var export = new SchemaExport(config);
-			export.Execute(false, true, false, session.Connection, null);
-		}
+		var export = new SchemaExport(config);
+		export.Execute(false, true, false, session.Connection, null);
 	}
 }

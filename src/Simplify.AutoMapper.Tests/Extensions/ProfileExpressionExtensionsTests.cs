@@ -3,73 +3,72 @@ using NUnit.Framework;
 using Simplify.AutoMapper.Extensions;
 using Simplify.AutoMapper.Tests.TestData;
 
-namespace Simplify.AutoMapper.Tests.Extensions
+namespace Simplify.AutoMapper.Tests.Extensions;
+
+[TestFixture]
+public class ProfileExpressionExtensionsTests
 {
-	[TestFixture]
-	public class ProfileExpressionExtensionsTests
+	#region SetUp
+
+	private readonly FoodSource source = new() { Category = "Fruit", Name = "Apple", Count = 5 };
+	private FoodDto? dto;
+	private IFoodDto? dtoBase;
+
+	[SetUp]
+	public void SetUp()
 	{
-		#region SetUp
+		dtoBase = null;
+		dto = null;
+	}
 
-		private readonly FoodSource source = new() { Category = "Fruit", Name = "Apple", Count = 5 };
-		private FoodDto? dto;
-		private IFoodDto? dtoBase;
+	#endregion SetUp
 
-		[SetUp]
-		public void SetUp()
-		{
-			dtoBase = null;
-			dto = null;
-		}
+	[Test]
+	public void CreateMap_WithDestinationBaseType_ValidMappingCreated()
+	{
+		// Arrange
 
-		#endregion SetUp
+		MapperConfiguration cfg = null!;
 
-		[Test]
-		public void CreateMap_WithDestinationBaseType_ValidMappingCreated()
-		{
-			// Arrange
+		// Act & Assert
 
-			MapperConfiguration cfg = null!;
+		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
+			.ForMember(d => d.Type, o => o.MapFrom(s => s.Category))
+			.ForMember(d => d.Source, o => o.Ignore())));
+		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+	}
 
-			// Act & Assert
+	[Test]
+	public void MapToType_ToDestinationBaseType_MappedCorrectly()
+	{
+		// Arrange
 
-			Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
-					.ForMember(d => d.Type, o => o.MapFrom(s => s.Category))
-					.ForMember(d => d.Source, o => o.Ignore())));
-			Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
-		}
+		var mapper = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
+				.ForMember(d => d.Type, o => o.MapFrom(s => s.Category)))
+			.CreateMapper();
 
-		[Test]
-		public void MapToType_ToDestinationBaseType_MappedCorrectly()
-		{
-			// Arrange
+		// Act & Assert
 
-			var mapper = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
-					.ForMember(d => d.Type, o => o.MapFrom(s => s.Category)))
-				.CreateMapper();
+		Assert.NotNull(dtoBase = mapper.Map<IFoodDto>(source));
+		Assert.AreEqual(dtoBase.Type, source.Category);
+		Assert.AreEqual(dtoBase.Name, source.Name);
+		Assert.AreEqual(dtoBase.Count, source.Count);
+	}
 
-			// Act & Assert
+	[Test]
+	public void MapToType_ToDestinationType_MappedCorrectly()
+	{
+		// Arrange
 
-			Assert.NotNull(dtoBase = mapper.Map<IFoodDto>(source));
-			Assert.AreEqual(dtoBase.Type, source.Category);
-			Assert.AreEqual(dtoBase.Name, source.Name);
-			Assert.AreEqual(dtoBase.Count, source.Count);
-		}
+		var mapper = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
+				.ForMember(d => d.Type, o => o.MapFrom(s => s.Category)))
+			.CreateMapper();
 
-		[Test]
-		public void MapToType_ToDestinationType_MappedCorrectly()
-		{
-			// Arrange
+		// Act & Assert
 
-			var mapper = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
-					.ForMember(d => d.Type, o => o.MapFrom(s => s.Category)))
-				.CreateMapper();
-
-			// Act & Assert
-
-			Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-			Assert.AreEqual(dto.Type, source.Category);
-			Assert.AreEqual(dto.Name, source.Name);
-			Assert.AreEqual(dto.Count, source.Count);
-		}
+		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
+		Assert.AreEqual(dto.Type, source.Category);
+		Assert.AreEqual(dto.Name, source.Name);
+		Assert.AreEqual(dto.Count, source.Count);
 	}
 }

@@ -1,9 +1,8 @@
-﻿namespace Simplify.FluentNHibernate.Tests.Entities.Accounts
+﻿namespace Simplify.FluentNHibernate.Tests.Entities.Accounts;
+
+public enum Privilege
 {
-	public enum Privilege
-	{
-		UserManagement = 0,
-		GroupManagement = 1,
-		OrganizationManagement = 2
-	}
+	UserManagement = 0,
+	GroupManagement = 1,
+	OrganizationManagement = 2
 }

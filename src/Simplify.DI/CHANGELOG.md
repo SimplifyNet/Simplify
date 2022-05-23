@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.2.2] - 2022-05-23
+
+### Added
+
+- Explicit .NET 6 support
+
+### Dependencies
+
+- Internal DryIoc bump to 5.1 (PR#395)
+
 ## [4.2.1] - 2022-05-11
 
 ### Dependencies

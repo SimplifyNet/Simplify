@@ -1,6 +1,5 @@
-﻿namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester
+﻿namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester;
+
+public class Dependency2
 {
-	public class Dependency2
-	{
-	}
 }

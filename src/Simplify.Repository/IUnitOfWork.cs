@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Simplify.Repository
+namespace Simplify.Repository;
+
+/// <summary>
+/// Represent unit of work without explicit transaction
+/// </summary>
+public interface IUnitOfWork : IDisposable
 {
-	/// <summary>
-	/// Represent unit of work without explicit transaction
-	/// </summary>
-	public interface IUnitOfWork : IDisposable
-	{
-	}
 }

@@ -1,24 +1,23 @@
 ﻿using System.Diagnostics;
 using System.Threading;
 
-namespace Simplify.Scheduler.IntegrationTester
+namespace Simplify.Scheduler.IntegrationTester;
+
+public class OneMinuteStepCrontabProcessor
 {
-	public class OneMinuteStepCrontabProcessor
+	private static bool _isRunning;
+
+	public void Run()
 	{
-		private static bool _isRunning;
+		if (_isRunning)
+			throw new SimplifySchedulerException("OneMinuteStepCrontabProcessor is running a duplicate!");
 
-		public void Run()
-		{
-			if (_isRunning)
-				throw new SimplifySchedulerException("OneMinuteStepCrontabProcessor is running a duplicate!");
+		_isRunning = true;
 
-			_isRunning = true;
+		Trace.WriteLine("--- OneMinuteStepCrontabProcessor launched");
 
-			Trace.WriteLine("--- OneMinuteStepCrontabProcessor launched");
+		Thread.Sleep(3218);
 
-			Thread.Sleep(3218);
-
-			_isRunning = false;
-		}
+		_isRunning = false;
 	}
 }

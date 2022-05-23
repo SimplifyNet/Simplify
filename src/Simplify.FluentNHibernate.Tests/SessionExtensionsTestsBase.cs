@@ -13,196 +13,195 @@ using NUnit.Framework;
 using Simplify.FluentNHibernate.Tests.Entities.Accounts;
 using Simplify.FluentNHibernate.Tests.Mappings.Accounts;
 
-namespace Simplify.FluentNHibernate.Tests
+namespace Simplify.FluentNHibernate.Tests;
+
+public class SessionExtensionsTestsBase
 {
-	public class SessionExtensionsTestsBase
+	protected readonly Expression<Func<User, bool>> SingleObjectQuery = x => x.Name == "test";
+	protected readonly Expression<Func<User, bool>> MultipleObjectsQuery = x => x.LastActivityTime == new DateTime(2015, 2, 3, 14, 16, 0);
+
+	protected readonly int PagedPageIndex = 1;
+	protected readonly int PagedItemsPerPage = 2;
+	protected readonly Expression<Func<User, bool>> PagedQuery = x => x.Name.Contains("test");
+	protected readonly Func<IQueryable<User>, IQueryable<User>> PagedCustomProcessing = x => x.OrderByDescending(o => o.LastActivityTime);
+
+	public void CreateDatabase(Func<ISessionFactory, DbConnection> sessionBuilder, bool inMemory = true)
 	{
-		protected readonly Expression<Func<User, bool>> SingleObjectQuery = x => x.Name == "test";
-		protected readonly Expression<Func<User, bool>> MultipleObjectsQuery = x => x.LastActivityTime == new DateTime(2015, 2, 3, 14, 16, 0);
+		if (sessionBuilder == null) throw new ArgumentNullException(nameof(sessionBuilder));
 
-		protected readonly int PagedPageIndex = 1;
-		protected readonly int PagedItemsPerPage = 2;
-		protected readonly Expression<Func<User, bool>> PagedQuery = x => x.Name.Contains("test");
-		protected readonly Func<IQueryable<User>, IQueryable<User>> PagedCustomProcessing = x => x.OrderByDescending(o => o.LastActivityTime);
+		var configuration = inMemory ? CreateConfigurationInMemory() : CreateConfiguration();
 
-		public void CreateDatabase(Func<ISessionFactory, DbConnection> sessionBuilder, bool inMemory = true)
-		{
-			if (sessionBuilder == null) throw new ArgumentNullException(nameof(sessionBuilder));
+		Configuration config = null;
+		configuration.ExposeConfiguration(c => config = c);
+		var factory = configuration.BuildSessionFactory();
 
-			var configuration = inMemory ? CreateConfigurationInMemory() : CreateConfiguration();
+		var export = new SchemaExport(config);
+		export.Execute(false, true, false, sessionBuilder(factory), null);
+	}
 
-			Configuration config = null;
-			configuration.ExposeConfiguration(c => config = c);
-			var factory = configuration.BuildSessionFactory();
+	protected static void PerformSingleObjectNotExistTest(Func<User> act)
+	{
+		// Act
+		var result = act();
 
-			var export = new SchemaExport(config);
-			export.Execute(false, true, false, sessionBuilder(factory), null);
-		}
+		// Assert
+		Assert.IsNull(result);
+	}
 
-		protected static void PerformSingleObjectNotExistTest(Func<User> act)
-		{
-			// Act
-			var result = act();
+	protected static async Task PerformSingleObjectNotExistAsyncTest(Func<Task<User>> act)
+	{
+		// Act
+		var result = await act();
 
-			// Assert
-			Assert.IsNull(result);
-		}
+		// Assert
+		Assert.IsNull(result);
+	}
 
-		protected static async Task PerformSingleObjectNotExistAsyncTest(Func<Task<User>> act)
-		{
-			// Act
-			var result = await act();
+	protected void PerformSingleObjectExistTest(Func<User> act, Action userCreator)
+	{
+		// Arrange
 
-			// Assert
-			Assert.IsNull(result);
-		}
+		userCreator();
 
-		protected void PerformSingleObjectExistTest(Func<User> act, Action userCreator)
-		{
-			// Arrange
+		// Act
+		var result = act();
 
-			userCreator();
+		// Assert
+		Assert.IsNotNull(result);
+	}
 
-			// Act
-			var result = act();
+	protected async Task PerformSingleObjectExistAsyncTest(Func<Task<User>> act, Action userCreator)
+	{
+		// Arrange
 
-			// Assert
-			Assert.IsNotNull(result);
-		}
+		userCreator();
 
-		protected async Task PerformSingleObjectExistAsyncTest(Func<Task<User>> act, Action userCreator)
-		{
-			// Arrange
+		// Act
+		var result = await act();
 
-			userCreator();
+		// Assert
+		Assert.IsNotNull(result);
+	}
 
-			// Act
-			var result = await act();
+	protected void PerformSingleObjectMultipleExistTest(Func<User> act, Action userCreator)
+	{
+		// Arrange
 
-			// Assert
-			Assert.IsNotNull(result);
-		}
+		userCreator();
 
-		protected void PerformSingleObjectMultipleExistTest(Func<User> act, Action userCreator)
-		{
-			// Arrange
+		// Act & Assert
+		Assert.Throws<InvalidOperationException>(() => act());
+	}
 
-			userCreator();
+	protected void PerformSingleObjectMultipleExistAsyncTest(Func<Task<User>> act, Action userCreator)
+	{
+		// Arrange
 
-			// Act & Assert
-			Assert.Throws<InvalidOperationException>(() => act());
-		}
+		userCreator();
 
-		protected void PerformSingleObjectMultipleExistAsyncTest(Func<Task<User>> act, Action userCreator)
-		{
-			// Arrange
+		// Act
+		Assert.ThrowsAsync<InvalidOperationException>(() => act());
+	}
 
-			userCreator();
+	protected void PerformMultipleObjectsRetrieveTest(Func<IList<User>> act)
+	{
+		// Act
+		var items = act();
 
-			// Act
-			Assert.ThrowsAsync<InvalidOperationException>(() => act());
-		}
+		// Assert
 
-		protected void PerformMultipleObjectsRetrieveTest(Func<IList<User>> act)
-		{
-			// Act
-			var items = act();
+		Assert.AreEqual(2, items.Count);
+		Assert.AreEqual("test5", items[0].Name);
+		Assert.AreEqual("foo1", items[1].Name);
+	}
 
-			// Assert
+	protected async Task PerformMultipleObjectsRetrieveAsyncTest(Func<Task<IList<User>>> act)
+	{
+		// Act
+		var items = await act();
 
-			Assert.AreEqual(2, items.Count);
-			Assert.AreEqual("test5", items[0].Name);
-			Assert.AreEqual("foo1", items[1].Name);
-		}
+		// Assert
 
-		protected async Task PerformMultipleObjectsRetrieveAsyncTest(Func<Task<IList<User>>> act)
-		{
-			// Act
-			var items = await act();
+		Assert.AreEqual(2, items.Count);
+		Assert.AreEqual("test5", items[0].Name);
+		Assert.AreEqual("foo1", items[1].Name);
+	}
 
-			// Assert
+	protected void PerformMultipleObjectPagedRetrieveTest(Func<IList<User>> act)
+	{
+		// Act
+		var items = act();
 
-			Assert.AreEqual(2, items.Count);
-			Assert.AreEqual("test5", items[0].Name);
-			Assert.AreEqual("foo1", items[1].Name);
-		}
+		// Assert
 
-		protected void PerformMultipleObjectPagedRetrieveTest(Func<IList<User>> act)
-		{
-			// Act
-			var items = act();
+		Assert.AreEqual(2, items.Count);
+		Assert.AreEqual("test5", items[0].Name);
+		Assert.AreEqual("test0", items[1].Name);
+	}
 
-			// Assert
+	protected async Task PerformMultipleObjectPagedRetrieveAsyncTest(Func<Task<IList<User>>> act)
+	{
+		// Act
+		var items = await act();
 
-			Assert.AreEqual(2, items.Count);
-			Assert.AreEqual("test5", items[0].Name);
-			Assert.AreEqual("test0", items[1].Name);
-		}
+		// Assert
 
-		protected async Task PerformMultipleObjectPagedRetrieveAsyncTest(Func<Task<IList<User>>> act)
-		{
-			// Act
-			var items = await act();
+		Assert.AreEqual(2, items.Count);
+		Assert.AreEqual("test5", items[0].Name);
+		Assert.AreEqual("test0", items[1].Name);
+	}
 
-			// Assert
+	protected void PerformCountTest(Func<int> act)
+	{
+		// Act
+		var result = act();
 
-			Assert.AreEqual(2, items.Count);
-			Assert.AreEqual("test5", items[0].Name);
-			Assert.AreEqual("test0", items[1].Name);
-		}
+		// Assert
 
-		protected void PerformCountTest(Func<int> act)
-		{
-			// Act
-			var result = act();
+		Assert.AreEqual(5, result);
+	}
 
-			// Assert
+	protected async Task PerformCountAsyncTest(Func<Task<int>> act)
+	{
+		// Act
+		var result = await act();
 
-			Assert.AreEqual(5, result);
-		}
+		// Assert
 
-		protected async Task PerformCountAsyncTest(Func<Task<int>> act)
-		{
-			// Act
-			var result = await act();
+		Assert.AreEqual(5, result);
+	}
 
-			// Assert
+	protected void PerformLongCountTest(Func<long> act)
+	{
+		// Act
+		var result = act();
 
-			Assert.AreEqual(5, result);
-		}
+		// Assert
 
-		protected void PerformLongCountTest(Func<long> act)
-		{
-			// Act
-			var result = act();
+		Assert.AreEqual(5, result);
+	}
 
-			// Assert
+	protected async Task PerformLongCountAsyncTest(Func<Task<long>> act)
+	{
+		// Act
+		var result = await act();
 
-			Assert.AreEqual(5, result);
-		}
+		// Assert
 
-		protected async Task PerformLongCountAsyncTest(Func<Task<long>> act)
-		{
-			// Act
-			var result = await act();
+		Assert.AreEqual(5, result);
+	}
 
-			// Assert
+	private static FluentConfiguration CreateConfigurationInMemory()
+	{
+		return Fluently.Configure()
+			.InitializeFromConfigSqLiteInMemory(true)
+			.AddMappingsFromAssemblyOf<UserMap>(PrimaryKey.Name.Is(x => "ID"));
+	}
 
-			Assert.AreEqual(5, result);
-		}
-
-		private static FluentConfiguration CreateConfigurationInMemory()
-		{
-			return Fluently.Configure()
-				.InitializeFromConfigSqLiteInMemory(true)
-				.AddMappingsFromAssemblyOf<UserMap>(PrimaryKey.Name.Is(x => "ID"));
-		}
-
-		private static FluentConfiguration CreateConfiguration()
-		{
-			return Fluently.Configure()
-				.InitializeFromConfigSqLite("Test.sqlite", true)
-				.AddMappingsFromAssemblyOf<UserMap>(PrimaryKey.Name.Is(x => "ID"));
-		}
+	private static FluentConfiguration CreateConfiguration()
+	{
+		return Fluently.Configure()
+			.InitializeFromConfigSqLite("Test.sqlite", true)
+			.AddMappingsFromAssemblyOf<UserMap>(PrimaryKey.Name.Is(x => "ID"));
 	}
 }

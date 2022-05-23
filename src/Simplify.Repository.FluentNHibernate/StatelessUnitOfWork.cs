@@ -1,48 +1,47 @@
 ﻿using System;
 using NHibernate;
 
-namespace Simplify.Repository.FluentNHibernate
+namespace Simplify.Repository.FluentNHibernate;
+
+/// <summary>
+/// Provides unit of work with stateless session
+/// </summary>
+/// <seealso cref="IUnitOfWork" />
+public class StatelessUnitOfWork : IUnitOfWork
 {
 	/// <summary>
-	/// Provides unit of work with stateless session
+	/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
 	/// </summary>
-	/// <seealso cref="IUnitOfWork" />
-	public class StatelessUnitOfWork : IUnitOfWork
+	/// <param name="sessionFactory">The session factory.</param>
+	public StatelessUnitOfWork(ISessionFactory sessionFactory) =>
+		Session = sessionFactory.OpenStatelessSession() ?? throw new InvalidOperationException("Error opening session, session is null");
+
+	/// <summary>
+	/// Gets the session.
+	/// </summary>
+	/// <value>
+	/// The session.
+	/// </value>
+	public IStatelessSession Session { get; }
+
+	/// <summary>
+	/// Releases unmanaged and - optionally - managed resources.
+	/// </summary>
+	public void Dispose()
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
-		/// </summary>
-		/// <param name="sessionFactory">The session factory.</param>
-		public StatelessUnitOfWork(ISessionFactory sessionFactory) =>
-			Session = sessionFactory.OpenStatelessSession() ?? throw new InvalidOperationException("Error opening session, session is null");
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
 
-		/// <summary>
-		/// Gets the session.
-		/// </summary>
-		/// <value>
-		/// The session.
-		/// </value>
-		public IStatelessSession Session { get; }
+	/// <summary>
+	/// Releases unmanaged and - optionally - managed resources.
+	/// </summary>
+	/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+	protected virtual void Dispose(bool disposing)
+	{
+		if (!disposing)
+			return;
 
-		/// <summary>
-		/// Releases unmanaged and - optionally - managed resources.
-		/// </summary>
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-
-		/// <summary>
-		/// Releases unmanaged and - optionally - managed resources.
-		/// </summary>
-		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!disposing)
-				return;
-
-			Session.Dispose();
-		}
+		Session.Dispose();
 	}
 }

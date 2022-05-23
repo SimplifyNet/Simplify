@@ -1,13 +1,12 @@
-﻿namespace Simplify.DI
+﻿namespace Simplify.DI;
+
+/// <summary>
+/// Represents DI container verifier
+/// </summary>
+public interface IDIVerifier
 {
 	/// <summary>
-	/// Represents DI container verifier
+	/// Performs container objects graph verification
 	/// </summary>
-	public interface IDIVerifier
-	{
-		/// <summary>
-		/// Performs container objects graph verification
-		/// </summary>
-		void Verify();
-	}
+	void Verify();
 }

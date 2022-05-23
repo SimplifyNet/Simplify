@@ -1,4 +1,3 @@
-﻿namespace Simplify.Templates.Tests
-{
-	public delegate TemplateBuilder TemplateBuilderDelegate();
-}
+﻿namespace Simplify.Templates.Tests;
+
+public delegate TemplateBuilder TemplateBuilderDelegate();

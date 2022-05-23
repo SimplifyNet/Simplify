@@ -1,15 +1,14 @@
-﻿namespace Simplify.WindowsServices.CommandLine
+﻿namespace Simplify.WindowsServices.CommandLine;
+
+/// <summary>
+/// Represent windows-service command line processor
+/// </summary>
+public interface ICommandLineProcessor
 {
 	/// <summary>
-	/// Represent windows-service command line processor
+	/// Processes the command line arguments.
 	/// </summary>
-	public interface ICommandLineProcessor
-	{
-		/// <summary>
-		/// Processes the command line arguments.
-		/// </summary>
-		/// <param name="args">The arguments.</param>
-		/// <returns></returns>
-		ProcessCommandLineResult ProcessCommandLineArguments(string[]? args);
-	}
+	/// <param name="args">The arguments.</param>
+	/// <returns></returns>
+	ProcessCommandLineResult ProcessCommandLineArguments(string[]? args);
 }

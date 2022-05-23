@@ -2,19 +2,18 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Simplify.Scheduler.IntegrationTester
+namespace Simplify.Scheduler.IntegrationTester;
+
+public class TwoParallelTasksProcessor
 {
-	public class TwoParallelTasksProcessor
+	public async Task Execute() => await DoWork();
+
+	private Task DoWork()
 	{
-		public async Task Execute() => await DoWork();
+		Trace.WriteLine("--- TwoParallelTasksProcessor launched");
 
-		private Task DoWork()
-		{
-			Trace.WriteLine("--- TwoParallelTasksProcessor launched");
+		Thread.Sleep(5000);
 
-			Thread.Sleep(5000);
-
-			return Task.CompletedTask;
-		}
+		return Task.CompletedTask;
 	}
 }
