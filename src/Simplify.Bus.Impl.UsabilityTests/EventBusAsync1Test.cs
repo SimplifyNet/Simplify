@@ -22,7 +22,7 @@ public class EventBusAsync1Test : DIContainerTestFixtureBase
 				typeof(UserCreatedNotifier),
 				typeof(UserCreatedNotifier2));
 
-		var @event = new UserCreatedEvent(new User
+		var busEvent = new UserCreatedEvent(new User
 		{
 			Name = "Test User"
 		});
@@ -32,6 +32,6 @@ public class EventBusAsync1Test : DIContainerTestFixtureBase
 		using var scope = Container.BeginLifetimeScope();
 		var bus = scope.Resolver.Resolve<IEventBusAsync<UserCreatedEvent>>();
 
-		await bus.Publish(@event);
+		await bus.Publish(busEvent);
 	}
 }

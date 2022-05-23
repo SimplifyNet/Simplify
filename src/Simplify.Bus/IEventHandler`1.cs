@@ -4,5 +4,5 @@ namespace Simplify.Bus;
 
 public interface IEventHandler<in TEvent>
 {
-	Task Handle(TEvent @event);
+	Task Handle(TEvent busEvent);
 }

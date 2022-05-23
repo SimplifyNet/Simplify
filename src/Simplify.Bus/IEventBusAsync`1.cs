@@ -4,5 +4,5 @@ namespace Simplify.Bus;
 
 public interface IEventBusAsync<in TEvent>
 {
-	Task Publish(TEvent @event);
+	Task Publish(TEvent busEvent);
 }
