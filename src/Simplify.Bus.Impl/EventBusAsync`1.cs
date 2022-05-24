@@ -14,8 +14,9 @@ public class EventBusAsync<TEvent> : IEventBusAsync<TEvent>
 		_publishStrategy = publishStrategy;
 	}
 
-	public Task Publish(TEvent busEvent)
+	public async Task Publish(TEvent busEvent)
 	{
-		throw new System.NotImplementedException();
+		foreach (var item in _eventHandlers)
+			await item.Handle(busEvent);
 	}
 }

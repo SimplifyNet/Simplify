@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
 using Simplify.Bus.Impl.UsabilityTests.Application.Users.Get;
+using Simplify.Bus.Impl.UsabilityTests.Database.Users;
+using Simplify.Bus.Impl.UsabilityTests.Domain.Users;
 using Simplify.DI;
 
 namespace Simplify.Bus.Impl.UsabilityTests;
@@ -14,8 +16,10 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 		// Arrange
 
 		Container
+			.Register<IUsersRepository, UsersRepository>()
+
 			.Register<IRequestHandler<GetUserQuery, GetUserResponse>, GetUserQueryHandler>()
-			.RegisterBus<GetUserQuery>();
+			.RegisterBus<GetUserQuery, GetUserResponse>();
 
 		var query = new GetUserQuery(1);
 
@@ -23,7 +27,7 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 
 		using var scope = Container.BeginLifetimeScope();
 
-		await scope.Resolver.Resolve<IBusAsync<GetUserQuery>>()
+		await scope.Resolver.Resolve<IBusAsync<GetUserQuery, GetUserResponse>>()
 			.Send(query);
 	}
 
@@ -33,8 +37,10 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 		// Arrange
 
 		Container
+			.Register<IUsersRepository, UsersRepository>()
+
 			.Register<IRequestHandler<GetUserQuery, GetUserResponse>, GetUserQueryHandler>()
-			.RegisterBus<GetUserQuery>(
+			.RegisterBus<GetUserQuery, GetUserResponse>(
 				typeof(GetUserQueryValidationBehavior)
 			);
 
@@ -44,7 +50,7 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 
 		using var scope = Container.BeginLifetimeScope();
 
-		await scope.Resolver.Resolve<IBusAsync<GetUserQuery>>()
+		await scope.Resolver.Resolve<IBusAsync<GetUserQuery, GetUserResponse>>()
 			.Send(query);
 	}
 }
