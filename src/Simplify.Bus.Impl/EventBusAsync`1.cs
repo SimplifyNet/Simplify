@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Simplify.Bus.Impl;
@@ -16,7 +17,11 @@ public class EventBusAsync<TEvent> : IEventBusAsync<TEvent>
 
 	public async Task Publish(TEvent busEvent)
 	{
-		foreach (var item in _eventHandlers)
-			await item.Handle(busEvent);
+		if (_publishStrategy == PublishStrategy.SyncStopOnException)
+			foreach (var item in _eventHandlers)
+				await item.Handle(busEvent);
+
+		else if (_publishStrategy == PublishStrategy.ParallelWhenAll)
+			await Task.WhenAll(_eventHandlers.Select(x => x.Handle(busEvent)).ToArray());
 	}
 }

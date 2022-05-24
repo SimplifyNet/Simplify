@@ -56,4 +56,28 @@ public class EventBusAsync1Tests
 		handler1.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
 		handler2.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
 	}
+
+	[Test]
+	public async Task Publish_TwoEventHandlersParallelWhenAllStrategy_ExecutedAll()
+	{
+		// Arrange
+
+		var busEvent = new TestEvent();
+
+		var handler1 = new Mock<IEventHandler<TestEvent>>();
+		var handler2 = new Mock<IEventHandler<TestEvent>>();
+
+		handler1.Setup(x => x.Handle(It.Is<TestEvent>(r => r == busEvent)));
+		handler2.Setup(x => x.Handle(It.Is<TestEvent>(r => r == busEvent)));
+
+		var bus = new EventBusAsync<TestEvent>(new List<IEventHandler<TestEvent>> { handler1.Object, handler2.Object }, PublishStrategy.ParallelWhenAll);
+
+		// Act
+		await bus.Publish(busEvent);
+
+		// Assert
+
+		handler1.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
+		handler2.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
+	}
 }
