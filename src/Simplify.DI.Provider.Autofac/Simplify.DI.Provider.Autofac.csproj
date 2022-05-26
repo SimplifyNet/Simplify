@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+		<TargetFrameworks>net6.0;netstandard2.0;net462</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -8,7 +8,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.1.1</Version>
+		<Version>1.1.2</Version>
 
 		<Authors>Simplify community</Authors>
 		<Product>Simplify</Product>
@@ -23,7 +23,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.4.0" />
-		<PackageReference Include="Simplify.DI" Version="4.1.*" />
+		<PackageReference Include="Simplify.DI" Version="4.2.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
