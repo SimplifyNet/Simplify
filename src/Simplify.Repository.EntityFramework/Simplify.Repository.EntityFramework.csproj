@@ -26,7 +26,7 @@
 		<ProjectReference Include="..\Simplify.Repository\Simplify.Repository.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.6" />
 		<PackageReference Include="Simplify.DI" Version="4.1.5" />
 	</ItemGroup>
 	<ItemGroup>
