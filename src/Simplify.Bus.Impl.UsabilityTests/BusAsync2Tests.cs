@@ -40,6 +40,7 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 			.Register<IUsersRepository, UsersRepository>()
 
 			.Register<IRequestHandler<GetUserQuery, GetUserResponse>, GetUserQueryHandler>()
+			.Register<GetUserQueryValidationBehavior>()
 			.RegisterBus<GetUserQuery, GetUserResponse>(
 				typeof(GetUserQueryValidationBehavior)
 			);

@@ -24,14 +24,14 @@ public static class SimplifyDIRegistratorExtensions
 			.RegisterEventHandlersList<TEvent>(eventHandlers.Where(x => x.ImplementsServiceType(typeof(IEventHandler<TEvent>))).ToList());
 
 	private static IDIRegistrator RegisterBehaviorsList<TRequest>(this IDIRegistrator registrator, ICollection<Type> behaviors)
-		=> registrator.Register<IList<IBehavior<TRequest>>>(r =>
+		=> registrator.Register<IReadOnlyList<IBehavior<TRequest>>>(r =>
 			behaviors.Select(item => (IBehavior<TRequest>)r.Resolve(item)).ToList());
 
 	private static IDIRegistrator RegisterBehaviorsList<TRequest, TResponse>(this IDIRegistrator registrator, ICollection<Type> behaviors)
-		=> registrator.Register<IList<IBehavior<TRequest, TResponse>>>(r =>
+		=> registrator.Register<IReadOnlyList<IBehavior<TRequest, TResponse>>>(r =>
 			behaviors.Select(item => (IBehavior<TRequest, TResponse>)r.Resolve(item)).ToList());
 
 	private static IDIRegistrator RegisterEventHandlersList<TEvent>(this IDIRegistrator registrator, ICollection<Type> eventHandlers)
-		=> registrator.Register<IList<IEventHandler<TEvent>>>(r =>
+		=> registrator.Register<IReadOnlyList<IEventHandler<TEvent>>>(r =>
 			eventHandlers.Select(item => (IEventHandler<TEvent>)r.Resolve(item)).ToList());
 }
