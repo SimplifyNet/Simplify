@@ -20,8 +20,13 @@ public static class SimplifyDIRegistratorExtensions
 			.RegisterBehaviorsList<TRequest, TResponse>(behaviors.Where(x => x.ImplementsServiceType(typeof(IBehavior<TRequest, TResponse>))).ToList());
 
 	public static IDIRegistrator RegisterEventBus<TEvent>(this IDIRegistrator registrator, params Type[] eventHandlers) => registrator
-			.Register<IEventBusAsync<TEvent>, EventBusAsync<TEvent>>()
-			.RegisterEventHandlersList<TEvent>(eventHandlers.Where(x => x.ImplementsServiceType(typeof(IEventHandler<TEvent>))).ToList());
+		.RegisterEventBus<TEvent>(PublishStrategy.SyncStopOnException, eventHandlers);
+
+	public static IDIRegistrator RegisterEventBus<TEvent>(this IDIRegistrator registrator, PublishStrategy publishStrategy,
+		params Type[] eventHandlers) => registrator
+		.RegisterEventHandlersList<TEvent>(eventHandlers.Where(x => x.ImplementsServiceType(typeof(IEventHandler<TEvent>))).ToList())
+
+	.Register<IEventBusAsync<TEvent>>(r => new EventBusAsync<TEvent>(r.Resolve<IReadOnlyList<IEventHandler<TEvent>>>(), publishStrategy));
 
 	private static IDIRegistrator RegisterBehaviorsList<TRequest>(this IDIRegistrator registrator, ICollection<Type> behaviors)
 		=> registrator.Register<IReadOnlyList<IBehavior<TRequest>>>(r =>

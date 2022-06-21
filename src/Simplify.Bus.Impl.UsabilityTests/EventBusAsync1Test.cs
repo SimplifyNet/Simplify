@@ -18,14 +18,16 @@ public class EventBusAsync1Test : DIContainerTestFixtureBase
 			.Register<UserCreatedNotifier>()
 			.Register<UserCreatedNotifier2>()
 
-			.RegisterEventBus<UserCreatedEvent>(
-				typeof(UserCreatedNotifier),
-				typeof(UserCreatedNotifier2));
+		.RegisterEventBus<UserCreatedEvent>(
+			typeof(UserCreatedNotifier),
+			typeof(UserCreatedNotifier2));
 
 		var busEvent = new UserCreatedEvent(new User
 		{
 			Name = "Test User"
 		});
+
+		Container.Verify();
 
 		// Act
 
