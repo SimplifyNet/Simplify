@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.3] - 2022-07-15
+
+### Dependencies
+
+- DryIoc assets dependence fix
+
 ## [4.2.2] - 2022-05-23
 
 ### Added
