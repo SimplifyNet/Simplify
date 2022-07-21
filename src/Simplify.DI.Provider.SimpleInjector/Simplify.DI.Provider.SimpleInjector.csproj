@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;netstandard2.0;netstandard1.3;net452</TargetFrameworks>
+		<TargetFrameworks>net6.0;netstandard2.0;net452</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -8,7 +8,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.10.2</Version>
+		<Version>1.11</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>

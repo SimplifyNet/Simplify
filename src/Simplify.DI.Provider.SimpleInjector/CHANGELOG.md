@@ -1,6 +1,10 @@
 # Changelog
 
-## [1.10.2] - 2022-07-21
+## [1.11.0] - 2022-07-21
+
+### Removed
+
+- .NET Standard 1.3 support
 
 ### Added
 
