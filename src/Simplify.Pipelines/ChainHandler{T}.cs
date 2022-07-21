@@ -2,11 +2,11 @@
 
 namespace Simplify.Pipelines
 {
-	[Obsolete]
 	/// <summary>
 	/// Provides chain of responsibility handler base class
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[Obsolete]
 	public abstract class ChainHandler<T>
 	{
 		/// <summary>

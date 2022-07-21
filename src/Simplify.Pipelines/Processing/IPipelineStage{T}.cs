@@ -2,11 +2,11 @@
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Represent pipeline stage
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[Obsolete("Please use IConveyor with exceptions")]
 	public interface IPipelineStage<in T>
 	{
 		/// <summary>
