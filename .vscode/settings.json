@@ -2,15 +2,16 @@
 	"dotnet-test-explorer.testProjectPath": "src/**/*Tests.csproj",
 	"dotnet-test-explorer.testArguments": "/p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info",
 	"cSpell.words": [
+		"Сonveyor",
 		"appsettings",
 		"Autofac",
 		"cref",
 		"Displayer",
+		"langword",
 		"localizable",
 		"registrator",
 		"seealso",
 		"serializer",
-		"SMTP",
-		"Сonveyor"
+		"SMTP"
 	]
 }

@@ -16,14 +16,14 @@ namespace Simplify.Mail;
 /// </summary>
 public class MailSender : IMailSender, IDisposable
 {
+	private static readonly object AntiSpamLocker = new();
+	private static readonly Dictionary<string, DateTime> AntiSpamPool = new();
+
 	private static IMailSender _defaultInstance;
 
-	private readonly object _antiSpamLocker = new();
 	private readonly object _sendLocker = new();
 
-	private readonly Dictionary<string, DateTime> _antiSpamPool = new();
-
-	private SmtpClient _smtpClient;
+	private volatile SmtpClient _smtpClient;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="MailSender"/> class.
@@ -111,16 +111,18 @@ public class MailSender : IMailSender, IDisposable
 				if (_smtpClient != null)
 					return _smtpClient;
 
-				_smtpClient = new SmtpClient(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber)
+				var smtpClient = new SmtpClient(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber)
 				{
 					EnableSsl = Settings.EnableSsl
 				};
 
-				if (string.IsNullOrEmpty(Settings.SmtpUserName))
-					return _smtpClient;
+				if (!string.IsNullOrEmpty(Settings.SmtpUserName))
+				{
+					smtpClient.UseDefaultCredentials = false;
+					smtpClient.Credentials = new NetworkCredential(Settings.SmtpUserName, Settings.SmtpUserPassword);
+				}
 
-				_smtpClient.UseDefaultCredentials = false;
-				_smtpClient.Credentials = new NetworkCredential(Settings.SmtpUserName, Settings.SmtpUserPassword);
+				_smtpClient = smtpClient;
 			}
 
 			return _smtpClient;
@@ -604,24 +606,27 @@ public class MailSender : IMailSender, IDisposable
 		if (!Settings.AntiSpamMessagesPoolOn || string.IsNullOrEmpty(messageBody))
 			return false;
 
-		lock (_antiSpamLocker)
+		lock (AntiSpamLocker)
 		{
-			if (_antiSpamPool.ContainsKey(messageBody))
+			if (AntiSpamPool.ContainsKey(messageBody))
 				return true;
 
-			var itemsToRemove = (from item in _antiSpamPool
-								 where (DateTime.Now - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
-								 select item.Key).ToList();
+			var itemsToRemove = GetItemsToRemove();
 
 			foreach (var item in itemsToRemove)
-				_antiSpamPool.Remove(item);
+				AntiSpamPool.Remove(item);
 
-			if (_antiSpamPool.ContainsKey(messageBody))
+			if (AntiSpamPool.ContainsKey(messageBody))
 				return true;
 
-			_antiSpamPool.Add(messageBody, DateTime.Now);
+			AntiSpamPool.Add(messageBody, DateTime.Now);
 
 			return false;
 		}
 	}
+
+	private IEnumerable<string> GetItemsToRemove() =>
+		from item in AntiSpamPool
+		where (DateTime.Now - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
+		select item.Key;
 }
