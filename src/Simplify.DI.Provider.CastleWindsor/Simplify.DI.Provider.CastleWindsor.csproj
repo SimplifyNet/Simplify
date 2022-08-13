@@ -23,7 +23,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Castle.Windsor" Version="5.1.2" />
-		<PackageReference Include="Simplify.DI" Version="4.2.1" />
+		<PackageReference Include="Simplify.DI" Version="4.2.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
