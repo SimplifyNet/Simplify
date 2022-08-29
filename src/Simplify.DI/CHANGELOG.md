@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.6] - 2022-08-29
+
+### Dependencies
+
+- Internal DryIoc bump to 5.2.2 (PR#429)
+
 ## [4.2.5] - 2022-08-21
 
 ### Dependencies
