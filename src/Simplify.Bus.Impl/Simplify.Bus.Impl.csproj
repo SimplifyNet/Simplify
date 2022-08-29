@@ -25,7 +25,7 @@
 		<ProjectReference Include="..\Simplify.Bus\Simplify.Bus.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.1.*" />
+		<PackageReference Include="Simplify.DI" Version="4.2.*" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
