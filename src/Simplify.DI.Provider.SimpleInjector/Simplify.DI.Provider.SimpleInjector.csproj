@@ -22,7 +22,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.SimpleInjector/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.2.3" />
+		<PackageReference Include="Simplify.DI" Version="4.2.6" />
 		<PackageReference Include="SimpleInjector" Version="5.4.0" />
 	</ItemGroup>
 	<ItemGroup>
