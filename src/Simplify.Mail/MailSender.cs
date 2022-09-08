@@ -625,8 +625,9 @@ public class MailSender : IMailSender, IDisposable
 		}
 	}
 
-	private IEnumerable<string> GetItemsToRemove() =>
-		from item in AntiSpamPool
-		where (DateTime.Now - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
-		select item.Key;
+	private IList<string> GetItemsToRemove() =>
+		(from item in AntiSpamPool
+		 where (DateTime.Now - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
+		 select item.Key)
+		.ToList();
 }

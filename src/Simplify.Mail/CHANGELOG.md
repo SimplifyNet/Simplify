@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.4] - 2022-09-08
+
+### Fixed
+
+- Collection was modified; enumeration operation may not execute.
+
 ## [1.5.3] - 2022-07-21
 
 ### Fixed
