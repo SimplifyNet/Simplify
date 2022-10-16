@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.11.1] - 2022-10-16
+
+### Dependencies
+
+- SimpleInjector bump to 5.4.1 (PR#439)
+
 ## [1.11.0] - 2022-07-21
 
 ### Removed
