@@ -15,7 +15,7 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.*" />
 		<PackageReference Include="NUnit" Version="3.13.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.3.*" />
-		<PackageReference Include="FluentValidation" Version="11.2.*" />
+		<PackageReference Include="FluentValidation" Version="11.3.*" />
 		<PackageReference Include="Simplify.DI.Provider.SimpleInjector" Version="1.11.*" />
 	</ItemGroup>
 </Project>
