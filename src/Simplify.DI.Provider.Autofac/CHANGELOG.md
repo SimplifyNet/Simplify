@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3] - 2022-11-19
+
+### Dependencies
+
+- Autofac bump to 6.5.0 (PR#462)
+
 ## [1.1.2] - 2022-05-26
 
 ### Added
