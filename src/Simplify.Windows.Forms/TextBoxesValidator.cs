@@ -26,7 +26,7 @@ namespace Simplify.Windows.Forms
 		{
 			get { return LocalStringTableInstance ?? (LocalStringTableInstance = new ResourcesStringTable(true, "LocalResources")); }
 		}
-		
+
 		/// <summary>
 		/// Text-box numeric value validation event
 		/// </summary>
@@ -47,7 +47,6 @@ namespace Simplify.Windows.Forms
 					MessageBox.ShowMessageBox(LocalStringTable["ErrorTextBoxIntegerValidation"]);
 					e.Cancel = true;
 				}
-
 			}
 
 			if (type == typeof(long))
@@ -101,16 +100,16 @@ namespace Simplify.Windows.Forms
 		{
 			var nonValidControls = false;
 
-			foreach(var item in _checkItems)
+			foreach (var item in _checkItems)
 			{
-				if(item.Text.Length == 0)
+				if (item.Text.Length == 0)
 				{
-					if(_colorHighlight)
+					if (_colorHighlight)
 						item.BackColor = Color.FromArgb(255, 210, 210);
 
 					nonValidControls = true;
 				}
-				else if(_colorHighlight && item.BackColor != SystemColors.Window)
+				else if (_colorHighlight && item.BackColor != SystemColors.Window)
 					item.BackColor = SystemColors.Window;
 			}
 
@@ -119,7 +118,7 @@ namespace Simplify.Windows.Forms
 
 		private void OnCheckItemTextChanged(object sender, EventArgs e)
 		{
-			if(_validationEnabled)
+			if (_validationEnabled)
 				ValidateItems();
 		}
 
@@ -130,7 +129,7 @@ namespace Simplify.Windows.Forms
 		{
 			_validationEnabled = true;
 
-			foreach(var item in _checkItems)
+			foreach (var item in _checkItems)
 				item.TextChanged += OnCheckItemTextChanged;
 
 			ValidateItems();

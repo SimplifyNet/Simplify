@@ -20,7 +20,6 @@ public class EventBusAsync<TEvent> : IEventBusAsync<TEvent>
 		if (_publishStrategy == PublishStrategy.SyncStopOnException)
 			foreach (var item in _eventHandlers)
 				await item.Handle(busEvent);
-
 		else if (_publishStrategy == PublishStrategy.ParallelWhenAll)
 			await Task.WhenAll(_eventHandlers.Select(x => x.Handle(busEvent)).ToArray());
 	}
