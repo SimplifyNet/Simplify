@@ -1,49 +1,46 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-	{
-		"name": "Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester Launch",
-		"type": "coreclr",
-		"request": "launch",
-		"preLaunchTask": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
-		"program": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net6.0/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.dll",
-		"cwd": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net6.0/",
-		"internalConsoleOptions": "openOnSessionStart",
-		"serverReadyAction":
 		{
-			"action": "openExternally",
-			"pattern": "Now listening on",
-			"uriFormat": "http://localhost:5000/status"
+			"name": "Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester Launch",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
+			"program": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net6.0/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.dll",
+			"cwd": "${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/bin/Debug/net6.0/",
+			"internalConsoleOptions": "openOnSessionStart",
+			"serverReadyAction": {
+				"action": "openExternally",
+				"pattern": "Now listening on",
+				"uriFormat": "http://localhost:5000/status"
+			},
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
 		},
-		"env":
 		{
-			"ASPNETCORE_ENVIRONMENT": "Development"
-		}
-	},
-	{
-		"name": "Simplify.Examples.Repository.EntityFramework.App Launch",
-		"type": "coreclr",
-		"request": "launch",
-		"preLaunchTask": "Build Simplify.Examples.Repository.EntityFramework.App",
-		"program": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net6.0/Simplify.Examples.Repository.EntityFramework.App.dll",
-		"cwd": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net6.0/",
-		"internalConsoleOptions": "openOnSessionStart",
-		"args": "TestUser",
-		"env":
+			"name": "Simplify.Examples.Repository.EntityFramework.App Launch",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "Build Simplify.Examples.Repository.EntityFramework.App",
+			"program": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net6.0/Simplify.Examples.Repository.EntityFramework.App.dll",
+			"cwd": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net6.0/",
+			"internalConsoleOptions": "openOnSessionStart",
+			"args": "TestUser",
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		},
 		{
-			"ASPNETCORE_ENVIRONMENT": "Development"
+			"name": "Simplify.Scheduler.IntegrationTester Launch",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "Build Simplify.Scheduler.IntegrationTester",
+			"program": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/Simplify.Scheduler.IntegrationTester.dll",
+			"cwd": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/",
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
 		}
-	},
-	{
-		"name": "Simplify.Scheduler.IntegrationTester Launch",
-		"type": "coreclr",
-		"request": "launch",
-		"preLaunchTask": "Build Simplify.Scheduler.IntegrationTester",
-		"program": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/Simplify.Scheduler.IntegrationTester.dll",
-		"cwd": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/",
-		"env":
-		{
-			"ASPNETCORE_ENVIRONMENT": "Development"
-		}
-	}]
+	]
 }
