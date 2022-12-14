@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection;
 
@@ -48,10 +49,7 @@ public class MicrosoftDependencyInjectionDIProvider : IDIContainerProvider
 	/// </summary>
 	/// <param name="serviceType">Type of the service.</param>
 	/// <returns></returns>
-	public object Resolve(Type serviceType)
-	{
-		return ServiceProvider.GetRequiredService(serviceType);
-	}
+	public object Resolve(Type serviceType) => ServiceProvider.GetRequiredService(serviceType);
 
 	/// <summary>
 	/// Registers the specified service type with corresponding implementation type.
@@ -130,10 +128,14 @@ public class MicrosoftDependencyInjectionDIProvider : IDIContainerProvider
 	/// </summary>
 	public void Verify()
 	{
+		var filtered = Services
+			.Where(x => !IsOpenGeneric(x.ServiceType))
+			.Where(x => x.ImplementationType is not null);
+
 		using (var scope = BeginLifetimeScope())
-		{
-			foreach (var service in Services)
+			foreach (var service in filtered)
 				scope.Resolver.Resolve(service.ServiceType);
-		}
 	}
+
+	private static bool IsOpenGeneric(Type type) => type.IsGenericType && type.ContainsGenericParameters;
 }

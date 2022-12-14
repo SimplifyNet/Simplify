@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.2] - 2022-12-14
+
+### Fixed
+
+- Ignore open generic types and types without implementation in container graph verification (#474)
+
 ## [1.4.1] - 2022-10-16
 
 ### Dependencies
