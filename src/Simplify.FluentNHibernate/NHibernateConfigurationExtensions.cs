@@ -10,8 +10,8 @@ namespace Simplify.FluentNHibernate;
 /// </summary>
 public static class NHibernateConfigurationExtensions
 {
-	private static readonly PropertyInfo _tableMappingsProperty =
-		typeof(Configuration).GetProperty("TableMappings", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+	private static readonly PropertyInfo TableMappingsProperty =
+		typeof(Configuration).GetProperty("TableMappings", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)!;
 
 	/// <summary>
 	/// Creates the indexes for foreign keys.
@@ -21,7 +21,7 @@ public static class NHibernateConfigurationExtensions
 	{
 		configuration.BuildMappings();
 
-		var tables = (ICollection<Table>)_tableMappingsProperty.GetValue(configuration, null);
+		var tables = (ICollection<Table>?)TableMappingsProperty.GetValue(configuration, null) ?? throw new System.InvalidOperationException("TableMappings value is null");
 
 		foreach (var table in tables)
 		{

@@ -29,7 +29,7 @@ public static class SessionExtensions
 		if (query != null)
 			queryable = queryable.Where(query);
 
-		return queryable.SingleOrDefault();
+		return queryable.SingleOrDefault()!;
 	}
 
 	/// <summary>
@@ -65,7 +65,7 @@ public static class SessionExtensions
 
 		queryable = queryable.WithOptions(x => x.SetCacheable(true));
 
-		return queryable.SingleOrDefault();
+		return queryable.SingleOrDefault()!;
 	}
 
 	/// <summary>
@@ -102,7 +102,7 @@ public static class SessionExtensions
 		if (query != null)
 			queryable = queryable.Where(query);
 
-		return queryable.FirstOrDefault();
+		return queryable.FirstOrDefault()!;
 	}
 
 	/// <summary>
