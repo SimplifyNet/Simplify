@@ -7,7 +7,7 @@
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/SimplifyNet/Simplify)](https://www.codefactor.io/repository/github/simplifynet/simplify)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](http://makeapullrequest.com)
 
-`Simplify` is an open-source set of .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
+`Simplify` is an open-source set of lightweight .NET libraries that provide infrastructure for your applications. DI and mocking friendly.
 
 ## Packages
 
