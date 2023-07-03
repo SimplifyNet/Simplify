@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0] - 2023-07-03
+
+### Dependencies
+
+- Autofac bump to 7.0.1
+- Simplify.DI bump to 4.2.9
+
 ## [1.1.3] - 2022-11-19
 
 ### Dependencies
