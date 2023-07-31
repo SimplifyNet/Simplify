@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.7.2] - 2023-07-31
+
+### Removed
+
+- .NET 4.5.2 support
+
+### Added
+
+- .NET Standard 2.1 support
+- .NET 4.8 support
+
+### Dependencies
+
+- Castle.Windsor bump to 6.0.0
+- Simplify.DI bump to 4.2.9
+
 ## [1.7.1] - 2022-05-18
 
 ### Added

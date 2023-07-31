@@ -20,6 +20,12 @@
 			<frameworkAssembly assemblyName="System.Xml" />
 			<frameworkAssembly assemblyName="System.Xml.Linq" />
 		</frameworkAssemblies>
+		<dependencies>
+			<group targetFramework=".NET6.0" />
+			<group targetFramework=".NETStandard2.1" />
+			<group targetFramework=".NETStandard2.0" />
+			<group targetFramework=".NETFramework4.8" />
+		</dependencies>
 	</metadata>
 	<files>
 		<file src="Converters/ChainedObjectConverter.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/Converters/ChainedObjectConverter.cs" />

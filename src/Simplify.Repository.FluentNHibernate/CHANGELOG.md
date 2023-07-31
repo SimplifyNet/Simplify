@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.2] - 2023-07-31
+
+### Removed
+
+- .NET 4.6.2 support
+
+### Added
+
+- .NET Standard 2.1 support
+- .NET 4.8 support
+
 ## [1.5.1] - 2023-04-17
 
 ### Added
