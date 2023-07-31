@@ -1,11 +1,10 @@
 ﻿using Simplify.Repository;
 
-namespace Simplify.Examples.Repository.Domain.Location
-{
-	public interface ICityName : INamedObject
-	{
-		ICity City { get; set; }
+namespace Simplify.Examples.Repository.Domain.Location;
 
-		string Language { get; set; }
-	}
+public interface ICityName : INamedObject
+{
+	ICity City { get; set; }
+
+	string Language { get; set; }
 }

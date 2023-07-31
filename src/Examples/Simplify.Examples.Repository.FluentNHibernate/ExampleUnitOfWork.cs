@@ -2,12 +2,11 @@
 using Simplify.Examples.Repository.Domain;
 using Simplify.Repository.FluentNHibernate;
 
-namespace Simplify.Examples.Repository.FluentNHibernate
+namespace Simplify.Examples.Repository.FluentNHibernate;
+
+public class ExampleUnitOfWork : TransactUnitOfWork, IExampleUnitOfWork
 {
-	public class ExampleUnitOfWork : TransactUnitOfWork, IExampleUnitOfWork
+	public ExampleUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory)
 	{
-		public ExampleUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory)
-		{
-		}
 	}
 }

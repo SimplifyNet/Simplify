@@ -1,27 +1,26 @@
 ﻿using System.Data;
 
-namespace Simplify.Examples.Repository.Domain.Location
+namespace Simplify.Examples.Repository.Domain.Location;
+
+public class TransactCitiesService : ICitiesService
 {
-	public class TransactCitiesService : ICitiesService
+	private readonly ICitiesService _baseService;
+	private readonly IExampleUnitOfWork _unitOfWork;
+
+	public TransactCitiesService(ICitiesService baseService, IExampleUnitOfWork unitOfWork)
 	{
-		private readonly ICitiesService _baseService;
-		private readonly IExampleUnitOfWork _unitOfWork;
+		_baseService = baseService;
+		_unitOfWork = unitOfWork;
+	}
 
-		public TransactCitiesService(ICitiesService baseService, IExampleUnitOfWork unitOfWork)
-		{
-			_baseService = baseService;
-			_unitOfWork = unitOfWork;
-		}
+	public ICity GetCity(string cityName)
+	{
+		_unitOfWork.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-		public ICity GetCity(string cityName)
-		{
-			_unitOfWork.BeginTransaction(IsolationLevel.ReadUncommitted);
+		var item = _baseService.GetCity(cityName);
 
-			var item = _baseService.GetCity(cityName);
+		_unitOfWork.Commit();
 
-			_unitOfWork.Commit();
-
-			return item;
-		}
+		return item;
 	}
 }
