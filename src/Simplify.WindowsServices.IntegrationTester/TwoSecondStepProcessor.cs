@@ -1,6 +1,6 @@
-﻿using Simplify.WindowsServices.Jobs;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
+using Simplify.WindowsServices.Jobs;
 
 namespace Simplify.WindowsServices.IntegrationTester
 {

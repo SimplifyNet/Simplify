@@ -16,7 +16,7 @@ public class CommonEqualityComparer : IEqualityComparer
 	/// <returns>
 	///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
 	/// </returns>
-	public new virtual bool Equals(object? x, object? y)
+	public virtual new bool Equals(object? x, object? y)
 	{
 		if (x == null || y == null)
 			return false;

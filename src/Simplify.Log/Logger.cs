@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.IO.Abstractions;
 using System.Reflection;
-using System.Web;
 using Microsoft.Extensions.Configuration;
 using Simplify.Log.Settings;
 using Simplify.Log.Settings.Impl;

@@ -13,14 +13,14 @@ public class MicrosoftDependencyInjectionDIProvider : IDIContainerProvider
 	private IServiceProvider? _serviceProvider;
 
 	/// <summary>
-	/// <c>true</c> to perform check verifying that scoped services never gets resolved from root provider; otherwise <c>false</c>.
-	/// </summary>
-	public bool ValidateScopes { get; set; } = true;
-
-	/// <summary>
 	/// Occurs when the lifetime scope is opened
 	/// </summary>
 	public event BeginLifetimeScopeEventHandler? OnBeginLifetimeScope;
+
+	/// <summary>
+	/// <c>true</c> to perform check verifying that scoped services never gets resolved from root provider; otherwise <c>false</c>.
+	/// </summary>
+	public bool ValidateScopes { get; set; } = true;
 
 	/// <summary>
 	/// The IOC container registrations

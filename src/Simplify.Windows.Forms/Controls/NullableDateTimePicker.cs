@@ -26,7 +26,7 @@ namespace Simplify.Windows.Forms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the string value that is showing in the control as <see langword="null"/> value. 
+		/// Gets or sets the string value that is showing in the control as <see langword="null"/> value.
 		/// </summary>
 		[Browsable(true)]
 		[Category("Behavior")]
@@ -48,14 +48,14 @@ namespace Simplify.Windows.Forms.Controls
 		{
 			get
 			{
-				if(_isNull)
+				if (_isNull)
 					return null;
 
 				return base.Value;
 			}
 			set
 			{
-				if(value == null)
+				if (value == null)
 					SetToNullValue();
 				else
 				{
@@ -63,6 +63,30 @@ namespace Simplify.Windows.Forms.Controls
 					base.Value = (DateTime)value;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Raises the CloseUp event.
+		/// </summary>
+		/// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+		protected override void OnCloseUp(EventArgs e)
+		{
+			if (MouseButtons == MouseButtons.None && _isNull)
+				SetToDateTimeValue();
+
+			base.OnCloseUp(e);
+		}
+
+		/// <summary>
+		/// Raises the <see cref="E:System.Windows.Forms.Control.KeyUp" /> event.
+		/// </summary>
+		/// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.</param>
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+				Value = null;
+
+			base.OnKeyUp(e);
 		}
 
 		/// <summary>
@@ -84,30 +108,6 @@ namespace Simplify.Windows.Forms.Controls
 
 			Format = DateTimePickerFormat.Long;
 			_isNull = false;
-		}
-
-		/// <summary>
-		/// Raises the CloseUp event.
-		/// </summary>
-		/// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-		protected override void OnCloseUp(EventArgs e)
-		{
-			if(MouseButtons == MouseButtons.None && _isNull)
-				SetToDateTimeValue();
-
-			base.OnCloseUp(e);
-		}
-
-		/// <summary>
-		/// Raises the <see cref="E:System.Windows.Forms.Control.KeyUp" /> event.
-		/// </summary>
-		/// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.</param>
-		protected override void OnKeyUp(KeyEventArgs e)
-		{
-			if(e.KeyCode == Keys.Delete)
-				Value = null;
-
-			base.OnKeyUp(e);
 		}
 	}
 }

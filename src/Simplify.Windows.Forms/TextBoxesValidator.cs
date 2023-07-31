@@ -20,6 +20,30 @@ namespace Simplify.Windows.Forms
 		private bool _validationEnabled;
 
 		/// <summary>
+		/// Initialize controls validator
+		/// </summary>
+		/// <param name="resultStatusControl">Control which will be disabled or enabled after validation</param>
+		/// <param name="checkItems">Items to validate</param>
+		public TextBoxesValidator(Control resultStatusControl, params TextBox[] checkItems)
+		{
+			_resultStatusControl = resultStatusControl;
+			_checkItems = checkItems;
+		}
+
+		/// <summary>
+		/// Initialize controls validator
+		/// </summary>
+		/// <param name="enableColorHightlight">Enabled text boxes color highlight in case of invalid control</param>
+		/// <param name="resultStatusControl">Control which will be disabled or enabled after validation</param>
+		/// <param name="checkItems">Items to validate</param>
+		public TextBoxesValidator(bool enableColorHightlight, Control resultStatusControl, params TextBox[] checkItems)
+		{
+			_colorHighlight = enableColorHightlight;
+			_resultStatusControl = resultStatusControl;
+			_checkItems = checkItems;
+		}
+
+		/// <summary>
 		/// ApplicationHelper string table
 		/// </summary>
 		internal static IResourcesStringTable LocalStringTable
@@ -73,27 +97,24 @@ namespace Simplify.Windows.Forms
 		}
 
 		/// <summary>
-		/// Initialize controls validator
+		/// Elable items validation
 		/// </summary>
-		/// <param name="resultStatusControl">Control which will be disabled or enabled after validation</param>
-		/// <param name="checkItems">Items to validate</param>
-		public TextBoxesValidator(Control resultStatusControl, params TextBox[] checkItems)
+		public void EnableValidation()
 		{
-			_resultStatusControl = resultStatusControl;
-			_checkItems = checkItems;
+			_validationEnabled = true;
+
+			foreach (var item in _checkItems)
+				item.TextChanged += OnCheckItemTextChanged;
+
+			ValidateItems();
 		}
 
 		/// <summary>
-		/// Initialize controls validator
+		/// Disable items validation
 		/// </summary>
-		/// <param name="enableColorHightlight">Enabled text boxes color highlight in case of invalid control</param>
-		/// <param name="resultStatusControl">Control which will be disabled or enabled after validation</param>
-		/// <param name="checkItems">Items to validate</param>
-		public TextBoxesValidator(bool enableColorHightlight, Control resultStatusControl, params TextBox[] checkItems)
+		public void DisableValidation()
 		{
-			_colorHighlight = enableColorHightlight;
-			_resultStatusControl = resultStatusControl;
-			_checkItems = checkItems;
+			_validationEnabled = false;
 		}
 
 		private void ValidateItems()
@@ -120,27 +141,6 @@ namespace Simplify.Windows.Forms
 		{
 			if (_validationEnabled)
 				ValidateItems();
-		}
-
-		/// <summary>
-		/// Elable items validation
-		/// </summary>
-		public void EnableValidation()
-		{
-			_validationEnabled = true;
-
-			foreach (var item in _checkItems)
-				item.TextChanged += OnCheckItemTextChanged;
-
-			ValidateItems();
-		}
-
-		/// <summary>
-		/// Disable items validation
-		/// </summary>
-		public void DisableValidation()
-		{
-			_validationEnabled = false;
 		}
 	}
 }

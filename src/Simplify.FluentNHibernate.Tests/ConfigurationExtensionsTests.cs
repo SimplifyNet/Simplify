@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
+using Microsoft.Extensions.Configuration;
 using NHibernate.Dialect;
 using NUnit.Framework;
 

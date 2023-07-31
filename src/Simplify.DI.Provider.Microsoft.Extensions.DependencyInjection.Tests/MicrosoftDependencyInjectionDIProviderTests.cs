@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Simplify.DI.TestsTypes;
-using System;
 
 namespace Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.Tests;
 

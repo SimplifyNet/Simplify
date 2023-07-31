@@ -1,6 +1,4 @@
-﻿using Simplify.Log.Settings.Impl;
-
-namespace Simplify.Log.Settings;
+﻿namespace Simplify.Log.Settings;
 
 /// <summary>
 /// Represent Simplify.Log settings

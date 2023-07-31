@@ -1,7 +1,7 @@
-﻿using Castle.MicroKernel;
+﻿using System;
+using Castle.MicroKernel;
 using NUnit.Framework;
 using Simplify.DI.TestsTypes;
-using System;
 
 namespace Simplify.DI.Provider.CastleWindsor.Tests;
 
@@ -253,7 +253,7 @@ public class CastleWindsorDIContainerProviderTests
 		Assert.IsNotNull(bar);
 	}
 
-	#endregion Existance tests
+	#endregion Existence tests
 
 	#region Reuse tests
 
