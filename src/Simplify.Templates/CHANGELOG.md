@@ -11,3 +11,7 @@
 - .NET 6 support
 - .NET Standard 2.1 support
 - .NET 4.8 support
+
+### Fixed
+
+- items with incorrect name attribute exclude

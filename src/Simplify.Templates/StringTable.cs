@@ -56,7 +56,7 @@ public static class StringTable
 		var stringTable = XDocument.Parse(stringTableXml);
 
 		if (stringTable.Root != null)
-			return stringTable.Root.XPathSelectElements("item")
+			return stringTable.Root.XPathSelectElements("item[@name]")
 				.Where(x => x.HasAttributes)
 				.ToDictionary(GetName, GetValue);
 
@@ -105,13 +105,13 @@ public static class StringTable
 		return LoadStringTableFromString(await FileReader.ReadFileAsync(filePath));
 	}
 
-	private static string GetName(XElement item)
+	private static string? GetName(XElement item)
 	{
-		return (string)item.Attribute("name");
+		return (string?)item.Attribute("name");
 	}
 
-	private static string GetValue(XElement item)
+	private static string? GetValue(XElement item)
 	{
-		return string.IsNullOrEmpty(item.Value) ? (string)item.Attribute("value") : item.InnerXml().Trim();
+		return string.IsNullOrEmpty(item.Value) ? (string?)item.Attribute("value") : item.InnerXml().Trim();
 	}
 }
