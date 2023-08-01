@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.1] - 2023-07-31
+## [1.6.1] - 2023-08-01
 
 ### Removed
 
@@ -9,8 +9,13 @@
 
 ### Added
 
+- .NET 6 support
 - .NET Standard 2.1 support
 - .NET 4.8 support
+
+### Dependencies
+
+- Explicit System.Data.Common reference removed
 
 ## [1.6.0] - 2021-10-28
 
