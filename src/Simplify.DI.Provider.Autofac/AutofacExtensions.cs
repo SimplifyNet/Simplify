@@ -20,6 +20,6 @@ public static class AutofacExtensions
 	{
 		var property = service.GetType().GetProperty(ServiceTypePropertyName) ?? throw new InvalidOperationException($"Error reading {ServiceTypePropertyName}");
 
-		return (Type)property.GetValue(service);
+		return (Type)property.GetValue(service)!;
 	}
 }
