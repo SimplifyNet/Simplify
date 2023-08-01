@@ -52,7 +52,7 @@ public class ModelSetter<T> : ModelSetterBase, IModelSetter<T>
 		var propInfo = _modelType.GetProperty(expression.Member.Name);
 
 		if (propInfo != null)
-			Template.Set(FormatModelVariableName(propInfo.Name), dataExpression.Invoke((TData)propInfo.GetValue(_model)));
+			Template.Set(FormatModelVariableName(propInfo.Name), dataExpression.Invoke((TData)propInfo.GetValue(_model)!));
 
 		return this;
 	}

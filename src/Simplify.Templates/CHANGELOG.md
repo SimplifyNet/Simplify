@@ -15,3 +15,7 @@
 ### Fixed
 
 - items with incorrect name attribute exclude
+
+### Changed
+
+- Refactored to nullable
