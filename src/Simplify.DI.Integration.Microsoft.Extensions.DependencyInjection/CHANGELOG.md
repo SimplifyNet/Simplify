@@ -11,6 +11,7 @@
 ### Dependencies
 
 - Simplify.DI bump to 4.2.10
+- Microsoft.Extensions.DependencyInjection bump to 7.0.0
 
 ## [1.1.1] - 2022-10-16
 
