@@ -9,7 +9,7 @@
 ### Added
 
 - .NET 4.8 support
- 
+
 ### Dependencies
 
 - Simplify.DI bump to 4.2.10
