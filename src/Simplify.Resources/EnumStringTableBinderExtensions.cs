@@ -17,10 +17,7 @@ public static class EnumStringTableBinderExtensions
 	/// <returns>
 	/// associated value
 	/// </returns>
-	public static string GetAssociatedValue<T>(this IResourcesStringTable stringTable, T enumValue) where T : struct
-	{
-		return stringTable[enumValue.GetType().Name + Enum.GetName(typeof(T), enumValue)];
-	}
+	public static string GetAssociatedValue<T>(this IResourcesStringTable stringTable, T enumValue) where T : struct => stringTable[enumValue.GetType().Name + Enum.GetName(typeof(T), enumValue)];
 
 	/// <summary>
 	/// Generates <c>KeyValuePair</c> list with ID from enum and associated name from <c>StringTable</c>

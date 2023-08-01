@@ -44,10 +44,7 @@ public class ResourcesStringTable : IResourcesStringTable
 	/// <summary>
 	/// Get string table record by name
 	/// </summary>
-	public string GetString(string name)
-	{
-		return _resourceManager.GetString(name);
-	}
+	public string GetString(string name) => _resourceManager.GetString(name);
 
 	private void InitializeResourceManager(string resourcesFileName = "Resources", string baseName = null)
 	{
