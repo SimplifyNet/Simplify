@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.1] - 2023-07-31
+## [2.0.1] - 2023-08-01
 
 ### Removed
 
@@ -19,3 +19,7 @@
 ### Changed
 
 - Refactored to nullable
+
+### Dependencies
+
+- Internal Simplify.Xml.Sources bump to 1.3.1
