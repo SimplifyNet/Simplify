@@ -10,6 +10,7 @@
 ### Added
 
 - .NET 6.0 for windows support
+- .NET 4.8 support
 
 ## [1.1.2] - 2021-08-24
 
