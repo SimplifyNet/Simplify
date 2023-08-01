@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.7.2] - 2023-07-31
+## [1.8.0] - 2023-08-01
 
 ### Removed
 
@@ -14,7 +14,7 @@
 ### Dependencies
 
 - Castle.Windsor bump to 6.0.0
-- Simplify.DI bump to 4.2.9
+- Simplify.DI bump to 4.2.10
 
 ## [1.7.1] - 2022-05-18
 

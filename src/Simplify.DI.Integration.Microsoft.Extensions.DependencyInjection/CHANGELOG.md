@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.1] - 2023-08-01
+
+### Added
+
+- .NET 6 support
+- .NET Standard 2.1 support
+- .NET 4.8 support
+
+### Dependencies
+
+- Simplify.DI bump to 4.2.10
+
 ## [1.1.1] - 2022-10-16
 
 ### Dependencies

@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.1] - 2023-07-31
+## [1.2.1] - 2023-08-01
 
 ### Removed
 
@@ -10,6 +10,10 @@
 
 - .NET Standard 2.1 support
 - .NET 4.8 support
+
+### Dependencies
+
+- Simplify.DI bump to 4.2.10
 
 ## [1.2.0] - 2023-07-03
 
