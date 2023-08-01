@@ -14,10 +14,7 @@ public static class TemplateAddExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Add(this ITemplate tpl, string variableName, int value)
-	{
-		return tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Add(this ITemplate tpl, string variableName, int value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
@@ -26,10 +23,7 @@ public static class TemplateAddExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Add(this ITemplate tpl, string variableName, object? value)
-	{
-		return tpl.Add(variableName, value?.ToString());
-	}
+	public static ITemplate Add(this ITemplate tpl, string variableName, object? value) => tpl.Add(variableName, value?.ToString());
 
 	/// <summary>
 	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
@@ -38,10 +32,7 @@ public static class TemplateAddExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Add(this ITemplate tpl, string variableName, double value)
-	{
-		return tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Add(this ITemplate tpl, string variableName, double value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
@@ -50,10 +41,7 @@ public static class TemplateAddExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Add(this ITemplate tpl, string variableName, decimal value)
-	{
-		return tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Add(this ITemplate tpl, string variableName, decimal value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
@@ -62,10 +50,7 @@ public static class TemplateAddExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Add(this ITemplate tpl, string variableName, long value)
-	{
-		return tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Add(this ITemplate tpl, string variableName, long value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Add value to set template variable value with text from template (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
@@ -74,8 +59,5 @@ public static class TemplateAddExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="template">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Add(this ITemplate tpl, string variableName, ITemplate template)
-	{
-		return tpl.Add(variableName, template?.Get());
-	}
+	public static ITemplate Add(this ITemplate tpl, string variableName, ITemplate template) => tpl.Add(variableName, template?.Get());
 }

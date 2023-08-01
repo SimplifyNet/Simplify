@@ -14,8 +14,6 @@ public static class TemplateModelExtensions
 	/// <param name="modelPrefix">The model prefix (for example 'Model', it will be used like 'Model.YourVariableName').</param>
 	/// <returns></returns>
 	public static IModelSetter<T> Model<T>(this ITemplate template, T model, string? modelPrefix = null)
-		where T : class
-	{
-		return new ModelSetter<T>(template, model, modelPrefix);
-	}
+		where T : class =>
+		new ModelSetter<T>(template, model, modelPrefix);
 }

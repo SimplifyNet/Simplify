@@ -252,10 +252,7 @@ public class TemplateBuilder
 			: await FileReader.ReadFromAssemblyAsync(_filePath, _assembly);
 	}
 
-	private string PreprocessTemplateText(string text)
-	{
-		return _fixLineEndingsHtml ? text.Replace(Environment.NewLine, "<br />") : text;
-	}
+	private string PreprocessTemplateText(string text) => _fixLineEndingsHtml ? text.Replace(Environment.NewLine, "<br />") : text;
 
 	private void PostprocessTemplate(ITemplate tpl)
 	{
