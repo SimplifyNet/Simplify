@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0] - 2023-08-01
+
+### Dependencies
+
+- System.IO.Abstractions bump to 19.2.51
+- Microsoft.Extensions.Configuration.Abstractions bump to 7.0
+
 ## [2.1.0] - 2022-11-30
 
 ### Added
