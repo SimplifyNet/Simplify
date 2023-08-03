@@ -13,8 +13,9 @@ public static class FluentConfigurationExtension
 	/// <summary>
 	/// Creates database structure from code (destructive)
 	/// </summary>
+	/// <param name="configurationAddons">The configuration addition setup.</param>
 	/// <param name="configuration">The configuration.</param>
-	public static void ExportSchema(this FluentConfiguration configuration)
+	public static void ExportSchema(this FluentConfiguration configuration, Action<Configuration>? configurationAddons = null)
 	{
 		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
@@ -27,6 +28,8 @@ public static class FluentConfigurationExtension
 
 		try
 		{
+			configurationAddons?.Invoke(config!);
+
 			var export = new SchemaExport(config);
 			export.Execute(false, true, false, session.Connection, null);
 
