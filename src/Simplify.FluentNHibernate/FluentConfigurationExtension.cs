@@ -20,10 +20,24 @@ public static class FluentConfigurationExtension
 
 		Configuration? config = null;
 		configuration.ExposeConfiguration(c => config = c);
-		var factory = configuration.BuildSessionFactory();
+		var sessionFactory = configuration.BuildSessionFactory();
 
-		var export = new SchemaExport(config);
-		export.Execute(false, true, false, factory.OpenSession().Connection, null);
+		using var session = sessionFactory.OpenSession();
+		using var tx = session.BeginTransaction();
+
+		try
+		{
+			var export = new SchemaExport(config);
+			export.Execute(false, true, false, session.Connection, null);
+
+			tx.Commit();
+		}
+		catch (Exception)
+		{
+			tx.Rollback();
+
+			throw;
+		}
 	}
 
 	/// <summary>
@@ -38,11 +52,25 @@ public static class FluentConfigurationExtension
 
 		Configuration? config = null;
 		configuration.ExposeConfiguration(c => config = c);
-		configuration.BuildSessionFactory();
+		var sessionFactory = configuration.BuildSessionFactory();
 
-		configurationAddons?.Invoke(config!);
+		using var session = sessionFactory.OpenSession();
+		using var tx = session.BeginTransaction();
 
-		var updater = new SchemaUpdate(config);
-		updater.Execute(true, true);
+		try
+		{
+			configurationAddons?.Invoke(config!);
+
+			var updater = new SchemaUpdate(config);
+			updater.Execute(true, true);
+
+			tx.Commit();
+		}
+		catch (Exception)
+		{
+			tx.Rollback();
+
+			throw;
+		}
 	}
 }

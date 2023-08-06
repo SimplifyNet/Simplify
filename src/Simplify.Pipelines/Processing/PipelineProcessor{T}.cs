@@ -2,12 +2,12 @@
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Provides default pipeline processor
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <seealso cref="IPipelineProcessor" />
+	[Obsolete("Please use IConveyor with exceptions")]
 	public class PipelineProcessor<T> : IPipelineProcessor
 	{
 		private readonly IPipeline<T> _pipeline;

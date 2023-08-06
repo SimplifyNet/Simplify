@@ -23,6 +23,8 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 
 		var query = new GetUserQuery(1);
 
+		Container.Verify();
+
 		// Act
 
 		using var scope = Container.BeginLifetimeScope();
@@ -40,9 +42,14 @@ public class Bus2Async2Tests : DIContainerTestFixtureBase
 			.Register<IUsersRepository, UsersRepository>()
 
 			.Register<IRequestHandler<GetUserQuery, GetUserResponse>, GetUserQueryHandler>()
+
+			.Register<GetUserQueryValidationBehavior>()
+
 			.RegisterBus<GetUserQuery, GetUserResponse>(
 				typeof(GetUserQueryValidationBehavior)
 			);
+
+		Container.Verify();
 
 		var query = new GetUserQuery(1);
 

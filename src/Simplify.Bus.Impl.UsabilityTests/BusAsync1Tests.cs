@@ -40,6 +40,10 @@ public class BusAsync1Tests : DIContainerTestFixtureBase
 
 		Container
 			.Register<IRequestHandler<CreateUserCommand>, CreateUserCommandHandler>()
+
+			.Register<LoggingBehavior<CreateUserCommand>>()
+			.Register<CreateUserCommandValidationBehavior>()
+
 			.RegisterBus<CreateUserCommand>(
 				typeof(LoggingBehavior<CreateUserCommand>),
 				typeof(CreateUserCommandValidationBehavior)
@@ -49,6 +53,8 @@ public class BusAsync1Tests : DIContainerTestFixtureBase
 		{
 			Name = "Test User"
 		});
+
+		Container.Verify();
 
 		// Act
 

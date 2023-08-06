@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.0] - 2022-11-30
+
+### Added
+
+- .NET 6.0 explicit targeting (removed incorrect .NET 5 targeting)
+
+### Dependencies
+
+- System.IO.Abstractions bump to 18.0.1 (PR#467)
+- Microsoft.Extensions.Configuration.Abstractions bump to 6.0
+
 ## [2.0.3] - 2022-05-02
 
 ### Dependencies

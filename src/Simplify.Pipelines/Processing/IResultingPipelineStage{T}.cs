@@ -2,13 +2,13 @@
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyorStage with exceptions")]
 	/// <summary>
 	/// Represent pipeline stage with processing error result information
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TResult">The type of the result.</typeparam>
 	/// <seealso cref="Simplify.Pipelines.Processing.IPipelineStage{T}" />
+	[Obsolete("Please use IConveyorStage with exceptions")]
 	public interface IResultingPipelineStage<in T, out TResult> : IPipelineStage<T>
 	{
 		/// <summary>

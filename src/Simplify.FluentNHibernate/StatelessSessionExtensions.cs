@@ -29,7 +29,7 @@ public static class StatelessSessionExtensions
 		if (query != null)
 			queryable = queryable.Where(query);
 
-		return queryable.SingleOrDefault();
+		return queryable!.SingleOrDefault()!;
 	}
 
 	/// <summary>
@@ -65,7 +65,7 @@ public static class StatelessSessionExtensions
 
 		queryable = queryable.WithOptions(x => x.SetCacheable(true));
 
-		return queryable.SingleOrDefault();
+		return queryable.SingleOrDefault()!;
 	}
 
 	/// <summary>
@@ -102,7 +102,7 @@ public static class StatelessSessionExtensions
 		if (query != null)
 			queryable = queryable.Where(query);
 
-		return queryable.FirstOrDefault();
+		return queryable.FirstOrDefault()!;
 	}
 
 	/// <summary>

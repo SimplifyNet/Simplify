@@ -142,7 +142,6 @@ public class GenericRepository<T> : IGenericRepository<T>
 		int itemsPerPage,
 		Expression<Func<T, bool>>? query = null,
 		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
-
 	{
 		var queryable = Session.Set<T>().AsQueryable();
 

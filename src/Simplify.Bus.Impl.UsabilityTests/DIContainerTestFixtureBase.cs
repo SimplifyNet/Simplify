@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Simplify.DI;
-using Simplify.DI.Provider.DryIoc;
+using Simplify.DI.Provider.SimpleInjector;
 
 namespace Simplify.Bus.Impl.UsabilityTests;
 
@@ -16,7 +16,7 @@ public class DIContainerTestFixtureBase
 	}
 
 	[SetUp]
-	public virtual void Initialize() => _container = new DryIocDIProvider();
+	public virtual void Initialize() => _container = new SimpleInjectorDIProvider();
 
 	[TearDown]
 	public void Dispose() => _container?.Dispose();

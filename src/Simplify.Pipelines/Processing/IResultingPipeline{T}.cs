@@ -2,12 +2,12 @@ using System;
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Represent pipeline with processing error result information
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TResult">The type of the result.</typeparam>
+	[Obsolete("Please use IConveyor with exceptions")]
 	public interface IResultingPipeline<in T, out TResult>
 	{
 		/// <summary>

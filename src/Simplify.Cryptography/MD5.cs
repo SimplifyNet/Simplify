@@ -23,7 +23,7 @@ namespace Simplify.Cryptography
 
 			var sBuilder = new StringBuilder();
 
-			// Loop through each byte of the hashed data 
+			// Loop through each byte of the hashed data
 			// and format each one as a hexadecimal string.
 			foreach (var t in data)
 				sBuilder.Append(t.ToString("x2"));
@@ -43,7 +43,7 @@ namespace Simplify.Cryptography
 
 			var comparer = StringComparer.OrdinalIgnoreCase;
 
-			return 0 == comparer.Compare(hashOfInput, hash);
+			return comparer.Compare(hashOfInput, hash) == 0;
 		}
 	}
 }

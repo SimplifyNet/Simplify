@@ -2,11 +2,11 @@ using System;
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Represent pipeline
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[Obsolete("Please use IConveyor with exceptions")]
 	public interface IPipeline<T>
 	{
 		/// <summary>
