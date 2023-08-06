@@ -1,32 +1,31 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Simplify.DI;
 
-namespace Simplify.Scheduler.IntegrationTester.Setup
+namespace Simplify.Scheduler.IntegrationTester.Setup;
+
+public static class IocRegistrations
 {
-	public static class IocRegistrations
+	public static IConfiguration Configuration { get; private set; }
+
+	public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
 	{
-		public static IConfiguration Configuration { get; private set; }
+		provider.RegisterConfiguration()
+			.Register<DisposableDependency>()
+			.Register<OneSecondStepProcessor>()
+			.Register<TwoSecondStepProcessor>()
+			.Register<OneMinuteStepCrontabProcessor>()
+			.Register<TwoParallelTasksProcessor>()
+			.Register<BasicTaskProcessor>();
 
-		public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
-		{
-			provider.RegisterConfiguration()
-				.Register<DisposableDependency>()
-				.Register<OneSecondStepProcessor>()
-				.Register<TwoSecondStepProcessor>()
-				.Register<OneMinuteStepCrontabProcessor>()
-				.Register<TwoParallelTasksProcessor>()
-				.Register<BasicTaskProcessor>();
+		return provider;
+	}
 
-			return provider;
-		}
+	private static IDIRegistrator RegisterConfiguration(this IDIRegistrator registrator)
+	{
+		Configuration = new ConfigurationBuilder()
+			.AddJsonFile("appsettings.json", false)
+			.Build();
 
-		private static IDIRegistrator RegisterConfiguration(this IDIRegistrator registrator)
-		{
-			Configuration = new ConfigurationBuilder()
-				.AddJsonFile("appsettings.json", false)
-				.Build();
-
-			return registrator.Register(p => Configuration, LifetimeType.Singleton);
-		}
+		return registrator.Register(p => Configuration, LifetimeType.Singleton);
 	}
 }

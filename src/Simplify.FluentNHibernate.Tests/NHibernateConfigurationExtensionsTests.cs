@@ -9,58 +9,57 @@ using NUnit.Framework;
 using Simplify.FluentNHibernate.Conventions;
 using Simplify.FluentNHibernate.Tests.Mappings.Accounts;
 
-namespace Simplify.FluentNHibernate.Tests
+namespace Simplify.FluentNHibernate.Tests;
+
+[TestFixture]
+public class NHibernateConfigurationExtensionsTests : SessionExtensionsTestsBase
 {
-	[TestFixture]
-	public class NHibernateConfigurationExtensionsTests : SessionExtensionsTestsBase
+	private SchemaUpdate _schemaUpdate;
+
+	[SetUp]
+	public void Initialize()
 	{
-		private SchemaUpdate _schemaUpdate;
+		var configuration = CreateConfiguration();
 
-		[SetUp]
-		public void Initialize()
-		{
-			var configuration = CreateConfiguration();
+		Configuration config = null;
+		configuration.ExposeConfiguration(c => config = c);
+		configuration.BuildSessionFactory();
 
-			Configuration config = null;
-			configuration.ExposeConfiguration(c => config = c);
-			configuration.BuildSessionFactory();
+		config.CreateIndexesForForeignKeys();
 
-			config.CreateIndexesForForeignKeys();
+		_schemaUpdate = new SchemaUpdate(config);
+	}
 
-			_schemaUpdate = new SchemaUpdate(config);
-		}
+	[Test]
+	public void UpdateSchema_WithCreateIndexesForForeignKeys_IndexesCreated()
+	{
+		// Act
 
-		[Test]
-		public void UpdateSchema_WithCreateIndexesForForeignKeys_IndexesCreated()
-		{
-			// Act
+		using var sw = new StringWriter();
+		_schemaUpdate.Execute(sw.Write, false);
 
-			using var sw = new StringWriter();
-			_schemaUpdate.Execute(sw.Write, false);
+		// Assert
 
-			// Assert
+		var result = sw.ToString();
+		var matches = Regex.Matches(result, @"IDX\w+");
+		var indexes = (from Match match in matches select match.Value).ToList();
 
-			var result = sw.ToString();
-			var matches = Regex.Matches(result, @"IDX\w+");
-			var indexes = (from Match match in matches select match.Value).ToList();
+		Assert.AreEqual(7, indexes.Count);
+		Assert.AreEqual("IDX_FK_Employee_User", indexes[0]);
+		Assert.AreEqual("IDX_FK_UsersGroups_UserID", indexes[1]);
+		Assert.AreEqual("IDX_FK_UsersGroups_GroupID", indexes[2]);
+		Assert.AreEqual("IDX_FK_Custom_UsersPrivileges_GroupID", indexes[3]);
+		Assert.AreEqual("IDX_FK_Traveler_EmployeeID", indexes[4]);
+		Assert.AreEqual("IDX_FK_User_OrganizationID", indexes[5]);
+		Assert.AreEqual("IDX_FK_UsersPrivileges_UserID", indexes[6]);
+	}
 
-			Assert.AreEqual(7, indexes.Count);
-			Assert.AreEqual("IDX_FK_Employee_User", indexes[0]);
-			Assert.AreEqual("IDX_FK_UsersGroups_UserID", indexes[1]);
-			Assert.AreEqual("IDX_FK_UsersGroups_GroupID", indexes[2]);
-			Assert.AreEqual("IDX_FK_Custom_UsersPrivileges_GroupID", indexes[3]);
-			Assert.AreEqual("IDX_FK_Traveler_EmployeeID", indexes[4]);
-			Assert.AreEqual("IDX_FK_User_OrganizationID", indexes[5]);
-			Assert.AreEqual("IDX_FK_UsersPrivileges_UserID", indexes[6]);
-		}
-
-		private static FluentConfiguration CreateConfiguration()
-		{
-			return Fluently.Configure()
-				.InitializeFromConfigSqLiteInMemory(true)
-				.AddMappingsFromAssemblyOf<UserMap>(
-					ForeignKey.EndsWith("ID"),
-					ForeignKeyConstraintNameConvention.WithConstraintNameConvention());
-		}
+	private static FluentConfiguration CreateConfiguration()
+	{
+		return Fluently.Configure()
+			.InitializeFromConfigSqLiteInMemory(true)
+			.AddMappingsFromAssemblyOf<UserMap>(
+				ForeignKey.EndsWith("ID"),
+				ForeignKeyConstraintNameConvention.WithConstraintNameConvention());
 	}
 }

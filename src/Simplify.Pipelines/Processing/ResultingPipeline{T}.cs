@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Provides default resulting pipeline
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TResult">The type of the result.</typeparam>
 	/// <seealso cref="IResultingPipeline{T, TResult}" />
+	[Obsolete("Please use IConveyor with exceptions")]
 	public class ResultingPipeline<T, TResult> : IResultingPipeline<T, TResult>
 	{
 		private readonly IList<IResultingPipelineStage<T, TResult>> _stages;

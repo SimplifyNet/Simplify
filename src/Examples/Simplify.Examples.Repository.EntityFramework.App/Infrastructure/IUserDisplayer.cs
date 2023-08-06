@@ -1,7 +1,6 @@
-﻿namespace Simplify.Examples.Repository.EntityFramework.App.Infrastructure
+﻿namespace Simplify.Examples.Repository.EntityFramework.App.Infrastructure;
+
+public interface IUserDisplayer
 {
-	public interface IUserDisplayer
-	{
-		void DisplayUserInfo(string userName);
-	}
+	void DisplayUserInfo(string userName);
 }

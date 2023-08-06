@@ -1,60 +1,59 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-	{
-		"label": "Build",
-		"command": "dotnet",
-		"type": "process",
-		"args": [
-			"build",
-			"${workspaceFolder}/src/Simplify.sln"
-		],
-		"problemMatcher": "$msCompile",
-		"group":
 		{
-			"kind": "build",
-			"isDefault": true
-		}
-	},
-	{
-		"label": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
-		"command": "dotnet",
-		"type": "process",
-		"args": [
-			"build",
-			"${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.csproj"
-		],
-		"problemMatcher": "$msCompile"
-	},
-	{
-		"label": "Build Simplify.Examples.Repository.EntityFramework.App",
-		"command": "dotnet",
-		"type": "process",
-		"args": [
-			"build",
-			"${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/Simplify.Examples.Repository.EntityFramework.App.csproj"
-		],
-		"problemMatcher": "$msCompile"
-	},
-	{
-		"label": "Build Simplify.Scheduler.IntegrationTester",
-		"command": "dotnet",
-		"type": "process",
-		"args": [
-			"build",
-			"${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/Simplify.Scheduler.IntegrationTester.csproj"
-		],
-		"problemMatcher": "$msCompile"
-	},
-	{
-		"label": "Test with coverage",
-		"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
-		"type": "shell",
-		"problemMatcher": "$msCompile",
-		"group":
+			"label": "Build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/Simplify.sln"
+			],
+			"problemMatcher": "$msCompile",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
 		{
-			"kind": "test",
-			"isDefault": true
+			"label": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build Simplify.Examples.Repository.EntityFramework.App",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/Simplify.Examples.Repository.EntityFramework.App.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build Simplify.Scheduler.IntegrationTester",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/Simplify.Scheduler.IntegrationTester.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Test with coverage",
+			"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
+			"type": "shell",
+			"problemMatcher": "$msCompile",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			}
 		}
-	}]
+	]
 }

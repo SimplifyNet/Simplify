@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+		<Version>0.1.1</Version>
+
+		<Description>Simplify.Bus implementation</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageTags>.NET Mediator CQRS Bus</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Bus.Impl/CHANGELOG.md for details</PackageReleaseNotes>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Simplify.Bus\Simplify.Bus.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Simplify.DI" Version="4.1.*" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+</Project>

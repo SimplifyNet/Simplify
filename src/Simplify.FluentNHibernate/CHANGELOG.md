@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.5.3] - 2023-04-15
+
+### Dependencies
+
+- FluentNHibernate bump to 3.2
+
+## [2.5.2] - 2022-02-27
+
+### Added
+
+- Explicit .NET 6 support
+
+### Fixed
+
+- FluentConfigurationExtension schema update/export no error (#475)
+
+### Dependencies
+
+- Microsoft.Extensions.Configuration.Abstractions bump to 6
+
 ## [2.5.1] - 2021-10-27
 
 ### Fixed

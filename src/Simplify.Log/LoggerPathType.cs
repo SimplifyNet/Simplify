@@ -1,18 +1,17 @@
-﻿namespace Simplify.Log
+﻿namespace Simplify.Log;
+
+/// <summary>
+/// Represent logger path type
+/// </summary>
+public enum LoggerPathType
 {
 	/// <summary>
-	/// Represent logger path type
+	/// The relative path type
 	/// </summary>
-	public enum LoggerPathType
-	{
-		/// <summary>
-		/// The relative path type
-		/// </summary>
-		Relative,
+	Relative,
 
-		/// <summary>
-		/// The full path type
-		/// </summary>
-		FullPath
-	}
+	/// <summary>
+	/// The full path type
+	/// </summary>
+	FullPath
 }

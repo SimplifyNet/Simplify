@@ -1,23 +1,22 @@
-﻿namespace Simplify.Scheduler.Jobs
+﻿namespace Simplify.Scheduler.Jobs;
+
+/// <summary>
+/// Provides job invoke method parameter type
+/// </summary>
+public enum InvokeMethodParameterType
 {
 	/// <summary>
-	/// Provides job invoke method parameter type
+	/// The parameterless invoke method
 	/// </summary>
-	public enum InvokeMethodParameterType
-	{
-		/// <summary>
-		/// The parameterless invoke method
-		/// </summary>
-		Parameterless,
+	Parameterless,
 
-		/// <summary>
-		/// The invoke method with application name parameter
-		/// </summary>
-		AppName,
+	/// <summary>
+	/// The invoke method with application name parameter
+	/// </summary>
+	AppName,
 
-		/// <summary>
-		/// The invoke method with job args parameter
-		/// </summary>
-		Args
-	}
+	/// <summary>
+	/// The invoke method with job args parameter
+	/// </summary>
+	Args
 }

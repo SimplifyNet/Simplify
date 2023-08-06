@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.11.1] - 2022-10-16
+
+### Dependencies
+
+- SimpleInjector bump to 5.4.1 (PR#439)
+
+## [1.11.0] - 2022-07-21
+
+### Removed
+
+- .NET Standard 1.3 support
+
+### Added
+
+- .NET 6 explicit support
+
+### Dependencies
+
+- SimpleInjector bump to 5.4.0 (PR#415)
+- Simplify.DI bump to 4.2.3
+
 ## [1.10.1] - 2022-02-08
 
 ### Dependencies

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+
+		<Description>Simplify.Bus.Impl unit tests with real structure and DI</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
+		<Copyright>Licensed under LGPL</Copyright>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Simplify.Bus.Impl\Simplify.Bus.Impl.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.*" />
+		<PackageReference Include="NUnit" Version="3.13.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.3.*" />
+		<PackageReference Include="FluentValidation" Version="11.4.*" />
+		<PackageReference Include="Simplify.DI.Provider.SimpleInjector" Version="1.11.*" />
+	</ItemGroup>
+</Project>

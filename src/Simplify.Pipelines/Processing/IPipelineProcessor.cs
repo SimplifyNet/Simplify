@@ -2,10 +2,10 @@ using System;
 
 namespace Simplify.Pipelines.Processing
 {
-	[Obsolete("Please use IConveyor with exceptions")]
 	/// <summary>
 	/// Represent pipeline processor
 	/// </summary>
+	[Obsolete("Please use IConveyor with exceptions")]
 	public interface IPipelineProcessor
 	{
 		/// <summary>

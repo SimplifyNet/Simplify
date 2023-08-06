@@ -2,23 +2,22 @@
 using NHibernate;
 using NHibernate.SqlCommand;
 
-namespace Simplify.FluentNHibernate
+namespace Simplify.FluentNHibernate;
+
+/// <summary>
+/// Executed SQL code tracer
+/// </summary>
+public class SqlStatementInterceptor : EmptyInterceptor
 {
 	/// <summary>
-	/// Executed SQL code tracer
+	/// Called on sql statement prepare.
 	/// </summary>
-	public class SqlStatementInterceptor : EmptyInterceptor
+	/// <param name="sql">The SQL.</param>
+	/// <returns></returns>
+	public override SqlString OnPrepareStatement(SqlString sql)
 	{
-		/// <summary>
-		/// Called on sql statement prepare.
-		/// </summary>
-		/// <param name="sql">The SQL.</param>
-		/// <returns></returns>
-		public override SqlString OnPrepareStatement(SqlString sql)
-		{
-			Trace.WriteLine($"SQL executed: '{sql}'");
+		Trace.WriteLine($"SQL executed: '{sql}'");
 
-			return sql;
-		}
+		return sql;
 	}
 }

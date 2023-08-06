@@ -4,98 +4,97 @@ using System.Threading;
 using Simplify.Scheduler.CommandLine;
 using Simplify.System;
 
-namespace Simplify.Scheduler
+namespace Simplify.Scheduler;
+
+/// <summary>
+/// Provides class which periodically creates a class instances specified in added jobs and launches them in separated thread, optimized to work as a console application
+/// </summary>
+public class MultitaskScheduler : SchedulerJobsHandler
 {
+	private readonly AutoResetEvent _closing = new(false);
+
+	private ICommandLineProcessor? _commandLineProcessor;
+
 	/// <summary>
-	/// Provides class which periodically creates a class instances specified in added jobs and launches them in separated thread, optimized to work as a console application
+	/// Initializes a new instance of the <see cref="MultitaskScheduler" /> class.
 	/// </summary>
-	public class MultitaskScheduler : SchedulerJobsHandler
+	public MultitaskScheduler()
 	{
-		private readonly AutoResetEvent _closing = new(false);
+		var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
+		AppName = assemblyInfo.Title;
 
-		private ICommandLineProcessor? _commandLineProcessor;
+		Console.CancelKeyPress += StopJobs;
+	}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MultitaskScheduler" /> class.
-		/// </summary>
-		public MultitaskScheduler()
+	/// <summary>
+	/// Gets or sets the current command line processor.
+	/// </summary>
+	/// <exception cref="ArgumentNullException"></exception>
+	public ICommandLineProcessor CommandLineProcessor
+	{
+		get => _commandLineProcessor ??= new CommandLineProcessor();
+		set => _commandLineProcessor = value ?? throw new ArgumentNullException(nameof(value));
+	}
+
+	/// <summary>
+	/// Starts the scheduler
+	/// </summary>
+	/// <param name="args">The arguments.</param>
+	public bool Start(string[]? args = null)
+	{
+		var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
+
+		switch (commandLineProcessResult)
 		{
-			var assemblyInfo = new AssemblyInfo(Assembly.GetCallingAssembly());
-			AppName = assemblyInfo.Title;
+			case ProcessCommandLineResult.SkipSchedulerStart:
+				return false;
 
-			Console.CancelKeyPress += StopJobs;
+			case ProcessCommandLineResult.NoArguments:
+				StartAndWait();
+				break;
+
+			case ProcessCommandLineResult.UndefinedParameters:
+				break;
+
+			case ProcessCommandLineResult.CommandLineActionExecuted:
+				break;
+
+			default:
+				throw new ArgumentOutOfRangeException();
 		}
 
-		/// <summary>
-		/// Gets or sets the current command line processor.
-		/// </summary>
-		/// <exception cref="ArgumentNullException"></exception>
-		public ICommandLineProcessor CommandLineProcessor
-		{
-			get => _commandLineProcessor ??= new CommandLineProcessor();
-			set => _commandLineProcessor = value ?? throw new ArgumentNullException(nameof(value));
-		}
+		return true;
+	}
 
-		/// <summary>
-		/// Starts the scheduler
-		/// </summary>
-		/// <param name="args">The arguments.</param>
-		public bool Start(string[]? args = null)
-		{
-			var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
+	/// <summary>
+	/// Called when scheduler is about to stop, main stopping point
+	/// </summary>
+	protected void StopJobs(object sender, ConsoleCancelEventArgs args)
+	{
+		StopJobs();
 
-			switch (commandLineProcessResult)
-			{
-				case ProcessCommandLineResult.SkipSchedulerStart:
-					return false;
+		args.Cancel = true;
+		_closing.Set();
+	}
 
-				case ProcessCommandLineResult.NoArguments:
-					StartAndWait();
-					break;
+	/// <summary>
+	/// Releases unmanaged and - optionally - managed resources.
+	/// </summary>
+	/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+	// ReSharper disable once FlagArgument
+	protected override void Dispose(bool disposing)
+	{
+		base.Dispose(disposing);
 
-				case ProcessCommandLineResult.UndefinedParameters:
-					break;
+		_closing.Dispose();
+	}
 
-				case ProcessCommandLineResult.CommandLineActionExecuted:
-					break;
+	private void StartAndWait()
+	{
+		StartJobs().Wait();
 
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
+		Console.WriteLine("Scheduler started. Press Ctrl + C to shut down.");
 
-			return true;
-		}
-
-		/// <summary>
-		/// Called when scheduler is about to stop, main stopping point
-		/// </summary>
-		protected void StopJobs(object sender, ConsoleCancelEventArgs args)
-		{
-			StopJobs();
-
-			args.Cancel = true;
-			_closing.Set();
-		}
-
-		/// <summary>
-		/// Releases unmanaged and - optionally - managed resources.
-		/// </summary>
-		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		// ReSharper disable once FlagArgument
-		protected override void Dispose(bool disposing)
-		{
-			base.Dispose(disposing);
-
-			_closing.Dispose();
-		}
-
-		private void StartAndWait()
-		{
-			StartJobs().Wait();
-
-			Console.WriteLine("Scheduler started. Press Ctrl + C to shut down.");
-
-			_closing.WaitOne();
-		}
+		_closing.WaitOne();
 	}
 }

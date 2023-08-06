@@ -1,6 +1,5 @@
-﻿namespace Simplify.Repository.FluentNHibernate.Tests.Entities.Accounts
+﻿namespace Simplify.Repository.FluentNHibernate.Tests.Entities.Accounts;
+
+public class User : NamedObject
 {
-	public class User : NamedObject
-	{
-	}
 }

@@ -1,18 +1,17 @@
-namespace Simplify.WindowsServices.Jobs
+namespace Simplify.WindowsServices.Jobs;
+
+/// <summary>
+/// Represent basic service job
+/// </summary>
+public interface IServiceJob : IServiceJobRepresentation
 {
 	/// <summary>
-	/// Represent basic service job
+	/// Starts this job timer.
 	/// </summary>
-	public interface IServiceJob : IServiceJobRepresentation
-	{
-		/// <summary>
-		/// Starts this job timer.
-		/// </summary>
-		void Start();
+	void Start();
 
-		/// <summary>
-		/// Stops and disposes job timer.
-		/// </summary>
-		void Stop();
-	}
+	/// <summary>
+	/// Stops and disposes job timer.
+	/// </summary>
+	void Stop();
 }

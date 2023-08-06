@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Simplify.Scheduler.IntegrationTester
+namespace Simplify.Scheduler.IntegrationTester;
+
+public class BasicTaskProcessor : IDisposable
 {
-	public class BasicTaskProcessor : IDisposable
+	private static bool _isRunning;
+
+	private readonly DisposableDependency _dependency;
+
+	public BasicTaskProcessor(DisposableDependency dependency) => _dependency = dependency;
+
+	public void Run()
 	{
-		private static bool _isRunning;
+		if (_isRunning)
+			throw new SimplifySchedulerException("BasicTaskProcessor is running a duplicate!");
 
-		private readonly DisposableDependency _dependency;
+		_isRunning = true;
 
-		public BasicTaskProcessor(DisposableDependency dependency) => _dependency = dependency;
+		Trace.WriteLine("BasicTaskProcessor launched");
+	}
 
-		public void Run()
-		{
-			if (_isRunning)
-				throw new SimplifySchedulerException("BasicTaskProcessor is running a duplicate!");
-
-			_isRunning = true;
-
-			Trace.WriteLine("BasicTaskProcessor launched");
-		}
-
-		public void Dispose()
-		{
-			Trace.WriteLine("BasicTaskProcessor disposed");
-		}
+	public void Dispose()
+	{
+		Trace.WriteLine("BasicTaskProcessor disposed");
 	}
 }

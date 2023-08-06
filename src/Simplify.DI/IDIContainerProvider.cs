@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Simplify.DI
+namespace Simplify.DI;
+
+/// <summary>
+/// Represents DI container provider
+/// </summary>
+public interface IDIContainerProvider : IDIRegistrator, IDIResolver, IDIContextHandler, IDIVerifier, IDisposable
 {
-	/// <summary>
-	/// Represents DI container provider
-	/// </summary>
-	public interface IDIContainerProvider : IDIRegistrator, IDIResolver, IDIContextHandler, IDIVerifier, IDisposable
-	{
-	}
 }

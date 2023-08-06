@@ -1,26 +1,25 @@
 ﻿using FluentNHibernate.Mapping;
 using Simplify.FluentNHibernate.Tests.Entities.Accounts;
 
-namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts
+namespace Simplify.FluentNHibernate.Tests.Mappings.Accounts;
+
+public class GroupMap : ClassMap<Group>
 {
-	public class GroupMap : ClassMap<Group>
+	public GroupMap()
 	{
-		public GroupMap()
-		{
-			Table("Groups");
+		Table("Groups");
 
-			Id(x => x.ID);
+		Id(x => x.ID);
 
-			Map(x => x.Name);
+		Map(x => x.Name);
 
-			HasManyToMany(x => x.Users)
-				.Table("UsersGroups");
+		HasManyToMany(x => x.Users)
+			.Table("UsersGroups");
 
-			HasMany(x => x.Privileges)
-				.KeyColumn("GroupID")
-				.ForeignKeyConstraintName("FK_Custom_UsersPrivileges_GroupID")
-				.Table("GroupsPrivileges")
-				.Element("Type");
-		}
+		HasMany(x => x.Privileges)
+			.KeyColumn("GroupID")
+			.ForeignKeyConstraintName("FK_Custom_UsersPrivileges_GroupID")
+			.Table("GroupsPrivileges")
+			.Element("Type");
 	}
 }

@@ -1,16 +1,15 @@
-﻿namespace Simplify.Repository
+﻿namespace Simplify.Repository;
+
+/// <summary>
+/// Represent object with string identifier
+/// </summary>
+public interface IStringIdentityObject
 {
 	/// <summary>
-	/// Represent object with string identifier
+	/// Gets the identifier.
 	/// </summary>
-	public interface IStringIdentityObject
-	{
-		/// <summary>
-		/// Gets the identifier.
-		/// </summary>
-		/// <value>
-		/// The identifier.
-		/// </value>
-		string? ID { get; set; }
-	}
+	/// <value>
+	/// The identifier.
+	/// </value>
+	string? ID { get; set; }
 }

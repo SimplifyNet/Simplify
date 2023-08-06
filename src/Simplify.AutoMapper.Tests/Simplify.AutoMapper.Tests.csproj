@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<LangVersion>9.0</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 
 		<Authors>Simplify community</Authors>
@@ -13,8 +13,8 @@
 		<ProjectReference Include="..\Simplify.AutoMapper\Simplify.AutoMapper.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.*" />
 		<PackageReference Include="NUnit" Version="3.13.*" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.2.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.3.*" />
 	</ItemGroup>
 </Project>

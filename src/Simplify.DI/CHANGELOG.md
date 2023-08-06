@@ -1,5 +1,57 @@
 # Changelog
 
+## [4.2.9] - 2023-07-03
+
+### Dependencies
+
+- Internal DryIoc bump to 5.4.1
+
+## [4.2.8] - 2022-11-30
+
+### Dependencies
+
+- Internal DryIoc bump to 5.3.1 (PR#466)
+
+## [4.2.7] - 2022-11-11
+
+### Dependencies
+
+- Internal DryIoc bump to 5.3.0 (PR#459)
+
+## [4.2.6] - 2022-08-29
+
+### Dependencies
+
+- Internal DryIoc bump to 5.2.2 (PR#429)
+
+## [4.2.5] - 2022-08-21
+
+### Dependencies
+
+- Internal DryIoc bump to 5.2.1 (PR#423)
+
+## [4.2.4] - 2022-08-07
+
+### Dependencies
+
+- Internal DryIoc bump to 5.2 (PR#418)
+
+## [4.2.3] - 2022-07-15
+
+### Dependencies
+
+- DryIoc assets dependence fix
+
+## [4.2.2] - 2022-05-23
+
+### Added
+
+- Explicit .NET 6 support
+
+### Dependencies
+
+- Internal DryIoc bump to 5.1 (PR#395)
+
 ## [4.2.1] - 2022-05-11
 
 ### Dependencies

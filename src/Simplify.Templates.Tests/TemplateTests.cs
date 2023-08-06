@@ -1,80 +1,79 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Simplify.Templates.Tests
+namespace Simplify.Templates.Tests;
+
+[TestFixture]
+public class TemplateTests
 {
-	[TestFixture]
-	public class TemplateTests
+	private const string VariableName = "var1";
+
+	private ITemplate _tpl;
+
+	[SetUp]
+	public void Initialize()
 	{
-		private const string VariableName = "var1";
+		// Arrange
+		_tpl = TemplateBuilder.FromString("{" + VariableName + "}")
+			.Build();
+	}
 
-		private ITemplate _tpl;
+	[Test]
+	public void Build_FromNullString_ArgumentNullException()
+	{
+		// Act
+		var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null));
 
-		[SetUp]
-		public void Initialize()
-		{
-			// Arrange
-			_tpl = TemplateBuilder.FromString("{" + VariableName + "}")
-				.Build();
-		}
+		// Assert
+		Assert.AreEqual("Value cannot be null. (Parameter 'text')", ex.Message);
+	}
 
-		[Test]
-		public void Build_FromNullString_ArgumentNullException()
-		{
-			// Act
-			var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null));
+	[Test]
+	public void Set_NullVariableName_ArgumentNullException()
+	{
+		// Act
+		var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Set(null, "test"));
 
-			// Assert
-			Assert.AreEqual("Value cannot be null. (Parameter 'text')", ex.Message);
-		}
+		// Assert
+		Assert.AreEqual("Value cannot be null. (Parameter 'variableName')", ex.Message);
+	}
 
-		[Test]
-		public void Set_NullVariableName_ArgumentNullException()
-		{
-			// Act
-			var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Set(null, "test"));
+	[Test]
+	public void Add_NullVariableName_ArgumentNullException()
+	{
+		// Act
+		var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Add(null, "test"));
 
-			// Assert
-			Assert.AreEqual("Value cannot be null. (Parameter 'variableName')", ex.Message);
-		}
+		// Assert
+		Assert.AreEqual("Value cannot be null. (Parameter 'variableName')", ex.Message);
+	}
 
-		[Test]
-		public void Add_NullVariableName_ArgumentNullException()
-		{
-			// Act
-			var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Add(null, "test"));
+	[Test]
+	public void Rollback_RolledAfterChange()
+	{
+		// Act
+		_tpl.Set(VariableName, "test");
 
-			// Assert
-			Assert.AreEqual("Value cannot be null. (Parameter 'variableName')", ex.Message);
-		}
+		// Assert
+		Assert.AreEqual("test", _tpl.Get());
 
-		[Test]
-		public void Rollback_RolledAfterChange()
-		{
-			// Act
-			_tpl.Set(VariableName, "test");
+		// Act
+		_tpl.RollBack();
 
-			// Assert
-			Assert.AreEqual("test", _tpl.Get());
+		// Assert
+		Assert.AreEqual("{var1}", _tpl.Get());
+	}
 
-			// Act
-			_tpl.RollBack();
+	[Test]
+	public void GetAndRoll_RolledAfterChangeWithValueReturn()
+	{
+		// Act
+		_tpl.Set(VariableName, "test");
 
-			// Assert
-			Assert.AreEqual("{var1}", _tpl.Get());
-		}
+		// Act & Assert
+		Assert.AreEqual("test", _tpl.GetAndRoll());
 
-		[Test]
-		public void GetAndRoll_RolledAfterChangeWithValueReturn()
-		{
-			// Act
-			_tpl.Set(VariableName, "test");
-
-			// Act & Assert
-			Assert.AreEqual("test", _tpl.GetAndRoll());
-
-			// Assert
-			Assert.AreEqual("{var1}", _tpl.Get());
-		}
+		// Assert
+		Assert.AreEqual("{var1}", _tpl.Get());
 	}
 }

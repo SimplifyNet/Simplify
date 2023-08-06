@@ -1,28 +1,27 @@
-﻿namespace Simplify.WindowsServices.CommandLine
+﻿namespace Simplify.WindowsServices.CommandLine;
+
+/// <summary>
+/// List of possible action from command line
+/// </summary>
+public enum CommandLineAction
 {
 	/// <summary>
-	/// List of possible action from command line
+	/// The undefined action in command line
 	/// </summary>
-	public enum CommandLineAction
-	{
-		/// <summary>
-		/// The undefined action in command line
-		/// </summary>
-		UndefinedAction,
+	UndefinedAction,
 
-		/// <summary>
-		/// The install service action from command line
-		/// </summary>
-		InstallService,
+	/// <summary>
+	/// The install service action from command line
+	/// </summary>
+	InstallService,
 
-		/// <summary>
-		/// The uninstall service action from command line
-		/// </summary>
-		UninstallService,
+	/// <summary>
+	/// The uninstall service action from command line
+	/// </summary>
+	UninstallService,
 
-		/// <summary>
-		/// The run as console application action from command line
-		/// </summary>
-		RunAsConsole
-	}
+	/// <summary>
+	/// The run as console application action from command line
+	/// </summary>
+	RunAsConsole
 }

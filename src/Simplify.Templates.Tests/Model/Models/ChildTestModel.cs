@@ -1,7 +1,6 @@
-﻿namespace Simplify.Templates.Tests.Model.Models
+﻿namespace Simplify.Templates.Tests.Model.Models;
+
+public class ChildTestModel : BaseTestModel
 {
-	public class ChildTestModel : BaseTestModel
-	{
-		public string Name { get; set; }
-	}
+	public string Name { get; set; }
 }
