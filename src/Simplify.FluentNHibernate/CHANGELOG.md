@@ -10,6 +10,7 @@
 
 - .NET Standard 2.1 support
 - .NET 4.8 support
+- SessionFactoryBuilderBase moved from Simplify.Repository.FluentNHibernate
 
 ### Dependencies
 
