@@ -16,7 +16,7 @@ jobs:
         include:
           - os: windows-latest
             solution: Simplify.sln
-          - os: buntu-latest
+          - os: ubuntu-latest
             solution: Simplify.Linux.sln
 
     steps:
