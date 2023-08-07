@@ -8,8 +8,6 @@ namespace Simplify.FluentNHibernate.Tests;
 [TestFixture]
 public class ConfigurationExtensionsTests
 {
-	private const string ConfigSectionName = "DatabaseConnectionSettings";
-
 	private IConfiguration _configuration;
 
 	[SetUp]
