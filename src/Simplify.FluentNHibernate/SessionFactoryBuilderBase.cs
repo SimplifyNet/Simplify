@@ -1,6 +1,6 @@
 ﻿using System;
-using FluentNHibernate.Cfg;
 using Microsoft.Extensions.Configuration;
+using FluentNHibernate.Cfg;
 using NHibernate;
 
 namespace Simplify.FluentNHibernate;
@@ -31,7 +31,7 @@ public abstract class SessionFactoryBuilderBase : IDisposable
 	/// <value>
 	/// The connection string.
 	/// </value>
-	public string ConnectionString { get; private set; }
+	public string? ConnectionString { get; private set; }
 
 	/// <summary>
 	/// Gets or sets the session factory.
