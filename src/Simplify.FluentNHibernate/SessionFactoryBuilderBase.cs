@@ -26,6 +26,14 @@ public abstract class SessionFactoryBuilderBase : IDisposable
 	}
 
 	/// <summary>
+	/// Gets the connection string.
+	/// </summary>
+	/// <value>
+	/// The connection string.
+	/// </value>
+	public string ConnectionString { get; private set; }
+
+	/// <summary>
 	/// Gets or sets the session factory.
 	/// </summary>
 	/// <value>
@@ -63,6 +71,11 @@ public abstract class SessionFactoryBuilderBase : IDisposable
 	public virtual SessionFactoryBuilderBase Build()
 	{
 		var configuration = CreateConfiguration();
+
+		FluentConfiguration.ExposeConfiguration(c =>
+		{
+			ConnectionString = c.GetProperty(NHibernate.Cfg.Environment.ConnectionString);
+		});
 
 		Instance = configuration.BuildSessionFactory();
 
