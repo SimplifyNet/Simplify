@@ -13,6 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
+        include:
+          - os: windows-latest
+            solution: Simplify.sln
+          - os: buntu-latest
+            solution: Simplify.Linux.sln
 
     steps:
       - name: Code Checkout
@@ -22,16 +27,16 @@ jobs:
         uses: actions/setup-dotnet@v1
 
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore ${{ matrix.solution }}
 
       - name: Build Packages
-        run: dotnet build --no-restore -c Release
+        run: dotnet build ${{ matrix.solution }} --no-restore -c Release
 
       - name: Perform Unit Testing
-        run: dotnet test --no-build -c Release --filter TestCategory!=Integration --verbosity normal
+        run: dotnet test ${{ matrix.solution }} --no-build -c Release --filter TestCategory!=Integration --verbosity normal
 
       - name: Create Packages
-        run: dotnet pack --no-build -c Release -o ./publish
+        run: dotnet pack ${{ matrix.solution }} --no-build -c Release -o ./publish
 
       - name: Create Source Packages
         shell: pwsh
