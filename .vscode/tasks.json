@@ -7,13 +7,23 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/src/Simplify.sln"
+				"${workspaceFolder}/src/Simplify.Linux.sln"
 			],
 			"problemMatcher": "$msCompile",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"label": "Build Window",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/Simplify.sln"
+			],
+			"problemMatcher": "$msCompile"
 		},
 		{
 			"label": "Build Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester",
