@@ -16,8 +16,10 @@ jobs:
         include:
           - os: windows-latest
             solution: Simplify.sln
+            tests-exclude-category: Linux
           - os: ubuntu-latest
-            solution: Simplify.Linux.sln
+            solution: Simplify.NetCore.sln
+            tests-exclude-category: Windows
 
     steps:
       - name: Code Checkout
@@ -33,7 +35,7 @@ jobs:
         run: dotnet build ${{ matrix.solution }} --no-restore -c Release
 
       - name: Perform Unit Testing
-        run: dotnet test ${{ matrix.solution }} --no-build -c Release --filter TestCategory!=Integration --verbosity normal
+        run: dotnet test ${{ matrix.solution }} --no-build -c Release --filter "TestCategory != Integration & TestCategory != ${{ matrix.tests-exclude-category }}" --verbosity normal
 
       - name: Create Packages
         run: dotnet pack ${{ matrix.solution }} --no-build -c Release -o ./publish

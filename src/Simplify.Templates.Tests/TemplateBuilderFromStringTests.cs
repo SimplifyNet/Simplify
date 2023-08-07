@@ -46,7 +46,7 @@ public class TemplateBuilderFromStringTests
 	{
 		// Act
 		var tpl = TemplateBuilder
-			.FromString("test\r\ntest2")
+			.FromString($"test{Environment.NewLine}test2")
 			.FixLineEndingsHtml()
 			.Build();
 
