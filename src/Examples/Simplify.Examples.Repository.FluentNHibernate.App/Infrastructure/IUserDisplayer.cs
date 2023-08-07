@@ -1,7 +1,6 @@
-﻿namespace Simplify.Examples.Repository.FluentNHibernate.App.Infrastructure
+﻿namespace Simplify.Examples.Repository.FluentNHibernate.App.Infrastructure;
+
+public interface IUserDisplayer
 {
-	public interface IUserDisplayer
-	{
-		void DisplayUserInfo(string userName);
-	}
+	void DisplayUserInfo(string userName);
 }

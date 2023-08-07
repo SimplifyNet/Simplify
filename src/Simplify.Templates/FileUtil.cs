@@ -7,17 +7,14 @@ namespace Simplify.Templates;
 /// <summary>
 /// Provides file utility class
 /// </summary>
-public class FileUtil
+public static class FileUtil
 {
 	/// <summary>
 	/// Constructs the full file path based on calling assembly location.
 	/// </summary>
 	/// <param name="localFilePath">The local file path.</param>
 	/// <returns></returns>
-	public static string ConstructFullFilePath(string localFilePath)
-	{
-		return $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{localFilePath}";
-	}
+	public static string ConstructFullFilePath(string localFilePath) => $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{localFilePath}";
 
 	/// <summary>
 	/// Constructs the path of the file located inside the assembly.

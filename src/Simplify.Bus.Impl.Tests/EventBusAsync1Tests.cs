@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -55,6 +56,36 @@ public class EventBusAsync1Tests
 
 		handler1.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
 		handler2.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
+	}
+
+	[Test]
+	public async Task Publish_TwoEventHandlersSyncStopOnExceptionStrategyWithException_ProcessStopped()
+	{
+		// Arrange
+
+		var busEvent = new TestEvent();
+
+		var handler1 = new Mock<IEventHandler<TestEvent>>();
+		var handler2 = new Mock<IEventHandler<TestEvent>>();
+		var sequence = new MockSequence();
+
+		handler1
+			.InSequence(sequence)
+			.Setup(x => x.Handle(It.Is<TestEvent>(r => r == busEvent))).Returns(() => throw new Exception());
+
+		handler2
+			.InSequence(sequence)
+			.Setup(x => x.Handle(It.Is<TestEvent>(r => r == busEvent)));
+
+		var bus = new EventBusAsync<TestEvent>(new List<IEventHandler<TestEvent>> { handler1.Object, handler2.Object });
+
+		// Act
+		Assert.ThrowsAsync<Exception>(async () => await bus.Publish(busEvent));
+
+		// Assert
+
+		handler1.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Once);
+		handler2.Verify(x => x.Handle(It.Is<TestEvent>(v => v == busEvent)), Times.Never);
 	}
 
 	[Test]

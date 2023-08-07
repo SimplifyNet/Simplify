@@ -14,10 +14,7 @@ public static class TemplateSetExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="template">The template.</param>
 	/// <returns></returns>
-	public static ITemplate Set(this ITemplate tpl, string variableName, ITemplate template)
-	{
-		return tpl.Set(variableName, template?.Get());
-	}
+	public static ITemplate Set(this ITemplate tpl, string variableName, ITemplate template) => tpl.Set(variableName, template?.Get());
 
 	/// <summary>
 	/// Set template variable value (all occurrences will be replaced)
@@ -26,10 +23,7 @@ public static class TemplateSetExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Set(this ITemplate tpl, string variableName, object? value)
-	{
-		return tpl.Set(variableName, value?.ToString());
-	}
+	public static ITemplate Set(this ITemplate tpl, string variableName, object? value) => tpl.Set(variableName, value?.ToString());
 
 	/// <summary>
 	/// Set template variable value (all occurrences will be replaced)
@@ -38,10 +32,7 @@ public static class TemplateSetExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Set(this ITemplate tpl, string variableName, int value)
-	{
-		return tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Set(this ITemplate tpl, string variableName, int value) => tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Set template variable value (all occurrences will be replaced)
@@ -50,10 +41,7 @@ public static class TemplateSetExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Set(this ITemplate tpl, string variableName, long value)
-	{
-		return tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Set(this ITemplate tpl, string variableName, long value) => tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Set template variable value (all occurrences will be replaced)
@@ -62,10 +50,7 @@ public static class TemplateSetExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Set(this ITemplate tpl, string variableName, decimal value)
-	{
-		return tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Set(this ITemplate tpl, string variableName, decimal value) => tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
 	/// Set template variable value (all occurrences will be replaced)
@@ -74,8 +59,5 @@ public static class TemplateSetExtensions
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
 	/// <returns></returns>
-	public static ITemplate Set(this ITemplate tpl, string variableName, double value)
-	{
-		return tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
-	}
+	public static ITemplate Set(this ITemplate tpl, string variableName, double value) => tpl.Set(variableName, value.ToString(CultureInfo.InvariantCulture));
 }

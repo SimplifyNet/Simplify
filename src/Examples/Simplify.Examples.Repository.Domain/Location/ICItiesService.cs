@@ -1,7 +1,6 @@
-﻿namespace Simplify.Examples.Repository.Domain.Location
+﻿namespace Simplify.Examples.Repository.Domain.Location;
+
+public interface ICitiesService
 {
-	public interface ICitiesService
-	{
-		ICity GetCity(string cityName);
-	}
+	ICity GetCity(string cityName);
 }

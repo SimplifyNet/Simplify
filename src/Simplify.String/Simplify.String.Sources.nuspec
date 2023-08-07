@@ -6,20 +6,27 @@
 		<title>Simplify.String.Sources</title>
 		<authors>Alexander Krylkov</authors>
 		<projectUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.String</projectUrl>
-		<iconUrl>https://raw.githubusercontent.com/SimplifyNet/Images/master/Logo.png</iconUrl>
+		<icon>images\icon.png</icon>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>String operations/validation functions</description>
 		<summary>String operations/validation functions</summary>
-		<releaseNotes>
-			Bug fixes
-			* ValidateMobilePhone phone length validation fix
-		</releaseNotes>
+
+		<releaseNotes>See CHANGELOG.md for details</releaseNotes>
+
 		<copyright>Licensed under LGPL</copyright>
 		<language>en-US</language>
 		<tags>.NET</tags>
+		<dependencies>
+			<group targetFramework=".NET6.0" />
+			<group targetFramework=".NETStandard2.1" />
+			<group targetFramework=".NETStandard2.0" />
+			<group targetFramework=".NETFramework4.8" />
+		</dependencies>
 	</metadata>
 	<files>
 		<file src="StringHelper.cs" target="content/App_Packages/Simplify.String.Sources.$version$/StringHelper.cs" />
 		<file src="StringHelper.cs" target="contentFiles\cs\any\App_Packages\Simplify.String.Sources.$version$\StringHelper.cs" />
+		<file src="..\..\images\icon.png" target="images\" />
+		<file src="CHANGELOG.md" target="\" />
 	</files>
 </package>

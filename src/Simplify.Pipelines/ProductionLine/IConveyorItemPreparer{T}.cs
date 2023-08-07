@@ -1,15 +1,14 @@
-﻿namespace Simplify.Pipelines.ProductionLine
+﻿namespace Simplify.Pipelines.ProductionLine;
+
+/// <summary>
+/// Represent conveyor item preparer (retriever) for processing thru conveyor
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public interface IConveyorItemPreparer<out T>
 {
 	/// <summary>
-	/// Represent conveyor item preparer (retriever) for processing thru conveyor
+	/// Gets the item for conveyor processing.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public interface IConveyorItemPreparer<out T>
-	{
-		/// <summary>
-		/// Gets the item for conveyor processing.
-		/// </summary>
-		/// <returns>Conveyor executing item</returns>
-		T GetItem();
-	}
+	/// <returns>Conveyor executing item</returns>
+	T GetItem();
 }

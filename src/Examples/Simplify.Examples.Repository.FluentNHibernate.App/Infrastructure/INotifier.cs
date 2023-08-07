@@ -1,9 +1,8 @@
-﻿namespace Simplify.Examples.Repository.FluentNHibernate.App.Infrastructure
-{
-	public interface INotifier
-	{
-		void ShowNoArgsMessage();
+﻿namespace Simplify.Examples.Repository.FluentNHibernate.App.Infrastructure;
 
-		void ShowTooManyArgsMessage();
-	}
+public interface INotifier
+{
+	void ShowNoArgsMessage();
+
+	void ShowTooManyArgsMessage();
 }

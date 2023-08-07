@@ -3,4 +3,5 @@
 <items>
 	<item name="Localizable1" value="text1" />
 	<item name="Localizable2">text2</item>
+	<item badElement=""></item>
 </items>

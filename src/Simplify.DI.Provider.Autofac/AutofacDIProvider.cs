@@ -40,9 +40,9 @@ public class AutofacDIProvider : IDIContainerProvider
 	/// <summary>
 	/// Resolves the specified service type.
 	/// </summary>
-	/// <param name="serviceType">Type of the service.</param>
+	/// <param name="type">Type of the service.</param>
 	/// <returns></returns>
-	public object Resolve(Type serviceType) => Container.Resolve(serviceType);
+	public object Resolve(Type type) => Container.Resolve(type);
 
 	/// <summary>
 	/// Registers the specified service type with corresponding implementation type.

@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace Simplify.Scheduler.Jobs.Settings.Impl;
 

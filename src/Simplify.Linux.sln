@@ -25,8 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{2D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.Resources", "Simplify.Resources\Simplify.Resources.csproj", "{C197714E-8EBA-4A27-8370-A6F8D1648762}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.Windows.Forms", "Simplify.Windows.Forms\Simplify.Windows.Forms.csproj", "{95BAF8DC-B67D-4C65-82EF-7097199B256A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.IO", "Simplify.IO\Simplify.IO.csproj", "{A0BFE550-8E25-422A-89EC-821EB712392C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplify.IO.Tests", "Simplify.IO.Tests\Simplify.IO.Tests.csproj", "{C089B4F9-1F37-4EED-949B-E22A64A998A5}"
@@ -217,10 +215,6 @@ Global
 		{C197714E-8EBA-4A27-8370-A6F8D1648762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C197714E-8EBA-4A27-8370-A6F8D1648762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C197714E-8EBA-4A27-8370-A6F8D1648762}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95BAF8DC-B67D-4C65-82EF-7097199B256A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95BAF8DC-B67D-4C65-82EF-7097199B256A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95BAF8DC-B67D-4C65-82EF-7097199B256A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95BAF8DC-B67D-4C65-82EF-7097199B256A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A0BFE550-8E25-422A-89EC-821EB712392C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0BFE550-8E25-422A-89EC-821EB712392C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0BFE550-8E25-422A-89EC-821EB712392C}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.9.2] - 2023-08-01
+
+### Removed
+
+- .NET 4.5.2 support
+
+### Added
+
+- .NET 6 support
+
 ## [0.9.1] - 2022-05-02
 
 ### Deprecated

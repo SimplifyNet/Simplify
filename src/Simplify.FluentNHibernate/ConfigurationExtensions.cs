@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
+using Microsoft.Extensions.Configuration;
 using NHibernate.Driver;
 using Simplify.FluentNHibernate.Drivers;
 using Simplify.FluentNHibernate.Settings;

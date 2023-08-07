@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ public static class StringTable
 	/// </summary>
 	/// <param name="tpl">The TPL.</param>
 	/// <param name="stringTable">The string table.</param>
-	public static void InjectStringTableItems(ITemplate tpl, IDictionary<string, string> stringTable)
+	public static void InjectStringTableItems(ITemplate tpl, IDictionary<string, string?> stringTable)
 	{
 		foreach (var item in stringTable)
 			tpl.Set(item.Key, item.Value);
@@ -51,16 +52,16 @@ public static class StringTable
 	/// </summary>
 	/// <param name="stringTableXml">The string table XML.</param>
 	/// <returns></returns>
-	public static IDictionary<string, string> LoadStringTableFromString(string stringTableXml)
+	public static IDictionary<string, string?> LoadStringTableFromString(string stringTableXml)
 	{
 		var stringTable = XDocument.Parse(stringTableXml);
 
 		if (stringTable.Root != null)
-			return stringTable.Root.XPathSelectElements("item")
+			return stringTable.Root.XPathSelectElements("item[@name]")
 				.Where(x => x.HasAttributes)
 				.ToDictionary(GetName, GetValue);
 
-		return new Dictionary<string, string>();
+		return new Dictionary<string, string?>();
 	}
 
 	/// <summary>
@@ -69,7 +70,7 @@ public static class StringTable
 	/// <param name="filePath">The string table file path.</param>
 	/// <param name="assembly">The assembly.</param>
 	/// <returns></returns>
-	public static IDictionary<string, string> LoadStringTableFromAssembly(string filePath, Assembly assembly)
+	public static IDictionary<string, string?> LoadStringTableFromAssembly(string filePath, Assembly assembly)
 	{
 		return LoadStringTableFromString(FileReader.ReadFromAssembly(filePath, assembly));
 	}
@@ -80,7 +81,7 @@ public static class StringTable
 	/// <param name="filePath">The string table file path.</param>
 	/// <param name="assembly">The assembly.</param>
 	/// <returns></returns>
-	public static async Task<IDictionary<string, string>> LoadStringTableFromAssemblyAsync(string filePath, Assembly assembly)
+	public static async Task<IDictionary<string, string?>> LoadStringTableFromAssemblyAsync(string filePath, Assembly assembly)
 	{
 		return LoadStringTableFromString(await FileReader.ReadFromAssemblyAsync(filePath, assembly));
 	}
@@ -90,7 +91,7 @@ public static class StringTable
 	/// </summary>
 	/// <param name="filePath">The string table file path.</param>
 	/// <returns></returns>
-	public static IDictionary<string, string> LoadStringTableFromFile(string filePath)
+	public static IDictionary<string, string?> LoadStringTableFromFile(string filePath)
 	{
 		return LoadStringTableFromString(FileReader.ReadFile(filePath));
 	}
@@ -100,18 +101,18 @@ public static class StringTable
 	/// </summary>
 	/// <param name="filePath">The string table file path.</param>
 	/// <returns></returns>
-	public static async Task<IDictionary<string, string>> LoadStringTableFromFileAsync(string filePath)
+	public static async Task<IDictionary<string, string?>> LoadStringTableFromFileAsync(string filePath)
 	{
 		return LoadStringTableFromString(await FileReader.ReadFileAsync(filePath));
 	}
 
 	private static string GetName(XElement item)
 	{
-		return (string)item.Attribute("name");
+		return (string?)item.Attribute("name") ?? throw new InvalidOperationException("name attribute is null");
 	}
 
-	private static string GetValue(XElement item)
+	private static string? GetValue(XElement item)
 	{
-		return string.IsNullOrEmpty(item.Value) ? (string)item.Attribute("value") : item.InnerXml().Trim();
+		return string.IsNullOrEmpty(item.Value) ? (string?)item.Attribute("value") : item.InnerXml().Trim();
 	}
 }

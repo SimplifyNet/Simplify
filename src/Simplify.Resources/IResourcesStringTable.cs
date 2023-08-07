@@ -1,18 +1,17 @@
-﻿namespace Simplify.Resources
+﻿namespace Simplify.Resources;
+
+/// <summary>
+/// Interface for getting assembly resource file string
+/// </summary>
+public interface IResourcesStringTable
 {
 	/// <summary>
-	/// Interface for getting assembly resource file string
+	/// Get string table record by name
 	/// </summary>
-	public interface IResourcesStringTable
-	{
-		/// <summary>
-		/// Get string table record by name
-		/// </summary>
-		string this[string name] { get; }
+	string this[string name] { get; }
 
-		/// <summary>
-		/// Get string table record by name
-		/// </summary>
-		string GetString(string name);
-	}
+	/// <summary>
+	/// Get string table record by name
+	/// </summary>
+	string GetString(string name);
 }

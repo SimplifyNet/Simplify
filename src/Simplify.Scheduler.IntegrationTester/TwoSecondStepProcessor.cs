@@ -1,6 +1,6 @@
-﻿using Simplify.Scheduler.Jobs;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
+using Simplify.Scheduler.Jobs;
 
 namespace Simplify.Scheduler.IntegrationTester;
 

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.IO.Abstractions;
 using System.Reflection;
-using System.Web;
 using Microsoft.Extensions.Configuration;
 using Simplify.Log.Settings;
 using Simplify.Log.Settings.Impl;
@@ -195,13 +194,10 @@ public class Logger : ILogger
 		return $"[Inner Exception{levelText}]{positionPrefix} {e.GetType()} : {e.Message}{Environment.NewLine}{trace}{GetInnerExceptionData(currentLevel + 1, e.InnerException)}";
 	}
 
-	private void Initialize()
-	{
-		if (Settings.PathType == LoggerPathType.FullPath)
-			_currentLogFileName = Settings.FileName;
-		else
-			_currentLogFileName = $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{Settings.FileName}";
-	}
+	private void Initialize() =>
+		_currentLogFileName = Settings.PathType == LoggerPathType.FullPath
+			? Settings.FileName
+			: $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{Settings.FileName}";
 
 	private void WriteToFile(string message)
 	{
@@ -210,15 +206,12 @@ public class Logger : ILogger
 			if (Settings.ShowTraceOutput)
 				Trace.WriteLine(Environment.NewLine + message);
 
-			if (Settings.MaxFileSize != 0)
+			if (Settings.MaxFileSize != 0 && FileSystem.File.Exists(_currentLogFileName))
 			{
-				if (FileSystem.File.Exists(_currentLogFileName))
-				{
-					var fileInfo = FileSystem.FileInfo.FromFileName(_currentLogFileName);
+				var fileInfo = FileSystem.FileInfo.New(_currentLogFileName);
 
-					if (fileInfo.Length > Settings.MaxFileSize * 1024)
-						FileSystem.File.Delete(_currentLogFileName);
-				}
+				if (fileInfo.Length > Settings.MaxFileSize * 1024)
+					FileSystem.File.Delete(_currentLogFileName);
 			}
 
 			var writeMessage = AddTimeInformation(message + Environment.NewLine);

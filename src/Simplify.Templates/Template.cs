@@ -48,8 +48,7 @@ public class Template : ITemplate
 		if (variableName == null)
 			throw new ArgumentNullException(nameof(variableName));
 
-		if (_addValues == null)
-			_addValues = new Dictionary<string, string?>();
+		_addValues ??= new Dictionary<string, string?>();
 
 		variableName = variableName.Trim();
 
@@ -74,10 +73,7 @@ public class Template : ITemplate
 	/// <summary>
 	/// Sets initial template state equal to current.
 	/// </summary>
-	public void Commit()
-	{
-		_initialText = _text;
-	}
+	public void Commit() => _initialText = _text;
 
 	/// <summary>
 	/// Return template to it's initial state

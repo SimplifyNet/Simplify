@@ -6,11 +6,6 @@
 public abstract class ModelSetterBase
 {
 	/// <summary>
-	/// The model prefix separator
-	/// </summary>
-	public static string ModelPrefixSeparator = ".";
-
-	/// <summary>
 	/// Initializes a new instance of the <see cref="ModelSetterBase" /> class.
 	/// </summary>
 	/// <param name="template">The template.</param>
@@ -20,6 +15,11 @@ public abstract class ModelSetterBase
 		ModelPrefix = modelPrefix;
 		Template = template;
 	}
+
+	/// <summary>
+	/// The model prefix separator
+	/// </summary>
+	public static string ModelPrefixSeparator { get; set; } = ".";
 
 	/// <summary>
 	/// Gets the template.
@@ -39,8 +39,5 @@ public abstract class ModelSetterBase
 	/// </summary>
 	/// <param name="variableName">Name of the variable.</param>
 	/// <returns></returns>
-	protected string FormatModelVariableName(string variableName)
-	{
-		return ModelPrefix != null ? ModelPrefix + ModelPrefixSeparator + variableName : variableName;
-	}
+	protected string FormatModelVariableName(string variableName) => ModelPrefix != null ? ModelPrefix + ModelPrefixSeparator + variableName : variableName;
 }

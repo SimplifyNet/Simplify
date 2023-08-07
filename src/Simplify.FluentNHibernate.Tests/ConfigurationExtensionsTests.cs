@@ -1,15 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
+using Microsoft.Extensions.Configuration;
 using NHibernate.Dialect;
 using NUnit.Framework;
 
-namespace Simplify.FluentNHibernate.FrameworkTests;
+namespace Simplify.FluentNHibernate.Tests;
 
 [TestFixture]
 public class ConfigurationExtensionsTests
 {
-	private const string ConfigSectionName = "DatabaseConnectionSettings";
-
 	private IConfiguration _configuration;
 
 	[SetUp]

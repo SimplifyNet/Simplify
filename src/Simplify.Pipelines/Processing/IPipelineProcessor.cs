@@ -1,16 +1,15 @@
 using System;
 
-namespace Simplify.Pipelines.Processing
+namespace Simplify.Pipelines.Processing;
+
+/// <summary>
+/// Represent pipeline processor
+/// </summary>
+[Obsolete("Please use IConveyor with exceptions")]
+public interface IPipelineProcessor
 {
 	/// <summary>
-	/// Represent pipeline processor
+	/// Executes pipeline.
 	/// </summary>
-	[Obsolete("Please use IConveyor with exceptions")]
-	public interface IPipelineProcessor
-	{
-		/// <summary>
-		/// Executes pipeline.
-		/// </summary>
-		void Execute();
-	}
+	void Execute();
 }
