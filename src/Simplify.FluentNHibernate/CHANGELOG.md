@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.6.0] - 2023-08-02
+## [2.6.0] - 2023-08-07
 
 ### Removed
 
@@ -10,7 +10,8 @@
 
 - .NET Standard 2.1 support
 - .NET 4.8 support
-- SessionFactoryBuilderBase moved from Simplify.Repository.FluentNHibernate
+- ConfigurationAddons parameter in ExportSchema as in UpdateSchema (#480)
+- SessionFactoryBuilderBase moved from Simplify.Repository.FluentNHibernate (№481)
 
 ### Dependencies
 
