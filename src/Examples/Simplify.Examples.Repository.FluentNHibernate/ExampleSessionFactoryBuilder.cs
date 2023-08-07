@@ -3,7 +3,6 @@ using FluentNHibernate.Conventions.Helpers;
 using Microsoft.Extensions.Configuration;
 using Simplify.FluentNHibernate;
 using Simplify.FluentNHibernate.Conventions;
-using Simplify.Repository.FluentNHibernate;
 
 namespace Simplify.Examples.Repository.FluentNHibernate;
 
