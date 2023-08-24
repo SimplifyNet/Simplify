@@ -7,7 +7,7 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/src/Simplify.Linux.sln"
+				"${workspaceFolder}/src/Simplify.NetCore.sln"
 			],
 			"problemMatcher": "$msCompile",
 			"group": {
@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"label": "Build Window",
+			"label": "Build Windows",
 			"command": "dotnet",
 			"type": "process",
 			"args": [
