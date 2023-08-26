@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0] - 2023-09-26
+
+### Added
+
+- .NET 6 support
+
+### Dependencies
+
+- AutoMapper bump to 12.0.1
+
 ## [1.1.1] - 2022-02-08
 
 ### Dependencies
