@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0] - 2023-08-26
+
+### Removed
+
+- .NET Framework 4.6.2 support
+
+### Added
+
+- .NET Standard 2.1 support
+- .NET Framework 4.8 support
+
+### Dependencies
+
+- System.IO.Abstractions bump to 19.2.67
+
 ## [1.3.0] - 2022-11-30
 
 ### Dependencies
