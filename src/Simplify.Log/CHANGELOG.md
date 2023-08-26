@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.1] - 2023-08-26
+
+### Added
+
+- .NET Standard 2.1 support
+
+### Dependencies
+
+- System.IO.Abstractions bump to 19.2.67
+
 ## [2.2.0] - 2023-08-01
 
 ### Dependencies
