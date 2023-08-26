@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net462</TargetFrameworks>
+		<TargetFrameworks>net48</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -8,11 +8,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.0.1</Version>
-		<PackageReleaseNotes>
-			Updates
-			* Simplify.System bump to 1.6
-		</PackageReleaseNotes>
+		<Version>1.0.2</Version>
 
 		<Authors>Simplify community</Authors>
 		<Product>Simplify</Product>
@@ -22,14 +18,17 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET WPF</PackageTags>
+
+		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Wpf/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.System" Version="1.6.*" />
+		<PackageReference Include="Simplify.System" Version="1.6.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="PresentationFramework" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
