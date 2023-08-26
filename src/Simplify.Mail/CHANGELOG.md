@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.5] - 2022-09-08
+
+### Added
+
+- .NET 6 support
+- .NET Standard 2.1 support
+
+### Dependencies
+
+- Microsoft.Extensions.Configuration bump to 3.1.32
+
 ## [1.5.4] - 2022-09-08
 
 ### Fixed
