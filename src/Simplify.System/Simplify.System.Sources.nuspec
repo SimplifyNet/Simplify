@@ -63,5 +63,6 @@
 		<file src="WeakSingleton.cs" target="contentFiles\cs\any\App_Packages\Simplify.System.Sources.$version$\WeakSingleton.cs" />
 		<file src="..\..\images\icon.png" target="images\" />
 		<file src="CHANGELOG.md" target="\" />
+		<file src="..\..\LICENSE.txt" target="\" />
 	</files>
 </package>
