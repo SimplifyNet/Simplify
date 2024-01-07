@@ -14,6 +14,7 @@
 		<Product>Simplify</Product>
 		<Description>Text templates engine</Description>
 		<Copyright>Licensed under LGPL</Copyright>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.Templates</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>

@@ -14,6 +14,7 @@
 		<Product>Simplify</Product>
 		<Description>Windows services framework with DI</Description>
 		<Copyright>Licensed under LGPL</Copyright>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.WindowsServices</RepositoryUrl>
@@ -36,5 +37,6 @@
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
 		<None Include="CHANGELOG.md" Pack="true" PackagePath="\" />
+		<None Include="..\..\LICENSE.txt" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

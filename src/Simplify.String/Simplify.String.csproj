@@ -12,6 +12,7 @@
 		<Product>Simplify</Product>
 		<Description>String operations/validation functions</Description>
 		<Copyright>Licensed under LGPL</Copyright>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>

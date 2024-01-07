@@ -13,7 +13,8 @@
 
 		<releaseNotes>See CHANGELOG.md for details</releaseNotes>
 
-		<copyright>Licensed under LGPL</copyright>
+		<Copyright>Licensed under LGPL</Copyright>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<language>en-US</language>
 		<tags>.NET</tags>
 		<dependencies>
