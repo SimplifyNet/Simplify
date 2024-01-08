@@ -14,6 +14,7 @@
 		<releaseNotes>See CHANGELOG.md for details</releaseNotes>
 
 		<copyright>Licensed under LGPL</copyright>
+		<license type="file">LICENSE.txt</license>
 		<language>en-US</language>
 		<tags>.NET</tags>
 		<dependencies>
@@ -28,5 +29,6 @@
 		<file src="StringHelper.cs" target="contentFiles\cs\any\App_Packages\Simplify.String.Sources.$version$\StringHelper.cs" />
 		<file src="..\..\images\icon.png" target="images\" />
 		<file src="CHANGELOG.md" target="\" />
+		<file src="..\..\LICENSE.txt" target="\" />
 	</files>
 </package>

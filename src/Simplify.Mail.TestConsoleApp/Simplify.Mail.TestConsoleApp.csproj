@@ -10,6 +10,7 @@
 		<Product>Simplify</Product>
 		<Description>Simplify.Mail .NET Core test app</Description>
 		<Copyright>Licensed under LGPL</Copyright>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Simplify.Mail\Simplify.Mail.csproj" />
