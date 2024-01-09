@@ -59,7 +59,7 @@ public class EventBusAsync1Tests
 	}
 
 	[Test]
-	public async Task Publish_TwoEventHandlersSyncStopOnExceptionStrategyWithException_ProcessStopped()
+	public void Publish_TwoEventHandlersSyncStopOnExceptionStrategyWithException_ProcessStopped()
 	{
 		// Arrange
 
