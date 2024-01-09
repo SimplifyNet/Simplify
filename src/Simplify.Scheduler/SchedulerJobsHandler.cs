@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -199,8 +200,11 @@ public abstract class SchedulerJobsHandler : IDisposable
 		_jobs.Add(job);
 	}
 
-	private void OnCronTimerTick(object state)
+	private void OnCronTimerTick(object? state)
 	{
+		if (state is null)
+			throw new ArgumentNullException(nameof(state));
+
 		var job = (ICrontabSchedulerJob)state;
 
 		if (job.CrontabProcessor == null)
@@ -214,8 +218,11 @@ public abstract class SchedulerJobsHandler : IDisposable
 		OnStartWork(state);
 	}
 
-	private void OnStartWork(object state)
+	private void OnStartWork(object? state)
 	{
+		if (state is null)
+			throw new ArgumentNullException(nameof(state));
+
 		var job = (ICrontabSchedulerJob)state;
 
 		lock (_workingJobsTasks)
@@ -232,8 +239,11 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 	#region Execution
 
-	private async Task Run(object state)
+	private async Task Run(object? state)
 	{
+		if (state is null)
+			throw new ArgumentNullException(nameof(state));
+
 		var (jobTaskID, job) = (Tuple<long, ICrontabSchedulerJob>)state;
 
 		try
@@ -291,26 +301,13 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 	private Task InvokeJobMethod(ISchedulerJobRepresentation job, object jobObject)
 	{
-		object result;
-
-		switch (job.InvokeMethodParameterType)
+		var result = job.InvokeMethodParameterType switch
 		{
-			case InvokeMethodParameterType.Parameterless:
-				result = job.InvokeMethodInfo.Invoke(jobObject, null);
-				break;
-
-			case InvokeMethodParameterType.AppName:
-				result = job.InvokeMethodInfo.Invoke(jobObject, new object[] { AppName });
-				break;
-
-			case InvokeMethodParameterType.Args:
-				result = job.InvokeMethodInfo.Invoke(jobObject, new object[] { job.JobArgs });
-				break;
-
-			default:
-				throw new ArgumentOutOfRangeException();
-		}
-
+			InvokeMethodParameterType.Parameterless => job.InvokeMethodInfo.Invoke(jobObject, null),
+			InvokeMethodParameterType.AppName => job.InvokeMethodInfo.Invoke(jobObject, new object[] { AppName }),
+			InvokeMethodParameterType.Args => job.InvokeMethodInfo.Invoke(jobObject, new object[] { job.JobArgs }),
+			_ => throw new InvalidEnumArgumentException(nameof(job.InvokeMethodParameterType)),
+		};
 		if (result is Task task)
 			return task;
 

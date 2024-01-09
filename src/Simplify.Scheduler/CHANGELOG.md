@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0] - 2024-01-09
+
+### Added
+
+- Null checks
+- Switch to better exceptions
+
 ## [1.3.1] - 2023-08-24
 
 ### Added

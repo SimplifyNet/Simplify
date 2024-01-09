@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 using Simplify.Scheduler.CommandLine;
@@ -60,7 +61,7 @@ public class MultitaskScheduler : SchedulerJobsHandler
 				break;
 
 			default:
-				throw new ArgumentOutOfRangeException();
+				throw new InvalidEnumArgumentException(nameof(commandLineProcessResult));
 		}
 
 		return true;
@@ -69,7 +70,7 @@ public class MultitaskScheduler : SchedulerJobsHandler
 	/// <summary>
 	/// Called when scheduler is about to stop, main stopping point
 	/// </summary>
-	protected void StopJobs(object sender, ConsoleCancelEventArgs args)
+	protected void StopJobs(object? sender, ConsoleCancelEventArgs args)
 	{
 		StopJobs();
 
