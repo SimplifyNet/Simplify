@@ -2,7 +2,7 @@
 using NHibernate;
 using NHibernate.SqlCommand;
 
-namespace Simplify.FluentNHibernate;
+namespace Simplify.FluentNHibernate.Interceptors;
 
 /// <summary>
 /// Executed SQL code tracer

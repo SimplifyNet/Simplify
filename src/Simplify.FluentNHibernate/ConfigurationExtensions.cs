@@ -5,6 +5,7 @@ using FluentNHibernate.Conventions;
 using Microsoft.Extensions.Configuration;
 using NHibernate.Driver;
 using Simplify.FluentNHibernate.Drivers;
+using Simplify.FluentNHibernate.Interceptors;
 using Simplify.FluentNHibernate.Settings;
 using Simplify.FluentNHibernate.Settings.Impl;
 
