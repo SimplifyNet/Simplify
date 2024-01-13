@@ -399,6 +399,7 @@ public static class ConfigurationExtensions
 	/// <param name="configuration">The configuration containing database config section.</param>
 	/// <param name="configSectionName">Database configuration section name in configuration.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
+	/// <param name="dialect">The dialect.</param>
 	/// <returns></returns>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
@@ -408,23 +409,35 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigPostgreSql(this FluentConfiguration fluentConfiguration,
 		IConfiguration configuration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null)
+		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
+		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
 	{
 		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigPostgreSql(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
 
 	private static void InitializeFromConfigPostgreSql(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
-		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null)
+		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
+		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
 	{
-		var clientConfiguration = PostgreSQLConfiguration.PostgreSQL82.ConnectionString(c => c
+		var clientConfiguration = dialect switch
+		{
+			PostgreSqlDialect.Standard => PostgreSQLConfiguration.Standard,
+			PostgreSqlDialect.PostgreSQL81 => PostgreSQLConfiguration.PostgreSQL81,
+			PostgreSqlDialect.PostgreSQL82 => PostgreSQLConfiguration.PostgreSQL82,
+			PostgreSqlDialect.PostgreSQL83 => PostgreSQLConfiguration.PostgreSQL83,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.ConnectionString(c => c
 			.Host(settings.ServerName)
 			.Port(settings.Port ?? 5432)
 			.Database(settings.DataBaseName)
