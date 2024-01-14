@@ -61,7 +61,7 @@ public interface IGenericRepository<T>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	IList<T> GetMultipleByQuery(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
+	IList<T> GetMultiple(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 	/// <summary>
 	/// Gets the multiple objects by query asynchronously.
@@ -69,7 +69,7 @@ public interface IGenericRepository<T>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
+	Task<IList<T>> GetMultipleAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 	/// <summary>
 	/// Gets the multiple paged elements list.

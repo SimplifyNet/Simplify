@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.0] - 2024-01-14
+
+### Changed
+
+- GetMultipleByQuery and GetMultipleByQueryAsync renamed to GetMultiple and GetMultipleAsync
+
 ## [1.6.1] - 2023-08-01
 
 ### Removed
