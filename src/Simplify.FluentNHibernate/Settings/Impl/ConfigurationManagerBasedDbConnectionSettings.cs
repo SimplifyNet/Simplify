@@ -18,54 +18,40 @@ public class ConfigurationManagerBasedDbConnectionSettings : DbConnectionSetting
 	{
 		if (string.IsNullOrEmpty(configSectionName)) throw new ArgumentNullException(nameof(configSectionName));
 
-		var settings = (NameValueCollection)ConfigurationManager.GetSection(configSectionName);
-
-		if (settings == null)
-			throw new DatabaseConnectionConfigurationException(
+		var settings = (NameValueCollection)ConfigurationManager.GetSection(configSectionName)
+			?? throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' was not found");
 
-		ServerName = settings["ServerName"];
+		ServerName = settings[nameof(ServerName)];
+		DataBaseName = settings[nameof(DataBaseName)];
+		UserName = settings[nameof(UserName)];
+		UserPassword = settings[nameof(UserPassword)];
+		var showSqlText = settings[nameof(ShowSql)];
+		var showSqlOutputTypeText = settings[nameof(ShowSqlOutputType)];
+		var port = settings[nameof(Port)];
 
 		if (string.IsNullOrEmpty(ServerName))
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' ServerName property was not specified");
 
-		DataBaseName = settings["DataBaseName"];
-
 		if (string.IsNullOrEmpty(DataBaseName))
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' DataBaseName property was not specified");
-
-		UserName = settings["UserName"];
 
 		if (string.IsNullOrEmpty(UserName))
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' UserName property was not specified");
 
-		UserPassword = settings["UserPassword"];
-
-		var showSqlText = settings["ShowSql"];
-
 		if (!string.IsNullOrEmpty(showSqlText))
-		{
 			if (bool.TryParse(showSqlText, out var buffer))
 				ShowSql = buffer;
-		}
-
-		var showSqlOutputTypeText = settings[nameof(ShowSqlOutputType)];
 
 		if (!string.IsNullOrEmpty(showSqlOutputTypeText))
-		{
 			if (Enum.TryParse<ShowSqlOutputType>(showSqlOutputTypeText, out var buffer))
 				ShowSqlOutputType = buffer;
-		}
-
-		var port = settings["Port"];
 
 		if (!string.IsNullOrEmpty(port))
-		{
 			if (int.TryParse(port, out var buffer))
 				Port = buffer;
-		}
 	}
 }

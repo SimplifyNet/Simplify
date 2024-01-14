@@ -29,48 +29,36 @@ public class ConfigurationBasedDbConnectionSettings : DbConnectionSettings
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' was not found");
 
-		ServerName = config["ServerName"];
+		ServerName = config[nameof(ServerName)];
+		DataBaseName = config[nameof(DataBaseName)];
+		UserName = config[nameof(UserName)];
+		UserPassword = config[nameof(UserPassword)];
+		var showSqlText = config[nameof(ShowSql)];
+		var showSqlOutputTypeText = config[nameof(ShowSqlOutputType)];
+		var port = config[nameof(Port)];
 
 		if (string.IsNullOrEmpty(ServerName))
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' ServerName property was not specified");
 
-		DataBaseName = config["DataBaseName"];
-
 		if (string.IsNullOrEmpty(DataBaseName))
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' DataBaseName property was not specified");
-
-		UserName = config["UserName"];
 
 		if (string.IsNullOrEmpty(UserName))
 			throw new DatabaseConnectionConfigurationException(
 				$"Database connection section '{configSectionName}' UserName property was not specified");
 
-		UserPassword = config["UserPassword"];
-
-		var showSqlText = config["ShowSql"];
-
 		if (!string.IsNullOrEmpty(showSqlText))
-		{
 			if (bool.TryParse(showSqlText, out var buffer))
 				ShowSql = buffer;
-		}
-
-		var showSqlOutputTypeText = config[nameof(ShowSqlOutputType)];
 
 		if (!string.IsNullOrEmpty(showSqlOutputTypeText))
-		{
 			if (Enum.TryParse<ShowSqlOutputType>(showSqlOutputTypeText, out var buffer))
 				ShowSqlOutputType = buffer;
-		}
-
-		var port = config["Port"];
 
 		if (!string.IsNullOrEmpty(port))
-		{
 			if (int.TryParse(port, out var buffer))
 				Port = buffer;
-		}
 	}
 }
