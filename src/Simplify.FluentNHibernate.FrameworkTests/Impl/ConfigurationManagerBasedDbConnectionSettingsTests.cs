@@ -12,7 +12,7 @@ public class ConfigurationManagerBasedDbConnectionSettingsTests
 	public void InitializeFromConfigOracleClient_CorrectConfig_NoExceptions()
 	{
 		// Arrange & Act
-		var settings = new ConfigurationBasedDbConnectionSettings();
+		var settings = new ConfigurationManagerBasedDbConnectionSettings();
 
 		// Assert
 
