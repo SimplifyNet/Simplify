@@ -13,7 +13,7 @@
 - ShowSql output by default redirected to Console
 - Default PostgreSQL83 dialect set for PostgreSQL connections
 - Default MsSql2012 dialect set for MS SQL connections
-- InitializeFromConfigMsSql null password exception
+- InitializeFromConfigMsSql null password exception type change
 - SessionFactoryBuilderBase dispose with GC.SuppressFinalize
 
 ### Dependencies
