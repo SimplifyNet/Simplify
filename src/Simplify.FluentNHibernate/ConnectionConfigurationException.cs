@@ -5,12 +5,11 @@ namespace Simplify.FluentNHibernate;
 /// <summary>
 /// The exception class using for Database connection configuration exceptions
 /// </summary>
+/// <remarks>
+/// Initializes a new instance of the <see cref="DatabaseConnectionConfigurationException"/> class.
+/// </remarks>
+/// <param name="message">The message that describes the error.</param>
 [Serializable]
-public sealed class DatabaseConnectionConfigurationException : Exception
+public sealed class DatabaseConnectionConfigurationException(string message) : Exception(message)
 {
-	/// <summary>
-	/// Initializes a new instance of the <see cref="DatabaseConnectionConfigurationException"/> class.
-	/// </summary>
-	/// <param name="message">The message that describes the error.</param>
-	public DatabaseConnectionConfigurationException(string message) : base(message) { }
 }
