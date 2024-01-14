@@ -56,7 +56,7 @@ public interface IGenericRepository<T>
 	Task<T> GetFirstByQueryAsync(Expression<Func<T, bool>> query);
 
 	/// <summary>
-	/// Gets the multiple objects by query.
+	/// Gets the multiple objects by query or all objects without query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
@@ -64,7 +64,7 @@ public interface IGenericRepository<T>
 	IList<T> GetMultiple(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null);
 
 	/// <summary>
-	/// Gets the multiple objects by query asynchronously.
+	/// Gets the multiple objects by query or all objects without query asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>

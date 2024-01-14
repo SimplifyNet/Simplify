@@ -1,11 +1,18 @@
 # Changelog
 
-## [1.6] - 2023-08-07
+## [1.7.0] - 2024-01-14
+
+### Dependencies
+
+- Simplify.Repository bump to 1.7
+- Simplify.FluentNHibernate bump to 3.0
+
+## [1.6.0] - 2023-08-07
 
 ### Removed
 
 - .NET 4.6.2 support
-- SessionFactoryBuilderBase moved from Simplify.Repository.FluentNHibernate (¹481)
+- SessionFactoryBuilderBase moved from Simplify.Repository.FluentNHibernate (ï¿½481)
 
 ### Added
 

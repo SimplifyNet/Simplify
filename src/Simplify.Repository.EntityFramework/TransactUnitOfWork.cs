@@ -9,18 +9,14 @@ namespace Simplify.Repository.EntityFramework;
 /// <summary>
 /// Provides unit of work with manual open transaction
 /// </summary>
-public class TransactUnitOfWork<T> : UnitOfWork<T>, ITransactUnitOfWork
+/// <remarks>
+/// Initializes a new instance of the <see cref="TransactUnitOfWork{T}"/> class.
+/// </remarks>
+/// <param name="context">The context.</param>
+public class TransactUnitOfWork<T>(DbContext context) : UnitOfWork<T>(context), ITransactUnitOfWork
 	where T : DbContext
 {
 	private IDbContextTransaction? _transaction;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="TransactUnitOfWork{T}"/> class.
-	/// </summary>
-	/// <param name="context">The context.</param>
-	public TransactUnitOfWork(DbContext context) : base(context)
-	{
-	}
 
 	/// <summary>
 	/// Gets a value indicating whether UoW's transaction is active.

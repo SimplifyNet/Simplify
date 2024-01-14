@@ -69,21 +69,21 @@ public class GenericRepository<T> : IGenericRepository<T>
 	public Task<T> GetFirstByQueryAsync(Expression<Func<T, bool>> query) => Session.GetFirstObjectAsync(query);
 
 	/// <summary>
-	/// Gets the multiple objects by query.
+	/// Gets the multiple objects by query or all objects without query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public IList<T> GetMultipleByQuery(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
+	public IList<T> GetMultiple(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 		=> Session.GetList(query, customProcessing);
 
 	/// <summary>
-	/// Gets the multiple objects by query asynchronously.
+	/// Gets the multiple objects by query or all objects without query asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
+	public Task<IList<T>> GetMultipleAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 		=> Session.GetListAsync(query, customProcessing);
 
 	/// <summary>

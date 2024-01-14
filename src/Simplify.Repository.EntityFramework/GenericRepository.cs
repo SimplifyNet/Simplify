@@ -11,19 +11,17 @@ namespace Simplify.Repository.EntityFramework;
 /// Provides generic repository pattern for easy Entity Framework repositories implementation
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class GenericRepository<T> : IGenericRepository<T>
+/// <remarks>
+/// Initializes a new instance of the <see cref="GenericRepository{T}"/> class.
+/// </remarks>
+/// <param name="session">The session.</param>
+public class GenericRepository<T>(DbContext session) : IGenericRepository<T>
 	where T : class
 {
 	/// <summary>
 	/// The NHibernate session
 	/// </summary>
-	protected readonly DbContext Session;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="GenericRepository{T}"/> class.
-	/// </summary>
-	/// <param name="session">The session.</param>
-	public GenericRepository(DbContext session) => Session = session;
+	protected readonly DbContext Session = session;
 
 	/// <summary>
 	/// Gets the single object by identifier.
@@ -68,12 +66,12 @@ public class GenericRepository<T> : IGenericRepository<T>
 	public Task<T> GetFirstByQueryAsync(Expression<Func<T, bool>> query) => Session.Set<T>().FirstOrDefaultAsync(query)!;
 
 	/// <summary>
-	/// Gets the multiple objects by query.
+	/// Gets the multiple objects by query or all objects without query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public IList<T> GetMultipleByQuery(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
+	public IList<T> GetMultiple(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 	{
 		var queryable = Session.Set<T>().AsQueryable();
 
@@ -87,12 +85,12 @@ public class GenericRepository<T> : IGenericRepository<T>
 	}
 
 	/// <summary>
-	/// Gets the multiple objects by query asynchronously.
+	/// Gets the multiple objects by query or all objects without query asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public async Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
+	public async Task<IList<T>> GetMultipleAsync(Expression<Func<T, bool>>? query = null, Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 	{
 		var queryable = Session.Set<T>().AsQueryable();
 

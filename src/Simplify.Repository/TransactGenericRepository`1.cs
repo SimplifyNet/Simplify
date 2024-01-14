@@ -251,12 +251,12 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	}
 
 	/// <summary>
-	/// Gets the multiple objects by query.
+	/// Gets the multiple objects by query or all objects without query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public IList<T> GetMultipleByQuery(Expression<Func<T, bool>>? query = null,
+	public IList<T> GetMultiple(Expression<Func<T, bool>>? query = null,
 		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 	{
 		var skip = false;
@@ -266,7 +266,7 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 		else
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
-		var result = _baseRepository.GetMultipleByQuery(query, customProcessing);
+		var result = _baseRepository.GetMultiple(query, customProcessing);
 
 		if (!skip)
 			_unitOfWork.Commit();
@@ -275,12 +275,12 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	}
 
 	/// <summary>
-	/// Gets the multiple objects by query asynchronously.
+	/// Gets the multiple objects by query or all objects without query asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public async Task<IList<T>> GetMultipleByQueryAsync(Expression<Func<T, bool>>? query = null,
+	public async Task<IList<T>> GetMultipleAsync(Expression<Func<T, bool>>? query = null,
 		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
 	{
 		var skip = false;
@@ -290,7 +290,7 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 		else
 			_unitOfWork.BeginTransaction(_isolationLevel);
 
-		var result = await _baseRepository.GetMultipleByQueryAsync(query, customProcessing);
+		var result = await _baseRepository.GetMultipleAsync(query, customProcessing);
 
 		if (!skip)
 			await _unitOfWork.CommitAsync();
