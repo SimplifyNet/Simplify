@@ -378,17 +378,19 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigPostgreSql(this FluentConfiguration fluentConfiguration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null)
+		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
+		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
 	{
 		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigPostgreSql(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
@@ -401,7 +403,6 @@ public static class ConfigurationExtensions
 	/// <param name="configSectionName">Database configuration section name in configuration.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
 	/// <param name="dialect">The dialect.</param>
-	/// <returns></returns>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
 	/// or
@@ -427,7 +428,7 @@ public static class ConfigurationExtensions
 	private static void InitializeFromConfigPostgreSql(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
 		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
-		PostgreSqlDialect dialect)
+		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
 	{
 		var clientConfiguration = dialect switch
 		{
