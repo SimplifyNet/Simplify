@@ -20,7 +20,8 @@ public class ConfigurationBasedDbConnectionSettings : DbConnectionSettings
 	/// </exception>
 	public ConfigurationBasedDbConnectionSettings(IConfiguration configuration, string configSectionName = "DatabaseConnectionSettings")
 	{
-		if (string.IsNullOrEmpty(configSectionName)) throw new ArgumentNullException(nameof(configSectionName));
+		if (string.IsNullOrEmpty(configSectionName))
+			throw new ArgumentNullException(nameof(configSectionName));
 
 		var config = configuration.GetSection(configSectionName);
 
