@@ -372,17 +372,19 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigMsSql(this FluentConfiguration fluentConfiguration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<MsSqlConfiguration>? additionalClientConfiguration = null)
+		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
+		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
 	{
 		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigMsSql(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
@@ -394,7 +396,7 @@ public static class ConfigurationExtensions
 	/// <param name="configuration">The configuration containing database config section.</param>
 	/// <param name="configSectionName">Database configuration section name in configuration.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
 	/// or
@@ -403,27 +405,39 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigMsSql(this FluentConfiguration fluentConfiguration,
 		IConfiguration configuration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<MsSqlConfiguration>? additionalClientConfiguration = null)
+		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
+		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
 	{
 		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigMsSql(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
 
 	private static void InitializeFromConfigMsSql(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
-		Action<MsSqlConfiguration>? additionalClientConfiguration = null)
+		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
+		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
 	{
-		var clientConfiguration = MsSqlConfiguration.MsSql2008.ConnectionString(c => c
+		var clientConfiguration = dialect switch
+		{
+			MsSqlDialect.MsSql2000 => MsSqlConfiguration.MsSql2000,
+			MsSqlDialect.MsSql2005 => MsSqlConfiguration.MsSql2005,
+			MsSqlDialect.MsSql2008 => MsSqlConfiguration.MsSql2008,
+			MsSqlDialect.MsSql7 => MsSqlConfiguration.MsSql7,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.ConnectionString(c => c
 			.Server(settings.ServerName)
 			.Database(settings.DataBaseName)
 			.Username(settings.UserName)
-			.Password(settings.UserPassword ?? throw new ArgumentNullException(nameof(settings.UserPassword))));
+			.Password(settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null")));
 
 		additionalClientConfiguration?.Invoke(clientConfiguration);
 

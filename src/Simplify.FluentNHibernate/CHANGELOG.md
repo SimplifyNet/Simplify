@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.0] - 2024-01-14
+
+### Added
+
+- InitializeFromConfig* methods selectable dialect (#487)
+- CompositeInterceptor (#483)
+
+### Changed
+
+- Default PostgreSQL83 dialect set for PostgreSQL connections
+- Default MsSql2012 dialect set for MS SQL connections
+- InitializeFromConfigMsSql null password exception
+- SessionFactoryBuilderBase dispose with GC.SuppressFinalize
+
 ## [2.6.0] - 2023-08-07
 
 ### Removed
