@@ -27,7 +27,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Simplify.DI" Version="4.2.10" />
-		<PackageReference Include="Simplify.FluentNHibernate" Version="2.6" />
+		<PackageReference Include="Simplify.FluentNHibernate" Version="3.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
