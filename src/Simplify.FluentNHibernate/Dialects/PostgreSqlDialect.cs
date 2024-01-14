@@ -6,7 +6,7 @@ namespace Simplify.FluentNHibernate.Dialects;
 public enum PostgreSqlDialect
 {
 	/// <summary>
-	/// The standard dialect
+	/// The Standard dialect
 	/// </summary>
 	Standard,
 	/// <summary>

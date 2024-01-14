@@ -287,17 +287,20 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigMySql(this FluentConfiguration fluentConfiguration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<MySQLConfiguration>? additionalClientConfiguration = null)
+		Action<MySQLConfiguration>? additionalClientConfiguration = null,
+		MySqlDialect dialect = MySqlDialect.Standard)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigMySql(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
@@ -309,7 +312,7 @@ public static class ConfigurationExtensions
 	/// <param name="configuration">The configuration containing database config section.</param>
 	/// <param name="configSectionName">Database configuration section name in configuration.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
 	/// or
@@ -318,23 +321,35 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigMySql(this FluentConfiguration fluentConfiguration,
 		IConfiguration configuration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<MySQLConfiguration>? additionalClientConfiguration = null)
+		Action<MySQLConfiguration>? additionalClientConfiguration = null,
+		MySqlDialect dialect = MySqlDialect.Standard)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigMySql(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
 
 	private static void InitializeFromConfigMySql(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
-		Action<MySQLConfiguration>? additionalClientConfiguration = null)
+		Action<MySQLConfiguration>? additionalClientConfiguration = null,
+		MySqlDialect dialect = MySqlDialect.Standard)
 	{
-		var clientConfiguration = MySQLConfiguration.Standard.ConnectionString(c => c
+		var clientConfiguration = dialect switch
+		{
+			MySqlDialect.Standard => MySQLConfiguration.Standard,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.ConnectionString(c => c
 			.Server(settings.ServerName)
 			.Database(settings.DataBaseName)
 			.Username(settings.UserName)
