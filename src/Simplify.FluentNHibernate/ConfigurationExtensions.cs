@@ -379,7 +379,8 @@ public static class ConfigurationExtensions
 		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
 		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigMsSql(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
@@ -408,8 +409,11 @@ public static class ConfigurationExtensions
 		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
 		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigMsSql(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
@@ -463,7 +467,8 @@ public static class ConfigurationExtensions
 		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
 		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigPostgreSql(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
@@ -492,8 +497,11 @@ public static class ConfigurationExtensions
 		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
 		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigPostgreSql(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
@@ -554,8 +562,11 @@ public static class ConfigurationExtensions
 		Action<SQLiteConfiguration>? additionalClientConfiguration = null,
 		SqliteDialect dialect = SqliteDialect.Standard)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (fileName == null)
+			throw new ArgumentNullException(nameof(fileName));
 
 		var clientConfiguration = dialect switch
 		{

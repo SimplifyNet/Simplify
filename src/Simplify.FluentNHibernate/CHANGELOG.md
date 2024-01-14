@@ -14,6 +14,10 @@
 - InitializeFromConfigMsSql null password exception
 - SessionFactoryBuilderBase dispose with GC.SuppressFinalize
 
+### Dependencies
+
+- FluentNHibernate bump to 3.3
+
 ## [2.6.0] - 2023-08-07
 
 ### Removed
