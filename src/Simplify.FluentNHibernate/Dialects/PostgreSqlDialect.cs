@@ -1,7 +1,7 @@
 namespace Simplify.FluentNHibernate.Dialects;
 
 /// <summary>
-/// Provides PostgreSQL dialect
+/// Provides PostgreSQL DBMS dialect
 /// </summary>
 public enum PostgreSqlDialect
 {
