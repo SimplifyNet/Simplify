@@ -33,7 +33,8 @@ public static class ConfigurationExtensions
 		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null,
 		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigOracleClient(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
@@ -60,8 +61,11 @@ public static class ConfigurationExtensions
 		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null,
 		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigOracleClient(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
@@ -107,17 +111,20 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigOracleOdpNetNative(this FluentConfiguration fluentConfiguration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
+		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null,
+		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigOracleOdpNetNative(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
@@ -129,7 +136,7 @@ public static class ConfigurationExtensions
 	/// <param name="configuration">The configuration containing database config section.</param>
 	/// <param name="configSectionName">Database configuration section name in configuration.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
 	/// or
@@ -138,23 +145,36 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigOracleOdpNetNative(this FluentConfiguration fluentConfiguration,
 		IConfiguration configuration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
+		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null,
+		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigOracleOdpNetNative(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
 
 	private static void InitializeFromConfigOracleOdpNetNative(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
-		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null)
+		Action<OracleDataClientConfiguration>? additionalClientConfiguration = null,
+		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		var clientConfiguration = OracleDataClientConfiguration.Oracle10.ConnectionString(c => c
+		var clientConfiguration = dialect switch
+		{
+			OracleDialect.Oracle9i => OracleDataClientConfiguration.Oracle9,
+			OracleDialect.Oracle10g => OracleDataClientConfiguration.Oracle10,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.ConnectionString(c => c
 				.Server(settings.ServerName)
 				.Port(settings.Port ?? 1521)
 				.Instance(settings.DataBaseName)
@@ -179,17 +199,20 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigOracleOdpNet(this FluentConfiguration fluentConfiguration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null)
+		Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null,
+		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		InitializeFromConfigOracleOdpNet(fluentConfiguration,
 			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
@@ -201,7 +224,7 @@ public static class ConfigurationExtensions
 	/// <param name="configuration">The configuration containing database config section.</param>
 	/// <param name="configSectionName">Database configuration section name in configuration.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
 	/// or
@@ -210,23 +233,36 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigOracleOdpNet(this FluentConfiguration fluentConfiguration,
 		IConfiguration configuration,
 		string configSectionName = "DatabaseConnectionSettings",
-		Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null)
+		Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null,
+		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
-		if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
 
 		InitializeFromConfigOracleOdpNet(fluentConfiguration,
 			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
-			additionalClientConfiguration);
+			additionalClientConfiguration,
+			dialect);
 
 		return fluentConfiguration;
 	}
 
 	private static void InitializeFromConfigOracleOdpNet(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
-		Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null)
+		Action<OracleManagedDataClientConfiguration>? additionalClientConfiguration = null,
+		OracleDialect dialect = OracleDialect.Oracle10g)
 	{
-		var clientConfiguration = OracleManagedDataClientConfiguration.Oracle10.ConnectionString(c => c
+		var clientConfiguration = dialect switch
+		{
+			OracleDialect.Oracle9i => OracleManagedDataClientConfiguration.Oracle9,
+			OracleDialect.Oracle10g => OracleManagedDataClientConfiguration.Oracle10,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.ConnectionString(c => c
 				.Server(settings.ServerName)
 				.Port(settings.Port ?? 1521)
 				.Instance(settings.DataBaseName)
@@ -477,7 +513,7 @@ public static class ConfigurationExtensions
 	/// <param name="fileName">Name of the SqLite database file.</param>
 	/// <param name="showSql">if set to <c>true</c> then all executed SQL queries will be shown in trace window.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">
 	/// fluentConfiguration
 	/// or
@@ -486,12 +522,19 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigSqLite(this FluentConfiguration fluentConfiguration,
 		string fileName,
 		bool showSql = false,
-		Action<SQLiteConfiguration>? additionalClientConfiguration = null)
+		Action<SQLiteConfiguration>? additionalClientConfiguration = null,
+		SqliteDialect dialect = SqliteDialect.Standard)
 	{
 		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
 		if (fileName == null) throw new ArgumentNullException(nameof(fileName));
 
-		var clientConfiguration = SQLiteConfiguration.Standard.UsingFile(fileName);
+		var clientConfiguration = dialect switch
+		{
+			SqliteDialect.Standard => SQLiteConfiguration.Standard,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.UsingFile(fileName);
 
 		additionalClientConfiguration?.Invoke(clientConfiguration);
 
@@ -512,15 +555,23 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="showSql">if set to <c>true</c> then all executed SQL queries will be shown in trace window.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
-	/// <returns></returns>
+	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigSqLiteInMemory(this FluentConfiguration fluentConfiguration,
 		bool showSql = false,
-		Action<SQLiteConfiguration>? additionalClientConfiguration = null)
+		Action<SQLiteConfiguration>? additionalClientConfiguration = null,
+		SqliteDialect dialect = SqliteDialect.Standard)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
-		var clientConfiguration = SQLiteConfiguration.Standard.InMemory();
+		var clientConfiguration = dialect switch
+		{
+			SqliteDialect.Standard => SQLiteConfiguration.Standard,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.InMemory();
 
 		additionalClientConfiguration?.Invoke(clientConfiguration);
 
@@ -543,7 +594,8 @@ public static class ConfigurationExtensions
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration AddMappingsFromAssemblyOf<T>(this FluentConfiguration fluentConfiguration, params IConvention[] conventions)
 	{
-		if (fluentConfiguration == null) throw new ArgumentNullException(nameof(fluentConfiguration));
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
 
 		fluentConfiguration.Mappings(m => m.FluentMappings
 			.AddFromAssemblyOf<T>()
