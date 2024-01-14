@@ -433,6 +433,7 @@ public static class ConfigurationExtensions
 			MsSqlDialect.MsSql2000 => MsSqlConfiguration.MsSql2000,
 			MsSqlDialect.MsSql2005 => MsSqlConfiguration.MsSql2005,
 			MsSqlDialect.MsSql2008 => MsSqlConfiguration.MsSql2008,
+			MsSqlDialect.MsSql2012 => MsSqlConfiguration.MsSql2012,
 			MsSqlDialect.MsSql7 => MsSqlConfiguration.MsSql7,
 			_ => throw new InvalidOperationException()
 		};
