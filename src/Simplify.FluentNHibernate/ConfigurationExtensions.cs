@@ -4,6 +4,7 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
 using Microsoft.Extensions.Configuration;
 using NHibernate.Driver;
+using Simplify.FluentNHibernate.Dialects;
 using Simplify.FluentNHibernate.Drivers;
 using Simplify.FluentNHibernate.Interceptors;
 using Simplify.FluentNHibernate.Settings;
@@ -426,7 +427,7 @@ public static class ConfigurationExtensions
 	private static void InitializeFromConfigPostgreSql(FluentConfiguration fluentConfiguration,
 		DbConnectionSettings settings,
 		Action<PostgreSQLConfiguration>? additionalClientConfiguration = null,
-		PostgreSqlDialect dialect = PostgreSqlDialect.PostgreSQL83)
+		PostgreSqlDialect dialect)
 	{
 		var clientConfiguration = dialect switch
 		{
