@@ -2,6 +2,10 @@
 
 ## [0.3.0] - 2023-01-14
 
+### Added
+
+- Make UnitOfWork.Session protected set to be able to change behavior on child classes (#485)
+
 ### Dependencies
 
 - Simplify.Repository bump to 1.7

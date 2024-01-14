@@ -6,14 +6,12 @@ namespace Simplify.Repository.FluentNHibernate;
 /// <summary>
 /// Provides unit of work
 /// </summary>
-public class UnitOfWork : IUnitOfWork
+/// <remarks>
+/// Initializes a new instance of the <see cref="UnitOfWork"/> class.
+/// </remarks>
+/// <param name="sessionFactory">The session factory.</param>
+public class UnitOfWork(ISessionFactory sessionFactory) : IUnitOfWork
 {
-	/// <summary>
-	/// Initializes a new instance of the <see cref="UnitOfWork"/> class.
-	/// </summary>
-	/// <param name="sessionFactory">The session factory.</param>
-	public UnitOfWork(ISessionFactory sessionFactory) =>
-		Session = sessionFactory.OpenSession() ?? throw new InvalidOperationException("Error opening session, session is null");
 
 	/// <summary>
 	/// Gets the session.
@@ -21,7 +19,7 @@ public class UnitOfWork : IUnitOfWork
 	/// <value>
 	/// The session.
 	/// </value>
-	public ISession Session { get; }
+	public ISession Session { get; protected set; } = sessionFactory.OpenSession() ?? throw new InvalidOperationException("Error opening session, session is null");
 
 	/// <summary>
 	/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
