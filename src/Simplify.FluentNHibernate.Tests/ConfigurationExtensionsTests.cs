@@ -66,6 +66,6 @@ public class ConfigurationExtensionsTests
 		// Act
 
 		Fluently.Configure().InitializeFromConfigSqLiteInMemory(true);
-		Fluently.Configure().InitializeFromConfigSqLiteInMemory(true, c => c.Dialect<SQLiteDialect>());
+		Fluently.Configure().InitializeFromConfigSqLiteInMemory(true, additionalClientConfiguration: c => c.Dialect<SQLiteDialect>());
 	}
 }

@@ -45,9 +45,14 @@ public class DbConnectionSettings
 	public string? UserPassword { get; protected set; }
 
 	/// <summary>
-	/// Gets a value indicating whether all executed SQL request should be shown in trace window
+	/// Gets a value indicating whether all executed SQL request should be shown via `ShowSqlSource` specified source
 	/// </summary>
 	public bool ShowSql { get; protected set; }
+
+	/// <summary>
+	/// Gets a value indicating the executed SQL commands output type
+	/// </summary>
+	public ShowSqlOutputType ShowSqlOutputType { get; protected set; }
 
 	/// <summary>
 	/// Gets the port number.

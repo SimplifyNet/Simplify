@@ -52,6 +52,14 @@ public class ConfigurationManagerBasedDbConnectionSettings : DbConnectionSetting
 				ShowSql = buffer;
 		}
 
+		var showSqlOutputTypeText = settings[nameof(ShowSqlOutputType)];
+
+		if (!string.IsNullOrEmpty(showSqlOutputTypeText))
+		{
+			if (Enum.TryParse<ShowSqlOutputType>(showSqlOutputTypeText, out var buffer))
+				ShowSqlOutputType = buffer;
+		}
+
 		var port = settings["Port"];
 
 		if (!string.IsNullOrEmpty(port))

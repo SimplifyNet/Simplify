@@ -6,9 +6,11 @@
 
 - InitializeFromConfig* methods selectable dialect (#487)
 - CompositeInterceptor (#483)
+- Possibility to switch SqlStatementInterceptor from Trace.WriteLine to Console.WriteLine (#486)
 
 ### Changed
 
+- ShowSql output by default redirected to Console
 - Default PostgreSQL83 dialect set for PostgreSQL connections
 - Default MsSql2012 dialect set for MS SQL connections
 - InitializeFromConfigMsSql null password exception

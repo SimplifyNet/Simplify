@@ -98,7 +98,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, settings.ShowSql);
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
 	#endregion Oracle Client
@@ -186,7 +186,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, settings.ShowSql);
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
 	#endregion ODP.NET Native
@@ -274,7 +274,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, settings.ShowSql);
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
 	#endregion ODP.NET
@@ -359,7 +359,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, settings.ShowSql);
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
 	#endregion MySQL
@@ -448,7 +448,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, settings.ShowSql);
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
 	#endregion MS SQL
@@ -537,7 +537,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, settings.ShowSql);
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
 	#endregion PostgreSQL
@@ -550,6 +550,7 @@ public static class ConfigurationExtensions
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="fileName">Name of the SqLite database file.</param>
 	/// <param name="showSql">if set to <c>true</c> then all executed SQL queries will be shown in trace window.</param>
+	/// <param name="showSqlOutputType">Specifies the SQL commands output type.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
 	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">
@@ -560,6 +561,7 @@ public static class ConfigurationExtensions
 	public static FluentConfiguration InitializeFromConfigSqLite(this FluentConfiguration fluentConfiguration,
 		string fileName,
 		bool showSql = false,
+		ShowSqlOutputType showSqlOutputType = ShowSqlOutputType.Console,
 		Action<SQLiteConfiguration>? additionalClientConfiguration = null,
 		SqliteDialect dialect = SqliteDialect.Standard)
 	{
@@ -581,7 +583,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, showSql);
+		PerformCommonInitialization(fluentConfiguration, showSql, showSqlOutputType);
 
 		return fluentConfiguration;
 	}
@@ -594,12 +596,14 @@ public static class ConfigurationExtensions
 	/// Initialize SqLite connection using in memory database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
-	/// <param name="showSql">if set to <c>true</c> then all executed SQL queries will be shown in trace window.</param>
+	/// <param name="showSql">if set to <c>true</c> then all executed SQL queries will be shown in output specified in `showSqlOutputType`.</param>
+	/// <param name="showSqlOutputType">Specifies the SQL commands output type.</param>
 	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
 	/// <param name="dialect">The dialect.</param>
 	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
 	public static FluentConfiguration InitializeFromConfigSqLiteInMemory(this FluentConfiguration fluentConfiguration,
 		bool showSql = false,
+		ShowSqlOutputType showSqlOutputType = ShowSqlOutputType.Console,
 		Action<SQLiteConfiguration>? additionalClientConfiguration = null,
 		SqliteDialect dialect = SqliteDialect.Standard)
 	{
@@ -618,7 +622,7 @@ public static class ConfigurationExtensions
 
 		fluentConfiguration.Database(clientConfiguration);
 
-		PerformCommonInitialization(fluentConfiguration, showSql);
+		PerformCommonInitialization(fluentConfiguration, showSql, showSqlOutputType);
 
 		return fluentConfiguration;
 	}
@@ -645,11 +649,11 @@ public static class ConfigurationExtensions
 		return fluentConfiguration;
 	}
 
-	private static void PerformCommonInitialization(FluentConfiguration fluentConfiguration, bool showSql)
+	private static void PerformCommonInitialization(FluentConfiguration fluentConfiguration, bool showSql, ShowSqlOutputType showSqlOutputType)
 	{
 		fluentConfiguration.ExposeConfiguration(c => c.Properties.Add("hbm2ddl.keywords", "none"));
 
 		if (showSql)
-			fluentConfiguration.ExposeConfiguration(x => x.SetInterceptor(new SqlStatementInterceptor()));
+			fluentConfiguration.ExposeConfiguration(x => x.SetInterceptor(new SqlStatementInterceptor(showSqlOutputType)));
 	}
 }
