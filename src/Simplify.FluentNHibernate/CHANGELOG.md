@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0] - 2024-03-24
+
+### Added
+
+- Microsoft.Data.SqlClient support (#489)
+
 ## [3.0.0] - 2024-01-14
 
 ### Added
