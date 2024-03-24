@@ -21,7 +21,7 @@ public static class ConfigurationExtensions
 	#region Oracle Client
 
 	/// <summary>
-	/// Initialize Oracle connection using Oracle10 client configuration and using oracle client to connect to database
+	/// Initialize Oracle connection using Oracle client to connect to database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
@@ -45,7 +45,7 @@ public static class ConfigurationExtensions
 	}
 
 	/// <summary>
-	/// Initialize Oracle connection using Oracle10 client configuration and using oracle client to connect to database
+	/// Initialize Oracle connection using Oracle client to connect to database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configuration">The configuration containing database config section.</param>
@@ -106,7 +106,7 @@ public static class ConfigurationExtensions
 	#region ODP.NET Native
 
 	/// <summary>
-	/// Initialize Oracle connection using Oracle10 client configuration and using Oracle.DataAccess.dll to connect to database
+	/// Initialize Oracle connection using Oracle.DataAccess.dll to connect to database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
@@ -130,7 +130,7 @@ public static class ConfigurationExtensions
 	}
 
 	/// <summary>
-	/// Initialize Oracle connection using Oracle10 client configuration and using Oracle.DataAccess.dll to connect to database
+	/// Initialize Oracle connection using Oracle.DataAccess.dll to connect to database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configuration">The configuration containing database config section.</param>
@@ -194,7 +194,7 @@ public static class ConfigurationExtensions
 	#region ODP.NET
 
 	/// <summary>
-	/// Initialize Oracle connection using Oracle10 client configuration and using Oracle.ManagedDataAccess.dll to connect to database
+	/// Initialize Oracle connection using Oracle.ManagedDataAccess.dll to connect to database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
@@ -218,7 +218,7 @@ public static class ConfigurationExtensions
 	}
 
 	/// <summary>
-	/// Initialize Oracle connection using Oracle10 client configuration and using Oracle.ManagedDataAccess.dll to connect to database
+	/// Initialize Oracle connection using Oracle.ManagedDataAccess.dll to connect to database
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configuration">The configuration containing database config section.</param>
@@ -282,7 +282,7 @@ public static class ConfigurationExtensions
 	#region MySQL
 
 	/// <summary>
-	/// Initialize MySQL connection using Standard client configuration
+	/// Initialize MySQL connection
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
@@ -306,7 +306,7 @@ public static class ConfigurationExtensions
 	}
 
 	/// <summary>
-	/// Initialize MySQL connection using Standard client configuration
+	/// Initialize MySQL connection
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configuration">The configuration containing database config section.</param>
@@ -367,7 +367,7 @@ public static class ConfigurationExtensions
 	#region MS SQL
 
 	/// <summary>
-	/// Initialize MsSQL connection using MsSql2008 client configuration
+	/// Initialize MsSQL connection
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
@@ -391,7 +391,7 @@ public static class ConfigurationExtensions
 	}
 
 	/// <summary>
-	/// Initialize MsSQL connection using MsSql2008 client configuration
+	/// Initialize MsSQL connection
 	/// </summary>
 	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
 	/// <param name="configuration">The configuration containing database config section.</param>
@@ -452,6 +452,96 @@ public static class ConfigurationExtensions
 	}
 
 	#endregion MS SQL
+
+	#region MS SQL Microsoft Driver
+
+	/// <summary>
+	/// Initialize MsSQL connection using Microsoft.Data.SqlClient driver
+	/// </summary>
+	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
+	/// <param name="configSectionName">Configuration section name in App.config or Web.config file.</param>
+	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
+	/// <param name="dialect">The dialect.</param>
+	/// <exception cref="ArgumentNullException">fluentConfiguration</exception>
+	public static FluentConfiguration InitializeFromConfigMsSqlMicrosoftDriver(this FluentConfiguration fluentConfiguration,
+		string configSectionName = "DatabaseConnectionSettings",
+		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
+		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
+	{
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		InitializeFromConfigMsSqlMicrosoftDriver(fluentConfiguration,
+			new ConfigurationManagerBasedDbConnectionSettings(configSectionName),
+			additionalClientConfiguration,
+			dialect);
+
+		return fluentConfiguration;
+	}
+
+	/// <summary>
+	/// Initialize MsSQL connection using Microsoft.Data.SqlClient driver
+	/// </summary>
+	/// <param name="fluentConfiguration">The fluentNHibernate configuration.</param>
+	/// <param name="configuration">The configuration containing database config section.</param>
+	/// <param name="configSectionName">Database configuration section name in configuration.</param>
+	/// <param name="additionalClientConfiguration">The additional client configuration.</param>
+	/// <param name="dialect">The dialect.</param>
+	/// <exception cref="ArgumentNullException">
+	/// fluentConfiguration
+	/// or
+	/// configuration
+	/// </exception>
+	public static FluentConfiguration InitializeFromConfigMsSqlMicrosoftDriver(this FluentConfiguration fluentConfiguration,
+		IConfiguration configuration,
+		string configSectionName = "DatabaseConnectionSettings",
+		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
+		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
+	{
+		if (fluentConfiguration == null)
+			throw new ArgumentNullException(nameof(fluentConfiguration));
+
+		if (configuration == null)
+			throw new ArgumentNullException(nameof(configuration));
+
+		InitializeFromConfigMsSqlMicrosoftDriver(fluentConfiguration,
+			new ConfigurationBasedDbConnectionSettings(configuration, configSectionName),
+			additionalClientConfiguration,
+			dialect);
+
+		return fluentConfiguration;
+	}
+
+	private static void InitializeFromConfigMsSqlMicrosoftDriver(FluentConfiguration fluentConfiguration,
+		DbConnectionSettings settings,
+		Action<MsSqlConfiguration>? additionalClientConfiguration = null,
+		MsSqlDialect dialect = MsSqlDialect.MsSql2012)
+	{
+		var clientConfiguration = dialect switch
+		{
+			MsSqlDialect.MsSql2000 => MsSqlConfiguration.MsSql2000,
+			MsSqlDialect.MsSql2005 => MsSqlConfiguration.MsSql2005,
+			MsSqlDialect.MsSql2008 => MsSqlConfiguration.MsSql2008,
+			MsSqlDialect.MsSql2012 => MsSqlConfiguration.MsSql2012,
+			MsSqlDialect.MsSql7 => MsSqlConfiguration.MsSql7,
+			_ => throw new InvalidOperationException()
+		};
+
+		clientConfiguration.ConnectionString(c => c
+			.Server(settings.ServerName)
+			.Database(settings.DataBaseName)
+			.Username(settings.UserName)
+			.Password(settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null")))
+			.Driver<MicrosoftDataSqlClientDriver>();
+
+		additionalClientConfiguration?.Invoke(clientConfiguration);
+
+		fluentConfiguration.Database(clientConfiguration);
+
+		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
+	}
+
+	#endregion MS SQL Microsoft
 
 	#region PostgreSQL
 
