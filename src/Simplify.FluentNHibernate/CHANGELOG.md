@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.0] - 2024-04-26
+
+### Added
+
+- PostgreSQL 8.3 dialect which uses timestamptz DateTime format
+
 ## [3.1.0] - 2024-03-24
 
 ### Added

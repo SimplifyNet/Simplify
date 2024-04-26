@@ -5,6 +5,7 @@ using FluentNHibernate.Conventions;
 using Microsoft.Extensions.Configuration;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using Pas.Database.Session.Dialects;
 using Simplify.FluentNHibernate.Dialects;
 using Simplify.FluentNHibernate.Drivers;
 using Simplify.FluentNHibernate.Interceptors;
@@ -613,6 +614,7 @@ public static class ConfigurationExtensions
 			PostgreSqlDialect.PostgreSQL81 => PostgreSQLConfiguration.PostgreSQL81,
 			PostgreSqlDialect.PostgreSQL82 => PostgreSQLConfiguration.PostgreSQL82,
 			PostgreSqlDialect.PostgreSQL83 => PostgreSQLConfiguration.PostgreSQL83,
+			PostgreSqlDialect.PostgreSQL83Z => PostgreSQLConfiguration.PostgreSQL83,
 			_ => throw new InvalidOperationException()
 		};
 
@@ -622,6 +624,9 @@ public static class ConfigurationExtensions
 			.Database(settings.DataBaseName)
 			.Username(settings.UserName)
 			.Password(settings.UserPassword));
+
+		if (dialect == PostgreSqlDialect.PostgreSQL83Z)
+			clientConfiguration.Dialect<PostgreSql83ZDialect>();
 
 		additionalClientConfiguration?.Invoke(clientConfiguration);
 

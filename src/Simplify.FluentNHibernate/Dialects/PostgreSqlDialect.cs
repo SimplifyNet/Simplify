@@ -20,5 +20,9 @@ public enum PostgreSqlDialect
 	/// <summary>
 	/// The PostgreSQL 8.3 dialect
 	/// </summary>
-	PostgreSQL83
+	PostgreSQL83,
+	/// <summary>
+	/// The PostgreSQL 8.3 dialect using timestamptz DateTime format
+	/// </summary>
+	PostgreSQL83Z
 }
