@@ -50,8 +50,8 @@ public class ObservableCollectionExtensionsTests
 
 		// Arrange
 
-		items = new object[] { };
-		indices = new int[] { };
+		items = [];
+		indices = [];
 		msg = "Empty items should not throw exception";
 
 		// Act & Assert

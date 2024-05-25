@@ -12,7 +12,6 @@ namespace Simplify.Repository.FluentNHibernate;
 /// <param name="sessionFactory">The session factory.</param>
 public class UnitOfWork(ISessionFactory sessionFactory) : IUnitOfWork
 {
-
 	/// <summary>
 	/// Gets the session.
 	/// </summary>
