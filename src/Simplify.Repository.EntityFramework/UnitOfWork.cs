@@ -14,7 +14,6 @@ namespace Simplify.Repository.EntityFramework;
 public class UnitOfWork<T>(DbContext context) : IUnitOfWork
 	where T : DbContext
 {
-
 	/// <summary>
 	/// Gets the session.
 	/// </summary>

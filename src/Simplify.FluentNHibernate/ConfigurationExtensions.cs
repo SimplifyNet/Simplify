@@ -3,7 +3,6 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
 using Microsoft.Extensions.Configuration;
-using NHibernate.Dialect;
 using NHibernate.Driver;
 using Pas.Database.Session.Dialects;
 using Simplify.FluentNHibernate.Dialects;
@@ -542,7 +541,7 @@ public static class ConfigurationExtensions
 		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
 	}
 
-	#endregion MS SQL Microsoft
+	#endregion MS SQL Microsoft Driver
 
 	#region PostgreSQL
 

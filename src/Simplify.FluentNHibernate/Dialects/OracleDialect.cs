@@ -9,6 +9,7 @@ public enum OracleDialect
 	/// The Oracle 9i dialect
 	/// </summary>
 	Oracle9i,
+
 	/// <summary>
 	/// The Oracle 10g dialect
 	/// </summary>

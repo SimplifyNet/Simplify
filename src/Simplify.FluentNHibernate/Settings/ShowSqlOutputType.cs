@@ -9,6 +9,7 @@ namespace Simplify.FluentNHibernate.Settings
 		/// The Console output
 		/// </summary>
 		Console,
+
 		/// <summary>
 		/// The Trace out[ut]
 		/// </summary>

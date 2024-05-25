@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 using FluentNHibernate.Cfg;
+using Microsoft.Extensions.Configuration;
 using NHibernate;
 
 namespace Simplify.FluentNHibernate;
