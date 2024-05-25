@@ -2,24 +2,15 @@
 
 namespace Simplify.Examples.Repository.Domain.Location;
 
-public class TransactCitiesService : ICitiesService
+public class TransactCitiesService(ICitiesService baseService, IExampleUnitOfWork unitOfWork) : ICitiesService
 {
-	private readonly ICitiesService _baseService;
-	private readonly IExampleUnitOfWork _unitOfWork;
-
-	public TransactCitiesService(ICitiesService baseService, IExampleUnitOfWork unitOfWork)
-	{
-		_baseService = baseService;
-		_unitOfWork = unitOfWork;
-	}
-
 	public ICity GetCity(string cityName)
 	{
-		_unitOfWork.BeginTransaction(IsolationLevel.ReadUncommitted);
+		unitOfWork.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-		var item = _baseService.GetCity(cityName);
+		var item = baseService.GetCity(cityName);
 
-		_unitOfWork.Commit();
+		unitOfWork.Commit();
 
 		return item;
 	}
