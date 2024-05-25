@@ -5,7 +5,7 @@
 ### Changed
 
 - ToXElement null check removed
-- Foramtting refactored
+- Formatting refactored
 - XML comments refactored
 
 ## [1.3.1] - 2023-08-01
