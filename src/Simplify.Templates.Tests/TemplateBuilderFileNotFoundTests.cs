@@ -9,15 +9,15 @@ public class TemplateBuilderFileNotFoundTests
 {
 	private const string FilePath = "NotFoundFile.txt";
 
-	private static readonly object[] _testCases =
-	{
+	private static readonly object[] TestCases =
+	[
 		(TestDelegate) (() => TemplateBuilder.FromFile(FilePath)),
 		(TestDelegate) (() => TemplateBuilder.FromLocalFile(FilePath)),
 		(TestDelegate) (() => TemplateBuilder.FromAssembly(FilePath, Assembly.GetExecutingAssembly())),
 		(TestDelegate) (() => TemplateBuilder.FromCurrentAssembly(FilePath))
-	};
+	];
 
-	[TestCaseSource(nameof(_testCases))]
+	[TestCaseSource(nameof(TestCases))]
 	public void FileNotExist_FileNotFoundException(TestDelegate templateBuilder)
 	{
 		// Act

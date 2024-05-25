@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFrameworks>net6.0;net48</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -8,20 +9,27 @@
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.*" />
-		<PackageReference Include="NUnit" Version="3.13.*" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.3.*" />
-		<PackageReference Include="Moq" Version="4.18.*" />
-		<PackageReference Include="coverlet.msbuild" Version="3.2.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.*" />
+		<PackageReference Include="NUnit" Version="4.1.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.5.*" />
+		<PackageReference Include="Moq" Version="4.20.*" />
+		<PackageReference Include="coverlet.msbuild" Version="6.0.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<ProjectReference Include="..\Simplify.Templates\Simplify.Templates.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<None Remove="TestTemplates\Embedded\EmptyFIle.txt" />
 		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl" />
 		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl-en.xml" />
 		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl-ru.xml" />
 		<None Remove="TestTemplates\Embedded\TestFile.txt" />
 	</ItemGroup>
 	<ItemGroup>
+		<EmbeddedResource Include="TestTemplates\Embedded\EmptyFIle.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
 		<EmbeddedResource Include="TestTemplates\Embedded\LocalizationTest.tpl">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -43,6 +51,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="TestTemplates\Local\LocalizationTest.tpl.ru.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="TestTemplates\Local\EmptyFIle.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="TestTemplates\Local\TestFile.txt">

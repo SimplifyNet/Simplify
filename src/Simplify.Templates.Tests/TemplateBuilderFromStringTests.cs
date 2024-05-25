@@ -11,10 +11,10 @@ public class TemplateBuilderFromStringTests
 	public void FromString_NullString_TemplateGetEqual()
 	{
 		// Act
-		var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null));
+		var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null!));
 
 		// Assert
-		Assert.AreEqual("Value cannot be null. (Parameter 'text')", ex.Message);
+		Assert.That(ex!.Message, Does.Contain("Value cannot be null"));
 	}
 
 	[Test]
@@ -26,7 +26,7 @@ public class TemplateBuilderFromStringTests
 			.Build();
 
 		// Assert
-		Assert.AreEqual("test", tpl.Get());
+		Assert.That(tpl.Get(), Is.EqualTo("test"));
 	}
 
 	[Test]
@@ -38,7 +38,7 @@ public class TemplateBuilderFromStringTests
 			.BuildAsync();
 
 		// Assert
-		Assert.AreEqual("test", tpl.Get());
+		Assert.That(tpl.Get(), Is.EqualTo("test"));
 	}
 
 	[Test]
@@ -51,6 +51,6 @@ public class TemplateBuilderFromStringTests
 			.Build();
 
 		// Assert
-		Assert.AreEqual("test<br />test2", tpl.Get());
+		Assert.That(tpl.Get(), Is.EqualTo("test<br />test2"));
 	}
 }

@@ -5,17 +5,18 @@ using System.Threading.Tasks;
 namespace Simplify.Templates;
 
 /// <summary>
-/// Providers template localization extensions
+/// Providers the template localization extensions
 /// </summary>
 public static class TemplateLocalizeExtensions
 {
 	/// <summary>
 	/// Localizes the specified template.
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
+	/// <param name="tpl">The template.</param>
 	/// <param name="filePath">The template file path.</param>
 	/// <param name="language">The language.</param>
 	/// <param name="baseLanguage">The base language.</param>
+	// ReSharper disable once TooManyArguments
 	public static void Localize(this ITemplate tpl, string filePath, string language, string baseLanguage)
 	{
 		var currentCultureStringTableFilePath = StringTable.FormatStringTableFileName(filePath, language);
@@ -31,12 +32,13 @@ public static class TemplateLocalizeExtensions
 	}
 
 	/// <summary>
-	/// Localizes the specified template the asynchronously.
+	/// Localizes the specified template asynchronously.
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
+	/// <param name="tpl">The template.</param>
 	/// <param name="filePath">The template file path.</param>
 	/// <param name="language">The language.</param>
 	/// <param name="baseLanguage">The base language.</param>
+	// ReSharper disable once TooManyArguments
 	public static async Task LocalizeAsync(this ITemplate tpl, string filePath, string language, string baseLanguage)
 	{
 		var currentCultureStringTableFilePath = StringTable.FormatStringTableFileName(filePath, language);
@@ -54,11 +56,12 @@ public static class TemplateLocalizeExtensions
 	/// <summary>
 	/// Localizes the specified template from the assembly.
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
+	/// <param name="tpl">The template.</param>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
 	/// <param name="language">The language.</param>
 	/// <param name="baseLanguage">The base language.</param>
+	// ReSharper disable once TooManyArguments
 	public static void LocalizeFromAssembly(this ITemplate tpl, string filePath, Assembly assembly, string language, string baseLanguage)
 	{
 		var currentCultureStringTableFilePath = StringTable.FormatAssemblyStringTableFileName(filePath, language);
@@ -76,11 +79,12 @@ public static class TemplateLocalizeExtensions
 	/// <summary>
 	/// Localizes the specified template from the assembly asynchronously.
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
+	/// <param name="tpl">The template.</param>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
 	/// <param name="language">The language.</param>
 	/// <param name="baseLanguage">The base language.</param>
+	// ReSharper disable once TooManyArguments
 	public static async Task LocalizeFromAssemblyAsync(this ITemplate tpl, string filePath, Assembly assembly, string language, string baseLanguage)
 	{
 		var currentCultureStringTableFilePath = StringTable.FormatAssemblyStringTableFileName(filePath, language);

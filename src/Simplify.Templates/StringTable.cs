@@ -10,7 +10,7 @@ using Simplify.Xml;
 namespace Simplify.Templates;
 
 /// <summary>
-/// Provides string table related functionality
+/// Provides the string table related functionality
 /// </summary>
 public static class StringTable
 {
@@ -19,22 +19,16 @@ public static class StringTable
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="languageCode">The language code.</param>
-	/// <returns></returns>
-	public static string FormatStringTableFileName(string filePath, string languageCode)
-	{
-		return $"{filePath}.{languageCode}.xml";
-	}
+	public static string FormatStringTableFileName(string filePath, string languageCode) =>
+		$"{filePath}.{languageCode}.xml";
 
 	/// <summary>
 	/// Formats the name of the assembly string table file.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="languageCode">The language code.</param>
-	/// <returns></returns>
-	public static string FormatAssemblyStringTableFileName(string filePath, string languageCode)
-	{
-		return $"{filePath}-{languageCode}.xml";
-	}
+	public static string FormatAssemblyStringTableFileName(string filePath, string languageCode) =>
+		$"{filePath}-{languageCode}.xml";
 
 	/// <summary>
 	/// Injects the string table items.
@@ -51,7 +45,6 @@ public static class StringTable
 	/// Loads the string table from string.
 	/// </summary>
 	/// <param name="stringTableXml">The string table XML.</param>
-	/// <returns></returns>
 	public static IDictionary<string, string?> LoadStringTableFromString(string stringTableXml)
 	{
 		var stringTable = XDocument.Parse(stringTableXml);
@@ -69,50 +62,34 @@ public static class StringTable
 	/// </summary>
 	/// <param name="filePath">The string table file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
-	public static IDictionary<string, string?> LoadStringTableFromAssembly(string filePath, Assembly assembly)
-	{
-		return LoadStringTableFromString(FileReader.ReadFromAssembly(filePath, assembly));
-	}
+	public static IDictionary<string, string?> LoadStringTableFromAssembly(string filePath, Assembly assembly) =>
+		LoadStringTableFromString(FileReader.ReadFromAssembly(filePath, assembly));
 
 	/// <summary>
 	/// Loads the string table from assembly embedded file asynchronously.
 	/// </summary>
 	/// <param name="filePath">The string table file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
-	public static async Task<IDictionary<string, string?>> LoadStringTableFromAssemblyAsync(string filePath, Assembly assembly)
-	{
-		return LoadStringTableFromString(await FileReader.ReadFromAssemblyAsync(filePath, assembly));
-	}
+	public static async Task<IDictionary<string, string?>> LoadStringTableFromAssemblyAsync(string filePath, Assembly assembly) =>
+		LoadStringTableFromString(await FileReader.ReadFromAssemblyAsync(filePath, assembly));
 
 	/// <summary>
 	/// Loads the string table from file.
 	/// </summary>
 	/// <param name="filePath">The string table file path.</param>
-	/// <returns></returns>
-	public static IDictionary<string, string?> LoadStringTableFromFile(string filePath)
-	{
-		return LoadStringTableFromString(FileReader.ReadFile(filePath));
-	}
+	public static IDictionary<string, string?> LoadStringTableFromFile(string filePath) =>
+		LoadStringTableFromString(FileReader.ReadFile(filePath));
 
 	/// <summary>
 	/// Loads the string table from file asynchronously.
 	/// </summary>
 	/// <param name="filePath">The string table file path.</param>
-	/// <returns></returns>
-	public static async Task<IDictionary<string, string?>> LoadStringTableFromFileAsync(string filePath)
-	{
-		return LoadStringTableFromString(await FileReader.ReadFileAsync(filePath));
-	}
+	public static async Task<IDictionary<string, string?>> LoadStringTableFromFileAsync(string filePath) =>
+		LoadStringTableFromString(await FileReader.ReadFileAsync(filePath));
 
-	private static string GetName(XElement item)
-	{
-		return (string?)item.Attribute("name") ?? throw new InvalidOperationException("name attribute is null");
-	}
+	private static string GetName(XElement item) =>
+		(string?)item.Attribute("name") ?? throw new InvalidOperationException("name attribute is null");
 
-	private static string? GetValue(XElement item)
-	{
-		return string.IsNullOrEmpty(item.Value) ? (string?)item.Attribute("value") : item.InnerXml().Trim();
-	}
+	private static string? GetValue(XElement item) =>
+		string.IsNullOrEmpty(item.Value) ? (string?)item.Attribute("value") : item.InnerXml().Trim();
 }

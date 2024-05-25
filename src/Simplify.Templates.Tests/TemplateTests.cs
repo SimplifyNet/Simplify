@@ -22,30 +22,30 @@ public class TemplateTests
 	public void Build_FromNullString_ArgumentNullException()
 	{
 		// Act
-		var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null));
+		var ex = Assert.Throws<ArgumentNullException>(() => TemplateBuilder.FromString(null!));
 
 		// Assert
-		Assert.AreEqual("Value cannot be null. (Parameter 'text')", ex.Message);
+		Assert.That(ex!.Message, Does.Contain("Value cannot be null"));
 	}
 
 	[Test]
 	public void Set_NullVariableName_ArgumentNullException()
 	{
 		// Act
-		var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Set(null, "test"));
+		var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Set(null!, "test"));
 
 		// Assert
-		Assert.AreEqual("Value cannot be null. (Parameter 'variableName')", ex.Message);
+		Assert.That(ex!.Message, Does.Contain("Value cannot be null"));
 	}
 
 	[Test]
 	public void Add_NullVariableName_ArgumentNullException()
 	{
 		// Act
-		var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Add(null, "test"));
+		var ex = Assert.Throws<ArgumentNullException>(() => _tpl.Add(null!, "test"));
 
 		// Assert
-		Assert.AreEqual("Value cannot be null. (Parameter 'variableName')", ex.Message);
+		Assert.That(ex!.Message, Does.Contain("Value cannot be null"));
 	}
 
 	[Test]
@@ -55,13 +55,13 @@ public class TemplateTests
 		_tpl.Set(VariableName, "test");
 
 		// Assert
-		Assert.AreEqual("test", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("test"));
 
 		// Act
 		_tpl.RollBack();
 
 		// Assert
-		Assert.AreEqual("{var1}", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("{var1}"));
 	}
 
 	[Test]
@@ -71,9 +71,9 @@ public class TemplateTests
 		_tpl.Set(VariableName, "test");
 
 		// Act & Assert
-		Assert.AreEqual("test", _tpl.GetAndRoll());
+		Assert.That(_tpl.GetAndRoll(), Is.EqualTo("test"));
 
 		// Assert
-		Assert.AreEqual("{var1}", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("{var1}"));
 	}
 }

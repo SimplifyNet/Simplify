@@ -21,10 +21,10 @@ public class TemplateSetExtensionsTests
 	public void Set_NullTemplate_Empty()
 	{
 		// Act
-		_tpl.Set(VariableName, (ITemplate)null);
+		_tpl.Set(VariableName, ((ITemplate)null)!);
 
 		// Assert
-		Assert.AreEqual("", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.Empty);
 	}
 
 	[Test]
@@ -34,7 +34,7 @@ public class TemplateSetExtensionsTests
 		_tpl.Set(VariableName, TemplateBuilder.FromString("a").Build());
 
 		// Assert
-		Assert.AreEqual("a", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("a"));
 	}
 
 	[Test]
@@ -44,7 +44,7 @@ public class TemplateSetExtensionsTests
 		_tpl.Set(VariableName, (object)null);
 
 		// Assert
-		Assert.AreEqual("", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.Empty);
 	}
 
 	[Test]
@@ -54,7 +54,7 @@ public class TemplateSetExtensionsTests
 		_tpl.Set(VariableName, new object());
 
 		// Assert
-		Assert.AreEqual("System.Object", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("System.Object"));
 	}
 
 	[Test]
@@ -64,7 +64,7 @@ public class TemplateSetExtensionsTests
 		_tpl.Set(VariableName, 17);
 
 		// Assert
-		Assert.AreEqual("17", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("17"));
 	}
 
 	[Test]
@@ -74,7 +74,7 @@ public class TemplateSetExtensionsTests
 		_tpl.Set(VariableName, (long)16);
 
 		// Assert
-		Assert.AreEqual("16", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("16"));
 	}
 
 	[Test]
@@ -84,16 +84,16 @@ public class TemplateSetExtensionsTests
 		_tpl.Set(VariableName, 15.5m);
 
 		// Assert
-		Assert.AreEqual("15.5", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("15.5"));
 	}
 
 	[Test]
 	public void Set_Double_SetCorrectly()
 	{
 		// Act
-		_tpl.Set(VariableName, 1123456789123.123);
+		_tpl.Set(VariableName, 1123456789123.12);
 
 		// Assert
-		Assert.AreEqual("1123456789123.123", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("1123456789123.12"));
 	}
 }

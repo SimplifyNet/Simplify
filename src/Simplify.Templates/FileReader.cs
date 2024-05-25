@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Simplify.Templates;
 
 /// <summary>
-/// Provide files reader
+/// Provides the file reader
 /// </summary>
 public static class FileReader
 {
@@ -13,7 +13,6 @@ public static class FileReader
 	/// Reads the file.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
-	/// <returns></returns>
 	public static string ReadFile(string filePath) => File.ReadAllText(filePath);
 
 	/// <summary>
@@ -21,7 +20,6 @@ public static class FileReader
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
 	/// <exception cref="TemplateException">Template: error loading file from resources in assembly '{assembly.FullName}': {filePath}</exception>
 	public static string ReadFromAssembly(string filePath, Assembly assembly)
 	{
@@ -34,14 +32,14 @@ public static class FileReader
 	}
 
 	/// <summary>
-	/// Reads from assembly asynchronous.
+	/// Reads the file from assembly asynchronous.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
 	/// <exception cref="TemplateException">Template: error loading file from resources in assembly '{assembly.FullName}': {filePath}</exception>
 	public static async Task<string> ReadFromAssemblyAsync(string filePath, Assembly assembly)
 	{
+		// ReSharper disable once UseAwaitUsing
 		using var fileStream = assembly.GetManifestResourceStream(filePath) ??
 							   throw new TemplateException($"Error loading file from the assembly '{assembly.FullName}': {filePath}");
 
@@ -54,7 +52,6 @@ public static class FileReader
 	/// Reads the file asynchronously.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
-	/// <returns></returns>
 	internal static async Task<string> ReadFileAsync(string filePath)
 	{
 		using var sr = new StreamReader(filePath);

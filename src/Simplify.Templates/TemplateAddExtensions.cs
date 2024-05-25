@@ -3,61 +3,56 @@
 namespace Simplify.Templates;
 
 /// <summary>
-/// Template add method extensions
+/// Provides the template add method extensions
 /// </summary>
 public static class TemplateAddExtensions
 {
 	/// <summary>
-	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="value">Value to set</param>
-	/// <returns></returns>
+	/// <param name="tpl">The template.</param>
+	/// <param name="variableName">Tbe variable name</param>
+	/// <param name="value">The value to set</param>
 	public static ITemplate Add(this ITemplate tpl, string variableName, int value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
-	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="value">Value to set</param>
-	/// <returns></returns>
+	/// <param name="tpl">The template.</param>
+	/// <param name="variableName">Tbe variable name</param>
+	/// <param name="value">The value to set</param>
 	public static ITemplate Add(this ITemplate tpl, string variableName, object? value) => tpl.Add(variableName, value?.ToString());
 
 	/// <summary>
-	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="value">Value to set</param>
+	/// <param name="tpl">The template.</param>
+	/// <param name="variableName">Tbe variable name</param>
+	/// <param name="value">The value to set</param>
 	/// <returns></returns>
 	public static ITemplate Add(this ITemplate tpl, string variableName, double value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
-	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="value">Value to set</param>
-	/// <returns></returns>
+	/// <param name="tpl">The template.</param>
+	/// <param name="variableName">Tbe variable name</param>
+	/// <param name="value">The value to set</param>
 	public static ITemplate Add(this ITemplate tpl, string variableName, decimal value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
-	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="value">Value to set</param>
-	/// <returns></returns>
+	/// <param name="tpl">The template.</param>
+	/// <param name="variableName">Tbe variable name</param>
+	/// <param name="value">The value to set</param>
 	public static ITemplate Add(this ITemplate tpl, string variableName, long value) => tpl.Add(variableName, value.ToString(CultureInfo.InvariantCulture));
 
 	/// <summary>
-	/// Add value to set template variable value with text from template (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to set template variable value with text from template (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
-	/// <param name="tpl">The TPL.</param>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="template">Value to set</param>
-	/// <returns></returns>
+	/// <param name="tpl">The template.</param>
+	/// <param name="variableName">Tbe variable name</param>
+	/// <param name="template">The value to set</param>
 	public static ITemplate Add(this ITemplate tpl, string variableName, ITemplate template) => tpl.Add(variableName, template?.Get());
 }

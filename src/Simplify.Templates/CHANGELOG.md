@@ -1,5 +1,20 @@
 # Changelog
 
+### [2.0.2] - 2024-05-25
+
+### Removed
+
+- Redundant null string check
+
+### Added
+
+- Some exceptions message
+
+### Changed
+
+- XML documentation refactoring
+- Refactoring to new C# features
+
 ## [2.0.1] - 2023-08-08
 
 ### Removed

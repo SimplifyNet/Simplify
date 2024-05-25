@@ -5,7 +5,7 @@ using System.Reflection;
 namespace Simplify.Templates;
 
 /// <summary>
-/// Provides file utility class
+/// Provides the file utility class
 /// </summary>
 public static class FileUtil
 {
@@ -13,7 +13,6 @@ public static class FileUtil
 	/// Constructs the full file path based on calling assembly location.
 	/// </summary>
 	/// <param name="localFilePath">The local file path.</param>
-	/// <returns></returns>
 	public static string ConstructFullFilePath(string localFilePath) => $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{localFilePath}";
 
 	/// <summary>
@@ -21,7 +20,6 @@ public static class FileUtil
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
 	public static string ConstructAssemblyFilePath(string filePath, Assembly assembly)
 	{
 		filePath = filePath.Replace("/", ".");
@@ -35,11 +33,6 @@ public static class FileUtil
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
-	public static bool AssemblyFileExists(string filePath, Assembly assembly)
-	{
-		var names = assembly.GetManifestResourceNames();
-
-		return names.Contains(filePath);
-	}
+	public static bool AssemblyFileExists(string filePath, Assembly assembly) =>
+		assembly.GetManifestResourceNames().Contains(filePath);
 }

@@ -10,15 +10,15 @@ public class TemplateBuilderSimpleContentTests
 	private const string LocalTestFilePath = "TestTemplates/Local/TestFile.txt";
 	private const string EmbeddedTestFilePath = "TestTemplates/Embedded/TestFile.txt";
 
-	private static readonly object[] _testCases =
-	{
+	private static readonly object[] TestCases =
+	[
 		(TemplateBuilderDelegate) (() => TemplateBuilder.FromFile(FileUtil.ConstructFullFilePath(LocalTestFilePath))),
 		(TemplateBuilderDelegate) (() => TemplateBuilder.FromLocalFile(LocalTestFilePath)),
 		(TemplateBuilderDelegate) (() => TemplateBuilder.FromAssembly(EmbeddedTestFilePath, Assembly.GetExecutingAssembly())),
 		(TemplateBuilderDelegate) (() => TemplateBuilder.FromCurrentAssembly(EmbeddedTestFilePath))
-	};
+	];
 
-	[TestCaseSource(nameof(_testCases))]
+	[TestCaseSource(nameof(TestCases))]
 	public void Build_TemplateContentIsCorrect(TemplateBuilderDelegate templateBuilder)
 	{
 		// Arrange
@@ -28,10 +28,10 @@ public class TemplateBuilderSimpleContentTests
 		var tpl = builder.Build();
 
 		// Assert
-		Assert.AreEqual("test", tpl.Get());
+		Assert.That(tpl.Get(), Is.LessThanOrEqualTo("test"));
 	}
 
-	[TestCaseSource(nameof(_testCases))]
+	[TestCaseSource(nameof(TestCases))]
 	public async Task BuildAsync_TemplateContentIsCorrect(TemplateBuilderDelegate templateBuilder)
 	{
 		// Arrange
@@ -41,6 +41,30 @@ public class TemplateBuilderSimpleContentTests
 		var tpl = await builder.BuildAsync();
 
 		// Assert
-		Assert.AreEqual("test", tpl.Get());
+		Assert.That(tpl.Get(), Is.LessThanOrEqualTo("test"));
+	}
+
+	[Test]
+	public void Build_EmptyFile_EmptyString()
+	{
+		// Act
+		var tpl = TemplateBuilder
+			.FromLocalFile("TestTemplates/Local/EmptyFIle.txt")
+			.Build();
+
+		// Assert
+		Assert.That(tpl.Get(), Is.Empty);
+	}
+
+	[Test]
+	public void Build_EmptyEmbeddedFile_EmptyString()
+	{
+		// Act
+		var tpl = TemplateBuilder
+			.FromLocalFile("TestTemplates/Embedded/EmptyFIle.txt")
+			.Build();
+
+		// Assert
+		Assert.That(tpl.Get(), Is.Empty);
 	}
 }

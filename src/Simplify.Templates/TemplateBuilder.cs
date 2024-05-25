@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Simplify.Templates;
 
 /// <summary>
-/// Provides ITemplate fluent builder
+/// Provides the template fluent builder
 /// </summary>
 public class TemplateBuilder
 {
@@ -23,10 +23,9 @@ public class TemplateBuilder
 	}
 
 	/// <summary>
-	/// Create builder based on the string.
+	/// Creates the builder based on the string.
 	/// </summary>
 	/// <param name="text">The text.</param>
-	/// <returns></returns>
 	public static TemplateBuilder FromString(string text)
 	{
 		if (text == null)
@@ -39,10 +38,9 @@ public class TemplateBuilder
 	}
 
 	/// <summary>
-	/// Create builder based on the file path, accepted full path or relative path according to current working directory.
+	/// Creates the builder based on the file path, accepted full path or relative path according to current working directory.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
-	/// <returns></returns>
 	public static TemplateBuilder FromFile(string filePath)
 	{
 		if (string.IsNullOrEmpty(filePath))
@@ -57,10 +55,9 @@ public class TemplateBuilder
 	}
 
 	/// <summary>
-	/// Create builder based on the file using calling assembly path prefix in filePath.
+	/// Creates the builder based on the file using calling assembly path prefix in filePath.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
-	/// <returns></returns>
 	public static TemplateBuilder FromLocalFile(string filePath)
 	{
 		if (string.IsNullOrEmpty(filePath))
@@ -77,11 +74,10 @@ public class TemplateBuilder
 	}
 
 	/// <summary>
-	/// Creates builder based on specified assembly embedded file, filePath should be path of the file inside assembly.
+	/// Creates the builder based on specified assembly embedded file, filePath should be path of the file inside assembly.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
 	/// <param name="assembly">The assembly.</param>
-	/// <returns></returns>
 	/// <exception cref="NotImplementedException"></exception>
 	public static TemplateBuilder FromAssembly(string filePath, Assembly assembly)
 	{
@@ -103,10 +99,9 @@ public class TemplateBuilder
 	}
 
 	/// <summary>
-	/// Creates builder based on the calling assembly embedded file, filePath should be path of the file inside assembly.
+	/// Creates the builder based on the calling assembly embedded file, filePath should be path of the file inside assembly.
 	/// </summary>
 	/// <param name="filePath">The file path.</param>
-	/// <returns></returns>
 	/// <exception cref="NotImplementedException"></exception>
 	public static TemplateBuilder FromCurrentAssembly(string filePath)
 	{
@@ -128,13 +123,9 @@ public class TemplateBuilder
 	/// <summary>
 	/// Builds the template.
 	/// </summary>
-	/// <returns></returns>
 	public ITemplate Build()
 	{
 		var text = LoadTemplateText();
-
-		if (text == null)
-			throw new TemplateException("Can't initialize empty template");
 
 		text = PreprocessTemplateText(text);
 
@@ -148,13 +139,9 @@ public class TemplateBuilder
 	/// <summary>
 	/// Builds the template asynchronously.
 	/// </summary>
-	/// <returns></returns>
 	public async Task<ITemplate> BuildAsync()
 	{
 		var text = await LoadTemplateTextAsync();
-
-		if (text == null)
-			throw new TemplateException("Can't initialize empty template");
 
 		PreprocessTemplateText(text);
 
@@ -170,7 +157,6 @@ public class TemplateBuilder
 	/// </summary>
 	/// <param name="language">The language.</param>
 	/// <param name="baseLanguage">The base language.</param>
-	/// <returns></returns>
 	public TemplateBuilder Localizable(string language, string baseLanguage = "en")
 	{
 		if (string.IsNullOrEmpty(language))
@@ -189,7 +175,6 @@ public class TemplateBuilder
 	/// Localizes the template from xml localization files using Thread.CurrentThread culture language as default.
 	/// </summary>
 	/// <param name="baseLanguage">The base language.</param>
-	/// <returns></returns>
 	public TemplateBuilder LocalizableFromCurrentThreadLanguage(string baseLanguage = "en")
 	{
 		if (string.IsNullOrEmpty(baseLanguage))
@@ -204,7 +189,6 @@ public class TemplateBuilder
 	/// <summary>
 	/// Replace all caret return characters by html <![CDATA[<BR />]]> tag.
 	/// </summary>
-	/// <returns></returns>
 	public TemplateBuilder FixLineEndingsHtml()
 	{
 		_fixLineEndingsHtml = true;
@@ -232,7 +216,7 @@ public class TemplateBuilder
 			return _text;
 
 		if (_filePath == null)
-			throw new InvalidOperationException();
+			throw new InvalidOperationException("File path is null");
 
 		return _assembly == null
 			? FileReader.ReadFile(_filePath)
@@ -245,7 +229,7 @@ public class TemplateBuilder
 			return _text;
 
 		if (_filePath == null)
-			throw new InvalidOperationException();
+			throw new InvalidOperationException("File path is null");
 
 		return _assembly == null
 			? await FileReader.ReadFileAsync(_filePath)

@@ -4,30 +4,23 @@ using System.Collections.Generic;
 namespace Simplify.Templates;
 
 /// <summary>
-/// Text templates class
+/// Provides the text template class
 /// </summary>
-public class Template : ITemplate
+/// <remarks>
+/// Initializes a new instance of the <see cref="Template"/> class.
+/// </remarks>
+/// <param name="initialText">The text.</param>
+/// <exception cref="ArgumentNullException">text</exception>
+public class Template(string initialText) : ITemplate
 {
-	private string _initialText;
-	private string _text;
+	private string _text = initialText ?? throw new ArgumentNullException(nameof(initialText));
 	private IDictionary<string, string?>? _addValues;
 
 	/// <summary>
-	/// Initializes a new instance of the <see cref="Template"/> class.
+	/// Sets the template variable value (all occurrences will be replaced)
 	/// </summary>
-	/// <param name="text">The text.</param>
-	/// <exception cref="ArgumentNullException">text</exception>
-	public Template(string text)
-	{
-		_text = text ?? throw new ArgumentNullException(nameof(text));
-		_initialText = text;
-	}
-
-	/// <summary>
-	/// Set template variable value (all occurrences will be replaced)
-	/// </summary>
-	/// <param name="variableName">Variable name</param>
-	/// <param name="value">Value to set</param>
+	/// <param name="variableName">The variable name</param>
+	/// <param name="value">The value to set</param>
 	public ITemplate Set(string variableName, string? value)
 	{
 		if (variableName == null)
@@ -39,10 +32,11 @@ public class Template : ITemplate
 	}
 
 	/// <summary>
-	/// Add value to set template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
+	/// Adds the value to the list to set to the template variable value (all occurrences will be replaced on Get method execute) allows setting multiple values to template variable
 	/// </summary>
 	/// <param name="variableName">Variable name</param>
 	/// <param name="value">Value to set</param>
+	/// <exception cref="ArgumentNullException">variableName</exception>
 	public ITemplate Add(string variableName, string? value)
 	{
 		if (variableName == null)
@@ -52,16 +46,21 @@ public class Template : ITemplate
 
 		variableName = variableName.Trim();
 
+#if NET48 || NETSTANDARD2_0
 		if (!_addValues.ContainsKey(variableName))
 			_addValues.Add(variableName, value);
 		else
 			_addValues[variableName] = _addValues[variableName] + value;
+#else
+		if (!_addValues.TryAdd(variableName, value))
+			_addValues[variableName] += value;
+#endif
 
 		return this;
 	}
 
 	/// <summary>
-	/// Get text of the template
+	/// Gets the text of the template
 	/// </summary>
 	public string Get()
 	{
@@ -71,23 +70,22 @@ public class Template : ITemplate
 	}
 
 	/// <summary>
-	/// Sets initial template state equal to current.
+	/// Sets the initial template state equal to current.
 	/// </summary>
-	public void Commit() => _initialText = _text;
+	public void Commit() => initialText = _text;
 
 	/// <summary>
-	/// Return template to it's initial state
+	/// Returns the template to it's initial state
 	/// </summary>
 	public void RollBack()
 	{
-		_text = _initialText;
+		_text = initialText;
 		_addValues?.Clear();
 	}
 
 	/// <summary>
 	/// Gets the text of the template and returns loaded template to it's initial state
 	/// </summary>
-	/// <returns>Text of the template</returns>
 	public string GetAndRoll()
 	{
 		var text = Get();
@@ -108,10 +106,5 @@ public class Template : ITemplate
 		_addValues.Clear();
 	}
 
-	private void ReplaceWithValue(string variableName, string? value)
-	{
-		var replaceableVariable = "{" + variableName + "}";
-
-		_text = _text.Replace(replaceableVariable, value);
-	}
+	private void ReplaceWithValue(string variableName, string? value) => _text = _text.Replace("{" + variableName + "}", value);
 }

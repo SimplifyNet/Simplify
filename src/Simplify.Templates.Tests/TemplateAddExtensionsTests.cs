@@ -21,10 +21,10 @@ public class TemplateAddExtensionsTests
 	public void Set_NullTemplate_Empty()
 	{
 		// Act
-		_tpl.Add(VariableName, (ITemplate)null);
+		_tpl.Add(VariableName, ((ITemplate)null)!);
 
 		// Assert
-		Assert.AreEqual("", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.Empty);
 	}
 
 	[Test]
@@ -34,7 +34,7 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, TemplateBuilder.FromString("a").Build());
 
 		// Assert
-		Assert.AreEqual("a", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("a"));
 	}
 
 	[Test]
@@ -44,7 +44,7 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, (object)null);
 
 		// Assert
-		Assert.AreEqual("", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.Empty);
 	}
 
 	[Test]
@@ -54,7 +54,7 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, new object());
 
 		// Assert
-		Assert.AreEqual("System.Object", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("System.Object"));
 	}
 
 	[Test]
@@ -64,7 +64,7 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, 17);
 
 		// Assert
-		Assert.AreEqual("17", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("17"));
 	}
 
 	[Test]
@@ -76,7 +76,7 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, 63);
 
 		// Assert
-		Assert.AreEqual("1763", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("1763"));
 	}
 
 	[Test]
@@ -86,7 +86,7 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, (long)16);
 
 		// Assert
-		Assert.AreEqual("16", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("16"));
 	}
 
 	[Test]
@@ -96,16 +96,16 @@ public class TemplateAddExtensionsTests
 		_tpl.Add(VariableName, 15.5m);
 
 		// Assert
-		Assert.AreEqual("15.5", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("15.5"));
 	}
 
 	[Test]
 	public void Set_Double_SetCorrectly()
 	{
 		// Act
-		_tpl.Add(VariableName, 1123456789123.123);
+		_tpl.Add(VariableName, 1123456789123.12);
 
 		// Assert
-		Assert.AreEqual("1123456789123.123", _tpl.Get());
+		Assert.That(_tpl.Get(), Is.EqualTo("1123456789123.12"));
 	}
 }

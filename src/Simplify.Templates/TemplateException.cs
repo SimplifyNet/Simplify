@@ -3,14 +3,12 @@
 namespace Simplify.Templates;
 
 /// <summary>
-/// provides `Template` related exceptions
+/// Provides the template related exceptions
 /// </summary>
-[Serializable]
-public sealed class TemplateException : Exception
+/// <remarks>
+/// Initializes a new instance of the <see cref="TemplateException"/> class.
+/// </remarks>
+/// <param name="message">The message that describes the error.</param>
+public sealed class TemplateException(string message) : Exception(message)
 {
-	/// <summary>
-	/// Initializes a new instance of the <see cref="TemplateException"/> class.
-	/// </summary>
-	/// <param name="message">The message that describes the error.</param>
-	public TemplateException(string message) : base(message) { }
 }

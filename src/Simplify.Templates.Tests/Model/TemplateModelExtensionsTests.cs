@@ -22,33 +22,33 @@ public class TemplateModelExtensionsTests
 	public void Set_NullModel_ReplacesWithNothing()
 	{
 		// Act
-		_template.Model<TestModel>(null).Set();
+		_template.Model<TestModel>(null!).Set();
 
 		// Assert
-		Assert.AreEqual("   ", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("   "));
 	}
 
 	[Test]
 	public void Set_NullModelWithWith_ReplacesWithNothing()
 	{
 		// Act
-		_template.Model<TestModel>(null).With(x => x.CreationTime, x => x.ToString("dd.MM.yyyy")).Set();
+		_template.Model<TestModel>(null!).With(x => x.CreationTime, x => x.ToString("dd.MM.yyyy")).Set();
 
 		// Assert
-		Assert.AreEqual("   ", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("   "));
 	}
 
 	[Test]
 	public void Set_Model_SetCorrectly()
 	{
 		// Arrange
-		var model = new TestModel { CreationTime = new DateTime(2014, 10, 5), Name = "Foo", EMail = "Foo@example.com", ID = 5 };
+		var model = new TestModel { CreationTime = new DateTime(2014, 10, 5, 0, 0, 0, DateTimeKind.Local), Name = "Foo", EMail = "Foo@example.com", ID = 5 };
 
 		// Act
 		_template.Model(model).With(x => x.CreationTime, x => x.ToString("dd.MM.yyyy")).Set();
 
 		// Assert
-		Assert.AreEqual("5 Foo Foo@example.com 05.10.2014", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("5 Foo Foo@example.com 05.10.2014"));
 	}
 
 	[Test]
@@ -66,7 +66,7 @@ public class TemplateModelExtensionsTests
 		_template.Model(model).Set();
 
 		// Assert
-		Assert.AreEqual("  ", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("  "));
 	}
 
 	[Test]
@@ -87,7 +87,7 @@ public class TemplateModelExtensionsTests
 		_template.Model(model2).Add();
 
 		// Assert
-		Assert.AreEqual("TestFoo test@test.comfoomail@test.com", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("TestFoo test@test.comfoomail@test.com"));
 	}
 
 	[Test]
@@ -105,7 +105,7 @@ public class TemplateModelExtensionsTests
 		_template.Model(model).Set();
 
 		// Assert
-		Assert.AreEqual("3 Hello!", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("3 Hello!"));
 	}
 
 	[Test]
@@ -123,6 +123,6 @@ public class TemplateModelExtensionsTests
 		_template.Model(model, "Model").Set();
 
 		// Assert
-		Assert.AreEqual("3", _template.Get());
+		Assert.That(_template.Get(), Is.EqualTo("3"));
 	}
 }
