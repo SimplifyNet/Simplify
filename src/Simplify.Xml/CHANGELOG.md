@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0] - 2024-05-25
+
+### Changed
+
+- ToXElement null check removed
+- Foramtting refactored
+- XML comments refactored
+
 ## [1.3.1] - 2023-08-01
 
 ### Removed

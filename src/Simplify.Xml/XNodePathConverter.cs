@@ -6,26 +6,26 @@ using Simplify.Xml.Converters;
 namespace Simplify.Xml;
 
 /// <summary>
-/// Provides XNode to XElement converter that resolves xpath by using XPath 1.0
+/// Provides the XNode to XElement converter that resolves xpath by using XPath 1.0 expressions
 /// </summary>
 public class XNodePathConverter : ChainedObjectConverter<XNode?, XElement?>
 {
 	/// <summary>
-	/// XPath 1.0
+	/// The XPath 1.0 expression
 	/// </summary>
 	protected readonly string XPath;
 
 	/// <summary>
-	/// IXmlNamespaceResolver
+	/// The resolver
 	/// </summary>
 	protected readonly IXmlNamespaceResolver? Resolver;
 
 	/// <summary>
-	/// Creates instance of XNodePathConverter
+	/// Creates the instance of XNodePathConverter
 	/// </summary>
-	/// <param name="xpath">XPath 1.0</param>
-	/// <param name="resolver">IXmlNamespaceResolver</param>
-	/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
+	/// <param name="xpath">The XPath 1.0 expression</param>
+	/// <param name="resolver">The resolver</param>
+	/// <param name="preConvertFunc">The Func delegate that converts source to destination before the main converter delegate</param>
 	/// <exception cref="ArgumentNullException"></exception>
 	public XNodePathConverter(string xpath, IXmlNamespaceResolver? resolver, Func<XNode?, XElement?>? preConvertFunc = null)
 		: base(preConvertFunc)
@@ -36,60 +36,49 @@ public class XNodePathConverter : ChainedObjectConverter<XNode?, XElement?>
 	}
 
 	/// <summary>
-	/// Creates instance of XNodePathConverter
+	/// Creates the instance of XNodePathConverter
 	/// </summary>
-	/// <param name="xpath">XPath 1.0</param>
-	/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
+	/// <param name="xpath">The XPath 1.0 expression</param>
+	/// <param name="preConvertFunc">The Func delegate that converts source to destination before the main converter delegate</param>
 	public XNodePathConverter(string xpath, Func<XNode?, XElement?>? preConvertFunc = null)
 		: this(xpath, null, preConvertFunc)
 	{
 	}
 
 	/// <summary>
-	/// Statically converts XNode to XElement using XPath 1.0
+	/// Converts the XNode to XElement using XPath 1.0 expression
 	/// </summary>
-	/// <param name="source">XNode source object</param>
-	/// <param name="xpath">XPath 1.0</param>
-	/// <param name="resolver">IXmlNamespaceResolver</param>
-	/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
-	/// <returns></returns>
-	public static XElement? Convert(XNode? source, string xpath, IXmlNamespaceResolver? resolver, Func<XNode?, XElement?>? preConvertFunc = null)
-	{
-		return new XNodePathConverter(xpath, resolver, preConvertFunc).Convert(source);
-	}
+	/// <param name="source">The XNode source object</param>
+	/// <param name="xpath">The XPath 1.0 expression</param>
+	/// <param name="resolver">The resolver</param>
+	/// <param name="preConvertFunc">The Func delegate that converts source to destination before the main converter delegate</param>
+	// ReSharper disable once TooManyArguments
+	public static XElement? Convert(XNode? source, string xpath, IXmlNamespaceResolver? resolver, Func<XNode?, XElement?>? preConvertFunc = null) =>
+		new XNodePathConverter(xpath, resolver, preConvertFunc).Convert(source);
 
 	/// <summary>
-	/// Statically converts XNode to XElement using XPath 1.0
+	/// Converts the XNode to XElement using XPath 1.0 expression
 	/// </summary>
-	/// <param name="source">XNode source object</param>
-	/// <param name="xpath">XPath 1.0</param>
-	/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
-	/// <returns></returns>
-	public static XElement? Convert(XNode? source, string xpath, Func<XNode?, XElement?>? preConvertFunc = null)
-	{
-		return Convert(source, xpath, null, preConvertFunc);
-	}
+	/// <param name="source">The XNode source object</param>
+	/// <param name="xpath">The XPath 1.0 expression</param>
+	/// <param name="preConvertFunc">The Func delegate that converts source to destination before the main converter delegate</param>
+	public static XElement? Convert(XNode? source, string xpath, Func<XNode?, XElement?>? preConvertFunc = null) =>
+		Convert(source, xpath, null, preConvertFunc);
 
 	/// <summary>
-	/// Statically provides Convert method as Func delegate
+	/// Provides the Convert method as Func delegate
 	/// </summary>
-	/// <param name="xpath">XPath 1.0</param>
-	/// <param name="resolver">IXmlNamespaceResolver</param>
-	/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
-	/// <returns></returns>
-	public static Func<XNode?, XElement?> AsFunc(string xpath, IXmlNamespaceResolver? resolver, Func<XNode?, XElement?>? preConvertFunc = null)
-	{
-		return new XNodePathConverter(xpath, resolver, preConvertFunc).AsFunc();
-	}
+	/// <param name="xpath">The XPath 1.0 expression</param>
+	/// <param name="resolver">The resolver</param>
+	/// <param name="preConvertFunc">The Func delegate that converts source to destination before the main converter delegate</param>
+	public static Func<XNode?, XElement?> AsFunc(string xpath, IXmlNamespaceResolver? resolver, Func<XNode?, XElement?>? preConvertFunc = null) =>
+		new XNodePathConverter(xpath, resolver, preConvertFunc).AsFunc();
 
 	/// <summary>
-	/// Statically provides Convert method as Func delegate
+	/// Provides the Convert method as Func delegate
 	/// </summary>
-	/// <param name="xpath">XPath 1.0</param>
-	/// <param name="preConvertFunc">Func delegate that converts source to destination before the main converter delegate</param>
-	/// <returns></returns>
-	public static Func<XNode?, XElement?> AsFunc(string xpath, Func<XNode?, XElement?>? preConvertFunc = null)
-	{
-		return AsFunc(xpath, null, preConvertFunc);
-	}
+	/// <param name="xpath">The XPath 1.0 expression</param>
+	/// <param name="preConvertFunc">The Func delegate that converts source to destination before the main converter delegate</param>
+	public static Func<XNode?, XElement?> AsFunc(string xpath, Func<XNode?, XElement?>? preConvertFunc = null) =>
+		AsFunc(xpath, null, preConvertFunc);
 }

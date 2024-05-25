@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
@@ -9,16 +8,15 @@ using XmlSer = System.Xml.Serialization;
 namespace Simplify.Xml;
 
 /// <summary>
-/// Objects XML serialization/deserialization extensions
+/// Provides XML serialization/deserialization extensions
 /// </summary>
 public static class XmlSerializer
 {
 	/// <summary>
-	/// Serializes the specified items list to a XML string.
+	/// Serializes the specified items list to the XML string.
 	/// </summary>
-	/// <typeparam name="T">Type of an item</typeparam>
+	/// <typeparam name="T">The type of the item</typeparam>
 	/// <param name="items">The items list to serialize.</param>
-	/// <returns></returns>
 	public static string Serialize<T>(IList<T> items)
 	{
 		using var memoryStream = new MemoryStream();
@@ -32,16 +30,12 @@ public static class XmlSerializer
 	}
 
 	/// <summary>
-	/// Serialize object to XElement.
+	/// Serialize the object to XElement.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <param name="obj">Object to serialize.</param>
-	/// <returns></returns>
+	/// <typeparam name="T">The type of the item</typeparam>
+	/// <param name="obj">The object to serialize.</param>
 	public static XElement ToXElement<T>(T obj)
 	{
-		if (obj == null)
-			throw new ArgumentNullException(nameof(obj));
-
 		using var memoryStream = new MemoryStream();
 		using TextWriter streamWriter = new StreamWriter(memoryStream);
 		var xmlSerializer = new XmlSer.XmlSerializer(typeof(T));
@@ -52,11 +46,10 @@ public static class XmlSerializer
 	}
 
 	/// <summary>
-	/// Deserialize XElement to object.
+	/// Deserialize the XElement to object.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="T">The type of the item</typeparam>
 	/// <param name="xElement">The XElement to deserialize.</param>
-	/// <returns></returns>
 	public static T FromXElement<T>(XElement xElement)
 	{
 		using var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xElement.ToString()));
