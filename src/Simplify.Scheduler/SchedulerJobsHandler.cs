@@ -248,7 +248,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 		try
 		{
-			await RunScoped(job);
+			await RunScopedAsync(job);
 		}
 		catch (Exception e)
 		{
@@ -263,7 +263,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 		}
 	}
 
-	private async Task RunScoped(ISchedulerJobRepresentation job)
+	private async Task RunScopedAsync(ISchedulerJobRepresentation job)
 	{
 		using var scope = DIContainer.Current.BeginLifetimeScope();
 
