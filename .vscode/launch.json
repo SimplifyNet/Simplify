@@ -26,7 +26,9 @@
 			"program": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net6.0/Simplify.Examples.Repository.EntityFramework.App.dll",
 			"cwd": "${workspaceFolder}/src/Examples/Simplify.Examples.Repository.EntityFramework.App/bin/Debug/net6.0/",
 			"internalConsoleOptions": "openOnSessionStart",
-			"args": "TestUser",
+			"args": [
+				"TestUser"
+			],
 			"env": {
 				"ASPNETCORE_ENVIRONMENT": "Development"
 			}
@@ -36,8 +38,8 @@
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "Build Simplify.Scheduler.IntegrationTester",
-			"program": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/Simplify.Scheduler.IntegrationTester.dll",
-			"cwd": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net6.0/",
+			"program": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net8.0/Simplify.Scheduler.IntegrationTester.dll",
+			"cwd": "${workspaceFolder}/src/Simplify.Scheduler.IntegrationTester/bin/Debug/net8.0/",
 			"env": {
 				"ASPNETCORE_ENVIRONMENT": "Development"
 			}
