@@ -1,41 +1,31 @@
-﻿using System;
-using Simplify.DI;
+﻿using Simplify.DI;
+using Simplify.Scheduler;
+using Simplify.Scheduler.IntegrationTester;
+using Simplify.Scheduler.IntegrationTester.Diagnostics;
 using Simplify.Scheduler.IntegrationTester.Setup;
 
-namespace Simplify.Scheduler.IntegrationTester;
+// IOC container setup
 
-internal class Program
+DIContainer.Current.RegisterAll()
+	.Verify();
+
+// Using scheduler
+
+using (var scheduler = new MultitaskScheduler())
 {
-	private static void Main(string[] args)
-	{
-		// IOC container setup
+	scheduler.OnJobStart += HandlerDiagnostics.HandlerOnJobStart;
+	scheduler.OnJobFinish += HandlerDiagnostics.HandlerOnJobFinish;
 
-		DIContainer.Current.RegisterAll()
-			.Verify();
+	scheduler.AddJob<OneSecondStepProcessor>(IocRegistrations.Configuration);
+	scheduler.AddJob<TwoSecondStepProcessor>(IocRegistrations.Configuration, startupArgs: "Hello world!!!");
+	scheduler.AddJob<OneMinuteStepCrontabProcessor>(IocRegistrations.Configuration);
+	scheduler.AddJob<TwoParallelTasksProcessor>(IocRegistrations.Configuration, invokeMethodName: "Execute");
+	scheduler.AddBasicJob<BasicTaskProcessor>();
 
-		// Using scheduler
-
-		using (var scheduler = new MultitaskScheduler())
-		{
-			scheduler.OnJobStart += HandlerOnJobStart;
-			scheduler.OnJobFinish += HandlerOnJobFinish;
-
-			scheduler.AddJob<OneSecondStepProcessor>(IocRegistrations.Configuration);
-			scheduler.AddJob<TwoSecondStepProcessor>(IocRegistrations.Configuration, startupArgs: "Hello world!!!");
-			scheduler.AddJob<OneMinuteStepCrontabProcessor>(IocRegistrations.Configuration);
-			scheduler.AddJob<TwoParallelTasksProcessor>(IocRegistrations.Configuration, invokeMethodName: "Execute");
-			scheduler.AddBasicJob<BasicTaskProcessor>();
-
-			if (scheduler.Start(args))
-				return;
-		}
-
-		// Testing some processors without scheduler
-		using (var scope = DIContainer.Current.BeginLifetimeScope())
-			scope.Resolver.Resolve<BasicTaskProcessor>().Run();
-	}
-
-	private static void HandlerOnJobStart(Jobs.ISchedulerJobRepresentation representation) => Console.WriteLine("Job started: " + representation.JobClassType.Name);
-
-	private static void HandlerOnJobFinish(Jobs.ISchedulerJobRepresentation representation) => Console.WriteLine("Job finished: " + representation.JobClassType.Name);
+	if (await scheduler.StartAsync(args))
+		return;
 }
+
+// Testing some processors without scheduler
+using (var scope = DIContainer.Current.BeginLifetimeScope())
+	scope.Resolver.Resolve<BasicTaskProcessor>().Run();

@@ -141,7 +141,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 	/// <summary>
 	/// Called when scheduler is started, main execution starting point.
 	/// </summary>
-	protected async Task StartJobs()
+	protected async Task StartJobsAsync()
 	{
 		Console.WriteLine("Starting Scheduler jobs...");
 
@@ -150,7 +150,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 			job.Start();
 
 			if (!(job is ICrontabSchedulerJob))
-				await RunBasicJob(job);
+				await RunBasicJobAsync(job);
 		}
 
 		Console.WriteLine("Scheduler jobs started.");
@@ -271,12 +271,12 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 		OnJobStart?.Invoke(job);
 
-		await InvokeJobMethod(job, jobObject);
+		await InvokeJobMethodAsync(job, jobObject);
 
 		OnJobFinish?.Invoke(job);
 	}
 
-	private async Task RunBasicJob(ISchedulerJobRepresentation job)
+	private async Task RunBasicJobAsync(ISchedulerJobRepresentation job)
 	{
 		try
 		{
@@ -286,7 +286,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 			OnJobStart?.Invoke(job);
 
-			await InvokeJobMethod(job, jobObject);
+			await InvokeJobMethodAsync(job, jobObject);
 
 			_workingBasicJobs.Add(job, scope);
 		}
@@ -299,7 +299,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 		}
 	}
 
-	private Task InvokeJobMethod(ISchedulerJobRepresentation job, object jobObject)
+	private Task InvokeJobMethodAsync(ISchedulerJobRepresentation job, object jobObject)
 	{
 		var result = job.InvokeMethodParameterType switch
 		{

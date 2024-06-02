@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using Simplify.Scheduler.CommandLine;
 using Simplify.System;
 
@@ -38,10 +39,10 @@ public class MultitaskScheduler : SchedulerJobsHandler
 	}
 
 	/// <summary>
-	/// Starts the scheduler
+	/// Starts the scheduler asynchronously.
 	/// </summary>
 	/// <param name="args">The arguments.</param>
-	public bool Start(string[]? args = null)
+	public async Task<bool> StartAsync(string[]? args = null)
 	{
 		var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
 
@@ -51,7 +52,7 @@ public class MultitaskScheduler : SchedulerJobsHandler
 				return false;
 
 			case ProcessCommandLineResult.NoArguments:
-				StartAndWait();
+				await StartAsync();
 				break;
 
 			case ProcessCommandLineResult.UndefinedParameters:
@@ -66,6 +67,16 @@ public class MultitaskScheduler : SchedulerJobsHandler
 
 		return true;
 	}
+
+	/// <summary>
+	/// Starts the scheduler.
+	/// </summary>
+	/// <param name="args">The arguments.</param>
+	public bool Start(string[]? args = null) =>
+		StartAsync(args)
+		.ConfigureAwait(false)
+		.GetAwaiter()
+		.GetResult();
 
 	/// <summary>
 	/// Called when scheduler is about to stop, main stopping point
@@ -90,9 +101,9 @@ public class MultitaskScheduler : SchedulerJobsHandler
 		_closing.Dispose();
 	}
 
-	private void StartAndWait()
+	private async Task StartAsync()
 	{
-		StartJobs().Wait();
+		await StartJobsAsync();
 
 		Console.WriteLine("Scheduler started. Press Ctrl + C to shut down.");
 
