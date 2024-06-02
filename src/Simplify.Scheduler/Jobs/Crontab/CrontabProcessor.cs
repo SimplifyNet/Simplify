@@ -20,7 +20,7 @@ public class CrontabProcessor : ICrontabProcessor
 	public CrontabProcessor(string crontabExpression)
 	{
 		if (string.IsNullOrEmpty(crontabExpression))
-			throw new ArgumentNullException();
+			throw new ArgumentNullException(nameof(crontabExpression));
 
 		Schedules = new List<CrontabSchedule>();
 		NextOccurrences = new List<DateTime>();
