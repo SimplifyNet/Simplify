@@ -11,18 +11,13 @@ public delegate void SchedulerExceptionEventHandler(SchedulerExceptionArgs args)
 /// <summary>
 /// Provides scheduler exception event args
 /// </summary>
-public class SchedulerExceptionArgs
+/// <remarks>
+/// Initializes a new instance of the <see cref="SchedulerExceptionArgs"/> class.
+/// </remarks>
+/// <param name="appName">Name of the scheduling application.</param>
+/// <param name="exception">The exception.</param>
+public class SchedulerExceptionArgs(string appName, Exception exception)
 {
-	/// <summary>
-	/// Initializes a new instance of the <see cref="SchedulerExceptionArgs"/> class.
-	/// </summary>
-	/// <param name="appName">Name of the scheduling application.</param>
-	/// <param name="exception">The exception.</param>
-	public SchedulerExceptionArgs(string appName, Exception exception)
-	{
-		AppName = appName;
-		Exception = exception;
-	}
 
 	/// <summary>
 	/// Gets the name of the application.
@@ -30,7 +25,7 @@ public class SchedulerExceptionArgs
 	/// <value>
 	/// The name of the application.
 	/// </value>
-	public string AppName { get; }
+	public string AppName { get; } = appName;
 
 	/// <summary>
 	/// Gets the exception.
@@ -38,5 +33,5 @@ public class SchedulerExceptionArgs
 	/// <value>
 	/// The exception.
 	/// </value>
-	public Exception Exception { get; }
+	public Exception Exception { get; } = exception;
 }

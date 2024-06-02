@@ -145,12 +145,21 @@ public abstract class SchedulerJobsHandler : IDisposable
 	{
 		Console.WriteLine("Starting Scheduler jobs...");
 
-		foreach (var job in _jobs)
+		try
 		{
-			job.Start();
+			foreach (var job in _jobs)
+			{
+				job.Start();
 
-			if (!(job is ICrontabSchedulerJob))
-				await RunBasicJobAsync(job);
+				if (!(job is ICrontabSchedulerJob))
+					await RunBasicJobAsync(job);
+			}
+		}
+		catch (Exception e)
+		{
+			TryRaiseOnExceptionEvent(e);
+
+			throw;
 		}
 
 		Console.WriteLine("Scheduler jobs started.");
@@ -172,6 +181,22 @@ public abstract class SchedulerJobsHandler : IDisposable
 		Task.WaitAll(itemsToWait);
 
 		Console.WriteLine("All jobs finished.");
+	}
+
+	/// <summary>
+	/// Tries to raise the OnException event, returns true if the OnException event raised, otherwise false.
+	/// </summary>
+	/// <param name="e">The exception.</param>
+	protected bool TryRaiseOnExceptionEvent(Exception e)
+	{
+		if (OnException != null)
+		{
+			OnException(new SchedulerExceptionArgs(AppName, e));
+
+			return true;
+		}
+
+		return false;
 	}
 
 	/// <summary>
@@ -252,9 +277,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 		}
 		catch (Exception e)
 		{
-			if (OnException != null)
-				OnException(new SchedulerExceptionArgs(AppName, e));
-			else
+			if (!TryRaiseOnExceptionEvent(e))
 				throw;
 		}
 		finally
@@ -292,9 +315,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 		}
 		catch (Exception e)
 		{
-			if (OnException != null)
-				OnException(new SchedulerExceptionArgs(AppName, e));
-			else
+			if (!TryRaiseOnExceptionEvent(e))
 				throw;
 		}
 	}
