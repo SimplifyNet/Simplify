@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0] - 2024-06-02
+
+### Added
+
+- Logging crontab parse errors to SchedulerJobsHandler.OnException (#490)
+- MultitaskScheduler.StartAsync method (To use scheduler asynchronously from `async Task Main` method) (#491)
+
+
 ## [1.4.0] - 2024-01-09
 
 ### Added
