@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.11] - 2024-06-09
+
+### Dependencies
+
+- Internal DryIoc bump to 5.4.3
+
 ## [4.2.10] - 2023-07-31
 
 ### Removed
