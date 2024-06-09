@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0] - 2024-06-09
+
+### Dependencies
+
+- Simplify.DI bump to 4.2.11
+- Microsoft.Extensions.DependencyInjection bump to 8.0.0
+
 ## [1.5.1] - 2023-08-01
 
 ### Removed
