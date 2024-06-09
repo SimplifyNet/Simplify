@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.0] - 2024-06-09
+
+- Simplify.DI bump to 4.2.11
+- Autofac bump to 8.0.0
+
 ## [1.2.1] - 2023-08-01
 
 ### Removed
