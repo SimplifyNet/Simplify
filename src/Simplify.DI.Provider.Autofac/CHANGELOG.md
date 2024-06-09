@@ -2,6 +2,8 @@
 
 ## [1.3.0] - 2024-06-09
 
+### Dependencies
+
 - Simplify.DI bump to 4.2.11
 - Autofac bump to 8.0.0
 
