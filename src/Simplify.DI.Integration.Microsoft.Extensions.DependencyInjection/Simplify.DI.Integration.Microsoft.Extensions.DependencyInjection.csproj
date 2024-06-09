@@ -14,7 +14,7 @@
 		<Description>Provides ability to use Simplify.DI as IOC container instead of Microsoft.Extensions.DependencyInjection</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI.Wcf</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI.Microsoft.AspNetCore</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageTags>.NET DI IOC-container Microsoft.Extensions.DependencyInjection</PackageTags>
