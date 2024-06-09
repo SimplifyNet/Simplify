@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.3] - 2024-06-09
+
+### Dependencies
+
+- Simplify.DI bump to 4.2.11
+- SimpleInjector bump to 5.4.6
+
 ## [1.11.2] - 2023-08-01
 
 ### Removed
