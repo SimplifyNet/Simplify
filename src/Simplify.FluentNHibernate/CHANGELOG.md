@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.1] - 2024-12-01
+
+### Dependencies
+
+- FluentNHibernate bump to 3.4
+
 ## [3.2.0] - 2024-04-26
 
 ### Added
