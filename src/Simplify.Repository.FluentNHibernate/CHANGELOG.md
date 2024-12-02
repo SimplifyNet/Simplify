@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1] - 2024-12-02
+
+### Dependencies
+
+- Simplify.FluentNHibernate bump to 3.2.1
+- Simplify.DI bump to 4.2.11
+
 ## [1.7.0] - 2024-01-14
 
 ### Added
