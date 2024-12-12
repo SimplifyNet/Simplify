@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.11.4] - 2024-12-12
+
+### Dependencies
+
+- SimpleInjector bump to 5.5
+
 ## [1.11.3] - 2024-06-09
 
 ### Dependencies
