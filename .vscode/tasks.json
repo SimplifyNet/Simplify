@@ -57,7 +57,7 @@
 		},
 		{
 			"label": "Test with coverage",
-			"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.sln --filter TestCategory!=Integration ",
+			"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.NetCore.sln --filter TestCategory!=Integration\\&TestCategory!=Windows",
 			"type": "shell",
 			"problemMatcher": "$msCompile",
 			"group": {
