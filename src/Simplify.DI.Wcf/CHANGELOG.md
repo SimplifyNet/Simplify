@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.2] - 2025-02-16
+
+### Dependencies
+
+- Simplify.DI bump to 4.2.11
+
 ## [1.5.1] - 2023-08-01
 
 ### Removed
