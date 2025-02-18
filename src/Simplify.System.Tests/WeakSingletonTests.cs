@@ -16,9 +16,9 @@ public class WeakSingletonTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => str = singleton.Instance);
-		Assert.NotNull(str);
-		Assert.AreEqual(str, "Hello");
+		Assert.That(() => str = singleton.Instance, Throws.Nothing);
+		Assert.That(str, Is.Not.Null);
+		Assert.That(str, Is.EqualTo("Hello"));
 	}
 
 	[Test]
@@ -31,8 +31,8 @@ public class WeakSingletonTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => obj = singleton.Instance);
-		Assert.NotNull(obj);
+		Assert.That(() => obj = singleton.Instance, Throws.Nothing);
+		Assert.That(obj, Is.Not.Null);
 	}
 
 #if RELEASE
@@ -55,8 +55,8 @@ public class WeakSingletonTests
 
 			// Act & Assert
 
-			Assert.NotNull(obj);
-			Assert.AreEqual(obj.Value, "Default");
+			Assert.That(obj, Is.Not.Null);
+			Assert.That(obj.Value, Is.EqualTo("Default"));
 		}
 
 #endif

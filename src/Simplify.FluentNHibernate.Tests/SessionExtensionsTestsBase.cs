@@ -36,14 +36,13 @@ public class SessionExtensionsTestsBase
 		var export = new SchemaExport(config);
 		export.Execute(false, true, false, sessionBuilder(factory), null);
 	}
-
 	protected static void PerformSingleObjectNotExistTest(Func<User> act)
 	{
 		// Act
 		var result = act();
 
 		// Assert
-		Assert.IsNull(result);
+		Assert.That(result, Is.Null);
 	}
 
 	protected static async Task PerformSingleObjectNotExistAsyncTest(Func<Task<User>> act)
@@ -52,7 +51,7 @@ public class SessionExtensionsTestsBase
 		var result = await act();
 
 		// Assert
-		Assert.IsNull(result);
+		Assert.That(result, Is.Null);
 	}
 
 	protected static void PerformSingleObjectMultipleExistTest(Func<User> act, Action userCreator)
@@ -62,7 +61,7 @@ public class SessionExtensionsTestsBase
 		userCreator();
 
 		// Act & Assert
-		Assert.Throws<InvalidOperationException>(() => act());
+		Assert.That(() => act(), Throws.InvalidOperationException);
 	}
 
 	protected static void PerformMultipleObjectPagedRetrieveTest(Func<IList<User>> act)
@@ -72,9 +71,9 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(2, items.Count);
-		Assert.AreEqual("test5", items[0].Name);
-		Assert.AreEqual("test0", items[1].Name);
+		Assert.That(items.Count, Is.EqualTo(2));
+		Assert.That(items[0].Name, Is.EqualTo("test5"));
+		Assert.That(items[1].Name, Is.EqualTo("test0"));
 	}
 
 	protected static async Task PerformSingleObjectExistAsyncTest(Func<Task<User>> act, Action userCreator)
@@ -87,7 +86,7 @@ public class SessionExtensionsTestsBase
 		var result = await act();
 
 		// Assert
-		Assert.IsNotNull(result);
+		Assert.That(result, Is.Not.Null);
 	}
 
 	protected static void PerformSingleObjectMultipleExistAsyncTest(Func<Task<User>> act, Action userCreator)
@@ -97,7 +96,7 @@ public class SessionExtensionsTestsBase
 		userCreator();
 
 		// Act
-		Assert.ThrowsAsync<InvalidOperationException>(() => act());
+		Assert.That(async () => await act(), Throws.InvalidOperationException);
 	}
 
 	protected static void PerformMultipleObjectsRetrieveTest(Func<IList<User>> act)
@@ -107,9 +106,9 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(2, items.Count);
-		Assert.AreEqual("test5", items[0].Name);
-		Assert.AreEqual("foo1", items[1].Name);
+		Assert.That(items.Count, Is.EqualTo(2));
+		Assert.That(items[0].Name, Is.EqualTo("test5"));
+		Assert.That(items[1].Name, Is.EqualTo("foo1"));
 	}
 
 	protected static void PerformSingleObjectExistTest(Func<User> act, Action userCreator)
@@ -122,7 +121,7 @@ public class SessionExtensionsTestsBase
 		var result = act();
 
 		// Assert
-		Assert.IsNotNull(result);
+		Assert.That(result, Is.Not.Null);
 	}
 
 	protected static async Task PerformMultipleObjectsRetrieveAsyncTest(Func<Task<IList<User>>> act)
@@ -132,9 +131,9 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(2, items.Count);
-		Assert.AreEqual("test5", items[0].Name);
-		Assert.AreEqual("foo1", items[1].Name);
+		Assert.That(items.Count, Is.EqualTo(2));
+		Assert.That(items[0].Name, Is.EqualTo("test5"));
+		Assert.That(items[1].Name, Is.EqualTo("foo1"));
 	}
 
 	protected static async Task PerformMultipleObjectPagedRetrieveAsyncTest(Func<Task<IList<User>>> act)
@@ -144,9 +143,9 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(2, items.Count);
-		Assert.AreEqual("test5", items[0].Name);
-		Assert.AreEqual("test0", items[1].Name);
+		Assert.That(items.Count, Is.EqualTo(2));
+		Assert.That(items[0].Name, Is.EqualTo("test5"));
+		Assert.That(items[1].Name, Is.EqualTo("test0"));
 	}
 
 	protected static void PerformCountTest(Func<int> act)
@@ -156,7 +155,7 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(5, result);
+		Assert.That(result, Is.EqualTo(5));
 	}
 
 	protected static async Task PerformCountAsyncTest(Func<Task<int>> act)
@@ -166,7 +165,7 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(5, result);
+		Assert.That(result, Is.EqualTo(5));
 	}
 
 	protected static void PerformLongCountTest(Func<long> act)
@@ -176,7 +175,7 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(5, result);
+		Assert.That(result, Is.EqualTo(5));
 	}
 
 	protected static async Task PerformLongCountAsyncTest(Func<Task<long>> act)
@@ -186,7 +185,7 @@ public class SessionExtensionsTestsBase
 
 		// Assert
 
-		Assert.AreEqual(5, result);
+		Assert.That(result, Is.EqualTo(5));
 	}
 
 	private static FluentConfiguration CreateConfigurationInMemory()

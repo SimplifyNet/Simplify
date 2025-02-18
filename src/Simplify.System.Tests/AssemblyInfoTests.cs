@@ -12,11 +12,11 @@ public class AssemblyInfoTests
 	{
 		var assemblyInfo = new AssemblyInfo(Assembly.GetAssembly(typeof(AssemblyInfoTests)) ?? throw new InvalidOperationException());
 
-		Assert.AreEqual("Alexander Krylkov", assemblyInfo.CompanyName);
-		Assert.AreEqual("Licensed under LGPL", assemblyInfo.Copyright);
-		Assert.AreEqual("Simplify.System unit tests", assemblyInfo.Description);
-		Assert.AreEqual("Simplify", assemblyInfo.ProductName);
-		Assert.AreEqual("Simplify.System.Tests", assemblyInfo.Title);
-		Assert.AreEqual("1.0.0.0", assemblyInfo.Version.ToString());
+		Assert.That(assemblyInfo.CompanyName, Is.EqualTo("Alexander Krylkov"));
+		Assert.That(assemblyInfo.Copyright, Is.EqualTo("Licensed under LGPL"));
+		Assert.That(assemblyInfo.Description, Is.EqualTo("Simplify.System unit tests"));
+		Assert.That(assemblyInfo.ProductName, Is.EqualTo("Simplify"));
+		Assert.That(assemblyInfo.Title, Is.EqualTo("Simplify.System.Tests"));
+		Assert.That(assemblyInfo.Version.ToString(), Is.EqualTo("1.0.0.0"));
 	}
 }

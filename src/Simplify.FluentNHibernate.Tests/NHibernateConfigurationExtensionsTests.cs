@@ -44,14 +44,14 @@ public class NHibernateConfigurationExtensionsTests : SessionExtensionsTestsBase
 		var matches = Regex.Matches(result, @"IDX\w+");
 		var indexes = (from Match match in matches select match.Value).ToList();
 
-		Assert.AreEqual(7, indexes.Count);
-		Assert.AreEqual("IDX_FK_Employee_User", indexes[0]);
-		Assert.AreEqual("IDX_FK_UsersGroups_UserID", indexes[1]);
-		Assert.AreEqual("IDX_FK_UsersGroups_GroupID", indexes[2]);
-		Assert.AreEqual("IDX_FK_Custom_UsersPrivileges_GroupID", indexes[3]);
-		Assert.AreEqual("IDX_FK_Traveler_EmployeeID", indexes[4]);
-		Assert.AreEqual("IDX_FK_User_OrganizationID", indexes[5]);
-		Assert.AreEqual("IDX_FK_UsersPrivileges_UserID", indexes[6]);
+		Assert.That(indexes.Count, Is.EqualTo(7));
+		Assert.That(indexes[0], Is.EqualTo("IDX_FK_Employee_User"));
+		Assert.That(indexes[1], Is.EqualTo("IDX_FK_UsersGroups_UserID"));
+		Assert.That(indexes[2], Is.EqualTo("IDX_FK_UsersGroups_GroupID"));
+		Assert.That(indexes[3], Is.EqualTo("IDX_FK_Custom_UsersPrivileges_GroupID"));
+		Assert.That(indexes[4], Is.EqualTo("IDX_FK_Traveler_EmployeeID"));
+		Assert.That(indexes[5], Is.EqualTo("IDX_FK_User_OrganizationID"));
+		Assert.That(indexes[6], Is.EqualTo("IDX_FK_UsersPrivileges_UserID"));
 	}
 
 	private static FluentConfiguration CreateConfiguration()

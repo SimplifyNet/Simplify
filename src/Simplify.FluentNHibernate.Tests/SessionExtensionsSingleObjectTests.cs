@@ -110,7 +110,7 @@ public class SessionExtensionsSingleObjectTests : SessionExtensionsTestsBase
 		var result = _session.GetFirstObject(SingleObjectQuery);
 
 		// Assert
-		Assert.AreEqual(1, result.ID);
+		Assert.That(result.ID, Is.EqualTo(1));
 	}
 
 	[Test]
@@ -123,7 +123,7 @@ public class SessionExtensionsSingleObjectTests : SessionExtensionsTestsBase
 		var result = await _session.GetFirstObjectAsync(SingleObjectQuery);
 
 		// Assert
-		Assert.AreEqual(1, result.ID);
+		Assert.That(result.ID, Is.EqualTo(1));
 	}
 
 	private void CreateTestUser()

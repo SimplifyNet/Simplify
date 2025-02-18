@@ -32,7 +32,7 @@ public class CastleWindsorDIContainerProviderTests
 		using var scope = _provider.BeginLifetimeScope();
 
 		// Assert
-		Assert.IsTrue(eventFired);
+		Assert.That(eventFired, Is.True);
 	}
 
 	#region Existence tests
@@ -87,7 +87,7 @@ public class CastleWindsorDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -104,7 +104,7 @@ public class CastleWindsorDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -117,7 +117,7 @@ public class CastleWindsorDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -130,7 +130,7 @@ public class CastleWindsorDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -147,7 +147,7 @@ public class CastleWindsorDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -160,7 +160,7 @@ public class CastleWindsorDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -173,7 +173,7 @@ public class CastleWindsorDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -190,7 +190,7 @@ public class CastleWindsorDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -203,7 +203,7 @@ public class CastleWindsorDIContainerProviderTests
 		var bar = _provider.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -220,7 +220,7 @@ public class CastleWindsorDIContainerProviderTests
 			bar = scope.Resolver.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -233,7 +233,7 @@ public class CastleWindsorDIContainerProviderTests
 		var bar = _provider.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -250,7 +250,7 @@ public class CastleWindsorDIContainerProviderTests
 			bar = scope.Resolver.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	#endregion Existence tests
@@ -277,10 +277,10 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -303,10 +303,10 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -330,9 +330,9 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -356,9 +356,9 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -382,11 +382,10 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
-
 	[Test]
 	public void ScopedResolve_ScopedDelegateDependsOnScoped_NotReusedBetweenScopes()
 	{
@@ -408,9 +407,8 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -434,7 +432,7 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -458,7 +456,7 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -498,13 +496,11 @@ public class CastleWindsorDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
-
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo, fooThird);
-
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreNotEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo, Is.Not.Null);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.Not.EqualTo(fooThird));
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooThird.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -544,13 +540,11 @@ public class CastleWindsorDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
-
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo, fooThird);
-
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreNotEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo, Is.Not.Null);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.Not.EqualTo(fooThird));
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooThird.Bar));
 	}
 
 	[Test]
@@ -573,9 +567,8 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -598,9 +591,8 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	// Note: this behavior check is not available
@@ -640,13 +632,11 @@ public class CastleWindsorDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
-
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
-
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo, Is.Not.Null);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -686,13 +676,13 @@ public class CastleWindsorDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -732,13 +722,13 @@ public class CastleWindsorDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -778,13 +768,13 @@ public class CastleWindsorDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	[Test]
@@ -807,10 +797,10 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -833,10 +823,10 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -860,11 +850,11 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-		Assert.IsNotNull(fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(fooSecond.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo, Is.Not.EqualTo(fooSecond));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -888,11 +878,11 @@ public class CastleWindsorDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-		Assert.IsNotNull(fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(fooSecond.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo, Is.Not.EqualTo(fooSecond));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	#endregion Reuse tests
@@ -934,7 +924,7 @@ public class CastleWindsorDIContainerProviderTests
 		_provider.Register<IFoo, Foo>();
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	[Test]
@@ -946,7 +936,7 @@ public class CastleWindsorDIContainerProviderTests
 		_provider.Register<IFoo, Foo>();
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	// Note: this behavior check is not available
@@ -986,7 +976,7 @@ public class CastleWindsorDIContainerProviderTests
 		_provider.Register<IFoo, Foo>(LifetimeType.Transient);
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	#endregion Verification

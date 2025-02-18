@@ -13,6 +13,6 @@ public class BytesExtensionsTests
 		var bytes = new byte[] { 116, 0, 101, 0, 115, 0, 116, 0 };
 
 		// Act & Assert
-		Assert.AreEqual("test", bytes.GetString());
+		Assert.That(bytes.GetString(), Is.EqualTo("test"));
 	}
 }

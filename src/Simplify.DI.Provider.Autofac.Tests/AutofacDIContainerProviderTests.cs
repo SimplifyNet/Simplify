@@ -32,7 +32,7 @@ public class AutofacDIContainerProviderTests
 		using var scope = _provider.BeginLifetimeScope();
 
 		// Assert
-		Assert.IsTrue(eventFired);
+		Assert.That(eventFired, Is.True);
 	}
 
 	#region Existence tests
@@ -41,7 +41,7 @@ public class AutofacDIContainerProviderTests
 	public void Resolve_NotRegistered_ActivationException()
 	{
 		// Act & Assert
-		Assert.Throws<ComponentNotRegisteredException>(() => _provider.Resolve<NonDepFoo>());
+		Assert.That(() => _provider.Resolve<NonDepFoo>(), Throws.TypeOf<ComponentNotRegisteredException>());
 	}
 
 	[Test]
@@ -51,7 +51,7 @@ public class AutofacDIContainerProviderTests
 
 		using var scope = _provider.BeginLifetimeScope();
 
-		Assert.Throws<ComponentNotRegisteredException>(() => scope.Resolver.Resolve<NonDepFoo>());
+		Assert.That(() => scope.Resolver.Resolve<NonDepFoo>(), Throws.TypeOf<ComponentNotRegisteredException>());
 	}
 
 	// Note: not applicable, because root container is also a scope
@@ -80,7 +80,7 @@ public class AutofacDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -97,7 +97,7 @@ public class AutofacDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -110,7 +110,7 @@ public class AutofacDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -123,7 +123,7 @@ public class AutofacDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -140,7 +140,7 @@ public class AutofacDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -153,7 +153,7 @@ public class AutofacDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -166,7 +166,7 @@ public class AutofacDIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -183,7 +183,7 @@ public class AutofacDIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -196,7 +196,7 @@ public class AutofacDIContainerProviderTests
 		var bar = _provider.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -213,7 +213,7 @@ public class AutofacDIContainerProviderTests
 			bar = scope.Resolver.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -226,7 +226,7 @@ public class AutofacDIContainerProviderTests
 		var bar = _provider.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -243,7 +243,7 @@ public class AutofacDIContainerProviderTests
 			bar = scope.Resolver.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	#endregion Existence tests
@@ -270,10 +270,10 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -296,10 +296,10 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -323,9 +323,9 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -349,11 +349,10 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
-
 	[Test]
 	public void ScopedResolve_ScopedDependsOnScoped_NotReusedBetweenScopes()
 	{
@@ -375,9 +374,8 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -401,9 +399,8 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -427,7 +424,7 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -451,7 +448,7 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -505,13 +502,11 @@ public class AutofacDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
-
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo, fooThird);
-
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreNotEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo, Is.Not.Null);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.Not.EqualTo(fooThird));
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooThird.Bar));
 	}
 
 	[Test]
@@ -534,9 +529,8 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -559,9 +553,8 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	// Note: this behavior check is not available
@@ -616,13 +609,11 @@ public class AutofacDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
-
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
-
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo, Is.Not.Null);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -678,13 +669,11 @@ public class AutofacDIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
-
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
-
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo, Is.Not.Null);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	[Test]
@@ -707,10 +696,9 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
-
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -733,10 +721,9 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
-
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -760,11 +747,10 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-		Assert.IsNotNull(fooSecond.Bar);
-
-		Assert.AreNotEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(fooSecond.Bar, Is.Not.Null);
+		Assert.That(foo, Is.Not.EqualTo(fooSecond));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -788,11 +774,10 @@ public class AutofacDIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-		Assert.IsNotNull(fooSecond.Bar);
-
-		Assert.AreNotEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(fooSecond.Bar, Is.Not.Null);
+		Assert.That(foo, Is.Not.EqualTo(fooSecond));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	#endregion Reuse tests
@@ -849,7 +834,7 @@ public class AutofacDIContainerProviderTests
 		_provider.Register<IFoo, Foo>();
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	[Test]
@@ -861,7 +846,7 @@ public class AutofacDIContainerProviderTests
 		_provider.Register<IFoo, Foo>();
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	// Note: this behavior check is not available
@@ -901,7 +886,7 @@ public class AutofacDIContainerProviderTests
 		_provider.Register<IFoo, Foo>(LifetimeType.Transient);
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	#endregion Verification

@@ -14,6 +14,6 @@ public class DateTimeExtensionsTests
 		var result = new DateTime(2015, 02, 03, 14, 22, 13, 456).TrimMilliseconds();
 
 		// Assert
-		Assert.AreEqual(0, result.Millisecond);
+		Assert.That(result.Millisecond, Is.EqualTo(0));
 	}
 }

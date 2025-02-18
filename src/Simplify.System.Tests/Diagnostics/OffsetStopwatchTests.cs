@@ -22,9 +22,9 @@ public class OffsetStopwatchTests
 
 		// Assert
 
-		Assert.AreEqual(3, stopwatch.Elapsed.Hours);
-		Assert.AreEqual(0, stopwatch.Elapsed.Minutes);
-		Assert.AreEqual(2, stopwatch.Elapsed.Seconds);
+		Assert.That(stopwatch.Elapsed.Hours, Is.EqualTo(3));
+		Assert.That(stopwatch.Elapsed.Minutes, Is.EqualTo(0));
+		Assert.That(stopwatch.Elapsed.Seconds, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -41,8 +41,8 @@ public class OffsetStopwatchTests
 
 		// Assert
 
-		Assert.AreEqual(0, stopwatch.Elapsed.Hours);
-		Assert.AreEqual(0, stopwatch.Elapsed.Minutes);
-		Assert.AreEqual(2, stopwatch.Elapsed.Seconds);
+		Assert.That(stopwatch.Elapsed.Hours, Is.EqualTo(0));
+		Assert.That(stopwatch.Elapsed.Minutes, Is.EqualTo(0));
+		Assert.That(stopwatch.Elapsed.Seconds, Is.EqualTo(2));
 	}
 }

@@ -22,7 +22,6 @@ public class MappingExpressionExtensionsTests
 	}
 
 	#endregion SetUp
-
 	[Test]
 	public void MapTo_CorrectDestinationAndSourceExpressions_MappedCorrectly()
 	{
@@ -34,8 +33,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Type, source.Category);
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Type, Is.EqualTo(source.Category));
 	}
 
 	[Test]
@@ -47,11 +46,11 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo(d => d.Type, s => s.Category)
-			.MapTo(d => d.Source, s => s)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
-		Assert.DoesNotThrow(() => cfg.CreateMapper());
+			.MapTo(d => d.Source, s => s)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
+		Assert.That(() => cfg.CreateMapper(), Throws.Nothing);
 	}
 
 	[Test]
@@ -65,8 +64,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Type, source.Category);
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Type, Is.EqualTo(source.Category));
 	}
 
 	[Test]
@@ -78,11 +77,11 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo(d => d.Type, "Category")
-			.MapTo(d => d.Source, s => s)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
-		Assert.DoesNotThrow(() => cfg.CreateMapper());
+			.MapTo(d => d.Source, s => s)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
+		Assert.That(() => cfg.CreateMapper(), Throws.Nothing);
 	}
 
 	[Test]
@@ -94,14 +93,14 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(nullDestinationExpression!, s => s.Category)));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(nullDestinationExpression!, s => s.Category)), Throws.TypeOf<AutoMapperConfigurationException>());
 
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(nullDestinationExpression!, "Category")));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(nullDestinationExpression!, "Category")), Throws.TypeOf<AutoMapperConfigurationException>());
 
-		Assert.Throws<ArgumentException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(d => null, s => s.Category)));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(d => null, s => s.Category)), Throws.TypeOf<ArgumentException>());
 	}
 
 	[Test]
@@ -113,19 +112,19 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(nullDestinationName!, s => s.Category)));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("", s => s.Category)));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("   ", s => s.Category)));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(nullDestinationName!, s => s.Category)), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("", s => s.Category)), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("   ", s => s.Category)), Throws.TypeOf<AutoMapperConfigurationException>());
 
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(nullDestinationName!, "Category")));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("", "Category")));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("   ", "Category")));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(nullDestinationName!, "Category")), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("", "Category")), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("   ", "Category")), Throws.TypeOf<AutoMapperConfigurationException>());
 	}
 
 	[Test]
@@ -137,19 +136,19 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(d => d.Type, nullSourcePath!)));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(d => d.Type, "")));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo(d => d.Type, "   ")));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(d => d.Type, nullSourcePath!)), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(d => d.Type, "")), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo(d => d.Type, "   ")), Throws.TypeOf<AutoMapperConfigurationException>());
 
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("Type", nullSourcePath!)));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("Type", "")));
-		Assert.Throws<AutoMapperConfigurationException>(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
-			.MapTo("Type", "   ")));
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("Type", nullSourcePath!)), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("Type", "")), Throws.TypeOf<AutoMapperConfigurationException>());
+		Assert.That(() => new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+			.MapTo("Type", "   ")), Throws.TypeOf<AutoMapperConfigurationException>());
 	}
 
 	[Test]
@@ -165,8 +164,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Source, source.ToString());
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Source, Is.EqualTo(source.ToString()));
 
 		// Arrange
 
@@ -176,8 +175,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Source, source.ToString());
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Source, Is.EqualTo(source.ToString()));
 	}
 
 	[Test]
@@ -190,15 +189,15 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo(d => d.Type, nullSourceExpression)
-			.MapTo(d => d.Source, nullSourceExpression)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.MapTo(d => d.Source, nullSourceExpression)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo("Type", nullSourceExpression)
-			.MapTo(d => d.Source, nullSourceExpression)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.MapTo(d => d.Source, nullSourceExpression)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 	}
 
 	[Test]
@@ -212,8 +211,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Type, null);
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Type, Is.Null);
 
 		// Arrange
 
@@ -223,8 +222,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Type, null);
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Type, Is.Null);
 	}
 
 	[Test]
@@ -236,15 +235,15 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo(d => d.Type, s => null)
-			.MapTo(d => d.Source, s => null)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.MapTo(d => d.Source, s => null)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo("Type", s => null)
-			.MapTo("Source", s => null)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.MapTo("Source", s => null)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 	}
 
 	[Test]
@@ -258,8 +257,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Source, source.ToString());
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Source, Is.EqualTo(source.ToString()));
 
 		// Arrange
 
@@ -269,8 +268,8 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Source, source.ToString());
+		Assert.That(dto = mapper.Map<FoodDto>(source), Is.Not.Null);
+		Assert.That(dto.Source, Is.EqualTo(source.ToString()));
 	}
 
 	[Test]
@@ -282,14 +281,14 @@ public class MappingExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo(d => d.Type)
-			.MapTo(d => d.Source)));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.MapTo(d => d.Source)), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, FoodDto>()
 			.MapTo("Type")
-			.MapTo("Source")));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.MapTo("Source")), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 	}
 }

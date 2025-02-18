@@ -24,8 +24,8 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.AreEqual((string)doc.Root.Get("foo"), "data");
-		Assert.AreEqual((string)doc.Get("test/foo"), "data");
+		Assert.That((string)doc.Root.Get("foo"), Is.EqualTo("data"));
+		Assert.That((string)doc.Get("test/foo"), Is.EqualTo("data"));
 	}
 
 	[Test]
@@ -37,8 +37,8 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.Null((string)doc.Root.Get("baaa"));
-		Assert.Null((string)doc.Get("test/baaa"));
+		Assert.That((string)doc.Root.Get("baaa"), Is.Null);
+		Assert.That((string)doc.Get("test/baaa"), Is.Null);
 	}
 
 	[Test]
@@ -50,7 +50,7 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.Null((string)doc.Get("test/foo"));
+		Assert.That((string)doc.Get("test/foo"), Is.Null);
 	}
 
 	[Test]
@@ -62,9 +62,9 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.Null((string)doc.Root.Get(null!));
-		Assert.Null((string)doc.Root.Get(""));
-		Assert.Null((string)doc.Root.Get("  "));
+		Assert.That((string)doc.Root.Get(null!), Is.Null);
+		Assert.That((string)doc.Root.Get(""), Is.Null);
+		Assert.That((string)doc.Root.Get("  "), Is.Null);
 	}
 
 	#endregion Get
@@ -81,10 +81,10 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
-		Assert.NotNull(collection);
-		Assert.IsNotEmpty(collection);
-		Assert.AreEqual((string)collection.ElementAt(0), "data");
+		Assert.That(collection, Is.InstanceOf<IEnumerable<XElement>>());
+		Assert.That(collection, Is.Not.Null);
+		Assert.That(collection, Is.Not.Empty);
+		Assert.That((string)collection.ElementAt(0), Is.EqualTo("data"));
 	}
 
 	[Test]
@@ -97,9 +97,9 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
-		Assert.NotNull(collection);
-		Assert.IsEmpty(collection);
+		Assert.That(collection, Is.InstanceOf<IEnumerable<XElement>>());
+		Assert.That(collection, Is.Not.Null);
+		Assert.That(collection, Is.Empty);
 	}
 
 	[Test]
@@ -113,9 +113,9 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.IsInstanceOf<IEnumerable<XElement>>(collection);
-		Assert.NotNull(collection);
-		Assert.IsEmpty(collection);
+		Assert.That(collection, Is.InstanceOf<IEnumerable<XElement>>());
+		Assert.That(collection, Is.Not.Null);
+		Assert.That(collection, Is.Empty);
 	}
 
 	[Test]
@@ -127,13 +127,13 @@ public class XmlExtensionsTests
 
 		// Act & Assert
 
-		Assert.IsInstanceOf<IEnumerable<XElement>>(doc.Root.GetMany(null!));
-		Assert.NotNull(doc.Root.GetMany(null!));
-		Assert.IsEmpty(doc.Root.GetMany(null!));
-		Assert.NotNull(doc.Root.GetMany(""));
-		Assert.IsEmpty(doc.Root.GetMany(""));
-		Assert.NotNull(doc.Root.GetMany("  "));
-		Assert.IsEmpty(doc.Root.GetMany("  "));
+		Assert.That(doc.Root.GetMany(null!), Is.InstanceOf<IEnumerable<XElement>>());
+		Assert.That(doc.Root.GetMany(null!), Is.Not.Null);
+		Assert.That(doc.Root.GetMany(null!), Is.Empty);
+		Assert.That(doc.Root.GetMany(""), Is.Not.Null);
+		Assert.That(doc.Root.GetMany(""), Is.Empty);
+		Assert.That(doc.Root.GetMany("  "), Is.Not.Null);
+		Assert.That(doc.Root.GetMany("  "), Is.Empty);
 	}
 
 	#endregion GetMany
@@ -145,7 +145,7 @@ public class XmlExtensionsTests
 		var element = XElement.Parse(InputString);
 
 		// Act & Assert
-		Assert.AreEqual(ExpectedInner, element.InnerXml());
+		Assert.That(element.InnerXml(), Is.EqualTo(ExpectedInner));
 	}
 
 	[Test]
@@ -155,7 +155,7 @@ public class XmlExtensionsTests
 		var element = XElement.Parse(InputString);
 
 		// Act & Assert
-		Assert.AreEqual(ExpectedOuter, element.OuterXml());
+		Assert.That(element.OuterXml(), Is.EqualTo(ExpectedOuter));
 	}
 
 	[Test]
@@ -165,6 +165,6 @@ public class XmlExtensionsTests
 		var str = TemplateBuilder.FromCurrentAssembly("TestData.XmlWithNamespaces.xml").Build().Get();
 
 		// Act & Assert
-		Assert.AreEqual(TemplateBuilder.FromCurrentAssembly("TestData.XmlWithoutNamespaces..xml").Build().Get(), str.RemoveAllXmlNamespaces());
+		Assert.That(str.RemoveAllXmlNamespaces(), Is.EqualTo(TemplateBuilder.FromCurrentAssembly("TestData.XmlWithoutNamespaces..xml").Build().Get()));
 	}
 }

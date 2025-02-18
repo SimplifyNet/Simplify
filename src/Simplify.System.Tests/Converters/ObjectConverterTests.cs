@@ -17,14 +17,14 @@ public class ObjectConverterTests
 
 		// Act & Assert
 
-		Assert.IsInstanceOf<Func<char, string>>(converter.AsFunc());
-		Assert.IsInstanceOf<Func<char, string>>((Func<char, string>)converter);
+		Assert.That(converter.AsFunc(), Is.InstanceOf<Func<char, string>>());
+		Assert.That((Func<char, string>)converter, Is.InstanceOf<Func<char, string>>());
 	}
 
 	[Test]
 	public void Constructor_NullConvertFunc_ThrowsArgumentNullException()
 	{
-		Assert.Throws<ArgumentNullException>(() => new ObjectConverter<int, int>(null!));
+		Assert.That(() => new ObjectConverter<int, int>(null!), Throws.TypeOf<ArgumentNullException>());
 	}
 
 	[Test]
@@ -35,7 +35,7 @@ public class ObjectConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual(converter.Convert("14"), 14);
-		Assert.AreEqual(converter.Convert("99"), 99);
+		Assert.That(converter.Convert("14"), Is.EqualTo(14));
+		Assert.That(converter.Convert("99"), Is.EqualTo(99));
 	}
 }

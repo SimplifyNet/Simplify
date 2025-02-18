@@ -9,7 +9,7 @@ public class StringExtensionsTests
 	[Test]
 	public void String_ToBytesArray_ConvertedCorrectly()
 	{
-		Assert.AreEqual(new byte[] { 116, 0, 101, 0, 115, 0, 116, 0 }, "test".ToBytesArray());
+		Assert.That("test".ToBytesArray(), Is.EqualTo(new byte[] { 116, 0, 101, 0, 115, 0, 116, 0 }));
 	}
 
 	[Test]
@@ -22,11 +22,10 @@ public class StringExtensionsTests
 		var time = str.TryToDateTimeExact("dd.MM.yy");
 
 		// Assert
-
-		Assert.IsNotNull(time);
-		Assert.AreEqual(12, time!.Value.Day);
-		Assert.AreEqual(3, time.Value.Month);
-		Assert.AreEqual(2013, time.Value.Year);
+		Assert.That(time, Is.Not.Null);
+		Assert.That(time!.Value.Day, Is.EqualTo(12));
+		Assert.That(time.Value.Month, Is.EqualTo(3));
+		Assert.That(time.Value.Year, Is.EqualTo(2013));
 	}
 
 	[Test]
@@ -36,6 +35,6 @@ public class StringExtensionsTests
 		const string str = "test";
 
 		// Act & Assert
-		Assert.IsNull(str.TryToDateTimeExact("dd.MM.yy"));
+		Assert.That(str.TryToDateTimeExact("dd.MM.yy"), Is.Null);
 	}
 }

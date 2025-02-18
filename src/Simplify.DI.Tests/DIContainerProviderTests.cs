@@ -15,7 +15,6 @@ public class DIContainerProviderTests
 	{
 		_provider = new DryIocDIProvider();
 	}
-
 	[Test]
 	public void BeginLifetimeScope_WithOnBeginLifetimeScopeEventSubscribed_EventFired()
 	{
@@ -32,7 +31,7 @@ public class DIContainerProviderTests
 		using var scope = _provider.BeginLifetimeScope();
 
 		// Assert
-		Assert.IsTrue(eventFired);
+		Assert.That(eventFired, Is.True);
 	}
 
 	#region Existence tests
@@ -86,8 +85,9 @@ public class DIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
+
 
 	[Test]
 	public void ScopedResolve_ScopeDelegateRegistered_Resolved()
@@ -103,7 +103,7 @@ public class DIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -116,7 +116,7 @@ public class DIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -129,7 +129,7 @@ public class DIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -146,7 +146,7 @@ public class DIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -159,7 +159,7 @@ public class DIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -172,7 +172,7 @@ public class DIContainerProviderTests
 		var foo = _provider.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -189,7 +189,7 @@ public class DIContainerProviderTests
 			foo = scope.Resolver.Resolve<NonDepFoo>();
 
 		// Assert
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 	}
 
 	[Test]
@@ -202,7 +202,7 @@ public class DIContainerProviderTests
 		var bar = _provider.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -219,7 +219,7 @@ public class DIContainerProviderTests
 			bar = scope.Resolver.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -232,7 +232,7 @@ public class DIContainerProviderTests
 		var bar = _provider.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	[Test]
@@ -249,7 +249,7 @@ public class DIContainerProviderTests
 			bar = scope.Resolver.Resolve<IBar>();
 
 		// Assert
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 	}
 
 	#endregion Existence tests
@@ -276,10 +276,10 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -302,10 +302,10 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -329,9 +329,9 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -355,9 +355,9 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -381,9 +381,9 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -407,9 +407,9 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -433,7 +433,7 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -457,7 +457,7 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -513,13 +513,13 @@ public class DIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo, fooThird);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.Not.EqualTo(fooThird));
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreNotEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooThird.Bar));
 	}
 
 	[Test]
@@ -542,9 +542,9 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -567,9 +567,9 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
+		Assert.That(bar, Is.Not.Null);
 
-		Assert.AreEqual(bar, barSecond);
+		Assert.That(bar, Is.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -616,7 +616,6 @@ public class DIContainerProviderTests
 	//	using var scope = _provider.BeginLifetimeScope();
 	//	Assert.Throws<ContainerException>(() => scope.Resolver.Resolve<IFoo>());
 	//}
-
 	[Test]
 	public void ScopedResolve_SingletonDependsOnTransient_TransientReusedAsSingleton()
 	{
@@ -638,13 +637,13 @@ public class DIContainerProviderTests
 		using (var scope = _provider.BeginLifetimeScope())
 			fooThird = scope.Resolver.Resolve<IFoo>();
 
-		Assert.IsNotNull(foo);
+		Assert.That(foo, Is.Not.Null);
 
-		Assert.AreEqual(foo, fooSecond);
-		Assert.AreEqual(foo, fooThird);
+		Assert.That(foo, Is.EqualTo(fooSecond));
+		Assert.That(foo, Is.EqualTo(fooThird));
 
-		Assert.AreEqual(foo.Bar, fooSecond.Bar);
-		Assert.AreEqual(foo.Bar, fooThird.Bar);
+		Assert.That(foo.Bar, Is.EqualTo(fooSecond.Bar));
+		Assert.That(foo.Bar, Is.EqualTo(fooThird.Bar));
 	}
 
 	// Note: this behavior check is not available
@@ -681,10 +680,10 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -707,10 +706,10 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(bar);
-		Assert.IsNotNull(barSecond);
+		Assert.That(bar, Is.Not.Null);
+		Assert.That(barSecond, Is.Not.Null);
 
-		Assert.AreNotEqual(bar, barSecond);
+		Assert.That(bar, Is.Not.EqualTo(barSecond));
 	}
 
 	[Test]
@@ -734,11 +733,11 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-		Assert.IsNotNull(fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(fooSecond.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo, Is.Not.EqualTo(fooSecond));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	[Test]
@@ -762,11 +761,11 @@ public class DIContainerProviderTests
 
 		// Assert
 
-		Assert.IsNotNull(foo.Bar);
-		Assert.IsNotNull(fooSecond.Bar);
+		Assert.That(foo.Bar, Is.Not.Null);
+		Assert.That(fooSecond.Bar, Is.Not.Null);
 
-		Assert.AreNotEqual(foo, fooSecond);
-		Assert.AreNotEqual(foo.Bar, fooSecond.Bar);
+		Assert.That(foo, Is.Not.EqualTo(fooSecond));
+		Assert.That(foo.Bar, Is.Not.EqualTo(fooSecond.Bar));
 	}
 
 	#endregion Reuse tests
@@ -808,7 +807,7 @@ public class DIContainerProviderTests
 		_provider.Register<IFoo, Foo>();
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	[Test]
@@ -820,7 +819,7 @@ public class DIContainerProviderTests
 		_provider.Register<IFoo, Foo>();
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	[Test]
@@ -859,7 +858,7 @@ public class DIContainerProviderTests
 		_provider.Register<IFoo, Foo>(LifetimeType.Transient);
 
 		// Act && Assert
-		Assert.DoesNotThrow(() => _provider.Verify());
+		Assert.That(() => _provider.Verify(), Throws.Nothing);
 	}
 
 	#endregion Verification

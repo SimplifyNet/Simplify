@@ -10,59 +10,59 @@ public class StringHelperTests
 	[Test]
 	public void IsMobilePhoneParsingCorrectly()
 	{
-		Assert.AreEqual("+77012256245", StringHelper.ParseMobilePhone("+7 701 22 56 245"));
-		Assert.AreEqual("+77012256245", StringHelper.ParseMobilePhone("+7701 2256 245"));
-		Assert.AreEqual("77012256245", StringHelper.ParseMobilePhone("7-701-22-56-245"));
-		Assert.AreEqual("87012256245", StringHelper.ParseMobilePhone("8(701)2256245"));
+		Assert.That(StringHelper.ParseMobilePhone("+7 701 22 56 245"), Is.EqualTo("+77012256245"));
+		Assert.That(StringHelper.ParseMobilePhone("+7701 2256 245"), Is.EqualTo("+77012256245"));
+		Assert.That(StringHelper.ParseMobilePhone("7-701-22-56-245"), Is.EqualTo("77012256245"));
+		Assert.That(StringHelper.ParseMobilePhone("8(701)2256245"), Is.EqualTo("87012256245"));
 	}
 
 	[Test]
 	public void IsEMailValidatingCorrectly()
 	{
-		Assert.IsTrue(StringHelper.ValidateEMail("testname@pupkin.org"));
-		Assert.IsTrue(StringHelper.ValidateEMail("someaddress.test.company@pupkin.org"));
-		Assert.IsTrue(StringHelper.ValidateEMail("someaddress.test@company"));
-		Assert.IsTrue(StringHelper.ValidateEMail("someaddress.test@companyorg"));
+		Assert.That(StringHelper.ValidateEMail("testname@pupkin.org"), Is.True);
+		Assert.That(StringHelper.ValidateEMail("someaddress.test.company@pupkin.org"), Is.True);
+		Assert.That(StringHelper.ValidateEMail("someaddress.test@company"), Is.True);
+		Assert.That(StringHelper.ValidateEMail("someaddress.test@companyorg"), Is.True);
 
-		Assert.IsFalse(StringHelper.ValidateEMail(null));
-		Assert.IsFalse(StringHelper.ValidateEMail("someaddress"));
-		Assert.IsFalse(StringHelper.ValidateEMail("someaddress.test.company.org"));
-		Assert.IsFalse(StringHelper.ValidateEMail("someaddress@test@company.org"));
-		Assert.IsFalse(StringHelper.ValidateEMail("someaddress.test..company.org"));
+		Assert.That(StringHelper.ValidateEMail(null), Is.False);
+		Assert.That(StringHelper.ValidateEMail("someaddress"), Is.False);
+		Assert.That(StringHelper.ValidateEMail("someaddress.test.company.org"), Is.False);
+		Assert.That(StringHelper.ValidateEMail("someaddress@test@company.org"), Is.False);
+		Assert.That(StringHelper.ValidateEMail("someaddress.test..company.org"), Is.False);
 	}
 
 	[Test]
 	public void IsMobilePhoneValid()
 	{
-		Assert.IsTrue(StringHelper.ValidateMobilePhone("+77015634321"));
-		Assert.IsTrue(StringHelper.ValidateMobilePhone("+7015634321"));
-		Assert.IsTrue(StringHelper.ValidateMobilePhone("+666567890345"));
-		Assert.IsTrue(StringHelper.ValidateMobilePhone("+9944511122333"));
-		Assert.IsTrue(StringHelper.ValidateMobilePhone("+9941234"));
+		Assert.That(StringHelper.ValidateMobilePhone("+77015634321"), Is.True);
+		Assert.That(StringHelper.ValidateMobilePhone("+7015634321"), Is.True);
+		Assert.That(StringHelper.ValidateMobilePhone("+666567890345"), Is.True);
+		Assert.That(StringHelper.ValidateMobilePhone("+9944511122333"), Is.True);
+		Assert.That(StringHelper.ValidateMobilePhone("+9941234"), Is.True);
 
-		Assert.IsFalse(StringHelper.ValidateMobilePhone(null));
-		Assert.IsFalse(StringHelper.ValidateMobilePhone("8 (701) 56 34 321"));
-		Assert.IsFalse(StringHelper.ValidateMobilePhone("+7701563432A"));
-		Assert.IsFalse(StringHelper.ValidateMobilePhone("+7701563432*"));
+		Assert.That(StringHelper.ValidateMobilePhone(null), Is.False);
+		Assert.That(StringHelper.ValidateMobilePhone("8 (701) 56 34 321"), Is.False);
+		Assert.That(StringHelper.ValidateMobilePhone("+7701563432A"), Is.False);
+		Assert.That(StringHelper.ValidateMobilePhone("+7701563432*"), Is.False);
 	}
 
 	[Test]
 	public void IsIndistinctMatchingMatchCorrectly()
 	{
-		Assert.AreEqual(75, StringHelper.IndistinctMatching("asdfghjkl", "fghasdjkl"));
-		Assert.AreEqual(100, StringHelper.IndistinctMatching("asdfghjkl", "asdfghjkl"));
-		Assert.AreEqual(0, StringHelper.IndistinctMatching("qwerty", "asdfgh"));
-		Assert.AreEqual(40, StringHelper.IndistinctMatching("qwerty", "ytrewq"));
-		Assert.AreEqual(72.22, Math.Round(StringHelper.IndistinctMatching("qwe asd", "asd qwe"), 2));
-		Assert.AreEqual(75, StringHelper.IndistinctMatching("qweasdzxc", "qwezxcasd"));
-		Assert.AreEqual(89.58, Math.Round(StringHelper.IndistinctMatching("qweasdzxc", "qweasdzxx"), 2));
-		Assert.AreEqual(0, StringHelper.IndistinctMatching(null, "fghasdjkl"));
-		Assert.AreEqual(0, StringHelper.IndistinctMatching("a", "fghasdjkl", 0));
+		Assert.That(StringHelper.IndistinctMatching("asdfghjkl", "fghasdjkl"), Is.EqualTo(75));
+		Assert.That(StringHelper.IndistinctMatching("asdfghjkl", "asdfghjkl"), Is.EqualTo(100));
+		Assert.That(StringHelper.IndistinctMatching("qwerty", "asdfgh"), Is.EqualTo(0));
+		Assert.That(StringHelper.IndistinctMatching("qwerty", "ytrewq"), Is.EqualTo(40));
+		Assert.That(Math.Round(StringHelper.IndistinctMatching("qwe asd", "asd qwe"), 2), Is.EqualTo(72.22));
+		Assert.That(StringHelper.IndistinctMatching("qweasdzxc", "qwezxcasd"), Is.EqualTo(75));
+		Assert.That(Math.Round(StringHelper.IndistinctMatching("qweasdzxc", "qweasdzxx"), 2), Is.EqualTo(89.58));
+		Assert.That(StringHelper.IndistinctMatching(null, "fghasdjkl"), Is.EqualTo(0));
+		Assert.That(StringHelper.IndistinctMatching("a", "fghasdjkl", 0), Is.EqualTo(0));
 	}
 
 	[Test]
 	public void IsStripHtmlTagsCorrectly()
 	{
-		Assert.AreEqual("text", StringHelper.StripHtmlTags("<a href=\"link\">text</a><input name=\"login\" />"));
+		Assert.That(StringHelper.StripHtmlTags("<a href=\"link\">text</a><input name=\"login\" />"), Is.EqualTo("text"));
 	}
 }

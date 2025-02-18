@@ -17,14 +17,14 @@ public class ChainedObjectConverterTests
 
 		// Act & Assert
 
-		Assert.IsInstanceOf<Func<object?, string?>>(converter.AsFunc());
-		Assert.IsInstanceOf<Func<object?, string?>>((Func<object?, string?>)converter);
+		Assert.That(converter.AsFunc(), Is.InstanceOf<Func<object?, string?>>());
+		Assert.That((Func<object?, string?>)converter, Is.InstanceOf<Func<object?, string?>>());
 	}
 
 	[Test]
 	public void Constructor_NullConvertFunc_ThrowsArgumentNullException()
 	{
-		Assert.Throws<ArgumentNullException>(() => new ChainedObjectConverter<object, string>(null!));
+		Assert.That(() => new ChainedObjectConverter<object, string>(null!), Throws.TypeOf<ArgumentNullException>());
 	}
 
 	[Test]
@@ -35,10 +35,10 @@ public class ChainedObjectConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual(converter.Convert(null), null);
-		Assert.AreEqual(converter.Convert(new object()), "System.Object");
-		Assert.AreEqual(converter.Convert(new string('A', 5)), "AAAAA");
-		Assert.AreEqual(converter.Convert("778899"), "778899");
+		Assert.That(converter.Convert(null), Is.EqualTo(null));
+		Assert.That(converter.Convert(new object()), Is.EqualTo("System.Object"));
+		Assert.That(converter.Convert(new string('A', 5)), Is.EqualTo("AAAAA"));
+		Assert.That(converter.Convert("778899"), Is.EqualTo("778899"));
 	}
 
 	[Test]
@@ -50,9 +50,9 @@ public class ChainedObjectConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual(converter2.Convert(null), "NULL : 4");
-		Assert.AreEqual(converter2.Convert(new object()), "Object : 6");
-		Assert.AreEqual(converter2.Convert(new DateTime()), "DateTime : 8");
-		Assert.AreEqual(converter2.Convert("778899"), "String : 6");
+		Assert.That(converter2.Convert(null), Is.EqualTo("NULL : 4"));
+		Assert.That(converter2.Convert(new object()), Is.EqualTo("Object : 6"));
+		Assert.That(converter2.Convert(new DateTime()), Is.EqualTo("DateTime : 8"));
+		Assert.That(converter2.Convert("778899"), Is.EqualTo("String : 6"));
 	}
 }

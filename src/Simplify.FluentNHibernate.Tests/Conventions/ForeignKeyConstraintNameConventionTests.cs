@@ -43,14 +43,14 @@ public class ForeignKeyConstraintNameConventionTests : SessionExtensionsTestsBas
 		var matches = Regex.Matches(result, @"FK\w+");
 		var constraints = (from Match match in matches select match.Value).ToList();
 
-		Assert.AreEqual(7, constraints.Count);
-		Assert.AreEqual("FK_Employee_User", constraints[0]);
-		Assert.AreEqual("FK_UsersGroups_UserID", constraints[1]);
-		Assert.AreEqual("FK_UsersGroups_GroupID", constraints[2]);
-		Assert.AreEqual("FK_Custom_UsersPrivileges_GroupID", constraints[3]);
-		Assert.AreEqual("FK_Traveler_EmployeeID", constraints[4]);
-		Assert.AreEqual("FK_User_OrganizationID", constraints[5]);
-		Assert.AreEqual("FK_UsersPrivileges_UserID", constraints[6]);
+		Assert.That(constraints.Count, Is.EqualTo(7));
+		Assert.That(constraints[0], Is.EqualTo("FK_Employee_User"));
+		Assert.That(constraints[1], Is.EqualTo("FK_UsersGroups_UserID"));
+		Assert.That(constraints[2], Is.EqualTo("FK_UsersGroups_GroupID"));
+		Assert.That(constraints[3], Is.EqualTo("FK_Custom_UsersPrivileges_GroupID"));
+		Assert.That(constraints[4], Is.EqualTo("FK_Traveler_EmployeeID"));
+		Assert.That(constraints[5], Is.EqualTo("FK_User_OrganizationID"));
+		Assert.That(constraints[6], Is.EqualTo("FK_UsersPrivileges_UserID"));
 	}
 
 	private static FluentConfiguration CreateConfiguration()

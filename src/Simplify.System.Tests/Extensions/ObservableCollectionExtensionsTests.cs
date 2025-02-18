@@ -25,12 +25,12 @@ public class ObservableCollectionExtensionsTests
 
 #pragma warning disable CS8604
 
-		Assert.Catch(() => collection!.AddRange(items!), msg);
-		Assert.Catch(() => collection!.AddRange(items.AsEnumerable()), msg);
-		Assert.Catch(() => collection!.RefreshItems(items!), msg);
-		Assert.Catch(() => collection!.RefreshItems(items.AsEnumerable()), msg);
-		Assert.Catch(() => collection!.RefreshIndices(indices!), msg);
-		Assert.Catch(() => collection!.RefreshIndices(indices.AsEnumerable()), msg);
+		Assert.That(() => collection!.AddRange(items!), Throws.Exception, msg);
+		Assert.That(() => collection!.AddRange(items.AsEnumerable()), Throws.Exception, msg);
+		Assert.That(() => collection!.RefreshItems(items!), Throws.Exception, msg);
+		Assert.That(() => collection!.RefreshItems(items.AsEnumerable()), Throws.Exception, msg);
+		Assert.That(() => collection!.RefreshIndices(indices!), Throws.Exception, msg);
+		Assert.That(() => collection!.RefreshIndices(indices.AsEnumerable()), Throws.Exception, msg);
 
 		// Arrange
 
@@ -39,12 +39,12 @@ public class ObservableCollectionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => collection.AddRange(items!), msg);
-		Assert.DoesNotThrow(() => collection.AddRange(items.AsEnumerable()), msg);
-		Assert.DoesNotThrow(() => collection.RefreshItems(items!), msg);
-		Assert.DoesNotThrow(() => collection.RefreshItems(items.AsEnumerable()), msg);
-		Assert.DoesNotThrow(() => collection.RefreshIndices(indices!), msg);
-		Assert.DoesNotThrow(() => collection.RefreshIndices(indices.AsEnumerable()), msg);
+		Assert.That(() => collection.AddRange(items!), Throws.Nothing, msg);
+		Assert.That(() => collection.AddRange(items.AsEnumerable()), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshItems(items!), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshItems(items.AsEnumerable()), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshIndices(indices!), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshIndices(indices.AsEnumerable()), Throws.Nothing, msg);
 
 #pragma warning restore CS8604
 
@@ -56,12 +56,12 @@ public class ObservableCollectionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => collection.AddRange(items), msg);
-		Assert.DoesNotThrow(() => collection.AddRange(items.AsEnumerable()), msg);
-		Assert.DoesNotThrow(() => collection.RefreshItems(items), msg);
-		Assert.DoesNotThrow(() => collection.RefreshItems(items.AsEnumerable()), msg);
-		Assert.DoesNotThrow(() => collection.RefreshIndices(indices), msg);
-		Assert.DoesNotThrow(() => collection.RefreshIndices(indices.AsEnumerable()), msg);
+		Assert.That(() => collection.AddRange(items), Throws.Nothing, msg);
+		Assert.That(() => collection.AddRange(items.AsEnumerable()), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshItems(items), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshItems(items.AsEnumerable()), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshIndices(indices), Throws.Nothing, msg);
+		Assert.That(() => collection.RefreshIndices(indices.AsEnumerable()), Throws.Nothing, msg);
 	}
 
 	#endregion Common tests
@@ -85,9 +85,9 @@ public class ObservableCollectionExtensionsTests
 		// 1. Allow fluent syntax
 		// 2. Not add nulls
 
-		Assert.DoesNotThrow(() => collection.AddRange(items1).AddRange(items2));
-		Assert.Greater(itemsTotalCount, collection.Count, "Null items should not be added to the collection");
-		Assert.AreEqual(itemsNotNullCount, collection.Count, "Non-null items should be added to the collection");
+		Assert.That(() => collection.AddRange(items1).AddRange(items2), Throws.Nothing);
+		Assert.That(collection.Count, Is.LessThan(itemsTotalCount), "Null items should not be added to the collection");
+		Assert.That(collection.Count, Is.EqualTo(itemsNotNullCount), "Non-null items should be added to the collection");
 	}
 
 	[Test]
@@ -102,13 +102,13 @@ public class ObservableCollectionExtensionsTests
 		// 1. Allow fluent syntax
 		// 2. Not add nulls
 
-		Assert.DoesNotThrow(() => collection.AddRange("testing", null, "params").AddRange("with", null));
+		Assert.That(() => collection.AddRange("testing", null, "params").AddRange("with", null), Throws.Nothing);
 
 		const int itemsTotalCount = 5;
 		const int itemsNotNullCount = 3;
 
-		Assert.Greater(itemsTotalCount, collection.Count, "Null items should not be added to the collection");
-		Assert.AreEqual(itemsNotNullCount, collection.Count, "Non-null items should be added to the collection");
+		Assert.That(collection.Count, Is.LessThan(itemsTotalCount), "Null items should not be added to the collection");
+		Assert.That(collection.Count, Is.EqualTo(itemsNotNullCount), "Non-null items should be added to the collection");
 	}
 
 	[Test]
@@ -122,11 +122,11 @@ public class ObservableCollectionExtensionsTests
 		// 1. Allow fluent syntax
 		// 2. Not throw exception when null-check on non-nullable struct
 
-		Assert.DoesNotThrow(() => collection.AddRange(1, 2, 3).AddRange(4, 5));
+		Assert.That(() => collection.AddRange(1, 2, 3).AddRange(4, 5), Throws.Nothing);
 
 		const int itemsCount = 5;
 
-		Assert.AreEqual(itemsCount, collection.Count, "All items should be added to the collection");
+		Assert.That(collection.Count, Is.EqualTo(itemsCount), "All items should be added to the collection");
 	}
 
 	#endregion AddRange tests
@@ -150,8 +150,8 @@ public class ObservableCollectionExtensionsTests
 		// 1. Allow fluent syntax
 		// 2. Not refresh nulls and not existed items
 
-		Assert.DoesNotThrow(() => collection.RefreshItems(items1).RefreshItems(items2));
-		Assert.DoesNotThrow(() => collection.RefreshIndices(indices1).RefreshIndices(indices2));
+		Assert.That(() => collection.RefreshItems(items1).RefreshItems(items2), Throws.Nothing);
+		Assert.That(() => collection.RefreshIndices(indices1).RefreshIndices(indices2), Throws.Nothing);
 
 		// Arrange
 
@@ -160,9 +160,9 @@ public class ObservableCollectionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => collection.RefreshItems(items2));
-		Assert.DoesNotThrow(() => collection.RefreshIndices(indices2));
-		Assert.AreEqual(count, collection.Count, "RefreshItems method should not change items count");
+		Assert.That(() => collection.RefreshItems(items2), Throws.Nothing);
+		Assert.That(() => collection.RefreshIndices(indices2), Throws.Nothing);
+		Assert.That(collection.Count, Is.EqualTo(count), "RefreshItems method should not change items count");
 	}
 
 	[Test]
@@ -177,7 +177,7 @@ public class ObservableCollectionExtensionsTests
 		// 1. Allow fluent syntax
 		// 2. Not refresh nulls and not existed items
 
-		Assert.DoesNotThrow(() => collection.RefreshItems("hello", null).RefreshItems("world", null));
+		Assert.That(() => collection.RefreshItems("hello", null).RefreshItems("world", null), Throws.Nothing);
 
 		// Arrange
 
@@ -186,9 +186,9 @@ public class ObservableCollectionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => collection.RefreshItems("hello", null, "other"));
-		Assert.DoesNotThrow(() => collection.RefreshIndices(-2, 4, 15));
-		Assert.AreEqual(count, collection.Count, "RefreshItems method should not change items count");
+		Assert.That(() => collection.RefreshItems("hello", null, "other"), Throws.Nothing);
+		Assert.That(() => collection.RefreshIndices(-2, 4, 15), Throws.Nothing);
+		Assert.That(collection.Count, Is.EqualTo(count), "RefreshItems method should not change items count");
 	}
 
 	[Test]
@@ -203,7 +203,7 @@ public class ObservableCollectionExtensionsTests
 		// 1. Allow fluent syntax
 		// 2. Not refresh nulls and not existed items
 
-		Assert.DoesNotThrow(() => collection.RefreshItems(5).RefreshItems(9));
+		Assert.That(() => collection.RefreshItems(5).RefreshItems(9), Throws.Nothing);
 
 		// Arrange
 
@@ -212,9 +212,9 @@ public class ObservableCollectionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => collection.RefreshItems(9, 7));
-		Assert.DoesNotThrow(() => collection.RefreshIndices(-3, 1, 7));
-		Assert.AreEqual(count, collection.Count, "RefreshItems method should not change items count");
+		Assert.That(() => collection.RefreshItems(9, 7), Throws.Nothing);
+		Assert.That(() => collection.RefreshIndices(-3, 1, 7), Throws.Nothing);
+		Assert.That(collection.Count, Is.EqualTo(count), "RefreshItems method should not change items count");
 	}
 
 	#endregion RefreshItems/RefreshIndices tests

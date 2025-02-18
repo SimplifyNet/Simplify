@@ -10,15 +10,15 @@ public class ProfileExpressionExtensionsTests
 {
 	#region SetUp
 
-	private readonly FoodSource source = new() { Category = "Fruit", Name = "Apple", Count = 5 };
-	private FoodDto? dto;
-	private IFoodDto? dtoBase;
+	private readonly FoodSource _source = new() { Category = "Fruit", Name = "Apple", Count = 5 };
+	private FoodDto? _dto;
+	private IFoodDto? _dtoBase;
 
 	[SetUp]
 	public void SetUp()
 	{
-		dtoBase = null;
-		dto = null;
+		_dtoBase = null;
+		_dto = null;
 	}
 
 	#endregion SetUp
@@ -32,10 +32,10 @@ public class ProfileExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
+		Assert.That(() => cfg = new MapperConfiguration(c => c.CreateMap<FoodSource, IFoodDto, FoodDto>()
 			.ForMember(d => d.Type, o => o.MapFrom(s => s.Category))
-			.ForMember(d => d.Source, o => o.Ignore())));
-		Assert.DoesNotThrow(() => cfg.AssertConfigurationIsValid());
+			.ForMember(d => d.Source, o => o.Ignore())), Throws.Nothing);
+		Assert.That(() => cfg.AssertConfigurationIsValid(), Throws.Nothing);
 	}
 
 	[Test]
@@ -49,10 +49,10 @@ public class ProfileExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dtoBase = mapper.Map<IFoodDto>(source));
-		Assert.AreEqual(dtoBase.Type, source.Category);
-		Assert.AreEqual(dtoBase.Name, source.Name);
-		Assert.AreEqual(dtoBase.Count, source.Count);
+		Assert.That(_dtoBase = mapper.Map<IFoodDto>(_source), Is.Not.Null);
+		Assert.That(_dtoBase.Type, Is.EqualTo(_source.Category));
+		Assert.That(_dtoBase.Name, Is.EqualTo(_source.Name));
+		Assert.That(_dtoBase.Count, Is.EqualTo(_source.Count));
 	}
 
 	[Test]
@@ -66,9 +66,9 @@ public class ProfileExpressionExtensionsTests
 
 		// Act & Assert
 
-		Assert.NotNull(dto = mapper.Map<FoodDto>(source));
-		Assert.AreEqual(dto.Type, source.Category);
-		Assert.AreEqual(dto.Name, source.Name);
-		Assert.AreEqual(dto.Count, source.Count);
+		Assert.That(_dto = mapper.Map<FoodDto>(_source), Is.Not.Null);
+		Assert.That(_dto.Type, Is.EqualTo(_source.Category));
+		Assert.That(_dto.Name, Is.EqualTo(_source.Name));
+		Assert.That(_dto.Count, Is.EqualTo(_source.Count));
 	}
 }

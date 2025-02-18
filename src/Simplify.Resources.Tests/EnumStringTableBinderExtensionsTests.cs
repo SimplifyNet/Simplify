@@ -20,7 +20,7 @@ public class EnumStringTableBinderExtensionsTests
 		var testString = _uow.GetAssociatedValue(TestType.Value1);
 
 		// Assert
-		Assert.AreEqual("Enum value 1", testString);
+		Assert.That(testString, Is.EqualTo("Enum value 1"));
 	}
 
 	[Test]
@@ -30,7 +30,7 @@ public class EnumStringTableBinderExtensionsTests
 		var testString = _uow.GetAssociatedValue(TestType.Value2);
 
 		// Assert
-		Assert.IsNull(testString);
+		Assert.That(testString, Is.Null);
 	}
 
 	[Test]
@@ -40,11 +40,10 @@ public class EnumStringTableBinderExtensionsTests
 		var valuesList = _uow.GetKeyValuePairList<TestType>();
 
 		// Assert
-
-		Assert.AreEqual(2, valuesList.Count);
-		Assert.AreEqual(TestType.Value1, valuesList[0].Key);
-		Assert.AreEqual("Enum value 1", valuesList[0].Value);
-		Assert.AreEqual(TestType.Value2, valuesList[1].Key);
-		Assert.IsNull(valuesList[1].Value);
+		Assert.That(valuesList.Count, Is.EqualTo(2));
+		Assert.That(valuesList[0].Key, Is.EqualTo(TestType.Value1));
+		Assert.That(valuesList[0].Value, Is.EqualTo("Enum value 1"));
+		Assert.That(valuesList[1].Key, Is.EqualTo(TestType.Value2));
+		Assert.That(valuesList[1].Value, Is.Null);
 	}
 }

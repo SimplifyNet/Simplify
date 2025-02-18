@@ -31,7 +31,7 @@ public class Bus2Async2Tests
 		// Assert
 
 		handler.Verify(x => x.Handle(It.Is<TestRequest>(r => r == request)), Times.Once);
-		Assert.AreEqual(response, result);
+		Assert.That(result, Is.EqualTo(response));
 	}
 
 	[Test]

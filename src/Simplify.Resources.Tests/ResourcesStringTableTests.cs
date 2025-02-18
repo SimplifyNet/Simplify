@@ -6,7 +6,7 @@ namespace Simplify.Resources.Tests;
 [TestFixture]
 public class ResourcesStringTableTests
 {
-	private IResourcesStringTable _uow;
+	private ResourcesStringTable _uow;
 
 	[SetUp]
 	public void Initialize()
@@ -24,7 +24,7 @@ public class ResourcesStringTableTests
 		var testString = _uow["TestString"];
 
 		// Assert
-		Assert.AreEqual("Hello World!", testString);
+		Assert.That(testString, Is.EqualTo("Hello World!"));
 	}
 
 	[Test]
@@ -38,7 +38,7 @@ public class ResourcesStringTableTests
 		var testString = _uow["TestString"];
 
 		// Assert
-		Assert.AreEqual("Hello World!", testString);
+		Assert.That(testString, Is.EqualTo("Hello World!"));
 	}
 
 	[Test]
@@ -48,6 +48,6 @@ public class ResourcesStringTableTests
 		var testString = _uow["TestString2"];
 
 		// Assert
-		Assert.IsNull(testString);
+		Assert.That(testString, Is.Null);
 	}
 }

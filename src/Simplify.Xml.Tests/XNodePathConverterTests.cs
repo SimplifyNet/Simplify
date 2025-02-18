@@ -23,13 +23,13 @@ public class XNodePathConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual((string)new XNodePathConverter("root/body/item").AsFunc()(_doc), "Value");
-		Assert.AreEqual((string)new XNodePathConverter("item", body).AsFunc()(_doc), "Value");
-		Assert.AreEqual((string)new XNodePathConverter("item", func).AsFunc()(_doc), "Value");
+		Assert.That((string)new XNodePathConverter("root/body/item").AsFunc()(_doc), Is.EqualTo("Value"));
+		Assert.That((string)new XNodePathConverter("item", body).AsFunc()(_doc), Is.EqualTo("Value"));
+		Assert.That((string)new XNodePathConverter("item", func).AsFunc()(_doc), Is.EqualTo("Value"));
 
-		Assert.AreEqual((string)new XNodePathConverter("root/body/colors").AsFunc()(_doc).GetMany("c").ElementAt(1), "green");
-		Assert.AreEqual((string)new XNodePathConverter("colors", body).AsFunc()(_doc).GetMany("c").ElementAt(0), "red");
-		Assert.AreEqual((string)new XNodePathConverter("colors", func).AsFunc()(_doc).GetMany("c").ElementAt(0), "red");
+		Assert.That((string)new XNodePathConverter("root/body/colors").AsFunc()(_doc).GetMany("c").ElementAt(1), Is.EqualTo("green"));
+		Assert.That((string)new XNodePathConverter("colors", body).AsFunc()(_doc).GetMany("c").ElementAt(0), Is.EqualTo("red"));
+		Assert.That((string)new XNodePathConverter("colors", func).AsFunc()(_doc).GetMany("c").ElementAt(0), Is.EqualTo("red"));
 	}
 
 	[Test]
@@ -42,13 +42,13 @@ public class XNodePathConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual((string)XNodePathConverter.AsFunc("root/body/item")(_doc), "Value");
-		Assert.AreEqual((string)XNodePathConverter.AsFunc("item", body)(_doc), "Value");
-		Assert.AreEqual((string)XNodePathConverter.AsFunc("item", func)(_doc), "Value");
+		Assert.That((string)XNodePathConverter.AsFunc("root/body/item")(_doc), Is.EqualTo("Value"));
+		Assert.That((string)XNodePathConverter.AsFunc("item", body)(_doc), Is.EqualTo("Value"));
+		Assert.That((string)XNodePathConverter.AsFunc("item", func)(_doc), Is.EqualTo("Value"));
 
-		Assert.AreEqual((string)XNodePathConverter.AsFunc("root/body/colors")(_doc).GetMany("c").ElementAt(1), "green");
-		Assert.AreEqual((string)XNodePathConverter.AsFunc("colors", body)(_doc).GetMany("c").ElementAt(0), "red");
-		Assert.AreEqual((string)XNodePathConverter.AsFunc("colors", func)(_doc).GetMany("c").ElementAt(1), "green");
+		Assert.That((string)XNodePathConverter.AsFunc("root/body/colors")(_doc).GetMany("c").ElementAt(1), Is.EqualTo("green"));
+		Assert.That((string)XNodePathConverter.AsFunc("colors", body)(_doc).GetMany("c").ElementAt(0), Is.EqualTo("red"));
+		Assert.That((string)XNodePathConverter.AsFunc("colors", func)(_doc).GetMany("c").ElementAt(1), Is.EqualTo("green"));
 	}
 
 	[Test]
@@ -61,13 +61,13 @@ public class XNodePathConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual((string)new XNodePathConverter("root/body/item").Convert(_doc), "Value");
-		Assert.AreEqual((string)new XNodePathConverter("item", body).Convert(_doc), "Value");
-		Assert.AreEqual((string)new XNodePathConverter("item", func).Convert(_doc), "Value");
+		Assert.That((string)new XNodePathConverter("root/body/item").Convert(_doc), Is.EqualTo("Value"));
+		Assert.That((string)new XNodePathConverter("item", body).Convert(_doc), Is.EqualTo("Value"));
+		Assert.That((string)new XNodePathConverter("item", func).Convert(_doc), Is.EqualTo("Value"));
 
-		Assert.AreEqual((string)new XNodePathConverter("root/body/colors").Convert(_doc).GetMany("c").ElementAt(1), "green");
-		Assert.AreEqual((string)new XNodePathConverter("colors", body).Convert(_doc).GetMany("c").ElementAt(0), "red");
-		Assert.AreEqual((string)new XNodePathConverter("colors", func).Convert(_doc).GetMany("c").ElementAt(1), "green");
+		Assert.That((string)new XNodePathConverter("root/body/colors").Convert(_doc).GetMany("c").ElementAt(1), Is.EqualTo("green"));
+		Assert.That((string)new XNodePathConverter("colors", body).Convert(_doc).GetMany("c").ElementAt(0), Is.EqualTo("red"));
+		Assert.That((string)new XNodePathConverter("colors", func).Convert(_doc).GetMany("c").ElementAt(1), Is.EqualTo("green"));
 	}
 
 	[Test]
@@ -80,13 +80,13 @@ public class XNodePathConverterTests
 
 		// Act & Assert
 
-		Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "root/body/item"), "Value");
-		Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "item", body), "Value");
-		Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "item", func), "Value");
+		Assert.That((string)XNodePathConverter.Convert(_doc, "root/body/item"), Is.EqualTo("Value"));
+		Assert.That((string)XNodePathConverter.Convert(_doc, "item", body), Is.EqualTo("Value"));
+		Assert.That((string)XNodePathConverter.Convert(_doc, "item", func), Is.EqualTo("Value"));
 
-		Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "root/body/colors").GetMany("c").ElementAt(0), "red");
-		Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "colors", body).GetMany("c").ElementAt(1), "green");
-		Assert.AreEqual((string)XNodePathConverter.Convert(_doc, "colors", func).GetMany("c").ElementAt(0), "red");
+		Assert.That((string)XNodePathConverter.Convert(_doc, "root/body/colors").GetMany("c").ElementAt(0), Is.EqualTo("red"));
+		Assert.That((string)XNodePathConverter.Convert(_doc, "colors", body).GetMany("c").ElementAt(1), Is.EqualTo("green"));
+		Assert.That((string)XNodePathConverter.Convert(_doc, "colors", func).GetMany("c").ElementAt(0), Is.EqualTo("red"));
 	}
 
 	[Test]
@@ -99,8 +99,8 @@ public class XNodePathConverterTests
 
 		// Act & Assert
 
-		Assert.DoesNotThrow(() => body = new XNodePathConverter("root/body"));
-		Assert.DoesNotThrow(() => item = new XNodePathConverter("item", body));
-		Assert.DoesNotThrow(() => item = new XNodePathConverter("item", x => x.Get("root/body")));
+		Assert.That(() => body = new XNodePathConverter("root/body"), Throws.Nothing);
+		Assert.That(() => item = new XNodePathConverter("item", body), Throws.Nothing);
+		Assert.That(() => item = new XNodePathConverter("item", x => x.Get("root/body")), Throws.Nothing);
 	}
 }
