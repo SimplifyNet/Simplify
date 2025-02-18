@@ -20,7 +20,7 @@ jobs:
           - os: ubuntu-latest
             solution: Simplify.NetCore.sln
             tests-exclude-category: Windows
-            dotnet-test-framework: net8.0
+            test-framework-command: --framework net8.0
 
     env:
       DOTNET_TEST_FRAMEWORK: ${{ matrix.dotnet-test-framework }} # Set at job level
@@ -39,7 +39,7 @@ jobs:
         run: dotnet build ${{ matrix.solution }} --no-restore -c Release
 
       - name: Perform Unit Testing
-        run: dotnet test ${{ matrix.solution }} --no-build -c Release --framework ${{ matrix.test-framework }} --filter "TestCategory != Integration & TestCategory != ${{ matrix.tests-exclude-category }}" --verbosity normal
+        run: dotnet test ${{ matrix.solution }} --no-build -c Release ${{ matrix.test-framework-command }} --filter "TestCategory != Integration & TestCategory != ${{ matrix.tests-exclude-category }}" --verbosity normal
 
       - name: Create Packages
         run: dotnet pack ${{ matrix.solution }} --no-build -c Release -o ./publish
