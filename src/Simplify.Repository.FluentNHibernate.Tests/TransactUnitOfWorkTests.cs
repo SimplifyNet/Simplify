@@ -12,6 +12,7 @@ using Simplify.Repository.FluentNHibernate.Tests.Mappings.Accounts;
 
 namespace Simplify.Repository.FluentNHibernate.Tests;
 
+[TestFixture]
 public class TransactUnitOfWorkTests
 {
 	private ISessionFactory _sessionFactory;
