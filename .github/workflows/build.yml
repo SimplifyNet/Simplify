@@ -20,7 +20,7 @@ jobs:
           - os: ubuntu-latest
             solution: Simplify.NetCore.sln
             tests-exclude-category: Windows
-            test-framework-command: --framework net8.0
+            test-framework-command: --framework net9.0
 
     env:
       DOTNET_TEST_FRAMEWORK: ${{ matrix.dotnet-test-framework }} # Set at job level
