@@ -15,7 +15,7 @@
 
 - ncrontab bump to 3.3.3
 - Simplify.DI bump to 4.2.11
-- Microsoft.Extensions.Configuration bump to 3.1.32
+- Microsoft.Extensions.Configuration bump to 9.0.6
 
 ## [1.5.0] - 2024-06-02
 
@@ -43,7 +43,7 @@
 
 - Simplify.DI bump to 4.2.10
 - Simplify.System bump to 1.6.2
-- Microsoft.Extensions.Configuration bump to 9.0.6
+- Microsoft.Extensions.Configuration bump to 3.1.32
 
 ## [1.3] - 2021-11-18
 
