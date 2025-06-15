@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0] - 2025-06-15
+
+### Removed
+
+- .NET 6 support
+
+### Added
+
+- .NET 9 support
+
+### Dependencies
+
+- System.IO.Abstractions bump to 22.0.14
+
 ## [1.4.0] - 2023-08-26
 
 ### Removed
