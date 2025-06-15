@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.15.0] - 2025-06-15
+
+### Dependencies
+
+- ncrontab bump to 3.3.3
+- Simplify.DI bump to 4.2.11
+- Microsoft.Extensions.Configuration bump to 9.0.6
+
 ## [2.14.1] - 2023-08-24
 
 ### Removed
