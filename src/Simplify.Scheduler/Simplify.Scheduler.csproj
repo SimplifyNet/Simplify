@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;netstandard2.1;netstandard2.0;net48</TargetFrameworks>
+		<TargetFrameworks>net9.0;net8.0;netstandard2.1;netstandard2.0;net48</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -24,10 +24,10 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Scheduler/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="ncrontab" Version="3.3.1" />
-		<PackageReference Include="Simplify.DI" Version="4.2.10" />
+		<PackageReference Include="ncrontab" Version="3.3.3" />
+		<PackageReference Include="Simplify.DI" Version="4.2.11" />
 		<PackageReference Include="Simplify.System" Version="1.6.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.32" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />

@@ -1,12 +1,27 @@
 # Changelog
 
+## [1.6.0] - 2025-06-15
+
+### Removed
+
+- .NET 6.0 support
+
+### Added
+
+- .NET 8.0 support
+- .NET 9.0 support
+
+### Dependencies
+
+- Simplify.DI bump to 4.2.11
+- Microsoft.Extensions.Configuration bump to 3.1.32
+
 ## [1.5.0] - 2024-06-02
 
 ### Added
 
 - Logging crontab parse errors to SchedulerJobsHandler.OnException (#490)
 - MultitaskScheduler.StartAsync method (To use scheduler asynchronously from `async Task Main` method) (#491)
-
 
 ## [1.4.0] - 2024-01-09
 
@@ -27,7 +42,7 @@
 
 - Simplify.DI bump to 4.2.10
 - Simplify.System bump to 1.6.2
-- Microsoft.Extensions.Configuration bump to 3.1.32
+- Microsoft.Extensions.Configuration bump to 9.0.6
 
 ## [1.3] - 2021-11-18
 
