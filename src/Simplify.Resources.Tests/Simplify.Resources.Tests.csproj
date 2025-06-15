@@ -8,9 +8,11 @@
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Simplify.Resources\Simplify.Resources.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" />
 		<PackageReference Include="NUnit" Version="4.3.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="5.0.*" />
-		<ProjectReference Include="..\Simplify.Resources\Simplify.Resources.csproj" />
 	</ItemGroup>
 </Project>
