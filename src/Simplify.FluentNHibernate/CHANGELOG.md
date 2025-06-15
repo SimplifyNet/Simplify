@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.3.0] - 2025-06-15
+
+### Removed
+
+- .NET 6.0 support
+
+### Added
+
+- .NET 8.0 explicit support
+- .NET 9.0 explicit support
+
+### Dependencies
+
+- FluentNHibernate bump to 3.4.1
+- Microsoft.Extensions.Configuration.Abstractions to 9.0.6
+
 ## [3.2.1] - 2024-12-01
 
 ### Dependencies
