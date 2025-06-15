@@ -13,6 +13,7 @@
 
 ### Dependencies
 
+- ncrontab bump to 3.3.3
 - Simplify.DI bump to 4.2.11
 - Microsoft.Extensions.Configuration bump to 3.1.32
 
