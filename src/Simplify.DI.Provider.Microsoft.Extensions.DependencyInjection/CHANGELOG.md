@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.0] - 2025-06-15
+
+### Removed
+
+- .NET 6 support
+
+### Added
+
+- .NET 9 explicit support
+
+### Dependencies
+
+- Microsoft.Extensions.DependencyInjection bump to 9.0.6
+
 ## [1.6.0] - 2024-06-09
 
 ### Dependencies

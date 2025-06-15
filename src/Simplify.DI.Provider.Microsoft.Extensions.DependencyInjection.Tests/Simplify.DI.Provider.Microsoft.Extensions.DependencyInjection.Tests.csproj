@@ -8,10 +8,12 @@
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection\Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\Simplify.DI.TestsTypes\Simplify.DI.TestsTypes.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" />
 		<PackageReference Include="NUnit" Version="4.3.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="5.0.*" />
-		<ProjectReference Include="..\Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection\Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.csproj" />
-		<ProjectReference Include="..\Simplify.DI.TestsTypes\Simplify.DI.TestsTypes.csproj" />
 	</ItemGroup>
 </Project>
