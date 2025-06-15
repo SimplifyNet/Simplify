@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0] - 2025-06-15
+
+### Removed
+
+- .NET 6 support
+
+### Added
+
+- .NET 9 support
+
+### Dependencies
+
+- Microsoft.Extensions.Configuration bump to 9.0.6
+- System.Configuration.ConfigurationManager bump to 9.0.6
+
 ## [1.5.5] - 2022-09-08
 
 ### Added
