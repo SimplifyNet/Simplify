@@ -7,12 +7,12 @@ public static class IocRegistrations
 {
 	public static IConfiguration Configuration { get; private set; }
 
-	public static IDIContainerProvider Register()
+	public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
 	{
-		DIContainer.Current.RegisterConfiguration()
+		provider.RegisterConfiguration()
 			.Register<PeriodicalProcessor>();
 
-		return DIContainer.Current;
+		return provider;
 	}
 
 	private static IDIRegistrator RegisterConfiguration(this IDIRegistrator registrator)

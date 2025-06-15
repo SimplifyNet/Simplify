@@ -4,7 +4,7 @@ namespace Simplify.Examples.Repository.FluentNHibernate.App.Setup;
 
 public static class IocRegistrations
 {
-	public static IDIContainerProvider RegisterSimplifyFluentNHibernateExamplesApp(this IDIContainerProvider provider)
+	public static IDIContainerProvider RegisterAll(this IDIContainerProvider provider)
 	{
 		provider.RegisterConfiguration()
 			.RegisterDatabase()

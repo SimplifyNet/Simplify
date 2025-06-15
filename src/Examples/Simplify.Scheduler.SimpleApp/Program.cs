@@ -1,43 +1,28 @@
 ﻿using System;
 using Simplify.DI;
+using Simplify.Scheduler;
+using Simplify.Scheduler.Jobs;
+using Simplify.Scheduler.SimpleApp;
 using Simplify.Scheduler.SimpleApp.Setup;
 
-namespace Simplify.Scheduler.SimpleApp;
+// IOC container setup
 
-internal class Program
-{
-	private static void Main(string[] args)
-	{
-		// IOC container setup
+DIContainer.Current
+	.RegisterAll()
+	.Verify();
 
-		IocRegistrations.Register()
-			.Verify();
+// Using scheduler
 
-		// Using scheduler
+using var scheduler = new MultitaskScheduler();
 
-		using (var scheduler = new MultitaskScheduler())
-		{
-			scheduler.OnJobStart += HandlerOnJobStart;
-			scheduler.OnJobFinish += HandlerOnJobFinish;
+scheduler.OnJobStart += (ISchedulerJobRepresentation representation) => Console.WriteLine("Job started: " + representation.JobClassType.Name);
+scheduler.OnJobFinish += (ISchedulerJobRepresentation representation) => Console.WriteLine("Job finished: " + representation.JobClassType.Name);
 
-			scheduler.AddJob<PeriodicalProcessor>(IocRegistrations.Configuration);
+scheduler.AddJob<PeriodicalProcessor>(IocRegistrations.Configuration);
 
-			if (scheduler.Start(args))
-				return;
-		}
+if (await scheduler.StartAsync(args))
+	return;
 
-		// Testing without scheduler
-		using (var scope = DIContainer.Current.BeginLifetimeScope())
-			scope.Resolver.Resolve<PeriodicalProcessor>().Run();
-	}
-
-	private static void HandlerOnJobStart(Jobs.ISchedulerJobRepresentation representation)
-	{
-		Console.WriteLine("Job started: " + representation.JobClassType.Name);
-	}
-
-	private static void HandlerOnJobFinish(Jobs.ISchedulerJobRepresentation representation)
-	{
-		Console.WriteLine("Job finished: " + representation.JobClassType.Name);
-	}
-}
+// Testing without scheduler
+using (var scope = DIContainer.Current.BeginLifetimeScope())
+	scope.Resolver.Resolve<PeriodicalProcessor>().Run();
