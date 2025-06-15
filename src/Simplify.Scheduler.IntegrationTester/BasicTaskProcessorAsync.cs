@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Simplify.Scheduler.IntegrationTester;
 
-public class BasicTaskProcessor : IDisposable
+public class BasicTaskProcessorAsync(DisposableDependency dependency) : IDisposable
 {
 	private static bool _isRunning;
 
-	private readonly DisposableDependency _dependency;
-
-	public BasicTaskProcessor(DisposableDependency dependency) => _dependency = dependency;
-
-	public void Run()
+	public Task Run()
 	{
 		if (_isRunning)
 			throw new SimplifySchedulerException("BasicTaskProcessor is running a duplicate!");
@@ -19,10 +16,11 @@ public class BasicTaskProcessor : IDisposable
 		_isRunning = true;
 
 		Trace.WriteLine("BasicTaskProcessor launched");
+
+		dependency.DoSomeWork();
+
+		return Task.CompletedTask;
 	}
 
-	public void Dispose()
-	{
-		Trace.WriteLine("BasicTaskProcessor disposed");
-	}
+	public void Dispose() => Trace.WriteLine("BasicTaskProcessor disposed");
 }

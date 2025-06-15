@@ -11,5 +11,5 @@ provider.RegisterAll()
 using var scope = provider.BeginLifetimeScope();
 var sender = scope.Resolver.Resolve<IMailSender>();
 
-sender.Send("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject",
+await sender.SendAsync("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject",
 	"Hello World!!!");

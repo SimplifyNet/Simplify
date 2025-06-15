@@ -15,7 +15,7 @@ public static class IocRegistrations
 			.Register<TwoSecondStepProcessor>()
 			.Register<OneMinuteStepCrontabProcessor>()
 			.Register<TwoParallelTasksProcessor>()
-			.Register<BasicTaskProcessor>();
+			.Register<BasicTaskProcessorAsync>();
 
 		return provider;
 	}

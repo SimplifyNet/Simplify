@@ -6,26 +6,29 @@ using Simplify.Scheduler.IntegrationTester.Setup;
 
 // IOC container setup
 
-DIContainer.Current.RegisterAll()
+DIContainer.Current
+	.RegisterAll()
 	.Verify();
 
 // Using scheduler
 
-using (var scheduler = new MultitaskScheduler())
-{
-	scheduler.OnJobStart += HandlerDiagnostics.HandlerOnJobStart;
-	scheduler.OnJobFinish += HandlerDiagnostics.HandlerOnJobFinish;
+using var scheduler = new MultitaskScheduler();
 
-	scheduler.AddJob<OneSecondStepProcessor>(IocRegistrations.Configuration);
-	scheduler.AddJob<TwoSecondStepProcessor>(IocRegistrations.Configuration, startupArgs: "Hello world!!!");
-	scheduler.AddJob<OneMinuteStepCrontabProcessor>(IocRegistrations.Configuration);
-	scheduler.AddJob<TwoParallelTasksProcessor>(IocRegistrations.Configuration, invokeMethodName: "Execute");
-	scheduler.AddBasicJob<BasicTaskProcessor>();
+scheduler.OnJobStart += HandlerDiagnostics.HandlerOnJobStart;
+scheduler.OnJobFinish += HandlerDiagnostics.HandlerOnJobFinish;
 
-	if (await scheduler.StartAsync(args))
-		return;
-}
+scheduler.AddJob<OneSecondStepProcessor>(IocRegistrations.Configuration);
+scheduler.AddJob<TwoSecondStepProcessor>(IocRegistrations.Configuration, startupArgs: "Hello world!!!");
+scheduler.AddJob<OneMinuteStepCrontabProcessor>(IocRegistrations.Configuration);
+scheduler.AddJob<TwoParallelTasksProcessor>(IocRegistrations.Configuration, invokeMethodName: "Execute");
+scheduler.AddBasicJob<BasicTaskProcessorAsync>();
+
+if (await scheduler.StartAsync(args))
+	return;
+
 
 // Testing some processors without scheduler
-using (var scope = DIContainer.Current.BeginLifetimeScope())
-	scope.Resolver.Resolve<BasicTaskProcessor>().Run();
+
+using var scope = DIContainer.Current.BeginLifetimeScope();
+
+await scope.Resolver.Resolve<BasicTaskProcessorAsync>().Run();
