@@ -16,7 +16,7 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" />
 		<PackageReference Include="NHibernate" Version="5.5.2" />
 		<PackageReference Include="NUnit" Version="4.3.*" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.6.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="5.0.*" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.*" />
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.117.*" />
 	</ItemGroup>

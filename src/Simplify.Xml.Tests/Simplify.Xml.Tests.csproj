@@ -13,7 +13,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" />
 		<PackageReference Include="NUnit" Version="4.3.*" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.6.*" />
+		<PackageReference Include="NUnit3TestAdapter" Version="5.0.*" />
 		<PackageReference Include="Simplify.Templates" Version="2.0.0" />
 	</ItemGroup>
 	<ItemGroup>
