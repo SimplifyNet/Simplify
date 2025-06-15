@@ -12,7 +12,7 @@
 		<ProjectReference Include="..\Simplify.Bus.Impl\Simplify.Bus.Impl.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.*" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.*" />
 		<PackageReference Include="NUnit" Version="4.3.*" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.6.*" />
 		<PackageReference Include="FluentValidation" Version="11.4.*" />
