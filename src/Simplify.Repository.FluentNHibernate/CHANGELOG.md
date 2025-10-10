@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.2] - 2025-10-10
+
+### Dependencies
+
+- Simplify.FluentNHibernate bump to 3.3.0
+
 ## [1.7.1] - 2024-12-02
 
 ### Dependencies
