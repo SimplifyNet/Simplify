@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0] - 2025-10-10
+
+### Removed
+
+- .NET Standard 2.1 support
+
+### Added
+
+- .NET 9 support
+
+### Dependencies
+
+- Simplify.EntityFramework bump to 1.1
+- Microsoft.EntityFrameworkCore.Relational to 9.0.9
+- Simplify.DI bump to 4.2.11
+
 ## [0.3.0] - 2023-01-14
 
 ### Added

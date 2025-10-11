@@ -13,10 +13,10 @@
 		<ProjectReference Include="..\Simplify.Examples.Repository.EntityFramework\Simplify.Examples.Repository.EntityFramework.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
 		<PackageReference Include="Simplify.DI" Version="4.2.*" />
 		<PackageReference Include="Simplify.DI.Provider.SimpleInjector" Version="1.11.*" />
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.*" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="appsettings.json">

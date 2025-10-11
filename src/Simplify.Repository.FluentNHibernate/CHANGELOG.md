@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.7.3] - 2025-10-10
+
+### Removed
+
+- .NET 6 support
+
+### Added
+
+- .NET 9 support
+
 ## [1.7.2] - 2025-10-10
 
 ### Dependencies

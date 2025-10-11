@@ -28,14 +28,14 @@ public class GenericRepository<T>(DbContext session) : IGenericRepository<T>
 	/// </summary>
 	/// <param name="id">The identifier.</param>
 	/// <returns></returns>
-	public T GetSingleByID(object id) => Session.Find<T>(id);
+	public T GetSingleByID(object id) => Session.Find<T>(id)!;
 
 	/// <summary>
 	/// Gets the single object by identifier asynchronously.
 	/// </summary>
 	/// <param name="id">The identifier.</param>
 	/// <returns></returns>
-	public Task<T> GetSingleByIDAsync(object id) => Session.FindAsync<T>(id).AsTask();
+	public Task<T> GetSingleByIDAsync(object id) => Session.FindAsync<T>(id).AsTask()!;
 
 	/// <summary>
 	/// Gets the single object by query.

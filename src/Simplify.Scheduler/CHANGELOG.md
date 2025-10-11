@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.6.1] - 2025-10-10
+
+- ncrontab bump to 3.4
+- Microsoft.Extensions.Configuration bump to 9.0.9
+
 ## [1.6.0] - 2025-06-15
 
 ### Removed

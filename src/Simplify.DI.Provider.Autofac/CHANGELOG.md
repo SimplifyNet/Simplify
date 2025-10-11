@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.3] - 2025-10-11
+
+### Dependencies
+
+- Autofac bump to 8.4.0
+
 ## [1.3.2] - 2025-06-15
 
 ### Dependencies

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.15.1] - 2025-10-10
+
+### Dependencies
+
+- ncrontab bump to 3.4
+- Microsoft.Extensions.Configuration bump to 9.0.6
+
 ## [2.15.0] - 2025-06-15
 
 ### Dependencies

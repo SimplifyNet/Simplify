@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.1] - 2025-10-10
+
+### Removed
+
+- .NET Standard 2.1 support
+
+### Added
+
+- .NET 9 support
+
+### Dependencies
+
+- Microsoft.EntityFrameworkCore to 9.0.9
+- Microsoft.Extensions.Configuration.Abstractions to 9.0.9
+- System.Data.SqlClient bump to 4.9
+
 ## [1.0] - 2024-01-14
 
 ### Dependencies
