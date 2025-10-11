@@ -12,9 +12,9 @@
 
 ### Dependencies
 
+- Switch from System.Data.SqlClient to Microsoft.Data.SqlClient 6.1.2
 - Microsoft.EntityFrameworkCore to 9.0.9
 - Microsoft.Extensions.Configuration.Abstractions to 9.0.9
-- System.Data.SqlClient bump to 4.9
 
 ## [1.0] - 2024-01-14
 

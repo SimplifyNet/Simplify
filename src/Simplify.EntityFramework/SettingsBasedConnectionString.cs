@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Simplify.EntityFramework.Settings;
 using Simplify.EntityFramework.Settings.Impl;
