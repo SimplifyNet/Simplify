@@ -18,7 +18,6 @@ public delegate void SchedulerExceptionEventHandler(SchedulerExceptionArgs args)
 /// <param name="exception">The exception.</param>
 public class SchedulerExceptionArgs(string appName, Exception exception)
 {
-
 	/// <summary>
 	/// Gets the name of the application.
 	/// </summary>
