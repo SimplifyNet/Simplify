@@ -5,6 +5,7 @@ using NUnit.Framework;
 namespace Simplify.Templates.Tests;
 
 [TestFixture]
+[Category("Integration")]
 public class TemplatePerformanceTests
 {
 	[Test]
