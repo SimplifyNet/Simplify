@@ -24,6 +24,8 @@
 		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl-en.xml" />
 		<None Remove="TestTemplates\Embedded\LocalizationTest.tpl-ru.xml" />
 		<None Remove="TestTemplates\Embedded\TestFile.txt" />
+		<None Remove="TestTemplates\Embedded\PerformanceTemplate.tpl" />
+		<None Remove="TestTemplates\Embedded\PerformanceTemplateResult.tpl" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="TestTemplates\Embedded\EmptyFIle.txt">
@@ -39,6 +41,12 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="TestTemplates\Embedded\TestFile.txt">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestTemplates\Embedded\PerformanceTemplate.tpl">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="TestTemplates\Embedded\PerformanceTemplateResult.tpl">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 	</ItemGroup>
