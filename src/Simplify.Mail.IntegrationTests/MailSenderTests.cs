@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using Simplify.DI;
 using Simplify.DI.Provider.DryIoc;
@@ -10,18 +11,32 @@ namespace Simplify.Mail.IntegrationTests;
 [Category("Integration")]
 public class MailSenderTests
 {
-	[Test]
-	public void SendSimpleTestEmail()
+	private IConfiguration _configuration;
+	private IMailSender _mailSender;
+
+	[SetUp]
+	public void Setup()
 	{
-		MailSender.Default.Send("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
+		_configuration = new ConfigurationBuilder()
+			.AddJsonFile("appsettings.json")
+			.Build();
+
+		_mailSender = new MailSender(_configuration);
+	}
+
+	[TearDown]
+	public void TearDown()
+	{
+		_mailSender.Dispose();
 	}
 
 	[Test]
-	public Task SendSimpleAsyncTestEmail()
-	{
-		return MailSender.Default.SendAsync("somesender@somedomain.com",
-			"somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
-	}
+	public void SendSimpleTestEmail() =>
+		_mailSender.Send("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
+
+	[Test]
+	public async Task SendSimpleAsyncTestEmail() =>
+		await _mailSender.SendAsync("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
 
 	[Test]
 	public async Task SendAsync_TwoDuplicates_OneSend()
@@ -30,7 +45,7 @@ public class MailSenderTests
 
 		var container = new DryIocDIProvider();
 
-		container.Register<IMailSender>(r => new MailSender());
+		container.Register<IMailSender>(r => new MailSender(_configuration));
 		container.Verify();
 
 		const string from = "somesender@somedomain.com";

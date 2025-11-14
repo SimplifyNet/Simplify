@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0] - Unreleased
+
+### Breaking change
+
+- Switched from System.Net.Mail to MimeKit
+
+### Removed
+
+- System.Configuration.ConfigurationManager base configuration support
+
 ## [1.6.0] - 2025-06-15
 
 ### Removed

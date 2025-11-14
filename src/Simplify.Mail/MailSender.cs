@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.Extensions.Configuration;
+using MimeKit;
 using Simplify.Mail.Settings;
 using Simplify.Mail.Settings.Impl;
 
@@ -17,25 +18,12 @@ namespace Simplify.Mail;
 public class MailSender : IMailSender, IDisposable
 {
 	private static readonly object AntiSpamLocker = new();
-	private static readonly Dictionary<string, DateTime> AntiSpamPool = new();
+	private static readonly Dictionary<string, DateTime> AntiSpamPool = [];
 
-	private static IMailSender _defaultInstance;
+	private readonly SemaphoreSlim _smtpLock = new(1, 1);
 
-	private readonly object _sendLocker = new();
-
-	private volatile SmtpClient _smtpClient;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="MailSender"/> class.
-	/// </summary>
-	/// <param name="configurationSectionName">Name of the configuration section in the *.config configuration file.</param>
-	public MailSender(string configurationSectionName = "MailSenderSettings")
-	{
-		if (string.IsNullOrEmpty(configurationSectionName))
-			throw new ArgumentNullException(nameof(configurationSectionName));
-
-		Settings = new ConfigurationManagedBasedMailSenderSettings(configurationSectionName);
-	}
+	private SmtpClient _smtpClient;
+	private bool _disposed;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="MailSender" /> class.
@@ -79,19 +67,6 @@ public class MailSender : IMailSender, IDisposable
 	public MailSender(IMailSenderSettings settings) => Settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
 	/// <summary>
-	/// Default MailSender instance.
-	/// </summary>
-	/// <value>
-	/// The default.
-	/// </value>
-	/// <exception cref="ArgumentNullException">value</exception>
-	public static IMailSender Default
-	{
-		get => _defaultInstance ??= new MailSender();
-		set => _defaultInstance = value ?? throw new ArgumentNullException(nameof(value));
-	}
-
-	/// <summary>
 	/// MailSender settings.
 	/// </summary>
 	public IMailSenderSettings Settings { get; }
@@ -106,23 +81,18 @@ public class MailSender : IMailSender, IDisposable
 			if (_smtpClient != null)
 				return _smtpClient;
 
-			lock (_sendLocker)
+			_smtpLock.Wait();
+
+			try
 			{
 				if (_smtpClient != null)
 					return _smtpClient;
 
-				var smtpClient = new SmtpClient(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber)
-				{
-					EnableSsl = Settings.EnableSsl
-				};
-
-				if (!string.IsNullOrEmpty(Settings.SmtpUserName))
-				{
-					smtpClient.UseDefaultCredentials = false;
-					smtpClient.Credentials = new NetworkCredential(Settings.SmtpUserName, Settings.SmtpUserPassword);
-				}
-
-				_smtpClient = smtpClient;
+				_smtpClient = new SmtpClient();
+			}
+			finally
+			{
+				_smtpLock.Release();
 			}
 
 			return _smtpClient;
@@ -133,43 +103,69 @@ public class MailSender : IMailSender, IDisposable
 	/// Send single e-mail.
 	/// </summary>
 	/// <param name="client">Smtp client.</param>
-	/// <param name="mailMessage">The mail message.</param>
+	/// <param name="mimeMessage">The MIME message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
-	public void Send(SmtpClient client, MailMessage mailMessage, string bodyForAntiSpam = null)
+	public void Send(SmtpClient client, MimeMessage mimeMessage, string bodyForAntiSpam = null)
 	{
-		if (CheckAntiSpamPool(bodyForAntiSpam ?? mailMessage.Body))
+		if (CheckAntiSpamPool(bodyForAntiSpam ?? mimeMessage.HtmlBody))
 			return;
 
-		lock (_sendLocker)
-			client.Send(mailMessage);
+		_smtpLock.Wait();
+
+		try
+		{
+			Connect(client);
+			client.Send(mimeMessage);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
 	/// Send single e-mail asynchronously.
 	/// </summary>
 	/// <param name="client">Smtp client.</param>
-	/// <param name="mailMessage">The mail message.</param>
+	/// <param name="mimeMessage">The MIME message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns></returns>
-	public Task SendAsync(SmtpClient client, MailMessage mailMessage, string bodyForAntiSpam = null) =>
-		CheckAntiSpamPool(bodyForAntiSpam ?? mailMessage.Body)
-			? Task.Delay(0)
-			: client.SendMailAsync(mailMessage);
+	public async Task SendAsync(SmtpClient client, MimeMessage mimeMessage, string bodyForAntiSpam = null,
+		CancellationToken cancellationToken = default)
+	{
+		if (CheckAntiSpamPool(bodyForAntiSpam ?? mimeMessage.HtmlBody))
+			return;
+
+		await _smtpLock.WaitAsync(cancellationToken);
+
+		try
+		{
+			await ConnectAsync(client, cancellationToken);
+			await client.SendAsync(mimeMessage, cancellationToken);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
+	}
 
 	/// <summary>
 	/// Send single e-mail.
 	/// </summary>
-	/// <param name="mailMessage">The mail message.</param>
+	/// <param name="mimeMessage">The MIME message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
-	public void Send(MailMessage mailMessage, string bodyForAntiSpam = null) => Send(SmtpClient, mailMessage, bodyForAntiSpam);
+	public void Send(MimeMessage mimeMessage, string bodyForAntiSpam = null) => Send(SmtpClient, mimeMessage, bodyForAntiSpam);
 
 	/// <summary>
 	/// Send single e-mail asynchronously.
 	/// </summary>
-	/// <param name="mailMessage">The mail message.</param>
+	/// <param name="mimeMessage">The MIME message.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns></returns>
-	public Task SendAsync(MailMessage mailMessage, string bodyForAntiSpam = null) => SendAsync(SmtpClient, mailMessage, bodyForAntiSpam);
+	public Task SendAsync(MimeMessage mimeMessage, string bodyForAntiSpam = null, CancellationToken cancellationToken = default) =>
+		SendAsync(SmtpClient, mimeMessage, bodyForAntiSpam, cancellationToken);
 
 	/// <summary>
 	/// Send single e-mail.
@@ -182,24 +178,24 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void Send(SmtpClient client, string from, string to, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments)
+		params MimeEntity[] attachments)
 	{
 		if (CheckAntiSpamPool(bodyForAntiSpam ?? body))
 			return;
 
-		var mm = new MailMessage(from, to, subject, body)
+		using var message = CreateMimeMessage(from, subject, body, to: to, attachments: attachments);
+
+		_smtpLock.Wait();
+
+		try
 		{
-			BodyEncoding = Encoding.UTF8,
-			IsBodyHtml = true,
-			DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-		};
-
-		if (attachments != null)
-			foreach (var attachment in attachments)
-				mm.Attachments.Add(attachment);
-
-		lock (_sendLocker)
-			client.Send(mm);
+			Connect(client);
+			client.Send(message);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
@@ -212,25 +208,26 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">The body.</param>
 	/// <param name="bodyForAntiSpam">The body for anti spam.</param>
 	/// <param name="attachments">The attachments.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns></returns>
-	public Task SendAsync(SmtpClient client, string @from, string to, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments)
+	public async Task SendAsync(SmtpClient client, string from, string to, string subject, string body, string bodyForAntiSpam = null,
+		MimeEntity[] attachments = null, CancellationToken cancellationToken = default)
 	{
 		if (CheckAntiSpamPool(bodyForAntiSpam ?? body))
-			return Task.Delay(0);
+			return;
 
-		var mm = new MailMessage(from, to, subject, body)
+		using var message = CreateMimeMessage(from, subject, body, to: to, attachments: attachments);
+
+		await _smtpLock.WaitAsync(cancellationToken);
+		try
 		{
-			BodyEncoding = Encoding.UTF8,
-			IsBodyHtml = true,
-			DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-		};
-
-		if (attachments != null)
-			foreach (var attachment in attachments)
-				mm.Attachments.Add(attachment);
-
-		return client.SendMailAsync(mm);
+			await ConnectAsync(client, cancellationToken);
+			await client.SendAsync(message, cancellationToken);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
@@ -242,7 +239,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
-	public void Send(string from, string to, string subject, string body, string bodyForAntiSpam = null, params Attachment[] attachments) =>
+	public void Send(string from, string to, string subject, string body, string bodyForAntiSpam = null, params MimeEntity[] attachments) =>
 		Send(SmtpClient, from, to, subject, body, bodyForAntiSpam, attachments);
 
 	/// <summary>
@@ -254,9 +251,11 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">The body.</param>
 	/// <param name="bodyForAntiSpam">The body for anti spam.</param>
 	/// <param name="attachments">The attachments.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns></returns>
-	public Task SendAsync(string @from, string to, string subject, string body, string bodyForAntiSpam = null, params Attachment[] attachments) =>
-		SendAsync(SmtpClient, from, to, subject, body, bodyForAntiSpam, attachments);
+	public Task SendAsync(string from, string to, string subject, string body, string bodyForAntiSpam = null, MimeEntity[] attachments = null,
+		CancellationToken cancellationToken = default) =>
+		SendAsync(SmtpClient, from, to, subject, body, bodyForAntiSpam, attachments, cancellationToken);
 
 	/// <summary>
 	/// Send e-mail to multiple recipients in one e-mail.
@@ -269,7 +268,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void Send(SmtpClient client, string fromMailAddress, IList<string> addresses, string subject, string body,
-		string bodyForAntiSpam = null, params Attachment[] attachments)
+		string bodyForAntiSpam = null, params MimeEntity[] attachments)
 	{
 		if (addresses.Count == 0)
 			return;
@@ -277,25 +276,18 @@ public class MailSender : IMailSender, IDisposable
 		if (CheckAntiSpamPool(bodyForAntiSpam ?? body))
 			return;
 
-		var mm = new MailMessage
+		using var message = CreateMimeMessage(fromMailAddress, subject, body, addresses: addresses, attachments: attachments);
+
+		_smtpLock.Wait();
+		try
 		{
-			From = new MailAddress(fromMailAddress),
-			Subject = subject,
-			BodyEncoding = Encoding.UTF8,
-			IsBodyHtml = true,
-			Body = body,
-			DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-		};
-
-		foreach (var item in addresses)
-			mm.To.Add(item);
-
-		if (attachments != null)
-			foreach (var attachment in attachments)
-				mm.Attachments.Add(attachment);
-
-		lock (_sendLocker)
-			client.Send(mm);
+			Connect(client);
+			client.Send(message);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
@@ -308,37 +300,31 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns>
 	/// Process status, <see langword="true" /> if all messages are processed to sent successfully
 	/// </returns>
-	public Task SendAsync(SmtpClient client, string fromMailAddress, IList<string> addresses, string subject, string body,
-		string bodyForAntiSpam = null,
-		params Attachment[] attachments)
+	public async Task SendAsync(SmtpClient client, string fromMailAddress, IList<string> addresses, string subject, string body,
+		string bodyForAntiSpam = null, MimeEntity[] attachments = null, CancellationToken cancellationToken = default)
 	{
 		if (addresses.Count == 0)
-			return Task.Delay(0);
+			return;
 
 		if (CheckAntiSpamPool(bodyForAntiSpam ?? body))
-			return Task.Delay(0);
+			return;
 
-		var mm = new MailMessage
+		using var message = CreateMimeMessage(fromMailAddress, subject, body, addresses: addresses, attachments: attachments);
+
+		await _smtpLock.WaitAsync(cancellationToken);
+		try
 		{
-			From = new MailAddress(fromMailAddress),
-			Subject = subject,
-			BodyEncoding = Encoding.UTF8,
-			IsBodyHtml = true,
-			Body = body,
-			DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-		};
-
-		foreach (var item in addresses)
-			mm.To.Add(item);
-
-		if (attachments != null)
-			foreach (var attachment in attachments)
-				mm.Attachments.Add(attachment);
-
-		return client.SendMailAsync(mm);
+			await ConnectAsync(client, cancellationToken);
+			await client.SendAsync(message, cancellationToken);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
@@ -351,7 +337,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void Send(string fromMailAddress, IList<string> addresses, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments) =>
+		params MimeEntity[] attachments) =>
 		Send(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
 
 	/// <summary>
@@ -363,12 +349,13 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns>
 	/// Process status, <see langword="true" /> if all messages are processed to sent successfully
 	/// </returns>
 	public Task SendAsync(string fromMailAddress, IList<string> addresses, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments) =>
-		SendAsync(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
+		MimeEntity[] attachments = null, CancellationToken cancellationToken = default) =>
+		SendAsync(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments, cancellationToken);
 
 	/// <summary>
 	/// Send e-mail to multiple recipients and carbon copy recipients in one e-mail.
@@ -382,7 +369,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void Send(SmtpClient client, string fromMailAddress, IList<string> addresses, IList<string> ccAddresses, string subject, string body,
-		string bodyForAntiSpam = null, params Attachment[] attachments)
+		string bodyForAntiSpam = null, params MimeEntity[] attachments)
 	{
 		if (addresses.Count == 0)
 			return;
@@ -390,28 +377,18 @@ public class MailSender : IMailSender, IDisposable
 		if (CheckAntiSpamPool(bodyForAntiSpam ?? body))
 			return;
 
-		var mm = new MailMessage
+		using var message = CreateMimeMessage(fromMailAddress, subject, body, addresses: addresses, ccAddresses: ccAddresses, attachments: attachments);
+
+		_smtpLock.Wait();
+		try
 		{
-			From = new MailAddress(fromMailAddress),
-			Subject = subject,
-			BodyEncoding = Encoding.UTF8,
-			IsBodyHtml = true,
-			Body = body,
-			DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-		};
-
-		foreach (var item in addresses)
-			mm.To.Add(item);
-
-		foreach (var item in ccAddresses)
-			mm.CC.Add(item);
-
-		if (attachments != null)
-			foreach (var attachment in attachments)
-				mm.Attachments.Add(attachment);
-
-		lock (_sendLocker)
-			client.Send(mm);
+			Connect(client);
+			client.Send(message);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
@@ -425,40 +402,31 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns>
 	/// Process status, <see langword="true" /> if all messages are processed to sent successfully
 	/// </returns>
-	public Task SendAsync(SmtpClient client, string fromMailAddress, IList<string> addresses, IList<string> ccAddresses, string subject,
-		string body,
-		string bodyForAntiSpam = null, params Attachment[] attachments)
+	public async Task SendAsync(SmtpClient client, string fromMailAddress, IList<string> addresses, IList<string> ccAddresses, string subject,
+		string body, string bodyForAntiSpam = null, MimeEntity[] attachments = null, CancellationToken cancellationToken = default)
 	{
 		if (addresses.Count == 0)
-			return Task.Delay(0);
+			return;
 
 		if (CheckAntiSpamPool(bodyForAntiSpam ?? body))
-			return Task.Delay(0);
+			return;
 
-		var mm = new MailMessage
+		using var message = CreateMimeMessage(fromMailAddress, subject, body, addresses: addresses, ccAddresses: ccAddresses, attachments: attachments);
+
+		await _smtpLock.WaitAsync(cancellationToken);
+		try
 		{
-			From = new MailAddress(fromMailAddress),
-			Subject = subject,
-			BodyEncoding = Encoding.UTF8,
-			IsBodyHtml = true,
-			Body = body,
-			DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-		};
-
-		foreach (var item in addresses)
-			mm.To.Add(item);
-
-		foreach (var item in ccAddresses)
-			mm.CC.Add(item);
-
-		if (attachments != null)
-			foreach (var attachment in attachments)
-				mm.Attachments.Add(attachment);
-
-		return client.SendMailAsync(mm);
+			await ConnectAsync(client, cancellationToken);
+			await client.SendAsync(message, cancellationToken);
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
 	}
 
 	/// <summary>
@@ -472,7 +440,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void Send(string fromMailAddress, IList<string> addresses, IList<string> ccAddresses, string subject,
-		string body, string bodyForAntiSpam = null, params Attachment[] attachments) =>
+		string body, string bodyForAntiSpam = null, params MimeEntity[] attachments) =>
 		Send(SmtpClient, fromMailAddress, addresses, ccAddresses, subject, body, bodyForAntiSpam, attachments);
 
 	/// <summary>
@@ -485,13 +453,13 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns>
 	/// Process status, <see langword="true" /> if all messages are processed to sent successfully
 	/// </returns>
 	public Task SendAsync(string fromMailAddress, IList<string> addresses, IList<string> ccAddresses, string subject, string body,
-		string bodyForAntiSpam = null,
-		params Attachment[] attachments) =>
-		SendAsync(SmtpClient, fromMailAddress, addresses, ccAddresses, subject, body, bodyForAntiSpam, attachments);
+		string bodyForAntiSpam = null, MimeEntity[] attachments = null, CancellationToken cancellationToken = default) =>
+		SendAsync(SmtpClient, fromMailAddress, addresses, ccAddresses, subject, body, bodyForAntiSpam, attachments, cancellationToken);
 
 	/// <summary>
 	/// Send e-mail to multiple recipients separately
@@ -504,7 +472,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void SendSeparately(SmtpClient client, string fromMailAddress, IList<string> addresses, string subject, string body,
-		string bodyForAntiSpam = null, params Attachment[] attachments)
+		string bodyForAntiSpam = null, params MimeEntity[] attachments)
 	{
 		if (addresses.Count == 0)
 			return;
@@ -514,19 +482,19 @@ public class MailSender : IMailSender, IDisposable
 
 		foreach (var item in addresses)
 		{
-			var mm = new MailMessage(fromMailAddress, item, subject, body)
+			using var message = CreateMimeMessage(fromMailAddress, subject, body, to: item, attachments: attachments);
+
+			_smtpLock.Wait();
+
+			try
 			{
-				BodyEncoding = Encoding.UTF8,
-				IsBodyHtml = true,
-				DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-			};
-
-			if (attachments != null)
-				foreach (var attachment in attachments)
-					mm.Attachments.Add(attachment);
-
-			lock (_sendLocker)
-				client.Send(mm);
+				Connect(client);
+				client.Send(message);
+			}
+			finally
+			{
+				_smtpLock.Release();
+			}
 		}
 	}
 
@@ -540,9 +508,9 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	public async Task SendSeparatelyAsync(SmtpClient client, string fromMailAddress, IList<string> addresses, string subject, string body,
-		string bodyForAntiSpam = null,
-		params Attachment[] attachments)
+		string bodyForAntiSpam = null, MimeEntity[] attachments = null, CancellationToken cancellationToken = default)
 	{
 		if (addresses.Count == 0)
 			return;
@@ -552,18 +520,19 @@ public class MailSender : IMailSender, IDisposable
 
 		foreach (var item in addresses)
 		{
-			var mm = new MailMessage(fromMailAddress, item, subject, body)
+			using var message = CreateMimeMessage(fromMailAddress, subject, body, to: item, attachments: attachments);
+
+			await _smtpLock.WaitAsync(cancellationToken);
+
+			try
 			{
-				BodyEncoding = Encoding.UTF8,
-				IsBodyHtml = true,
-				DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-			};
-
-			if (attachments != null)
-				foreach (var attachment in attachments)
-					mm.Attachments.Add(attachment);
-
-			await client.SendMailAsync(mm);
+				await ConnectAsync(client, cancellationToken);
+				await client.SendAsync(message, cancellationToken);
+			}
+			finally
+			{
+				_smtpLock.Release();
+			}
 		}
 	}
 
@@ -577,7 +546,7 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
 	public void SendSeparately(string fromMailAddress, IList<string> addresses, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments) =>
+		params MimeEntity[] attachments) =>
 		SendSeparately(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
 
 	/// <summary>
@@ -589,17 +558,98 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="body">e-mail body.</param>
 	/// <param name="bodyForAntiSpam">Part of an e-mail body just for anti-spam checking.</param>
 	/// <param name="attachments">The attachments to an e-mail.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
 	/// <returns>
 	/// Process status, <see langword="true" /> if all messages are processed to sent successfully
 	/// </returns>
 	public Task SendSeparatelyAsync(string fromMailAddress, IList<string> addresses, string subject, string body, string bodyForAntiSpam = null,
-		params Attachment[] attachments) =>
-		SendSeparatelyAsync(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments);
+		MimeEntity[] attachments = null, CancellationToken cancellationToken = default) =>
+		SendSeparatelyAsync(SmtpClient, fromMailAddress, addresses, subject, body, bodyForAntiSpam, attachments, cancellationToken);
 
 	/// <summary>
 	/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 	/// </summary>
-	public void Dispose() => _smtpClient?.Dispose();
+	public void Dispose()
+	{
+		if (_disposed)
+			return;
+
+		_smtpLock.Wait();
+
+		try
+		{
+			if (_smtpClient?.IsConnected == true)
+				_smtpClient.Disconnect(true);
+
+			_smtpClient?.Dispose();
+			_smtpClient = null;
+		}
+		finally
+		{
+			_smtpLock.Release();
+		}
+
+		_smtpLock?.Dispose();
+		_disposed = true;
+
+		GC.SuppressFinalize(this);
+	}
+
+	private async Task ConnectAsync(SmtpClient client, CancellationToken cancellationToken = default)
+	{
+		if (client.IsConnected)
+			return;
+
+		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.None;
+
+		await client.ConnectAsync(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber, secureSocketOptions, cancellationToken);
+
+		if (!string.IsNullOrEmpty(Settings.SmtpUserName))
+			await client.AuthenticateAsync(Settings.SmtpUserName, Settings.SmtpUserPassword, cancellationToken);
+	}
+
+	private void Connect(SmtpClient client)
+	{
+		if (client.IsConnected)
+			return;
+
+		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.None;
+
+		client.Connect(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber, secureSocketOptions);
+
+		if (!string.IsNullOrEmpty(Settings.SmtpUserName))
+			client.Authenticate(Settings.SmtpUserName, Settings.SmtpUserPassword);
+	}
+
+	private static MimeMessage CreateMimeMessage(string from, string subject, string body, string to = null,
+		IList<string> addresses = null, IList<string> ccAddresses = null, MimeEntity[] attachments = null)
+	{
+		var message = new MimeMessage();
+		message.From.Add(MailboxAddress.Parse(from));
+
+		if (!string.IsNullOrEmpty(to))
+			message.To.Add(MailboxAddress.Parse(to));
+
+		if (addresses != null)
+			foreach (var address in addresses)
+				message.To.Add(MailboxAddress.Parse(address));
+
+		if (ccAddresses != null)
+			foreach (var ccAddress in ccAddresses)
+				message.Cc.Add(MailboxAddress.Parse(ccAddress));
+
+		message.Subject = subject;
+
+		var bodyBuilder = new BodyBuilder { HtmlBody = body };
+
+		if (attachments != null)
+			foreach (var attachment in attachments)
+				bodyBuilder.Attachments.Add(attachment);
+
+		message.Body = bodyBuilder.ToMessageBody();
+
+		return message;
+	}
 
 	private bool CheckAntiSpamPool(string messageBody)
 	{
@@ -626,8 +676,7 @@ public class MailSender : IMailSender, IDisposable
 	}
 
 	private IList<string> GetItemsToRemove() =>
-		(from item in AntiSpamPool
+		[.. from item in AntiSpamPool
 		 where (DateTime.Now - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
-		 select item.Key)
-		.ToList();
+		 select item.Key];
 }

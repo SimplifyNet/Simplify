@@ -9,7 +9,7 @@ namespace Simplify.Mail.Settings.Impl;
 public sealed class ConfigurationBasedMailSenderSettings : MailSenderSettings
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="ConfigurationManagedBasedMailSenderSettings" /> class.
+	/// Initializes a new instance of the <see cref="ConfigurationBasedMailSenderSettings" /> class.
 	/// </summary>
 	/// <param name="configuration">The configuration.</param>
 	/// <param name="configSectionName">Name of the configuration section.</param>
