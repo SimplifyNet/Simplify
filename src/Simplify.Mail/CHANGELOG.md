@@ -10,6 +10,10 @@
 
 - System.Configuration.ConfigurationManager base configuration support
 
+### Dependencies
+
+- Microsoft.Extensions.Configuration bump to 9.0.11
+
 ## [1.6.0] - 2025-06-15
 
 ### Removed

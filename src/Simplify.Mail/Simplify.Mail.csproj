@@ -7,7 +7,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.6.0</Version>
+		<Version>2.0-pre01</Version>
 
 		<Authors>Alexander Krylkov</Authors>
 		<Product>Simplify</Product>
@@ -23,7 +23,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="MailKit" Version="4.14.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.11" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\images\icon.png" Pack="true" Visible="false" PackagePath="" />
