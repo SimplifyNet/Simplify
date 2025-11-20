@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net48</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
@@ -10,9 +10,9 @@
 
 		<Version>2.15.1</Version>
 
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
 		<Description>Windows services framework with DI</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.WindowsServices</PackageProjectUrl>

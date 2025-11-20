@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
 		<Description>Simplify.EntityFramework database mappings examples</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>

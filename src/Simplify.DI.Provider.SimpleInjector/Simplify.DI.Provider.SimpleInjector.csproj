@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;netstandard2.1;netstandard2.0;net48</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
@@ -10,9 +10,9 @@
 
 		<Version>1.11.4</Version>
 
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
 		<Description>Simplify.DI SimpleInjector provider</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI</PackageProjectUrl>

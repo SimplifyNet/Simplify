@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net48</TargetFrameworks>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -8,9 +8,9 @@
 
 		<Version>1.5.2</Version>
 
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
 		<Description>Provides ability to use Simplify.DI as IOC container in WCF services</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify/wiki/Simplify.DI.Wcf</PackageProjectUrl>

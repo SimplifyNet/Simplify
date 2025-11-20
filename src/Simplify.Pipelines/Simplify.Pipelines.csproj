@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
@@ -9,9 +9,9 @@
 
 		<Version>0.9.2</Version>
 
-		<Authors>Alexander Krylkov</Authors>
-		<Product>Simplify</Product>
 		<Description>Pipelines processing, validation patterns</Description>
+		<Product>Simplify</Product>
+		<Authors>Alexander Krylkov</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>

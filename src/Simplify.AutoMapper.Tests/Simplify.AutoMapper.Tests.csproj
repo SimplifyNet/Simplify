@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 
-		<Authors>Simplify community</Authors>
-		<Product>Simplify</Product>
 		<Description>Simplify.AutoMapper unit tests</Description>
+		<Product>Simplify</Product>
+		<Authors>Simplify community</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>

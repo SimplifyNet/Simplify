@@ -1,14 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<OutputType>Exe</OutputType>
+
+		<Description>Simplify.FluentNHibernate, Simplify.Repository, Simplify.Repository.FluentNHibernate minimal example application</Description>
+		<Product>Simplify</Product>
 		<Authors>Alexander Krylkov</Authors>
 
-		<Version>0.1</Version>
-
-		<Product>Simplify</Product>
-		<Description>Simplify.FluentNHibernate, Simplify.Repository, Simplify.Repository.FluentNHibernate minimal example application</Description>
 		<Copyright>Licensed under LGPL</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
