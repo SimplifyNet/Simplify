@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
@@ -10,9 +10,9 @@
 
 		<Version>1.2</Version>
 
-		<Authors>Simplify community</Authors>
-		<Product>Simplify</Product>
 		<Description>Extensions for the AutoMapper</Description>
+		<Product>Simplify</Product>
+		<Authors>Simplify community</Authors>
 		<Copyright>Licensed under LGPL</Copyright>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/SimplifyNet/Simplify</PackageProjectUrl>
