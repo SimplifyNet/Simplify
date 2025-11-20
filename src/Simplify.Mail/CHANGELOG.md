@@ -4,11 +4,11 @@
 
 ### Breaking change
 
-- Switched from System.Net.Mail to MimeKit
+- Switched from System.Net.Mail to MailKit
 
 ### Removed
 
-- System.Configuration.ConfigurationManager base configuration support
+- System.Configuration.ConfigurationManager configuration support
 
 ### Dependencies
 
