@@ -23,23 +23,13 @@ public static class DIRegistratorExtensions
 			RegisterServiceDescriptor(registrator, item, GetLifetime(item.Lifetime));
 	}
 
-	private static LifetimeType GetLifetime(ServiceLifetime lifetime)
+	private static LifetimeType GetLifetime(ServiceLifetime lifetime) => lifetime switch
 	{
-		switch (lifetime)
-		{
-			case ServiceLifetime.Scoped:
-				return LifetimeType.PerLifetimeScope;
-
-			case ServiceLifetime.Singleton:
-				return LifetimeType.Singleton;
-
-			case ServiceLifetime.Transient:
-				return LifetimeType.Transient;
-
-			default:
-				throw new ArgumentOutOfRangeException();
-		}
-	}
+		ServiceLifetime.Scoped => LifetimeType.PerLifetimeScope,
+		ServiceLifetime.Singleton => LifetimeType.Singleton,
+		ServiceLifetime.Transient => LifetimeType.Transient,
+		_ => throw new ArgumentOutOfRangeException(),
+	};
 
 	private static void RegisterServiceDescriptor(IDIRegistrator registrator, ServiceDescriptor item, LifetimeType lifetime)
 	{

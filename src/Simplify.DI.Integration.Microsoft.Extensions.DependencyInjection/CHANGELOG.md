@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5] - 2026-03-07
+
+### Dependencies
+
+- Microsoft.Extensions.DependencyInjection bump to 10.0.3
+
 ## [1.4] - 2025-10-10
 
 ### Removed

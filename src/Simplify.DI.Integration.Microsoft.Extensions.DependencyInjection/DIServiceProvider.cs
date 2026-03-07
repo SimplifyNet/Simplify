@@ -6,16 +6,12 @@ namespace Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection;
 /// Simplify.DI based service provider for Microsoft.Extensions.DependencyInjection
 /// </summary>
 /// <seealso cref="IServiceProvider" />
-public class DIServiceProvider : IServiceProvider
+/// <remarks>
+/// Initializes a new instance of the <see cref="DIServiceProvider"/> class.
+/// </remarks>
+/// <param name="resolver">The registrator.</param>
+public class DIServiceProvider(IDIResolver resolver) : IServiceProvider
 {
-	private readonly IDIResolver _resolver;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="DIServiceProvider"/> class.
-	/// </summary>
-	/// <param name="resolver">The registrator.</param>
-	public DIServiceProvider(IDIResolver resolver) => _resolver = resolver;
-
 	/// <summary>
 	/// Gets the service object of the specified type.
 	/// </summary>
@@ -23,5 +19,5 @@ public class DIServiceProvider : IServiceProvider
 	/// <returns>
 	/// A service object of type <paramref name="serviceType">serviceType</paramref>.   -or-  null if there is no service object of type <paramref name="serviceType">serviceType</paramref>.
 	/// </returns>
-	public object GetService(Type serviceType) => _resolver.Resolve(serviceType);
+	public object GetService(Type serviceType) => resolver.Resolve(serviceType);
 }
