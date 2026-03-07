@@ -24,5 +24,6 @@ if (await scheduler.StartAsync(args))
 	return;
 
 // Testing without scheduler
-using (var scope = DIContainer.Current.BeginLifetimeScope())
-	scope.Resolver.Resolve<PeriodicalProcessor>().Run();
+
+using var scope = DIContainer.Current.BeginLifetimeScope();
+scope.Resolver.Resolve<PeriodicalProcessor>().Run();
