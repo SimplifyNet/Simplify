@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1] - 2026-04-24
+
+### Dependencies
+
+- MailKit bump to 4.16
+
 ## [2.0] - 2025-11-20
 
 ### Breaking change
