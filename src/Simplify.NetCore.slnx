@@ -1,8 +1,4 @@
 <Solution>
-  <Folder Name="/AutoMapper/">
-    <Project Path="Simplify.AutoMapper.Tests/Simplify.AutoMapper.Tests.csproj" />
-    <Project Path="Simplify.AutoMapper/Simplify.AutoMapper.csproj" />
-  </Folder>
   <Folder Name="/Bus/">
     <Project Path="Simplify.Bus.Impl.Tests/Simplify.Bus.Impl.Tests.csproj" />
     <Project Path="Simplify.Bus.Impl.UsabilityTests/Simplify.Bus.Impl.UsabilityTests.csproj" />
