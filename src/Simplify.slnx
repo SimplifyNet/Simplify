@@ -1,0 +1,109 @@
+<Solution>
+  <Folder Name="/AutoMapper/">
+    <Project Path="Simplify.AutoMapper.Tests/Simplify.AutoMapper.Tests.csproj" />
+    <Project Path="Simplify.AutoMapper/Simplify.AutoMapper.csproj" />
+  </Folder>
+  <Folder Name="/Bus/">
+    <Project Path="Simplify.Bus.Impl.Tests/Simplify.Bus.Impl.Tests.csproj" />
+    <Project Path="Simplify.Bus.Impl.UsabilityTests/Simplify.Bus.Impl.UsabilityTests.csproj" />
+    <Project Path="Simplify.Bus.Impl/Simplify.Bus.Impl.csproj" />
+    <Project Path="Simplify.Bus/Simplify.Bus.csproj" />
+  </Folder>
+  <Folder Name="/DI/" />
+  <Folder Name="/DI/Core/">
+    <Project Path="Simplify.DI.Tests/Simplify.DI.Tests.csproj" />
+    <Project Path="Simplify.DI.TestsTypes/Simplify.DI.TestsTypes.csproj" />
+    <Project Path="Simplify.DI/Simplify.DI.csproj" />
+  </Folder>
+  <Folder Name="/DI/Integrations/" />
+  <Folder Name="/DI/Integrations/Microsoft.Extensions.DependencyInjection/">
+    <Project Path="Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.Tester.csproj" />
+    <Project Path="Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection/Simplify.DI.Integration.Microsoft.Extensions.DependencyInjection.csproj" />
+  </Folder>
+  <Folder Name="/DI/Integrations/WCF/">
+    <Project Path="Simplify.DI.Wcf/Simplify.DI.Wcf.csproj" />
+  </Folder>
+  <Folder Name="/DI/Providers/" />
+  <Folder Name="/DI/Providers/Autofac/">
+    <Project Path="Simplify.DI.Provider.Autofac.Tests/Simplify.DI.Provider.Autofac.Tests.csproj" />
+    <Project Path="Simplify.DI.Provider.Autofac/Simplify.DI.Provider.Autofac.csproj" />
+  </Folder>
+  <Folder Name="/DI/Providers/CastleWindsor/">
+    <Project Path="Simplify.DI.Provider.CastleWindsor.Tests/Simplify.DI.Provider.CastleWindsor.Tests.csproj" />
+    <Project Path="Simplify.DI.Provider.CastleWindsor/Simplify.DI.Provider.CastleWindsor.csproj" />
+  </Folder>
+  <Folder Name="/DI/Providers/Microsoft.Extensions.DependencyInjection/">
+    <Project Path="Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.Tests/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.Tests.csproj" />
+    <Project Path="Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection/Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection.csproj" />
+  </Folder>
+  <Folder Name="/DI/Providers/SimpleInjector/">
+    <Project Path="Simplify.DI.Provider.SimpleInjector.Tests/Simplify.DI.Provider.SimpleInjector.Tests.csproj" />
+    <Project Path="Simplify.DI.Provider.SimpleInjector/Simplify.DI.Provider.SimpleInjector.csproj" />
+  </Folder>
+  <Folder Name="/EntityFramework/">
+    <Project Path="Simplify.EntityFramework.Tests/Simplify.EntityFramework.Tests.csproj" />
+    <Project Path="Simplify.EntityFramework/Simplify.EntityFramework.csproj" />
+  </Folder>
+  <Folder Name="/Examples/">
+    <Project Path="Examples/Simplify.Examples.Repository.Domain/Simplify.Examples.Repository.Domain.csproj" />
+    <Project Path="Examples/Simplify.Examples.Repository.EntityFramework.App/Simplify.Examples.Repository.EntityFramework.App.csproj" />
+    <Project Path="Examples/Simplify.Examples.Repository.EntityFramework/Simplify.Examples.Repository.EntityFramework.csproj" />
+    <Project Path="Examples/Simplify.Examples.Repository.FluentNHibernate.App/Simplify.Examples.Repository.FluentNHibernate.App.csproj" />
+    <Project Path="Examples/Simplify.Examples.Repository.FluentNHibernate/Simplify.Examples.Repository.FluentNHibernate.csproj" />
+    <Project Path="Examples/Simplify.Scheduler.SimpleApp/Simplify.Scheduler.SimpleApp.csproj" />
+  </Folder>
+  <Folder Name="/FluentNHibernate/">
+    <Project Path="Simplify.FluentNHibernate.FrameworkTests/Simplify.FluentNHibernate.FrameworkTests.csproj" />
+    <Project Path="Simplify.FluentNHibernate.Tests/Simplify.FluentNHibernate.Tests.csproj" />
+    <Project Path="Simplify.FluentNHibernate/Simplify.FluentNHibernate.csproj" />
+  </Folder>
+  <Folder Name="/IO/">
+    <Project Path="Simplify.IO.Tests/Simplify.IO.Tests.csproj" />
+    <Project Path="Simplify.IO/Simplify.IO.csproj" />
+  </Folder>
+  <Folder Name="/Mail/">
+    <Project Path="Simplify.Mail.IntegrationTests/Simplify.Mail.IntegrationTests.csproj" />
+    <Project Path="Simplify.Mail.TestConsoleApp/Simplify.Mail.TestConsoleApp.csproj" />
+    <Project Path="Simplify.Mail/Simplify.Mail.csproj" />
+  </Folder>
+  <Folder Name="/Repository/">
+    <Project Path="Simplify.Repository.EntityFramework/Simplify.Repository.EntityFramework.csproj" />
+    <Project Path="Simplify.Repository.FluentNHibernate.Tests/Simplify.Repository.FluentNHibernate.Tests.csproj" />
+    <Project Path="Simplify.Repository.FluentNHibernate/Simplify.Repository.FluentNHibernate.csproj" />
+    <Project Path="Simplify.Repository/Simplify.Repository.csproj" />
+  </Folder>
+  <Folder Name="/Resources/">
+    <Project Path="Simplify.Resources.Tests/Simplify.Resources.Tests.csproj" />
+    <Project Path="Simplify.Resources/Simplify.Resources.csproj" />
+  </Folder>
+  <Folder Name="/Scheduler/">
+    <Project Path="Simplify.Scheduler.IntegrationTester/Simplify.Scheduler.IntegrationTester.csproj" />
+    <Project Path="Simplify.Scheduler/Simplify.Scheduler.csproj" />
+  </Folder>
+  <Folder Name="/String/">
+    <Project Path="Simplify.String.Tests/Simplify.String.Tests.csproj" />
+    <Project Path="Simplify.String/Simplify.String.csproj" />
+  </Folder>
+  <Folder Name="/System/">
+    <Project Path="Simplify.System.Tests/Simplify.System.Tests.csproj" />
+    <Project Path="Simplify.System/Simplify.System.csproj" />
+  </Folder>
+  <Folder Name="/Templates/">
+    <Project Path="Simplify.Templates.Tests/Simplify.Templates.Tests.csproj" />
+    <Project Path="Simplify.Templates/Simplify.Templates.csproj" />
+  </Folder>
+  <Folder Name="/WindowsServices/">
+    <Project Path="Simplify.WindowsServices.IntegrationTester/Simplify.WindowsServices.IntegrationTester.csproj" />
+    <Project Path="Simplify.WindowsServices/Simplify.WindowsServices.csproj" />
+  </Folder>
+  <Folder Name="/WPF/">
+    <Project Path="Simplify.Wpf/Simplify.Wpf.csproj" />
+  </Folder>
+  <Folder Name="/XML/">
+    <Project Path="Simplify.Xml.Tests/Simplify.Xml.Tests.csproj" />
+    <Project Path="Simplify.Xml/Simplify.Xml.csproj" />
+  </Folder>
+  <Project Path="Simplify.Log/Simplify.Log.csproj" />
+  <Project Path="Simplify.Pipelines/Simplify.Pipelines.csproj" />
+  <Project Path="Simplify.Windows.Forms/Simplify.Windows.Forms.csproj" />
+</Solution>

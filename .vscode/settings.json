@@ -25,6 +25,6 @@
 		"Сonveyor"
 	],
 	"dotrush.roslyn.projectOrSolutionFiles": [
-		"./src/Simplify.NetCore.sln"
+		"./src/Simplify.NetCore.slnx"
 	]
 }

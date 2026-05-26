@@ -15,10 +15,10 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: windows-latest
-            solution: Simplify.sln
+            solution: Simplify.slnx
             tests-exclude-category: Linux
           - os: ubuntu-latest
-            solution: Simplify.NetCore.sln
+            solution: Simplify.NetCore.slnx
             tests-exclude-category: Windows
             test-framework-command: --framework net9.0
 

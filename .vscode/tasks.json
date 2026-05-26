@@ -7,7 +7,7 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/src/Simplify.NetCore.sln"
+				"${workspaceFolder}/src/Simplify.NetCore.slnx"
 			],
 			"problemMatcher": "$msCompile",
 			"group": {
@@ -21,7 +21,7 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/src/Simplify.sln"
+				"${workspaceFolder}/src/Simplify.slnx"
 			],
 			"problemMatcher": "$msCompile"
 		},
@@ -57,7 +57,7 @@
 		},
 		{
 			"label": "Test with coverage",
-			"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.NetCore.sln --filter TestCategory!=Integration\\&TestCategory!=Windows",
+			"command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info ${workspaceFolder}/src/Simplify.NetCore.slnx --filter TestCategory!=Integration\\&TestCategory!=Windows",
 			"type": "shell",
 			"problemMatcher": "$msCompile",
 			"group": {
