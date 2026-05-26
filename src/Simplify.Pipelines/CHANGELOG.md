@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3] - 2026-05-26
+
+### Fixed
+
+- AsyncConveyor switched to real async instead of .GetAwaiter().GetResult()
+
+
 ## [0.9.2] - 2023-08-01
 
 ### Removed

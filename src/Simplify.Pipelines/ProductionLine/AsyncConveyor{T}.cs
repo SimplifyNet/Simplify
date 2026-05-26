@@ -9,16 +9,14 @@ namespace Simplify.Pipelines.ProductionLine;
 /// </summary>
 /// <typeparam name="T">Conveyor item type</typeparam>
 /// <seealso cref="IConveyor{T}" />
-public class AsyncConveyor<T> : IAsyncConveyor<T>
+/// <remarks>
+/// Initializes a new instance of the <see cref="AsyncConveyor{T}"/> class.
+/// </remarks>
+/// <param name="stages">The stages.</param>
+/// <exception cref="ArgumentNullException">stages</exception>
+public class AsyncConveyor<T>(IList<IAsyncConveyorStage<T>> stages) : IAsyncConveyor<T>
 {
-	private readonly IList<IAsyncConveyorStage<T>> _stages;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="AsyncConveyor{T}"/> class.
-	/// </summary>
-	/// <param name="stages">The stages.</param>
-	/// <exception cref="ArgumentNullException">stages</exception>
-	public AsyncConveyor(IList<IAsyncConveyorStage<T>> stages) => _stages = stages ?? throw new ArgumentNullException(nameof(stages));
+	private readonly IList<IAsyncConveyorStage<T>> _stages = stages ?? throw new ArgumentNullException(nameof(stages));
 
 	/// <summary>
 	/// Occurs when conveyor is about to execute.
@@ -34,17 +32,15 @@ public class AsyncConveyor<T> : IAsyncConveyor<T>
 	/// Executes the specified item thru conveyor.
 	/// </summary>
 	/// <param name="item">The item.</param>
-	public Task Execute(T item)
+	public async Task Execute(T item)
 	{
 		OnConveyorStart?.Invoke(item);
 
 		foreach (var stage in _stages)
 		{
-			stage.Execute(item).ConfigureAwait(false).GetAwaiter().GetResult();
+			await stage.Execute(item).ConfigureAwait(false);
 
 			OnStageExecuted?.Invoke(stage.GetType(), item);
 		}
-
-		return Task.Delay(0);
 	}
 }

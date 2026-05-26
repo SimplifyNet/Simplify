@@ -8,26 +8,20 @@ namespace Simplify.Pipelines.ProductionLine;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <seealso cref="IAsyncConveyorExecutor{T}" />
-public class AsyncConveyorExecutor<T> : IAsyncConveyorExecutor<T>
+/// <remarks>
+/// Initializes a new instance of the <see cref="AsyncConveyorExecutor{T}"/> class.
+/// </remarks>
+/// <param name="conveyor">The conveyor.</param>
+/// <param name="itemPreparer">The conveyor item preparer.</param>
+/// <exception cref="ArgumentNullException">
+/// conveyor
+/// or
+/// itemPreparer
+/// </exception>
+public class AsyncConveyorExecutor<T>(IAsyncConveyor<T> conveyor, IAsyncConveyorItemPreparer<T> itemPreparer) : IAsyncConveyorExecutor<T>
 {
-	private readonly IAsyncConveyor<T> _conveyor;
-	private readonly IAsyncConveyorItemPreparer<T> _itemPreparer;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="AsyncConveyorExecutor{T}"/> class.
-	/// </summary>
-	/// <param name="conveyor">The conveyor.</param>
-	/// <param name="itemPreparer">The conveyor item preparer.</param>
-	/// <exception cref="ArgumentNullException">
-	/// conveyor
-	/// or
-	/// itemPreparer
-	/// </exception>
-	public AsyncConveyorExecutor(IAsyncConveyor<T> conveyor, IAsyncConveyorItemPreparer<T> itemPreparer)
-	{
-		_conveyor = conveyor ?? throw new ArgumentNullException(nameof(conveyor));
-		_itemPreparer = itemPreparer ?? throw new ArgumentNullException(nameof(itemPreparer));
-	}
+	private readonly IAsyncConveyor<T> _conveyor = conveyor ?? throw new ArgumentNullException(nameof(conveyor));
+	private readonly IAsyncConveyorItemPreparer<T> _itemPreparer = itemPreparer ?? throw new ArgumentNullException(nameof(itemPreparer));
 
 	/// <summary>
 	/// Runs the conveyor
