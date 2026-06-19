@@ -8,6 +8,8 @@ namespace Simplify.DI;
 /// </summary>
 public class DIContainer
 {
+	private static readonly object Locker = new();
+
 	private static IDIContainerProvider? _current;
 
 	/// <summary>
@@ -15,7 +17,15 @@ public class DIContainer
 	/// </summary>
 	public static IDIContainerProvider Current
 	{
-		get => _current ??= new DryIocDIProvider();
+		get
+		{
+			if (_current != null)
+				return _current;
+
+			lock (Locker)
+				return _current ??= new DryIocDIProvider();
+		}
+
 		set => _current = value ?? throw new ArgumentNullException(nameof(value));
 	}
 }

@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.6.2] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- Crontab job timers were never stopped/disposed on shutdown, leaking timers that kept firing during and after stop; all job timers are now stopped before waiting for running tasks and on dispose
+- Data race in `CrontabProcessor` between `IsMatching` and `CalculateNextOccurrences` over the shared occurrences list; access is now synchronized
+- Lifetime scope leak in basic job execution when resolving or invoking the job throws; the scope is now disposed on failure
+- `MultitaskScheduler` now unsubscribes from the static `Console.CancelKeyPress` event on dispose, preventing the disposed instance from being rooted and from receiving Ctrl+C after disposal
+
 ## [1.6.1] - 2025-10-10
 
 ### Dependencies

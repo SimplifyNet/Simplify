@@ -1,7 +1,7 @@
 using System.Data;
 using NHibernate.Dialect;
 
-namespace Pas.Database.Session.Dialects;
+namespace Simplify.FluentNHibernate.Dialects;
 
 /// <summary>
 /// Provides PostgreSQL dialect which uses timestamptz DateTime format

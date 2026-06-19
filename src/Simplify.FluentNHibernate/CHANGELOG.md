@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.3.1] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- Moved `PostgreSql83ZDialect` from the leaked `Pas.Database.Session.Dialects` namespace to `Simplify.FluentNHibernate.Dialects` to match its location and the other dialects, and removed the dangling `using`
+
 ## [3.3.0] - 2025-06-15
 
 ### Removed

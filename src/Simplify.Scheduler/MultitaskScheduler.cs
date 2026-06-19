@@ -96,6 +96,9 @@ public class MultitaskScheduler : SchedulerJobsHandler
 	// ReSharper disable once FlagArgument
 	protected override void Dispose(bool disposing)
 	{
+		if (disposing)
+			Console.CancelKeyPress -= StopJobs;
+
 		base.Dispose(disposing);
 
 		_closing.Dispose();

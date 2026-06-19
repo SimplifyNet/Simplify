@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.1] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- `GenericRepository.GetSingleByQueryAsync` used `FirstAsync` instead of single-element semantics; it now uses `SingleOrDefaultAsync` to match the synchronous `GetSingleByQuery`
+- `TransactUnitOfWork` now clears the transaction reference on dispose
+
 ## [0.4.0] - 2025-10-10
 
 ### Removed

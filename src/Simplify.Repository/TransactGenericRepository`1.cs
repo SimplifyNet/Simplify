@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,25 +12,15 @@ namespace Simplify.Repository;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <seealso cref="IGenericRepository{T}" />
-public class TransactGenericRepository<T> : IGenericRepository<T>
+/// <remarks>
+/// Initializes a new instance of the <see cref="TransactGenericRepository{T}" /> class.
+/// </remarks>
+/// <param name="baseRepository">The base repository.</param>
+/// <param name="unitOfWork">The unit of work.</param>
+/// <param name="isolationLevel">The isolation level.</param>
+public class TransactGenericRepository<T>(IGenericRepository<T> baseRepository, ITransactUnitOfWork unitOfWork, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) : IGenericRepository<T>
 	where T : class
 {
-	private readonly IGenericRepository<T> _baseRepository;
-	private readonly IsolationLevel _isolationLevel;
-	private readonly ITransactUnitOfWork _unitOfWork;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="TransactGenericRepository{T}" /> class.
-	/// </summary>
-	/// <param name="baseRepository">The base repository.</param>
-	/// <param name="unitOfWork">The unit of work.</param>
-	/// <param name="isolationLevel">The isolation level.</param>
-	public TransactGenericRepository(IGenericRepository<T> baseRepository, ITransactUnitOfWork unitOfWork, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-	{
-		_baseRepository = baseRepository;
-		_unitOfWork = unitOfWork;
-		_isolationLevel = isolationLevel;
-	}
 
 	/// <summary>
 	/// Adds the object.
@@ -39,22 +29,7 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	/// <returns>
 	/// The generated identifier
 	/// </returns>
-	public object Add(T entity)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.Add(entity);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+	public object Add(T entity) => Execute(() => baseRepository.Add(entity));
 
 	/// <summary>
 	/// Adds the object asynchronously.
@@ -63,192 +38,61 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	/// <returns>
 	/// The generated identifier
 	/// </returns>
-	public async Task<object> AddAsync(T entity)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.AddAsync(entity);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<object> AddAsync(T entity) => ExecuteAsync(() => baseRepository.AddAsync(entity));
 
 	/// <summary>
 	/// Deletes the object.
 	/// </summary>
 	/// <param name="entity">The entity.</param>
-	public void Delete(T entity)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		_baseRepository.Delete(entity);
-
-		if (!skip)
-			_unitOfWork.Commit();
-	}
+	public void Delete(T entity) => Execute(() => baseRepository.Delete(entity));
 
 	/// <summary>
 	/// Deletes the object asynchronously.
 	/// </summary>
 	/// <param name="entity">The entity.</param>
-	public async Task DeleteAsync(T entity)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		await _baseRepository.DeleteAsync(entity);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-	}
+	public Task DeleteAsync(T entity) => ExecuteAsync(() => baseRepository.DeleteAsync(entity));
 
 	/// <summary>
 	/// Gets the number of elements.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public int GetCount(Expression<Func<T, bool>>? query = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetCount(query);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+	public int GetCount(Expression<Func<T, bool>>? query = null) => Execute(() => baseRepository.GetCount(query));
 
 	/// <summary>
 	/// Gets the number of elements asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public async Task<int> GetCountAsync(Expression<Func<T, bool>>? query = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetCountAsync(query);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<int> GetCountAsync(Expression<Func<T, bool>>? query = null) => ExecuteAsync(() => baseRepository.GetCountAsync(query));
 
 	/// <summary>
 	/// Gets the first object by query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public T GetFirstByQuery(Expression<Func<T, bool>> query)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetFirstByQuery(query);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+	public T GetFirstByQuery(Expression<Func<T, bool>> query) => Execute(() => baseRepository.GetFirstByQuery(query));
 
 	/// <summary>
 	/// Gets the first object by query asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public async Task<T> GetFirstByQueryAsync(Expression<Func<T, bool>> query)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetFirstByQueryAsync(query);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<T> GetFirstByQueryAsync(Expression<Func<T, bool>> query) => ExecuteAsync(() => baseRepository.GetFirstByQueryAsync(query));
 
 	/// <summary>
 	/// Gets the long number of elements.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public long GetLongCount(Expression<Func<T, bool>>? query = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetLongCount(query);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+	public long GetLongCount(Expression<Func<T, bool>>? query = null) => Execute(() => baseRepository.GetLongCount(query));
 
 	/// <summary>
 	/// Gets the long number of elements asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public async Task<long> GetLongCountAsync(Expression<Func<T, bool>>? query = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetLongCountAsync(query);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<long> GetLongCountAsync(Expression<Func<T, bool>>? query = null) => ExecuteAsync(() => baseRepository.GetLongCountAsync(query));
 
 	/// <summary>
 	/// Gets the multiple objects by query or all objects without query.
@@ -257,22 +101,8 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
 	public IList<T> GetMultiple(Expression<Func<T, bool>>? query = null,
-		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetMultiple(query, customProcessing);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null) =>
+		Execute(() => baseRepository.GetMultiple(query, customProcessing));
 
 	/// <summary>
 	/// Gets the multiple objects by query or all objects without query asynchronously.
@@ -280,23 +110,9 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public async Task<IList<T>> GetMultipleAsync(Expression<Func<T, bool>>? query = null,
-		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetMultipleAsync(query, customProcessing);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<IList<T>> GetMultipleAsync(Expression<Func<T, bool>>? query = null,
+		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null) =>
+		ExecuteAsync(() => baseRepository.GetMultipleAsync(query, customProcessing));
 
 	/// <summary>
 	/// Gets the multiple paged elements list.
@@ -307,22 +123,8 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
 	public IList<T> GetPaged(int pageIndex, int itemsPerPage, Expression<Func<T, bool>>? query = null,
-		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetPaged(pageIndex, itemsPerPage, query, customProcessing);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null) =>
+		Execute(() => baseRepository.GetPaged(pageIndex, itemsPerPage, query, customProcessing));
 
 	/// <summary>
 	/// Gets the multiple paged elements list asynchronously.
@@ -332,147 +134,109 @@ public class TransactGenericRepository<T> : IGenericRepository<T>
 	/// <param name="query">The query.</param>
 	/// <param name="customProcessing">The custom processing.</param>
 	/// <returns></returns>
-	public async Task<IList<T>> GetPagedAsync(int pageIndex, int itemsPerPage, Expression<Func<T, bool>>? query = null,
-		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetPagedAsync(pageIndex, itemsPerPage, query, customProcessing);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<IList<T>> GetPagedAsync(int pageIndex, int itemsPerPage, Expression<Func<T, bool>>? query = null,
+		Func<IQueryable<T>, IQueryable<T>>? customProcessing = null) =>
+		ExecuteAsync(() => baseRepository.GetPagedAsync(pageIndex, itemsPerPage, query, customProcessing));
 
 	/// <summary>
 	/// Gets the single object by identifier.
 	/// </summary>
 	/// <param name="id">The identifier.</param>
 	/// <returns></returns>
-	public T GetSingleByID(object id)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetSingleByID(id);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+	public T GetSingleByID(object id) => Execute(() => baseRepository.GetSingleByID(id));
 
 	/// <summary>
 	/// Gets the single object by identifier asynchronously.
 	/// </summary>
 	/// <param name="id">The identifier.</param>
 	/// <returns></returns>
-	public async Task<T> GetSingleByIDAsync(object id)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetSingleByIDAsync(id);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<T> GetSingleByIDAsync(object id) => ExecuteAsync(() => baseRepository.GetSingleByIDAsync(id));
 
 	/// <summary>
 	/// Gets the single object by query.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public T GetSingleByQuery(Expression<Func<T, bool>> query)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = _baseRepository.GetSingleByQuery(query);
-
-		if (!skip)
-			_unitOfWork.Commit();
-
-		return result;
-	}
+	public T GetSingleByQuery(Expression<Func<T, bool>> query) => Execute(() => baseRepository.GetSingleByQuery(query));
 
 	/// <summary>
 	/// Gets the single object by query asynchronously.
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public async Task<T> GetSingleByQueryAsync(Expression<Func<T, bool>> query)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		var result = await _baseRepository.GetSingleByQueryAsync(query);
-
-		if (!skip)
-			await _unitOfWork.CommitAsync();
-
-		return result;
-	}
+	public Task<T> GetSingleByQueryAsync(Expression<Func<T, bool>> query) => ExecuteAsync(() => baseRepository.GetSingleByQueryAsync(query));
 
 	/// <summary>
 	/// Updates the object.
 	/// </summary>
 	/// <param name="entity">The entity.</param>
-	public void Update(T entity)
-	{
-		var skip = false;
-
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
-
-		_baseRepository.Update(entity);
-
-		if (!skip)
-			_unitOfWork.Commit();
-	}
+	public void Update(T entity) => Execute(() => baseRepository.Update(entity));
 
 	/// <summary>
 	/// Updates the object asynchronously.
 	/// </summary>
 	/// <param name="entity">The entity.</param>
-	public async Task UpdateAsync(T entity)
+	public Task UpdateAsync(T entity) => ExecuteAsync(() => baseRepository.UpdateAsync(entity));
+
+	private TResult Execute<TResult>(Func<TResult> operation)
 	{
-		var skip = false;
+		if (unitOfWork.IsTransactionActive)
+			return operation();
 
-		if (_unitOfWork.IsTransactionActive)
-			skip = true;
-		else
-			_unitOfWork.BeginTransaction(_isolationLevel);
+		unitOfWork.BeginTransaction(isolationLevel);
 
-		await _baseRepository.UpdateAsync(entity);
+		try
+		{
+			var result = operation();
 
-		if (!skip)
-			await _unitOfWork.CommitAsync();
+			unitOfWork.Commit();
+
+			return result;
+		}
+		catch
+		{
+			unitOfWork.Rollback();
+
+			throw;
+		}
 	}
+
+	private void Execute(Action operation) =>
+		Execute(() =>
+		{
+			operation();
+
+			return true;
+		});
+
+	private async Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> operation)
+	{
+		if (unitOfWork.IsTransactionActive)
+			return await operation();
+
+		unitOfWork.BeginTransaction(isolationLevel);
+
+		try
+		{
+			var result = await operation();
+
+			await unitOfWork.CommitAsync();
+
+			return result;
+		}
+		catch
+		{
+			await unitOfWork.RollbackAsync();
+
+			throw;
+		}
+	}
+
+	private async Task ExecuteAsync(Func<Task> operation) =>
+		await ExecuteAsync(async () =>
+		{
+			await operation();
+
+			return true;
+		});
 }

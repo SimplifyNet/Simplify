@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Code Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v6
 
       - name: Install DotNet
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "9.0.x"
 
@@ -54,7 +54,7 @@ jobs:
 
       - name: Create packages artifact
         if: ${{ matrix.os == 'windows-latest' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Packages
           path: ./src/publish/
