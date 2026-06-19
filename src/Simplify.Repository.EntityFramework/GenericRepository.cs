@@ -49,7 +49,7 @@ public class GenericRepository<T>(DbContext session) : IGenericRepository<T>
 	/// </summary>
 	/// <param name="query">The query.</param>
 	/// <returns></returns>
-	public Task<T> GetSingleByQueryAsync(Expression<Func<T, bool>> query) => Session.Set<T>().FirstAsync(query);
+	public Task<T> GetSingleByQueryAsync(Expression<Func<T, bool>> query) => Session.Set<T>().SingleOrDefaultAsync(query)!;
 
 	/// <summary>
 	/// Gets the first object by query.

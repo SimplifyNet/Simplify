@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.4] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- `ResourcesStringTable` now throws a descriptive `InvalidOperationException` instead of a `NullReferenceException` when the entry assembly cannot be resolved (e.g. in unmanaged/host scenarios)
+
 ## [1.0.3] - 2023-08-01
 
 ### Removed

@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.7.1] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- `TransactGenericRepository` did not roll back the transaction when a repository operation threw, leaving an open transaction on the connection; all operations now roll back on failure
+
 ## [1.7.0] - 2024-01-14
 
 ### Changed

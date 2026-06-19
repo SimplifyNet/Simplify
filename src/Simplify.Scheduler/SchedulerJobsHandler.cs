@@ -173,6 +173,11 @@ public abstract class SchedulerJobsHandler : IDisposable
 		Console.WriteLine("Scheduler stopping, waiting for jobs to finish...");
 
 		ShutdownInProcess = true;
+
+		// Stop all job timers first so no new tasks are spawned while we wait for the running ones to finish.
+		foreach (var job in _jobs)
+			job.Stop();
+
 		Task[] itemsToWait;
 
 		lock (_workingJobsTasks)
@@ -209,11 +214,20 @@ public abstract class SchedulerJobsHandler : IDisposable
 		if (!disposing)
 			return;
 
-		foreach (var basicJobItem in _workingBasicJobs)
-		{
-			OnJobFinish?.Invoke(basicJobItem.Key);
+		// Stop and dispose all job timers (idempotent if already stopped in StopJobs) to avoid leaking them.
+		foreach (var job in _jobs)
+			job.Stop();
 
-			basicJobItem.Value.Dispose();
+		lock (_workingBasicJobs)
+		{
+			foreach (var basicJobItem in _workingBasicJobs)
+			{
+				OnJobFinish?.Invoke(basicJobItem.Key);
+
+				basicJobItem.Value.Dispose();
+			}
+
+			_workingBasicJobs.Clear();
 		}
 	}
 
@@ -301,9 +315,11 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 	private async Task RunBasicJobAsync(ISchedulerJobRepresentation job)
 	{
+		ILifetimeScope? scope = null;
+
 		try
 		{
-			var scope = DIContainer.Current.BeginLifetimeScope();
+			scope = DIContainer.Current.BeginLifetimeScope();
 
 			var jobObject = scope.Resolver.Resolve(job.JobClassType);
 
@@ -311,10 +327,13 @@ public abstract class SchedulerJobsHandler : IDisposable
 
 			await InvokeJobMethodAsync(job, jobObject);
 
-			_workingBasicJobs.Add(job, scope);
+			lock (_workingBasicJobs)
+				_workingBasicJobs.Add(job, scope);
 		}
 		catch (Exception e)
 		{
+			scope?.Dispose();
+
 			if (!TryRaiseOnExceptionEvent(e))
 				throw;
 		}

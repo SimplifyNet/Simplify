@@ -2,6 +2,10 @@
 
 ## [4.2.12] - 2026-06-19
 
+### Added
+
+- .NET 10 support
+
 ### Fixed
 
 - `DIContainer.Current` lazy initialization was not thread-safe and could construct multiple container providers under concurrent first access; initialization is now synchronized

@@ -4,7 +4,6 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
 using Microsoft.Extensions.Configuration;
 using NHibernate.Driver;
-using Pas.Database.Session.Dialects;
 using Simplify.FluentNHibernate.Dialects;
 using Simplify.FluentNHibernate.Drivers;
 using Simplify.FluentNHibernate.Interceptors;

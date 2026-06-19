@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.1] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Changed
+
+- `RemoveAllXmlNamespaces` now removes all namespace declarations in a single regex pass instead of an O(n²) per-match string replacement loop (same result)
+
 ## [1.4.0] - 2024-05-25
 
 ### Changed

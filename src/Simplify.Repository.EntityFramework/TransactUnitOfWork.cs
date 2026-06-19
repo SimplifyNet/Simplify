@@ -97,7 +97,10 @@ public class TransactUnitOfWork<T>(DbContext context) : UnitOfWork<T>(context), 
 		if (!disposing)
 			return;
 
+		// Disposing an uncommitted transaction rolls it back, preventing a leaked open transaction
+		// when the unit of work is disposed without an explicit Commit/Rollback.
 		_transaction?.Dispose();
+		_transaction = null;
 
 		base.Dispose(disposing);
 	}

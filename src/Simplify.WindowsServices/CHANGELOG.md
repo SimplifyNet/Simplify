@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.15.2] - 2026-06-19
+
+### Fixed
+
+- Crontab job timers were never stopped/disposed on service stop/dispose, leaking timers that kept firing during and after shutdown; all job timers are now stopped before waiting for running tasks and on dispose
+- Data race in `CrontabProcessor` between `IsMatching` and `CalculateNextOccurrences` over the shared occurrences list; access is now synchronized
+- Lifetime scope leak in basic job execution when resolving or invoking the job throws; the scope is now disposed on failure
+
 ## [2.15.1] - 2025-10-10
 
 ### Dependencies

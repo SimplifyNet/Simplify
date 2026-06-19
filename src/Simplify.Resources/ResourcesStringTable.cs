@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Resources;
 
 namespace Simplify.Resources;
@@ -48,6 +49,9 @@ public class ResourcesStringTable : IResourcesStringTable
 
 	private void InitializeResourceManager(string resourcesFileName = "Resources", string baseName = null)
 	{
+		if (_workingAssembly == null)
+			throw new InvalidOperationException("Unable to resolve the working assembly for the resources string table (entry assembly is null in the current host). Use the constructor accepting an explicit assembly.");
+
 		if (baseName == null)
 			baseName = _workingAssembly.GetName().Name;
 

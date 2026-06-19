@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.5.1] - 2026-06-19
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- `FileHelper.IsFileLockedForRead` and `GetLastLineOfFile` now use the configurable `IFileSystem` abstraction instead of direct file access, so they honor a custom/mocked file system
+
 ## [1.5.0] - 2025-06-15
 
 ### Removed
