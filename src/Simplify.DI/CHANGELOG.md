@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.12] - 2026-06-19
+
+### Fixed
+
+- `DIContainer.Current` lazy initialization was not thread-safe and could construct multiple container providers under concurrent first access; initialization is now synchronized
+
 ## [4.2.11] - 2024-06-09
 
 ### Dependencies

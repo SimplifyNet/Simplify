@@ -10,7 +10,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>4.2.11</Version>
+		<Version>4.2.12</Version>
 
 		<Description>Simplify DI common interface for IOC containers</Description>
 		<Product>Simplify</Product>
