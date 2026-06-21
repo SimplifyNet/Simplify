@@ -9,6 +9,8 @@
 ### Fixed
 
 - `WeakSingleton<T>` was not thread-safe and could create multiple instances under concurrent access; instance creation is now synchronized with double-checked locking
+- `ApplicationEnvironment.Name`, `TimeProvider.Current`, `AssemblyInfo.Entry` lazy initialization was not thread-safe (`??=`) and could return different instances under concurrent first access; initialization is now synchronized with double-checked locking
+- `ObjectConverter<T>` parameterless protected constructor left `ConvertFunc` null; `Convert` now guards against null with a descriptive exception
 
 ## [1.6.2] - 2023-08-02
 

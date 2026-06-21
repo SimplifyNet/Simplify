@@ -18,6 +18,8 @@ public static class ApplicationEnvironment
 	/// </summary>
 	public const string EnvironmentVariableName = "ASPNETCORE_ENVIRONMENT";
 
+	private static readonly object NameLock = new();
+
 	private static string? _name;
 
 	/// <summary>
@@ -43,7 +45,16 @@ public static class ApplicationEnvironment
 	/// </value>
 	public static string Name
 	{
-		get { return _name ??= Environment.GetEnvironmentVariable(EnvironmentVariableName) ?? DefaultEnvironmentName; }
+		get
+		{
+			if (_name != null) return _name;
+
+			lock (NameLock)
+				_name ??= Environment.GetEnvironmentVariable(EnvironmentVariableName) ?? DefaultEnvironmentName;
+
+			return _name;
+		}
+
 		set => _name = value ?? throw new ArgumentNullException(nameof(value));
 	}
 }

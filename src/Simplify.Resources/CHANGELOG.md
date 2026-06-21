@@ -9,6 +9,9 @@
 ### Fixed
 
 - `ResourcesStringTable` now throws a descriptive `InvalidOperationException` instead of a `NullReferenceException` when the entry assembly cannot be resolved (e.g. in unmanaged/host scenarios)
+- `ResourcesStringTable.GetString` now throws `KeyNotFoundException` instead of returning `null` for missing keys
+- `ResourcesStringTable(Assembly, ...)` constructor now validates the assembly parameter with `ArgumentNullException`
+- `StringTable.Entry` setter now uses `nameof(value)` in `ArgumentNullException` instead of an empty parameter name
 
 ## [1.0.3] - 2023-08-01
 

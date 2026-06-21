@@ -15,6 +15,6 @@ public static class StringTable
 	public static IResourcesStringTable Entry
 	{
 		get => _entryStringTable ??= new ResourcesStringTable(false, "ProgramResources");
-		set => _entryStringTable = value ?? throw new ArgumentNullException();
+		set => _entryStringTable = value ?? throw new ArgumentNullException(nameof(value));
 	}
 }

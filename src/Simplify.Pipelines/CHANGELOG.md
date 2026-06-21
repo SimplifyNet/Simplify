@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.9.4] - 2026-06-19
+
+### Removed
+
+- Long-obsolete `Pipeline<T>`, `ResultingPipeline<T,TResult>`, `PipelineProcessor<T>`, `ValidationPipeline<T,TResult>`, `ValidationPipelineProcessor<T,TResult>` and their supporting types (interfaces, rules, data preparers) — use `IConveyor` / `IAsyncConveyor` instead
+
 ## [0.9.3] - 2026-05-26
 
 ### Fixed

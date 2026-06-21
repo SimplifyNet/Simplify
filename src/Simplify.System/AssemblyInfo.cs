@@ -9,6 +9,7 @@ namespace Simplify.System;
 public class AssemblyInfo : IAssemblyInfo
 {
 	private static IAssemblyInfo? _entryAssemblyInfo;
+	private static readonly object _entryAssemblyInfoLock = new();
 	private readonly Assembly _infoAssembly;
 
 	/// <summary>
@@ -27,7 +28,17 @@ public class AssemblyInfo : IAssemblyInfo
 	/// <exception cref="ArgumentNullException">value</exception>
 	public static IAssemblyInfo Entry
 	{
-		get => _entryAssemblyInfo ??= new AssemblyInfo(Assembly.GetEntryAssembly() ?? throw new InvalidOperationException());
+		get
+		{
+			if (_entryAssemblyInfo != null) return _entryAssemblyInfo;
+
+			lock (_entryAssemblyInfoLock)
+			{
+				_entryAssemblyInfo ??= new AssemblyInfo(Assembly.GetEntryAssembly() ?? throw new InvalidOperationException());
+			}
+
+			return _entryAssemblyInfo;
+		}
 		set => _entryAssemblyInfo = value ?? throw new ArgumentNullException(nameof(value));
 	}
 

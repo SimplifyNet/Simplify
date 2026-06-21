@@ -9,6 +9,7 @@
 ### Fixed
 
 - `FileHelper.IsFileLockedForRead` and `GetLastLineOfFile` now use the configurable `IFileSystem` abstraction instead of direct file access, so they honor a custom/mocked file system
+- `FileHelper.GenerateFullName` now uses `Path.Combine` instead of a hardcoded `"/"` path separator for cross-platform compatibility
 
 ## [1.5.0] - 2025-06-15
 

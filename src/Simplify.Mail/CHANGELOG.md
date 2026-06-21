@@ -14,6 +14,8 @@
 
 - `Dispose` is now idempotent and thread-safe (guarded with `Interlocked`)
 - Anti-spam pool now uses `DateTime.UtcNow` to avoid mis-expiration on local clock/DST changes
+- `Dispose` no longer blocks indefinitely on `_smtpLock.Wait()` when another thread holds the semaphore; uses non-blocking `Wait(0)` instead
+- `ConfigurationBasedMailSenderSettings` config parsing now uses `TryParse` instead of `Parse` to avoid crashing on invalid configuration values
 
 ## [2.0.1] - 2026-04-24
 

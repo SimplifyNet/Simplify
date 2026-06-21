@@ -7,6 +7,8 @@ namespace Simplify.System;
 /// </summary>
 public static class TimeProvider
 {
+	private static readonly object CurrentInstanceLock = new();
+
 	private static ITimeProvider? _currentInstance;
 
 	/// <summary>
@@ -18,7 +20,15 @@ public static class TimeProvider
 	/// <exception cref="ArgumentNullException">value</exception>
 	public static ITimeProvider Current
 	{
-		get => _currentInstance ??= new SystemTimeProvider();
+		get
+		{
+			if (_currentInstance != null) return _currentInstance;
+
+			lock (CurrentInstanceLock)
+				_currentInstance ??= new SystemTimeProvider();
+
+			return _currentInstance;
+		}
 		set => _currentInstance = value ?? throw new ArgumentNullException(nameof(value));
 	}
 }

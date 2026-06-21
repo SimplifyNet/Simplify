@@ -121,5 +121,5 @@ public static class FileHelper
 	/// </summary>
 	/// <param name="fileName">Name of the file.</param>
 	/// <returns></returns>
-	public static string GenerateFullName(string fileName) => $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{fileName}";
+	public static string GenerateFullName(string fileName) => Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? throw new InvalidOperationException("Unable to resolve calling assembly location"), fileName);
 }

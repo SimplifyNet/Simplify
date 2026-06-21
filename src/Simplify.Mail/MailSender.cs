@@ -18,6 +18,7 @@ namespace Simplify.Mail;
 public class MailSender : IMailSender, IDisposable
 {
 	private static readonly object AntiSpamLocker = new();
+
 	private static readonly Dictionary<string, DateTime> AntiSpamPool = [];
 
 	private readonly SemaphoreSlim _smtpLock = new(1, 1);
@@ -574,22 +575,25 @@ public class MailSender : IMailSender, IDisposable
 		if (Interlocked.Exchange(ref _disposed, 1) == 1)
 			return;
 
-		_smtpLock.Wait();
-
-		try
+		// Try to acquire the semaphore without blocking. If another thread holds it,
+		// that thread will clean up the SmtpClient when it finishes.
+		if (_smtpLock.Wait(0))
 		{
-			if (_smtpClient?.IsConnected == true)
-				_smtpClient.Disconnect(true);
+			try
+			{
+				if (_smtpClient?.IsConnected == true)
+					_smtpClient.Disconnect(true);
 
-			_smtpClient?.Dispose();
-			_smtpClient = null;
-		}
-		finally
-		{
-			_smtpLock.Release();
+				_smtpClient?.Dispose();
+				_smtpClient = null;
+			}
+			finally
+			{
+				_smtpLock.Release();
+			}
 		}
 
-		_smtpLock?.Dispose();
+		_smtpLock.Dispose();
 
 		GC.SuppressFinalize(this);
 	}

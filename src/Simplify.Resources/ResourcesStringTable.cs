@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
 
@@ -33,7 +34,7 @@ public class ResourcesStringTable : IResourcesStringTable
 	/// <param name="baseName">The root name of the resources (Assembly name will be used by default).</param>
 	public ResourcesStringTable(Assembly assembly, string resourcesFileName = "Resources", string baseName = null)
 	{
-		_workingAssembly = assembly;
+		_workingAssembly = assembly ?? throw new ArgumentNullException(nameof(assembly));
 		InitializeResourceManager(resourcesFileName, baseName);
 	}
 
@@ -45,7 +46,7 @@ public class ResourcesStringTable : IResourcesStringTable
 	/// <summary>
 	/// Get string table record by name
 	/// </summary>
-	public string GetString(string name) => _resourceManager.GetString(name);
+	public string GetString(string name) => _resourceManager.GetString(name) ?? throw new KeyNotFoundException($"Resource key '{name}' not found in string table.");
 
 	private void InitializeResourceManager(string resourcesFileName = "Resources", string baseName = null)
 	{
