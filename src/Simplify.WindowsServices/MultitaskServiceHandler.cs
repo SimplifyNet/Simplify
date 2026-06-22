@@ -236,7 +236,7 @@ public class MultitaskServiceHandler : ServiceBase
 			job.Start();
 
 			if (!(job is ICrontabServiceJob))
-				RunBasicJob(job).Wait();
+				RunBasicJob(job);
 		}
 
 		base.OnStart(args);
@@ -273,33 +273,55 @@ public class MultitaskServiceHandler : ServiceBase
 
 	private void OnCronTimerTick(object state)
 	{
-		var job = (ICrontabServiceJob)state;
+		try
+		{
+			var job = (ICrontabServiceJob)state;
 
-		if (job.CrontabProcessor == null)
-			throw new InvalidOperationException($"{nameof(job.CrontabProcessor)} is null");
+			if (job.CrontabProcessor == null)
+				throw new InvalidOperationException($"{nameof(job.CrontabProcessor)} is null");
 
-		if (!job.CrontabProcessor.IsMatching())
-			return;
+			if (!job.CrontabProcessor.IsMatching())
+				return;
 
-		job.CrontabProcessor.CalculateNextOccurrences();
+			job.CrontabProcessor.CalculateNextOccurrences();
 
-		OnStartWork(state);
+			OnStartWork(state);
+		}
+		catch (Exception e)
+		{
+			RaiseOnExceptionOrTrace(e);
+		}
 	}
 
 	private void OnStartWork(object state)
 	{
-		var job = (ICrontabServiceJob)state;
-
-		lock (_workingJobsTasks)
+		try
 		{
-			if (ShutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
-				return;
+			var job = (ICrontabServiceJob)state;
 
-			_jobTaskID++;
+			lock (_workingJobsTasks)
+			{
+				if (ShutdownInProcess || _workingJobsTasks.Count(x => x.Job == job) >= job.Settings.MaximumParallelTasksCount)
+					return;
 
-			_workingJobsTasks.Add(new CrontabServiceJobTask(_jobTaskID, job,
-				Task.Factory.StartNew(Run, new Tuple<long, ICrontabServiceJob>(_jobTaskID, job)).Unwrap()));
+				_jobTaskID++;
+
+				_workingJobsTasks.Add(new CrontabServiceJobTask(_jobTaskID, job,
+					Task.Factory.StartNew(Run, new Tuple<long, ICrontabServiceJob>(_jobTaskID, job)).Unwrap()));
+			}
 		}
+		catch (Exception e)
+		{
+			RaiseOnExceptionOrTrace(e);
+		}
+	}
+
+	private void RaiseOnExceptionOrTrace(Exception e)
+	{
+		if (OnException != null)
+			OnException(new ServiceExceptionArgs(ServiceName, e));
+		else
+			Console.Error.WriteLine($"Unhandled exception in windows service job: {e}");
 	}
 
 	#region Execution
@@ -318,10 +340,7 @@ public class MultitaskServiceHandler : ServiceBase
 		}
 		catch (Exception e)
 		{
-			if (OnException != null)
-				OnException(new ServiceExceptionArgs(ServiceName, e));
-			else
-				throw;
+			RaiseOnExceptionOrTrace(e);
 		}
 		finally
 		{
@@ -342,31 +361,51 @@ public class MultitaskServiceHandler : ServiceBase
 		OnJobFinish?.Invoke(job);
 	}
 
-	private async Task RunBasicJob(IServiceJobRepresentation job)
+	private void RunBasicJob(IServiceJobRepresentation job)
 	{
-		ILifetimeScope? scope = null;
+		var scope = DIContainer.Current.BeginLifetimeScope();
+
+		object jobObject;
 
 		try
 		{
-			scope = DIContainer.Current.BeginLifetimeScope();
-
-			var jobObject = scope.Resolver.Resolve(job.JobClassType);
+			jobObject = scope.Resolver.Resolve(job.JobClassType);
 
 			OnJobStart?.Invoke(job);
-
-			await InvokeJobMethod(job, jobObject);
-
-			lock (_workingBasicJobs)
-				_workingBasicJobs.Add(job, scope);
 		}
 		catch (Exception e)
 		{
-			scope?.Dispose();
+			scope.Dispose();
 
-			if (OnException != null)
-				OnException(new ServiceExceptionArgs(ServiceName, e));
-			else
-				throw;
+			RaiseOnExceptionOrTrace(e);
+
+			return;
+		}
+
+		// The scope must be registered for disposal before awaiting: basic jobs are typically long-running
+		// (server-style) and the invocation may never complete, so registering it after the await would leak the scope.
+		lock (_workingBasicJobs)
+			_workingBasicJobs.Add(job, scope);
+
+		// Basic jobs must not block OnStart (the SCM would time out waiting for the service to start),
+		// so the (possibly non-completing) job method is run as a background task.
+		_ = InvokeJobMethod(job, jobObject).ContinueWith(t =>
+		{
+			RemoveAndDisposeBasicJob(job);
+
+			RaiseOnExceptionOrTrace(t.Exception!.GetBaseException());
+		}, TaskContinuationOptions.OnlyOnFaulted);
+	}
+
+	private void RemoveAndDisposeBasicJob(IServiceJobRepresentation job)
+	{
+		lock (_workingBasicJobs)
+		{
+			if (!_workingBasicJobs.TryGetValue(job, out var scope))
+				return;
+
+			scope.Dispose();
+			_workingBasicJobs.Remove(job);
 		}
 	}
 

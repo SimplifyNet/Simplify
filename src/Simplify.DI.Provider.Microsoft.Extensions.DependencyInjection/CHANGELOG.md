@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.1] - 2026-06-22
+
+### Fixed
+
+- `Register(Type, Type, ...)` defaulted to the `Singleton` lifetime while the `IDIRegistrator` contract and all other providers default to `PerLifetimeScope`, which could produce captive dependencies (a singleton capturing a scoped/transient service); the default lifetime is now `PerLifetimeScope`
+
 ## [1.7.0] - 2025-06-15
 
 ### Removed

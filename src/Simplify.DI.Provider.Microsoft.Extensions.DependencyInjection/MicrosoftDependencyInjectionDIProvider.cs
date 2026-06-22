@@ -57,7 +57,7 @@ public class MicrosoftDependencyInjectionDIProvider : IDIContainerProvider
 	/// <param name="serviceType">Service type.</param>
 	/// <param name="implementationType">Implementation type.</param>
 	/// <param name="lifetimeType">Lifetime type of the registering services type.</param>
-	public IDIRegistrator Register(Type serviceType, Type implementationType, LifetimeType lifetimeType = LifetimeType.Singleton)
+	public IDIRegistrator Register(Type serviceType, Type implementationType, LifetimeType lifetimeType = LifetimeType.PerLifetimeScope)
 	{
 		switch (lifetimeType)
 		{

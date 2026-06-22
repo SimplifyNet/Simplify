@@ -34,5 +34,14 @@ public class CommonEqualityComparer : IEqualityComparer
 	/// <returns>
 	/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
 	/// </returns>
-	public int GetHashCode(object obj) => obj.GetHashCode();
+	public int GetHashCode(object obj)
+	{
+		if (obj == null)
+			return 0;
+
+		if (obj is IIdentityObject identityObject)
+			return identityObject.ID.GetHashCode();
+
+		return obj.GetHashCode();
+	}
 }

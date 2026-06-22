@@ -1,10 +1,6 @@
 # Changelog
 
-## [1.6.2] - 2026-06-19
-
-### Added
-
-- .NET 10 support
+## [1.6.3] - 2026-06-22
 
 ### Fixed
 
@@ -12,6 +8,13 @@
 - Data race in `CrontabProcessor` between `IsMatching` and `CalculateNextOccurrences` over the shared occurrences list; access is now synchronized
 - Lifetime scope leak in basic job execution when resolving or invoking the job throws; the scope is now disposed on failure
 - `MultitaskScheduler` now unsubscribes from the static `Console.CancelKeyPress` event on dispose, preventing the disposed instance from being rooted and from receiving Ctrl+C after disposal
+- Exceptions thrown from the crontab timer callback (`OnCronTimerTick`/`OnStartWork`) escaped to a thread-pool thread and terminated the process; they are now routed to the `OnException` event
+- Unhandled job exceptions were rethrown from inside the worker task, surfacing as an `AggregateException` from `Task.WaitAll` and aborting graceful shutdown; they are no longer rethrown
+- Basic (long-running) job lifetime scope was registered for disposal only after the job method returned, leaking the scope for never-completing jobs and blocking startup; the scope is now registered before the job runs and the job is executed without blocking startup
+
+### Added
+
+- .NET 10 support
 
 ## [1.6.1] - 2025-10-10
 
