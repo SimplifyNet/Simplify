@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.3] - 2026-06-23
+
+### Changed
+
+- Documented `StringHelper.StripHtmlTags` as a cosmetic tag remover (simple `<.*?>` regex), explicitly not an HTML/XSS sanitizer
+
 ## [1.2.2] - 2023-08-01
 
 ### Removed

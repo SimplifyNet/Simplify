@@ -19,6 +19,7 @@
 		"netstandard",
 		"Postgre",
 		"registrator",
+		"resx",
 		"seealso",
 		"serializer",
 		"SMTP",

@@ -95,6 +95,10 @@ namespace Simplify.String
 		/// </summary>
 		/// <param name="source">The source string.</param>
 		/// <returns></returns>
+		/// <remarks>
+		/// This is a cosmetic tag remover (simple <c>&lt;.*?&gt;</c> regex), not an HTML/XSS sanitizer. Do not rely on it
+		/// to make untrusted input safe for rendering: it does not handle malformed tags, comments, scripts or attributes.
+		/// </remarks>
 		public static string StripHtmlTags(string source)
 		{
 			return Regex.Replace(source, "<.*?>", string.Empty);

@@ -9,6 +9,7 @@
 ### Fixed
 
 - Moved `PostgreSql83ZDialect` from the leaked `Pas.Database.Session.Dialects` namespace to `Simplify.FluentNHibernate.Dialects` to match its location and the other dialects, and removed the dangling `using`
+- `FluentConfigurationExtension.ExportSchema`/`UpdateSchema` did not dispose the temporary `ISessionFactory` (leaking it) and called `tx.Rollback()` unconditionally in the catch block; the session factory is now disposed and rollback only runs when the transaction is still active
 
 ## [3.3.0] - 2025-06-15
 

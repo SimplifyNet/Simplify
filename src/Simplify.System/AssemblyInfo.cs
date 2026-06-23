@@ -122,7 +122,7 @@ public class AssemblyInfo : IAssemblyInfo
 					return titleAttribute.Title;
 			}
 
-			return global::System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location ?? throw new InvalidOperationException());
+			return _infoAssembly.GetName().Name ?? throw new InvalidOperationException();
 		}
 	}
 

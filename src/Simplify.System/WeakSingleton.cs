@@ -13,7 +13,7 @@ namespace Simplify.System;
 public class WeakSingleton<T>(Func<T>? typeBuilder = null) where T : class
 {
 	private readonly Func<T> _typeBuilder = typeBuilder ?? (() => (T)Activator.CreateInstance(typeof(T), true)!);
-	private WeakReference<T> _ref = new(null!);
+	private readonly WeakReference<T> _ref = new(null!);
 
 	private readonly object _locker = new();
 
@@ -24,12 +24,12 @@ public class WeakSingleton<T>(Func<T>? typeBuilder = null) where T : class
 	{
 		get
 		{
-			if (_ref.TryGetTarget(out var target))
-				return target;
-
+			// WeakReference&lt;T&gt; instance members are not guaranteed to be thread-safe, so both the
+			// read (TryGetTarget) and the write (SetTarget) are performed under the same lock to avoid
+			// a torn state when one thread reads while another re-creates the collected target.
 			lock (_locker)
 			{
-				if (_ref.TryGetTarget(out target))
+				if (_ref.TryGetTarget(out var target))
 					return target;
 
 				target = _typeBuilder();

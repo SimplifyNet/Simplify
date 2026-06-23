@@ -2,7 +2,6 @@
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
-using System.Reflection;
 
 namespace Simplify.IO;
 
@@ -117,9 +116,13 @@ public static class FileHelper
 	public static string MakeValidFileName(string name) => Path.GetInvalidFileNameChars().Aggregate(name, (current, c) => current.Replace(c, '_'));
 
 	/// <summary>
-	/// Generates the full name of file in current directory adding calling assembly path in the start of file name.
+	/// Generates the full name of file in the application base directory adding its path in the start of file name.
 	/// </summary>
 	/// <param name="fileName">Name of the file.</param>
 	/// <returns></returns>
-	public static string GenerateFullName(string fileName) => Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? throw new InvalidOperationException("Unable to resolve calling assembly location"), fileName);
+	/// <remarks>
+	/// Uses <see cref="AppContext.BaseDirectory"/> which, unlike an assembly location, resolves correctly in
+	/// single-file and AOT deployments where <c>Assembly.Location</c> is empty.
+	/// </remarks>
+	public static string GenerateFullName(string fileName) => Path.Combine(AppContext.BaseDirectory, fileName);
 }
