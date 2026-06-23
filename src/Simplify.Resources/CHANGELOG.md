@@ -1,15 +1,15 @@
 # Changelog
 
-## [1.0.4] - 2026-06-19
+## [1.1.0] - 2026-06-19
 
 ### Added
 
 - .NET 10 support
+- `ResourcesStringTable.GetRequiredString`, throws `KeyNotFoundException` if key is not found
 
 ### Fixed
 
 - `ResourcesStringTable` now throws a descriptive `InvalidOperationException` instead of a `NullReferenceException` when the entry assembly cannot be resolved (e.g. in unmanaged/host scenarios)
-- `ResourcesStringTable.GetString` now throws `KeyNotFoundException` instead of returning `null` for missing keys
 - `ResourcesStringTable(Assembly, ...)` constructor now validates the assembly parameter with `ArgumentNullException`
 - `StringTable.Entry` setter now uses `nameof(value)` in `ArgumentNullException` instead of an empty parameter name
 

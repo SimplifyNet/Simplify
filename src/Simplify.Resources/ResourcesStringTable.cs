@@ -44,9 +44,14 @@ public class ResourcesStringTable : IResourcesStringTable
 	public string this[string name] => GetString(name);
 
 	/// <summary>
-	/// Get string table record by name
+	/// Get string table record by name (returns null if key not found)
 	/// </summary>
-	public string GetString(string name) => _resourceManager.GetString(name) ?? throw new KeyNotFoundException($"Resource key '{name}' not found in string table.");
+	public string GetString(string name) => _resourceManager.GetString(name);
+
+	/// <summary>
+	/// Get string table record by name, throws KeyNotFoundException if key not found
+	/// </summary>
+	public string GetRequiredString(string name) => _resourceManager.GetString(name) ?? throw new KeyNotFoundException($"Resource key '{name}' not found in string table.");
 
 	private void InitializeResourceManager(string resourcesFileName = "Resources", string baseName = null)
 	{

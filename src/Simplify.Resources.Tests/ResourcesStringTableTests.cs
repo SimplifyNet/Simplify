@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace Simplify.Resources.Tests;
@@ -49,5 +50,41 @@ public class ResourcesStringTableTests
 
 		// Assert
 		Assert.That(testString, Is.Null);
+	}
+
+	[Test]
+	public void ResourcesStringTableGetString_NoExistingString_Null()
+	{
+		// Arrange
+		_uow = new ResourcesStringTable(true, "ProgramResources");
+
+		// Act
+		var result = _uow.GetString("NonExistentKey");
+
+		// Assert
+		Assert.That(result, Is.Null);
+	}
+
+	[Test]
+	public void ResourcesStringTableGetRequiredString_ExistingString_ReturnsValue()
+	{
+		// Arrange
+		_uow = new ResourcesStringTable(true, "ProgramResources");
+
+		// Act
+		var result = _uow.GetRequiredString("TestString");
+
+		// Assert
+		Assert.That(result, Is.EqualTo("Hello World!"));
+	}
+
+	[Test]
+	public void ResourcesStringTableGetRequiredString_NoExistingString_ThrowsKeyNotFoundException()
+	{
+		// Arrange
+		_uow = new ResourcesStringTable(true, "ProgramResources");
+
+		// Act & Assert
+		Assert.Throws<KeyNotFoundException>(() => _uow.GetRequiredString("NonExistentKey"));
 	}
 }
