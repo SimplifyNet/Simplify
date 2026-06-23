@@ -25,6 +25,7 @@ public class FileHelperTester
 
 	[Test]
 	[Category("Windows")]
+	[Platform("Win")]
 	public void IsFileNameMadeValidCorrectly()
 	{
 		Assert.That(FileHelper.MakeValidFileName(@"thisIsValid.txt"), Is.EqualTo("thisIsValid.txt"));
