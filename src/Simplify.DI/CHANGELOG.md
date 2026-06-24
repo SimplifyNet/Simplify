@@ -1,10 +1,14 @@
 # Changelog
 
-## [4.2.12] - 2026-06-19
+## [4.3.0] - 2026-06-19
+
+### Removed
+
+- .NET Explicit 6 support
 
 ### Added
 
-- .NET 10 support
+- .NET Explicit 10 support
 
 ### Fixed
 
