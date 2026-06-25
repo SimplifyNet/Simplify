@@ -10,6 +10,11 @@
 
 - `TemplateBuilder.BuildAsync` ignored the preprocessing result, so `FixLineEndingsHtml` had no effect in the asynchronous build path
 
+### Dependencies
+
+- Internal Simplify.Xml.Sources bump to 1.4.1
+- Internal Simplify.System.Sources 1.6.3 added
+
 ### [2.0.2] - 2024-05-25
 
 ### Removed
