@@ -143,7 +143,7 @@ public class TemplateBuilder
 	{
 		var text = await LoadTemplateTextAsync();
 
-		PreprocessTemplateText(text);
+		text = PreprocessTemplateText(text);
 
 		var tpl = new Template(text);
 

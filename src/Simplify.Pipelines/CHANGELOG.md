@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.0] - 2026-06-25
+
+### Breaking Change
+
+- Long-obsolete `ChainHandler<T>`, `Pipeline<T>`, `ResultingPipeline<T,TResult>`, `PipelineProcessor<T>`, `ValidationPipeline<T,TResult>`, `ValidationPipelineProcessor<T,TResult>` and their supporting types (interfaces, rules, data preparers) — use `IConveyor` / `IAsyncConveyor` instead
+
+### Added
+
+- .NET 10 support
+
 ## [0.9.3] - 2026-05-26
 
 ### Fixed

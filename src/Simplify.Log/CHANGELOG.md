@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.1] - 2026-06-25
+
+### Fixed
+
+- `Logger.GetInnerExceptionData` returned `null` which was string-interpolated as `"null"`; now returns `string.Empty`
+- `Logger.Initialize` now guards against null `Assembly.GetCallingAssembly().Location` (can be null for merged/dynamic assemblies)
+- `Logger.Initialize` now uses `Path.Combine` instead of hardcoded `"/"` for cross-platform path construction
+- `ConfigurationBasedLoggerSettings` `PathType` parsing now uses `Enum.TryParse` instead of `Enum.Parse` to avoid crashing on invalid configuration values
+
+### Dependencies
+
+- System.IO.Abstractions bump to 22.1.1
+
 ## [2.3.0] - 2025-06-15
 
 ### Removed

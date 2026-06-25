@@ -8,19 +8,14 @@ namespace Simplify.Pipelines.ProductionLine;
 /// </summary>
 /// <typeparam name="T">Conveyor item type</typeparam>
 /// <seealso cref="IConveyor{T}" />
-public class Conveyor<T> : IConveyor<T>
+/// <remarks>
+/// Initializes a new instance of the <see cref="Conveyor{T}"/> class.
+/// </remarks>
+/// <param name="stages">The stages.</param>
+/// <exception cref="ArgumentNullException">stages</exception>
+public class Conveyor<T>(IList<IConveyorStage<T>> stages) : IConveyor<T>
 {
-	private readonly IList<IConveyorStage<T>> _stages;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="Conveyor{T}"/> class.
-	/// </summary>
-	/// <param name="stages">The stages.</param>
-	/// <exception cref="ArgumentNullException">stages</exception>
-	public Conveyor(IList<IConveyorStage<T>> stages)
-	{
-		_stages = stages ?? throw new ArgumentNullException(nameof(stages));
-	}
+	private readonly IList<IConveyorStage<T>> _stages = stages ?? throw new ArgumentNullException(nameof(stages));
 
 	/// <summary>
 	/// Occurs when conveyor is about to execute.

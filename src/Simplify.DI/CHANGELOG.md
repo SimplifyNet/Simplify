@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.3.0] - 2026-06-25
+
+### Removed
+
+- .NET Explicit 6 support
+
+### Added
+
+- .NET Explicit 10 support
+
+### Fixed
+
+- `DIContainer.Current` lazy initialization was not thread-safe and could construct multiple container providers under concurrent first access; initialization is now synchronized
+- `System` reference in .NET Framework 4.8 package
+
 ## [4.2.11] - 2024-06-09
 
 ### Dependencies

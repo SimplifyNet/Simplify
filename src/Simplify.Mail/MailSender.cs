@@ -18,12 +18,13 @@ namespace Simplify.Mail;
 public class MailSender : IMailSender, IDisposable
 {
 	private static readonly object AntiSpamLocker = new();
+
 	private static readonly Dictionary<string, DateTime> AntiSpamPool = [];
 
 	private readonly SemaphoreSlim _smtpLock = new(1, 1);
 
 	private SmtpClient _smtpClient;
-	private bool _disposed;
+	private int _disposed;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="MailSender" /> class.
@@ -571,26 +572,28 @@ public class MailSender : IMailSender, IDisposable
 	/// </summary>
 	public void Dispose()
 	{
-		if (_disposed)
+		if (Interlocked.Exchange(ref _disposed, 1) == 1)
 			return;
 
-		_smtpLock.Wait();
-
-		try
+		// Try to acquire the semaphore without blocking. If another thread holds it,
+		// that thread will clean up the SmtpClient when it finishes.
+		if (_smtpLock.Wait(0))
 		{
-			if (_smtpClient?.IsConnected == true)
-				_smtpClient.Disconnect(true);
+			try
+			{
+				if (_smtpClient?.IsConnected == true)
+					_smtpClient.Disconnect(true);
 
-			_smtpClient?.Dispose();
-			_smtpClient = null;
-		}
-		finally
-		{
-			_smtpLock.Release();
+				_smtpClient?.Dispose();
+				_smtpClient = null;
+			}
+			finally
+			{
+				_smtpLock.Release();
+			}
 		}
 
-		_smtpLock?.Dispose();
-		_disposed = true;
+		_smtpLock.Dispose();
 
 		GC.SuppressFinalize(this);
 	}
@@ -600,7 +603,9 @@ public class MailSender : IMailSender, IDisposable
 		if (client.IsConnected)
 			return;
 
-		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.None;
+		// When SSL is not explicitly enabled, still negotiate STARTTLS opportunistically if the server
+		// supports it, so credentials are never sent over a plain-text connection when avoidable.
+		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.StartTlsWhenAvailable;
 
 		await client.ConnectAsync(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber, secureSocketOptions, cancellationToken);
 
@@ -613,7 +618,9 @@ public class MailSender : IMailSender, IDisposable
 		if (client.IsConnected)
 			return;
 
-		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.None;
+		// When SSL is not explicitly enabled, still negotiate STARTTLS opportunistically if the server
+		// supports it, so credentials are never sent over a plain-text connection when avoidable.
+		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.StartTlsWhenAvailable;
 
 		client.Connect(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber, secureSocketOptions);
 
@@ -669,7 +676,7 @@ public class MailSender : IMailSender, IDisposable
 			if (AntiSpamPool.ContainsKey(messageBody))
 				return true;
 
-			AntiSpamPool.Add(messageBody, DateTime.Now);
+			AntiSpamPool.Add(messageBody, DateTime.UtcNow);
 
 			return false;
 		}
@@ -677,6 +684,6 @@ public class MailSender : IMailSender, IDisposable
 
 	private IList<string> GetItemsToRemove() =>
 		[.. from item in AntiSpamPool
-		 where (DateTime.Now - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
+		 where (DateTime.UtcNow - item.Value).TotalMinutes > Settings.AntiSpamPoolMessageLifeTime
 		 select item.Key];
 }

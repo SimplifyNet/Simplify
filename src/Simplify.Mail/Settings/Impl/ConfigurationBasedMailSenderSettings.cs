@@ -41,8 +41,8 @@ public sealed class ConfigurationBasedMailSenderSettings : MailSenderSettings
 
 		var smtpServerPortNumberString = config["SmtpServerPortNumber"];
 
-		if (!string.IsNullOrEmpty(smtpServerPortNumberString))
-			SmtpServerPortNumber = int.Parse(smtpServerPortNumberString);
+		if (!string.IsNullOrEmpty(smtpServerPortNumberString) && int.TryParse(smtpServerPortNumberString, out var portNumber))
+			SmtpServerPortNumber = portNumber;
 
 		SmtpUserName = config["SmtpUserName"];
 		SmtpUserPassword = config["SmtpUserPassword"];
@@ -52,17 +52,17 @@ public sealed class ConfigurationBasedMailSenderSettings : MailSenderSettings
 	{
 		var antiSpamPoolMessageLifeTimeString = config["AntiSpamPoolMessageLifeTime"];
 
-		if (!string.IsNullOrEmpty(antiSpamPoolMessageLifeTimeString))
-			AntiSpamPoolMessageLifeTime = int.Parse(antiSpamPoolMessageLifeTimeString);
+		if (!string.IsNullOrEmpty(antiSpamPoolMessageLifeTimeString) && int.TryParse(antiSpamPoolMessageLifeTimeString, out var lifeTime))
+			AntiSpamPoolMessageLifeTime = lifeTime;
 
 		var antiSpamMessagesPoolOnString = config["AntiSpamMessagesPoolOn"];
 
-		if (!string.IsNullOrEmpty(antiSpamMessagesPoolOnString))
-			AntiSpamMessagesPoolOn = bool.Parse(antiSpamMessagesPoolOnString);
+		if (!string.IsNullOrEmpty(antiSpamMessagesPoolOnString) && bool.TryParse(antiSpamMessagesPoolOnString, out var poolOn))
+			AntiSpamMessagesPoolOn = poolOn;
 
 		var enableSsl = config["EnableSsl"];
 
-		if (!string.IsNullOrEmpty(enableSsl))
-			EnableSsl = bool.Parse(enableSsl);
+		if (!string.IsNullOrEmpty(enableSsl) && bool.TryParse(enableSsl, out var sslEnabled))
+			EnableSsl = sslEnabled;
 	}
 }

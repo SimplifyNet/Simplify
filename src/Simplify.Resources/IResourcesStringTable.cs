@@ -11,7 +11,12 @@ public interface IResourcesStringTable
 	string this[string name] { get; }
 
 	/// <summary>
-	/// Get string table record by name
+	/// Get string table record by name (returns null if key not found)
 	/// </summary>
 	string GetString(string name);
+
+	/// <summary>
+	/// Get string table record by name, throws KeyNotFoundException if key not found
+	/// </summary>
+	string GetRequiredString(string name);
 }

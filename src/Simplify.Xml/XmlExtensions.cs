@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
@@ -100,16 +98,7 @@ public static class XmlExtensions
 	public static string RemoveAllXmlNamespaces(this string xmlData)
 	{
 		const string xmlnsPattern = "\\s+xmlns\\s*(:\\w)?\\s*=\\s*\\\"(?<url>[^\\\"]*)\\\"";
-		var matchCollection = Regex.Matches(xmlData, xmlnsPattern);
 
-		foreach (var m in matchCollection.Cast<Match?>())
-		{
-			if (m == null)
-				throw new InvalidOperationException("Match collection item is null");
-
-			xmlData = xmlData.Replace(m.ToString(), "");
-		}
-
-		return xmlData;
+		return Regex.Replace(xmlData, xmlnsPattern, "");
 	}
 }

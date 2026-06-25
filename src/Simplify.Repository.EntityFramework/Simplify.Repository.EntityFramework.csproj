@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFrameworks>net10.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -8,7 +8,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>0.4</Version>
+		<Version>0.5.0</Version>
 
 		<Description>Simplify.Repository EntityFramework implementation</Description>
 		<Product>Simplify</Product>
@@ -27,7 +27,7 @@
 		<ProjectReference Include="..\Simplify.Repository\Simplify.Repository.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.9" />
 		<PackageReference Include="Simplify.DI" Version="4.2.11" />
 	</ItemGroup>
 	<ItemGroup>

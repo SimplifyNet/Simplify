@@ -27,7 +27,7 @@ public class ChainedObjectConverter<TSource, TDestination> : ObjectConverter<TSo
 	}
 
 	/// <summary>
-	/// Creates instance of ChainedObjectConverter with uninitialized ConvertFunc
+	/// Creates instance of ChainedObjectConverter with deferred ConvertFunc initialization
 	/// </summary>
 	/// <param name="preConvertFunc"></param>
 	protected ChainedObjectConverter(Func<TSource, TDestination>? preConvertFunc = null)

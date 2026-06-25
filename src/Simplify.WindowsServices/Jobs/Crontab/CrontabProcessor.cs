@@ -11,6 +11,8 @@ namespace Simplify.WindowsServices.Jobs.Crontab;
 /// </summary>
 public class CrontabProcessor : ICrontabProcessor
 {
+	private readonly object _occurrencesLocker = new object();
+
 	/// <summary>
 	/// Initializes a new instance of the <see cref="CrontabProcessor"/> class.
 	/// </summary>
@@ -66,10 +68,13 @@ public class CrontabProcessor : ICrontabProcessor
 	/// <param name="baseTime">The base time.</param>
 	public void CalculateNextOccurrences(DateTime baseTime)
 	{
-		NextOccurrences.Clear();
+		lock (_occurrencesLocker)
+		{
+			NextOccurrences.Clear();
 
-		foreach (var schedule in Schedules)
-			NextOccurrences.Add(schedule.GetNextOccurrence(baseTime));
+			foreach (var schedule in Schedules)
+				NextOccurrences.Add(schedule.GetNextOccurrence(baseTime));
+		}
 	}
 
 	/// <summary>
@@ -79,11 +84,12 @@ public class CrontabProcessor : ICrontabProcessor
 	/// <returns></returns>
 	public bool IsMatching(DateTime time)
 	{
-		return
-			NextOccurrences.Any(
-				occurrence =>
-					time.Year == occurrence.Year && time.Month == occurrence.Month && time.Day == occurrence.Day &&
-					time.Hour == occurrence.Hour && time.Minute == occurrence.Minute);
+		lock (_occurrencesLocker)
+			return
+				NextOccurrences.Any(
+					occurrence =>
+						time.Year == occurrence.Year && time.Month == occurrence.Month && time.Day == occurrence.Day &&
+						time.Hour == occurrence.Hour && time.Minute == occurrence.Minute);
 	}
 
 	/// <summary>

@@ -2,7 +2,6 @@
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
-using System.Reflection;
 
 namespace Simplify.IO;
 
@@ -48,8 +47,8 @@ public static class FileHelper
 		if (!FileSystem.File.Exists(filePath))
 			throw new FileNotFoundException("File not found: " + filePath);
 
-		var file = new FileInfo(filePath);
-		FileStream stream = null;
+		var file = FileSystem.FileInfo.New(filePath);
+		Stream stream = null;
 
 		try
 		{
@@ -85,26 +84,25 @@ public static class FileHelper
 		if (!FileSystem.File.Exists(filePath))
 			throw new FileNotFoundException("File not found: " + filePath);
 
-		using (var sr = new StreamReader(filePath))
+		using var sr = new StreamReader(FileSystem.File.OpenRead(filePath));
+
+		sr.BaseStream.Seek(0, SeekOrigin.End);
+
+		long pos = -1;
+
+		while (sr.BaseStream.Length + pos > 0)
 		{
-			sr.BaseStream.Seek(0, SeekOrigin.End);
+			sr.BaseStream.Seek(pos, SeekOrigin.End);
+			var c = sr.Read();
+			sr.DiscardBufferedData();
 
-			long pos = -1;
-
-			while (sr.BaseStream.Length + pos > 0)
+			if (c == Convert.ToInt32('\n'))
 			{
-				sr.BaseStream.Seek(pos, SeekOrigin.End);
-				var c = sr.Read();
-				sr.DiscardBufferedData();
-
-				if (c == Convert.ToInt32('\n'))
-				{
-					sr.BaseStream.Seek(pos + 1, SeekOrigin.End);
-					return sr.ReadToEnd();
-				}
-
-				--pos;
+				sr.BaseStream.Seek(pos + 1, SeekOrigin.End);
+				return sr.ReadToEnd();
 			}
+
+			--pos;
 		}
 
 		return null;
@@ -115,18 +113,16 @@ public static class FileHelper
 	/// </summary>
 	/// <param name="name"></param>
 	/// <returns></returns>
-	public static string MakeValidFileName(string name)
-	{
-		return Path.GetInvalidFileNameChars().Aggregate(name, (current, c) => current.Replace(c, '_'));
-	}
+	public static string MakeValidFileName(string name) => Path.GetInvalidFileNameChars().Aggregate(name, (current, c) => current.Replace(c, '_'));
 
 	/// <summary>
-	/// Generates the full name of file in current directory adding calling assembly path in the start of file name.
+	/// Generates the full name of file in the application base directory adding its path in the start of file name.
 	/// </summary>
 	/// <param name="fileName">Name of the file.</param>
 	/// <returns></returns>
-	public static string GenerateFullName(string fileName)
-	{
-		return $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{fileName}";
-	}
+	/// <remarks>
+	/// Uses <see cref="AppContext.BaseDirectory"/> which, unlike an assembly location, resolves correctly in
+	/// single-file and AOT deployments where <c>Assembly.Location</c> is empty.
+	/// </remarks>
+	public static string GenerateFullName(string fileName) => Path.Combine(AppContext.BaseDirectory, fileName);
 }

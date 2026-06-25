@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.3] - 2026-06-25
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- `TemplateBuilder.BuildAsync` ignored the preprocessing result, so `FixLineEndingsHtml` had no effect in the asynchronous build path
+
 ### [2.0.2] - 2024-05-25
 
 ### Removed

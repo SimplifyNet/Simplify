@@ -21,7 +21,7 @@ public static class FluentConfigurationExtension
 
 		Configuration? config = null;
 		configuration.ExposeConfiguration(c => config = c);
-		var sessionFactory = configuration.BuildSessionFactory();
+		using var sessionFactory = configuration.BuildSessionFactory();
 
 		using var session = sessionFactory.OpenSession();
 		using var tx = session.BeginTransaction();
@@ -37,7 +37,8 @@ public static class FluentConfigurationExtension
 		}
 		catch (Exception)
 		{
-			tx.Rollback();
+			if (tx.IsActive)
+				tx.Rollback();
 
 			throw;
 		}
@@ -55,7 +56,7 @@ public static class FluentConfigurationExtension
 
 		Configuration? config = null;
 		configuration.ExposeConfiguration(c => config = c);
-		var sessionFactory = configuration.BuildSessionFactory();
+		using var sessionFactory = configuration.BuildSessionFactory();
 
 		using var session = sessionFactory.OpenSession();
 		using var tx = session.BeginTransaction();
@@ -71,7 +72,8 @@ public static class FluentConfigurationExtension
 		}
 		catch (Exception)
 		{
-			tx.Rollback();
+			if (tx.IsActive)
+				tx.Rollback();
 
 			throw;
 		}

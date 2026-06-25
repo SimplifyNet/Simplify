@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.3] - 2026-06-25
+
+### Added
+
+- Explicit .NET 10 Support
+
+### Fixed
+
+- `EventBusAsync<TEvent>` with the `ParallelWhenAll` strategy rethrew only the first handler exception (the default `await Task.WhenAll` behavior), silently losing the rest; when more than one handler fails the full `AggregateException` is now thrown
+
 ## [0.1.2] - 2025-10-10
 
 ### Dependencies

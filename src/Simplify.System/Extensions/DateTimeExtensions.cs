@@ -14,6 +14,7 @@ public static class DateTimeExtensions
 	/// <returns></returns>
 	public static DateTime TrimMilliseconds(this DateTime dt)
 	{
-		return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, 0);
+		// Preserve the original DateTimeKind (Utc/Local/Unspecified); the millisecond-only overload would reset it to Unspecified.
+		return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Kind);
 	}
 }

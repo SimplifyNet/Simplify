@@ -19,7 +19,7 @@ public class ObjectConverter<TSource, TDestination> : IObjectConverter<TSource, 
 	}
 
 	/// <summary>
-	/// Creates instance of ObjectConverter with uninitialized ConvertFunc
+	/// Creates instance of ObjectConverter with uninitialized ConvertFunc (for subclass deferred initialization)
 	/// </summary>
 	protected ObjectConverter()
 	{

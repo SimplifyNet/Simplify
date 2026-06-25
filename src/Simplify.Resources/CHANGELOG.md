@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0] - 2026-06-25
+
+### Added
+
+- .NET 10 support
+- `ResourcesStringTable.GetRequiredString`, throws `KeyNotFoundException` if key is not found
+
+### Fixed
+
+- `ResourcesStringTable` now throws a descriptive `InvalidOperationException` instead of a `NullReferenceException` when the entry assembly cannot be resolved (e.g. in unmanaged/host scenarios)
+- `ResourcesStringTable(Assembly, ...)` constructor now validates the assembly parameter with `ArgumentNullException`
+- `StringTable.Entry` setter now uses `nameof(value)` in `ArgumentNullException` instead of an empty parameter name
+- `StringTable.Entry` lazy initialization was not thread-safe (`??=`) and could allocate duplicate instances under concurrent first access; initialization is now synchronized with double-checked locking
+
 ## [1.0.3] - 2023-08-01
 
 ### Removed

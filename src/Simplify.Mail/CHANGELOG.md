@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.1.0] - 2026-06-25
+
+### Added
+
+- .NET 10 support
+
+### Security
+
+- SMTP authentication no longer falls back to a plain-text connection when SSL is not explicitly enabled: STARTTLS is now negotiated opportunistically (`StartTlsWhenAvailable`) so credentials are encrypted whenever the server supports it
+
+### Fixed
+
+- `Dispose` is now idempotent and thread-safe (guarded with `Interlocked`)
+- Anti-spam pool now uses `DateTime.UtcNow` to avoid mis-expiration on local clock/DST changes
+- `Dispose` no longer blocks indefinitely on `_smtpLock.Wait()` when another thread holds the semaphore; uses non-blocking `Wait(0)` instead
+- `ConfigurationBasedMailSenderSettings` config parsing now uses `TryParse` instead of `Parse` to avoid crashing on invalid configuration values
+
+
+### Dependencies
+
+- MailKit bump to 4.17
+- Microsoft.Extensions.Configuration bump to 10.0.9
+
 ## [2.0.1] - 2026-04-24
 
 ### Dependencies

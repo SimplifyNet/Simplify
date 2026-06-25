@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.7.1] - 2026-06-25
+
+### Added
+
+- .NET 10 support
+
+### Fixed
+
+- `CommonEqualityComparer.GetHashCode` was inconsistent with `Equals` (it returned the reference-based hash code while `Equals` compared by `ID`), so equal entities ended up in different buckets in hash-based collections (`Dictionary`, `HashSet`, `Distinct`, `GroupBy`); the hash code is now derived from `ID`, and `null` is handled
+- `TransactGenericRepository` did not roll back the transaction when a repository operation threw, leaving an open transaction on the connection; all operations now roll back on failure
+
 ## [1.7.0] - 2024-01-14
 
 ### Changed

@@ -166,25 +166,21 @@ public class Logger : ILogger
 	/// <param name="e">Exception to get data from</param>
 	/// <param name="addTimeInformation">Adds time information prefix to the generated message.</param>
 	/// <returns></returns>
-	public string GenerateWeb(Exception e, bool addTimeInformation = true)
-	{
-		return Generate(e, addTimeInformation).Replace("\r\n", "<br />");
-	}
+	public string GenerateWeb(Exception e, bool addTimeInformation = true) =>
+		Generate(e, addTimeInformation).Replace("\r\n", "<br />");
 
-	private static string AddTimeInformation(string message)
-	{
-		return $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss:fff", CultureInfo.InvariantCulture)}]{message}";
-	}
+	private static string AddTimeInformation(string message) =>
+		$"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss:fff", CultureInfo.InvariantCulture)}]{message}";
 
 	private static string GetInnerExceptionData(int currentLevel, Exception e)
 	{
 		if (e == null)
-			return null;
+			return string.Empty;
 
 		var trace = new StackTrace(e, true);
 
 		if (trace.FrameCount == 0)
-			return null;
+			return string.Empty;
 
 		var fileLineNumber = trace.GetFrame(0).GetFileLineNumber();
 		var fileColumnNumber = trace.GetFrame(0).GetFileColumnNumber();
@@ -197,7 +193,7 @@ public class Logger : ILogger
 	private void Initialize() =>
 		_currentLogFileName = Settings.PathType == LoggerPathType.FullPath
 			? Settings.FileName
-			: $"{Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)}/{Settings.FileName}";
+			: Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? throw new InvalidOperationException("Unable to resolve calling assembly location"), Settings.FileName);
 
 	private void WriteToFile(string message)
 	{

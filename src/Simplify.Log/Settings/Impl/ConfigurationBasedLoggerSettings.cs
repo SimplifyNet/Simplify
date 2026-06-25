@@ -35,8 +35,8 @@ public class ConfigurationBasedLoggerSettings : LoggerSettings
 				MaxFileSize = buffer;
 		}
 
-		if (!string.IsNullOrEmpty(config["PathType"]))
-			PathType = (LoggerPathType)Enum.Parse(typeof(LoggerPathType), config["PathType"]);
+		if (!string.IsNullOrEmpty(config["PathType"]) && Enum.TryParse<LoggerPathType>(config["PathType"], out var pathType))
+			PathType = pathType;
 
 		if (!string.IsNullOrEmpty(config["ShowTraceOutput"]))
 		{
