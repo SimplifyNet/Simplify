@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.11.6] - 2026-06-25
+
+### Dependencies
+
+- Simplify.DI bump to 4.3
+
 ## [1.11.5] - 2026-05-26
 
 ### Dependencies

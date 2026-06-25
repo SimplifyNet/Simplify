@@ -8,7 +8,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.11.5</Version>
+		<Version>1.11.6</Version>
 
 		<Description>Simplify.DI SimpleInjector provider</Description>
 		<Product>Simplify</Product>
@@ -23,7 +23,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.DI.Provider.SimpleInjector/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Simplify.DI" Version="4.2.11" />
+		<PackageReference Include="Simplify.DI" Version="4.3" />
 		<PackageReference Include="SimpleInjector" Version="5.5.2" />
 	</ItemGroup>
 	<ItemGroup>

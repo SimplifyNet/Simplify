@@ -17,7 +17,6 @@
 - `Dispose` no longer blocks indefinitely on `_smtpLock.Wait()` when another thread holds the semaphore; uses non-blocking `Wait(0)` instead
 - `ConfigurationBasedMailSenderSettings` config parsing now uses `TryParse` instead of `Parse` to avoid crashing on invalid configuration values
 
-
 ### Dependencies
 
 - MailKit bump to 4.17
