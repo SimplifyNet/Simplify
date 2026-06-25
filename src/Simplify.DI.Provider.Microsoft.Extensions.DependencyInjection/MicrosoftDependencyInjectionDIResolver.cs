@@ -8,19 +8,9 @@ namespace Simplify.DI.Provider.Microsoft.Extensions.DependencyInjection;
 /// Providers Microsoft.DependencyInjection resolver
 /// </summary>
 /// <seealso cref="IDIResolver" />
-public class MicrosoftDependencyInjectionDIResolver : IDIResolver
+/// <param name="serviceProvider">The resolver service provider.</param>
+public class MicrosoftDependencyInjectionDIResolver(IServiceProvider serviceProvider) : IDIResolver
 {
-	private readonly IServiceProvider _serviceProvider;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="DryIocDIResolver"/> class.
-	/// </summary>
-	/// <param name="serviceProvider">The resolver service provider.</param>
-	public MicrosoftDependencyInjectionDIResolver(IServiceProvider serviceProvider)
-	{
-		_serviceProvider = serviceProvider;
-	}
-
 	/// <summary>
 	/// Resolves the specified type.
 	/// </summary>
@@ -28,6 +18,6 @@ public class MicrosoftDependencyInjectionDIResolver : IDIResolver
 	/// <returns></returns>
 	public object Resolve(Type type)
 	{
-		return _serviceProvider.GetRequiredService(type);
+		return serviceProvider.GetRequiredService(type);
 	}
 }

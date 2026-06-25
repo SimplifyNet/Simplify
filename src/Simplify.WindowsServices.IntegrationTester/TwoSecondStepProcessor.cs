@@ -1,27 +1,26 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Threading;
 using Simplify.WindowsServices.Jobs;
 
-namespace Simplify.WindowsServices.IntegrationTester
+namespace Simplify.WindowsServices.IntegrationTester;
+
+public class TwoSecondStepProcessor
 {
-	public class TwoSecondStepProcessor
+	private static bool _isRunning;
+
+	public void Run(IJobArgs args)
 	{
-		private static bool _isRunning;
+		if (_isRunning)
+			throw new SimplifyWindowsServicesException("TwoSecondStepProcessor is running a duplicate!");
 
-		public void Run(IJobArgs args)
-		{
-			if (_isRunning)
-				throw new SimplifyWindowsServicesException("TwoSecondStepProcessor is running a duplicate!");
+		_isRunning = true;
 
-			_isRunning = true;
+		Trace.WriteLine("TwoSecondStepProcessor launched");
+		Trace.WriteLine($"TwoSecondStepProcessor args startup args is: {args.StartupArgs}");
+		Trace.WriteLine($"TwoSecondStepProcessor args service name is: {args.ServiceName}");
 
-			Trace.WriteLine("TwoSecondStepProcessor launched");
-			Trace.WriteLine($"TwoSecondStepProcessor args startup args is: {args.StartupArgs}");
-			Trace.WriteLine($"TwoSecondStepProcessor args service name is: {args.ServiceName}");
+		Thread.Sleep(3670);
 
-			Thread.Sleep(3670);
-
-			_isRunning = false;
-		}
+		_isRunning = false;
 	}
 }

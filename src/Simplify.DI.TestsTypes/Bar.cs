@@ -1,6 +1,5 @@
-﻿namespace Simplify.DI.TestsTypes
+namespace Simplify.DI.TestsTypes;
+
+public class Bar : IBar
 {
-	public class Bar : IBar
-	{
-	}
 }

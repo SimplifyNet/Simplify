@@ -1,6 +1,5 @@
-﻿namespace Simplify.DI.TestsTypes
+namespace Simplify.DI.TestsTypes;
+
+public interface IBar
 {
-	public interface IBar
-	{
-	}
 }

@@ -1,18 +1,17 @@
-namespace Simplify.FluentNHibernate.Settings
+namespace Simplify.FluentNHibernate.Settings;
+
+/// <summary>
+/// Provides SQL command output type
+/// </summary>
+public enum ShowSqlOutputType
 {
 	/// <summary>
-	/// Provides SQL command output type
+	/// The Console output
 	/// </summary>
-	public enum ShowSqlOutputType
-	{
-		/// <summary>
-		/// The Console output
-		/// </summary>
-		Console,
+	Console,
 
-		/// <summary>
-		/// The Trace out[ut]
-		/// </summary>
-		Trace,
-	}
+	/// <summary>
+	/// The Trace out[ut]
+	/// </summary>
+	Trace,
 }

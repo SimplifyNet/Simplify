@@ -1,7 +1,6 @@
-﻿namespace Simplify.DI.TestsTypes
+namespace Simplify.DI.TestsTypes;
+
+public interface IFoo
 {
-	public interface IFoo
-	{
-		IBar Bar { get; }
-	}
+	IBar Bar { get; }
 }

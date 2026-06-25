@@ -1,142 +1,141 @@
-﻿using System;
+using System;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 
-namespace Simplify.String
+namespace Simplify.String;
+
+/// <summary>
+/// Strings operations helper class
+/// </summary>
+public static class StringHelper
 {
 	/// <summary>
-	/// Strings operations helper class
+	/// Parse and convert mobile phone to format like +77015543456
 	/// </summary>
-	public static class StringHelper
+	/// <param name="phone">Mobile phone source string</param>
+	/// <returns></returns>
+	public static string ParseMobilePhone(string phone)
 	{
-		/// <summary>
-		/// Parse and convert mobile phone to format like +77015543456
-		/// </summary>
-		/// <param name="phone">Mobile phone source string</param>
-		/// <returns></returns>
-		public static string ParseMobilePhone(string phone)
+		return Regex.Replace(phone, @"[^+0-9]", "");
+	}
+
+	/// <summary>
+	/// Checking if e-mail address is correct
+	/// </summary>
+	/// <param name="eMail">E-mail address</param>
+	/// <returns></returns>
+	public static bool ValidateEMail(string eMail)
+	{
+		if (string.IsNullOrEmpty(eMail))
+			return false;
+
+		try
 		{
-			return Regex.Replace(phone, @"[^+0-9]", "");
+			// ReSharper disable once ObjectCreationAsStatement
+			new MailAddress(eMail);
+
+			return true;
+		}
+		catch (FormatException)
+		{
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Checking if mobile phone is correct
+	/// </summary>
+	/// <param name="phone">Mobile phone number</param>
+	/// <returns></returns>
+	public static bool ValidateMobilePhone(string phone)
+	{
+		if (string.IsNullOrEmpty(phone))
+			return false;
+
+		return Regex.IsMatch(phone, @"^\+[1-9]{1}[0-9]{4,12}$");
+	}
+
+	/// <summary>
+	/// Indistinct matching of the two strings.
+	/// </summary>
+	/// <param name="stringA">The string a.</param>
+	/// <param name="stringB">The string b.</param>
+	/// <param name="comparingBlockLength">Length of the comparing block.</param>
+	/// <returns></returns>
+	public static float IndistinctMatching(string stringA, string stringB, int comparingBlockLength = 3)
+	{
+		RetCount gRet;
+		int currentLength;
+
+		if (string.IsNullOrEmpty(stringA) || string.IsNullOrEmpty(stringB))
+			return 0;
+
+		gRet.CountLike = 0;
+		gRet.SubRows = 0;
+
+		for (currentLength = 1; currentLength <= comparingBlockLength; currentLength++)
+		{
+			var tRet = Matching(stringA, stringB, currentLength);
+			gRet.CountLike = gRet.CountLike + tRet.CountLike;
+			gRet.SubRows = gRet.SubRows + tRet.SubRows;
+
+			tRet = Matching(stringB, stringA, currentLength);
+			gRet.CountLike = gRet.CountLike + tRet.CountLike;
+			gRet.SubRows = gRet.SubRows + tRet.SubRows;
 		}
 
-		/// <summary>
-		/// Checking if e-mail address is correct
-		/// </summary>
-		/// <param name="eMail">E-mail address</param>
-		/// <returns></returns>
-		public static bool ValidateEMail(string eMail)
-		{
-			if (string.IsNullOrEmpty(eMail))
-				return false;
+		if (gRet.SubRows == 0)
+			return 0;
 
-			try
+		return (float)(gRet.CountLike * 100.0 / gRet.SubRows);
+	}
+
+	/// <summary>
+	/// Strips the HTML tags of the strings.
+	/// </summary>
+	/// <param name="source">The source string.</param>
+	/// <returns></returns>
+	/// <remarks>
+	/// This is a cosmetic tag remover (simple <c>&lt;.*?&gt;</c> regex), not an HTML/XSS sanitizer. Do not rely on it
+	/// to make untrusted input safe for rendering: it does not handle malformed tags, comments, scripts or attributes.
+	/// </remarks>
+	public static string StripHtmlTags(string source)
+	{
+		return Regex.Replace(source, "<.*?>", string.Empty);
+	}
+
+	private static RetCount Matching(string stringA, string stringB, int length)
+	{
+		RetCount tempRet;
+		int posStrA;
+
+		tempRet.CountLike = 0;
+		tempRet.SubRows = 0;
+
+		for (posStrA = 0; posStrA <= stringA.Length - length; posStrA++)
+		{
+			var tempStringA = stringA.Substring(posStrA, length);
+			int posStrB;
+
+			for (posStrB = 0; posStrB <= stringB.Length - length; posStrB++)
 			{
-				// ReSharper disable once ObjectCreationAsStatement
-				new MailAddress(eMail);
+				var tempStringB = stringB.Substring(posStrB, length);
 
-				return true;
-			}
-			catch (FormatException)
-			{
-				return false;
-			}
-		}
+				if ((string.CompareOrdinal(tempStringA, tempStringB) != 0))
+					continue;
 
-		/// <summary>
-		/// Checking if mobile phone is correct
-		/// </summary>
-		/// <param name="phone">Mobile phone number</param>
-		/// <returns></returns>
-		public static bool ValidateMobilePhone(string phone)
-		{
-			if (string.IsNullOrEmpty(phone))
-				return false;
-
-			return Regex.IsMatch(phone, @"^\+[1-9]{1}[0-9]{4,12}$");
-		}
-
-		/// <summary>
-		/// Indistinct matching of the two strings.
-		/// </summary>
-		/// <param name="stringA">The string a.</param>
-		/// <param name="stringB">The string b.</param>
-		/// <param name="comparingBlockLength">Length of the comparing block.</param>
-		/// <returns></returns>
-		public static float IndistinctMatching(string stringA, string stringB, int comparingBlockLength = 3)
-		{
-			RetCount gRet;
-			int currentLength;
-
-			if (string.IsNullOrEmpty(stringA) || string.IsNullOrEmpty(stringB))
-				return 0;
-
-			gRet.CountLike = 0;
-			gRet.SubRows = 0;
-
-			for (currentLength = 1; currentLength <= comparingBlockLength; currentLength++)
-			{
-				var tRet = Matching(stringA, stringB, currentLength);
-				gRet.CountLike = gRet.CountLike + tRet.CountLike;
-				gRet.SubRows = gRet.SubRows + tRet.SubRows;
-
-				tRet = Matching(stringB, stringA, currentLength);
-				gRet.CountLike = gRet.CountLike + tRet.CountLike;
-				gRet.SubRows = gRet.SubRows + tRet.SubRows;
+				tempRet.CountLike = (tempRet.CountLike + 1);
+				break;
 			}
 
-			if (gRet.SubRows == 0)
-				return 0;
-
-			return (float)(gRet.CountLike * 100.0 / gRet.SubRows);
+			tempRet.SubRows = (tempRet.SubRows + 1);
 		}
+		return tempRet;
+	}
 
-		/// <summary>
-		/// Strips the HTML tags of the strings.
-		/// </summary>
-		/// <param name="source">The source string.</param>
-		/// <returns></returns>
-		/// <remarks>
-		/// This is a cosmetic tag remover (simple <c>&lt;.*?&gt;</c> regex), not an HTML/XSS sanitizer. Do not rely on it
-		/// to make untrusted input safe for rendering: it does not handle malformed tags, comments, scripts or attributes.
-		/// </remarks>
-		public static string StripHtmlTags(string source)
-		{
-			return Regex.Replace(source, "<.*?>", string.Empty);
-		}
-
-		private static RetCount Matching(string stringA, string stringB, int length)
-		{
-			RetCount tempRet;
-			int posStrA;
-
-			tempRet.CountLike = 0;
-			tempRet.SubRows = 0;
-
-			for (posStrA = 0; posStrA <= stringA.Length - length; posStrA++)
-			{
-				var tempStringA = stringA.Substring(posStrA, length);
-				int posStrB;
-
-				for (posStrB = 0; posStrB <= stringB.Length - length; posStrB++)
-				{
-					var tempStringB = stringB.Substring(posStrB, length);
-
-					if ((string.CompareOrdinal(tempStringA, tempStringB) != 0))
-						continue;
-
-					tempRet.CountLike = (tempRet.CountLike + 1);
-					break;
-				}
-
-				tempRet.SubRows = (tempRet.SubRows + 1);
-			}
-			return tempRet;
-		}
-
-		private struct RetCount
-		{
-			public long SubRows;
-			public long CountLike;
-		}
+	private struct RetCount
+	{
+		public long SubRows;
+		public long CountLike;
 	}
 }

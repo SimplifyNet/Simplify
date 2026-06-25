@@ -15,8 +15,6 @@ namespace Simplify.FluentNHibernate.Interceptors;
 /// <param name="showSqlOutputType">Specifies the SQL commands output type</param>
 public class SqlStatementInterceptor(ShowSqlOutputType showSqlOutputType) : EmptyInterceptor
 {
-	private readonly ShowSqlOutputType _sqlSource = showSqlOutputType;
-
 	/// <summary>
 	/// Called on sql statement prepare.
 	/// </summary>
@@ -26,7 +24,7 @@ public class SqlStatementInterceptor(ShowSqlOutputType showSqlOutputType) : Empt
 	{
 		var message = $"SQL executed: '{sql}'";
 
-		switch (_sqlSource)
+		switch (showSqlOutputType)
 		{
 			case ShowSqlOutputType.Console:
 				Console.WriteLine(message);

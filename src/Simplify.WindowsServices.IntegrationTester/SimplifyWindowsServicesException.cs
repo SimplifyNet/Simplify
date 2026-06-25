@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 
-namespace Simplify.WindowsServices.IntegrationTester
+namespace Simplify.WindowsServices.IntegrationTester;
+
+public class SimplifyWindowsServicesException : Exception
 {
-	public class SimplifyWindowsServicesException : Exception
+	public SimplifyWindowsServicesException(string message) : base(message)
 	{
-		public SimplifyWindowsServicesException(string message) : base(message)
-		{
-		}
 	}
 }

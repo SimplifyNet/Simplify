@@ -6,23 +6,14 @@ namespace Simplify.Windows.Forms;
 /// <summary>
 /// Validates List of controls items for filled value or existing value
 /// </summary>
-public class ControlsValidator
+/// <remarks>
+/// Initialize controls validator
+/// </remarks>
+/// <param name="resultStatusControl">Control which will be disabled or enabled after validation</param>
+/// <param name="checkItems">Items to validate</param>
+public class ControlsValidator(Control resultStatusControl, params Control[] checkItems)
 {
-	private readonly Control[] _checkItems;
-	private readonly Control _resultStatusControl;
-
 	private bool _validationEnabled;
-
-	/// <summary>
-	/// Initialize controls validator
-	/// </summary>
-	/// <param name="resultStatusControl">Control which will be disabled or enabled after validation</param>
-	/// <param name="checkItems">Items to validate</param>
-	public ControlsValidator(Control resultStatusControl, params Control[] checkItems)
-	{
-		_resultStatusControl = resultStatusControl;
-		_checkItems = checkItems;
-	}
 
 	/// <summary>
 	/// Enable items validation
@@ -31,7 +22,7 @@ public class ControlsValidator
 	{
 		_validationEnabled = true;
 
-		foreach (var item in _checkItems)
+		foreach (var item in checkItems)
 		{
 			var castItemComboBox = item as ComboBox;
 
@@ -52,7 +43,7 @@ public class ControlsValidator
 
 	private void ValidateItems()
 	{
-		foreach (var item in _checkItems)
+		foreach (var item in checkItems)
 		{
 			var castItemComboBox = item as ComboBox;
 
@@ -60,18 +51,18 @@ public class ControlsValidator
 			{
 				if (castItemComboBox.DropDownStyle == ComboBoxStyle.DropDownList && castItemComboBox.SelectedIndex == -1)
 				{
-					_resultStatusControl.Enabled = false;
+					resultStatusControl.Enabled = false;
 					return;
 				}
 			}
 			else if (item.Text.Length == 0)
 			{
-				_resultStatusControl.Enabled = false;
+				resultStatusControl.Enabled = false;
 				return;
 			}
 		}
 
-		_resultStatusControl.Enabled = true;
+		resultStatusControl.Enabled = true;
 	}
 
 	private void OnItemCheckEvent(object sender, EventArgs e)

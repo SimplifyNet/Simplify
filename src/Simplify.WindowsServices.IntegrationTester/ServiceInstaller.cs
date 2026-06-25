@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
-namespace Simplify.WindowsServices.IntegrationTester
+namespace Simplify.WindowsServices.IntegrationTester;
+
+[RunInstaller(true)]
+public class ServiceInstaller : ServiceInstallerBase
 {
-	[RunInstaller(true)]
-	public class ServiceInstaller : ServiceInstallerBase
-	{
-	}
 }

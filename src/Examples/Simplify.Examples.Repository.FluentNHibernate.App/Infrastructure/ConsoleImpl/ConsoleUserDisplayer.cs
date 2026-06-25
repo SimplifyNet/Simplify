@@ -3,18 +3,11 @@ using Simplify.Examples.Repository.Domain.Accounts;
 
 namespace Simplify.Examples.Repository.FluentNHibernate.App.Infrastructure.ConsoleImpl;
 
-public class ConsoleUserDisplayer : IUserDisplayer
+public class ConsoleUserDisplayer(IUsersService service) : IUserDisplayer
 {
-	private readonly IUsersService _service;
-
-	public ConsoleUserDisplayer(IUsersService service)
-	{
-		_service = service;
-	}
-
 	public void DisplayUserInfo(string userName)
 	{
-		var user = _service.GetUser(userName);
+		var user = service.GetUser(userName);
 
 		if (user == null)
 		{
