@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.3] - 2026-06-22
+## [1.7.0] - 2026-06-25
 
 ### Fixed
 
@@ -15,6 +15,10 @@
 ### Added
 
 - .NET 10 support
+
+### Dependencies
+
+- Microsoft.Extensions.Configuration bump to 10.0.9
 
 ## [1.6.1] - 2025-10-10
 

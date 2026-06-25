@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.5.1] - 2026-06-19
+## [1.5.1] - 2026-06-25
 
 ### Added
 
@@ -11,6 +11,10 @@
 - `FileHelper.IsFileLockedForRead` and `GetLastLineOfFile` now use the configurable `IFileSystem` abstraction instead of direct file access, so they honor a custom/mocked file system
 - `FileHelper.GenerateFullName` now uses `Path.Combine` instead of a hardcoded `"/"` path separator for cross-platform compatibility
 - `FileHelper.GenerateFullName` now resolves the base path from `AppContext.BaseDirectory` instead of `Assembly.GetCallingAssembly().Location`, which is empty in single-file/AOT deployments (files would otherwise land in the current working directory)
+
+### Dependencies
+
+- System.IO.Abstractions bump to 22.1.1
 
 ## [1.5.0] - 2025-06-15
 

@@ -1,6 +1,10 @@
 # Changelog
 
-## [0.1.3] - 2026-06-23
+## [0.1.3] - 2026-06-25
+
+### Added
+
+- Explicit .NET 10 Support
 
 ### Fixed
 

@@ -42,7 +42,13 @@ public class MultitaskScheduler : SchedulerJobsHandler
 	/// Starts the scheduler asynchronously.
 	/// </summary>
 	/// <param name="args">The arguments.</param>
-	public async Task<bool> StartAsync(string[]? args = null)
+	public Task<bool> StartAsync(string[]? args = null) => Task.FromResult(Start(args));
+
+	/// <summary>
+	/// Starts the scheduler.
+	/// </summary>
+	/// <param name="args">The arguments.</param>
+	public bool Start(string[]? args = null)
 	{
 		var commandLineProcessResult = CommandLineProcessor.ProcessCommandLineArguments(args);
 
@@ -52,7 +58,7 @@ public class MultitaskScheduler : SchedulerJobsHandler
 				return false;
 
 			case ProcessCommandLineResult.NoArguments:
-				await StartAsync();
+				StartScheduler();
 				break;
 
 			case ProcessCommandLineResult.UndefinedParameters:
@@ -67,16 +73,6 @@ public class MultitaskScheduler : SchedulerJobsHandler
 
 		return true;
 	}
-
-	/// <summary>
-	/// Starts the scheduler.
-	/// </summary>
-	/// <param name="args">The arguments.</param>
-	public bool Start(string[]? args = null) =>
-		StartAsync(args)
-		.ConfigureAwait(false)
-		.GetAwaiter()
-		.GetResult();
 
 	/// <summary>
 	/// Called when scheduler is about to stop, main stopping point
@@ -104,9 +100,9 @@ public class MultitaskScheduler : SchedulerJobsHandler
 		_closing.Dispose();
 	}
 
-	private async Task StartAsync()
+	private void StartScheduler()
 	{
-		await StartJobsAsync();
+		StartJobs();
 
 		Console.WriteLine("Scheduler started. Press Ctrl + C to shut down.");
 

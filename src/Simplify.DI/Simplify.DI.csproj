@@ -14,7 +14,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>4.2.12</Version>
+		<Version>4.3.0</Version>
 
 		<Description>Simplify DI common interface for IOC containers</Description>
 		<Product>Simplify</Product>
@@ -32,7 +32,7 @@
 		<PackageReference Include="DryIoc" Version="5.4.3" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.*" PrivateAssets="All" />
 	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
 		<Reference Include="System" />
 	</ItemGroup>
 	<ItemGroup>

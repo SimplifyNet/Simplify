@@ -141,7 +141,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 	/// <summary>
 	/// Called when scheduler is started, main execution starting point.
 	/// </summary>
-	protected Task StartJobsAsync()
+	protected void StartJobs()
 	{
 		Console.WriteLine("Starting Scheduler jobs...");
 
@@ -151,7 +151,7 @@ public abstract class SchedulerJobsHandler : IDisposable
 			{
 				job.Start();
 
-				if (!(job is ICrontabSchedulerJob))
+				if (job is not ICrontabSchedulerJob)
 					RunBasicJob(job);
 			}
 		}
@@ -163,8 +163,6 @@ public abstract class SchedulerJobsHandler : IDisposable
 		}
 
 		Console.WriteLine("Scheduler jobs started.");
-
-		return Task.CompletedTask;
 	}
 
 	/// <summary>

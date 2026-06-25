@@ -21,7 +21,6 @@ namespace Simplify.Repository;
 public class TransactGenericRepository<T>(IGenericRepository<T> baseRepository, ITransactUnitOfWork unitOfWork, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) : IGenericRepository<T>
 	where T : class
 {
-
 	/// <summary>
 	/// Adds the object.
 	/// </summary>

@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.15.2] - 2026-06-19
+## [2.16] - 2026-06-25
 
 ### Fixed
 
@@ -10,6 +10,10 @@
 - Exceptions thrown from the crontab timer callback (`OnCronTimerTick`/`OnStartWork`) escaped to a thread-pool thread and terminated the service process; they are now routed to the `OnException` event
 - Unhandled job exceptions were rethrown from inside the worker task, surfacing as an `AggregateException` from `Task.WaitAll` and aborting graceful shutdown; they are no longer rethrown
 - Basic (long-running) job blocked `OnStart` (causing Service Control Manager start timeouts) and its lifetime scope was registered for disposal only after the job method returned, leaking the scope; the job now runs as a background task and the scope is registered before it runs
+
+#### Dependencies
+
+- Microsoft.Extensions.Configuration bump to 10.0.9
 
 ## [2.15.1] - 2025-10-10
 

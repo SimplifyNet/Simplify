@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.0] - 2026-06-19
+## [2.1.0] - 2026-06-25
 
 ### Added
 
@@ -16,6 +16,12 @@
 - Anti-spam pool now uses `DateTime.UtcNow` to avoid mis-expiration on local clock/DST changes
 - `Dispose` no longer blocks indefinitely on `_smtpLock.Wait()` when another thread holds the semaphore; uses non-blocking `Wait(0)` instead
 - `ConfigurationBasedMailSenderSettings` config parsing now uses `TryParse` instead of `Parse` to avoid crashing on invalid configuration values
+
+
+### Dependencies
+
+- MailKit bump to 4.17
+- Microsoft.Extensions.Configuration bump to 10.0.9
 
 ## [2.0.1] - 2026-04-24
 

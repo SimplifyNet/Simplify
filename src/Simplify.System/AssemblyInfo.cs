@@ -6,21 +6,18 @@ namespace Simplify.System;
 /// <summary>
 /// Provides the assembly information
 /// </summary>
-public class AssemblyInfo : IAssemblyInfo
+/// <remarks>
+/// Initializes a new instance of the <see cref="AssemblyInfo"/> class.
+/// </remarks>
+/// <param name="infoAssembly">The information assembly.</param>
+/// <exception cref="ArgumentNullException">infoAssembly</exception>
+public class AssemblyInfo(Assembly infoAssembly) : IAssemblyInfo
 {
 	private static IAssemblyInfo? _entryAssemblyInfo;
-	private static readonly object _entryAssemblyInfoLock = new();
-	private readonly Assembly _infoAssembly;
 
-	/// <summary>
-	/// Initializes a new instance of the <see cref="AssemblyInfo"/> class.
-	/// </summary>
-	/// <param name="infoAssembly">The information assembly.</param>
-	/// <exception cref="ArgumentNullException">infoAssembly</exception>
-	public AssemblyInfo(Assembly infoAssembly)
-	{
-		_infoAssembly = infoAssembly ?? throw new ArgumentNullException(nameof(infoAssembly));
-	}
+	private static readonly object _entryAssemblyInfoLock = new();
+
+	private readonly Assembly _infoAssembly = infoAssembly ?? throw new ArgumentNullException(nameof(infoAssembly));
 
 	/// <summary>
 	/// Gets or sets the entry assembly information.
@@ -30,12 +27,11 @@ public class AssemblyInfo : IAssemblyInfo
 	{
 		get
 		{
-			if (_entryAssemblyInfo != null) return _entryAssemblyInfo;
+			if (_entryAssemblyInfo != null)
+				return _entryAssemblyInfo;
 
 			lock (_entryAssemblyInfoLock)
-			{
 				_entryAssemblyInfo ??= new AssemblyInfo(Assembly.GetEntryAssembly() ?? throw new InvalidOperationException());
-			}
 
 			return _entryAssemblyInfo;
 		}
@@ -53,6 +49,7 @@ public class AssemblyInfo : IAssemblyInfo
 		get
 		{
 			var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+
 			return attributes.Length == 0 ? "" : ((AssemblyCompanyAttribute)attributes[0]).Company;
 		}
 	}
@@ -68,6 +65,7 @@ public class AssemblyInfo : IAssemblyInfo
 		get
 		{
 			var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+
 			return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
 		}
 	}
@@ -83,6 +81,7 @@ public class AssemblyInfo : IAssemblyInfo
 		get
 		{
 			var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+
 			return attributes.Length == 0 ? "" : ((AssemblyDescriptionAttribute)attributes[0]).Description;
 		}
 	}
@@ -98,6 +97,7 @@ public class AssemblyInfo : IAssemblyInfo
 		get
 		{
 			var attributes = _infoAssembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+
 			return attributes.Length == 0 ? "" : ((AssemblyProductAttribute)attributes[0]).Product;
 		}
 	}
