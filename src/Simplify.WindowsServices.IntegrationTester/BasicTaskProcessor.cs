@@ -3,9 +3,13 @@ using System.Diagnostics;
 
 namespace Simplify.WindowsServices.IntegrationTester;
 
-public class BasicTaskProcessor(DisposableDependency dependency) : IDisposable
+public class BasicTaskProcessor : IDisposable
 {
 	private static bool _isRunning;
+
+	public BasicTaskProcessor(DisposableDependency dependency)
+	{
+	}
 
 	public void Run()
 	{
