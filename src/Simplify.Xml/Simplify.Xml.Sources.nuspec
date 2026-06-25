@@ -29,12 +29,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Converters/ChainedObjectConverter.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/Converters/ChainedObjectConverter.cs" />
-		<file src="Converters/ChainedObjectConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\Converters\ChainedObjectConverter.cs" />
-		<file src="Converters/IObjectConverter.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/Converters/IObjectConverter.cs" />
-		<file src="Converters/IObjectConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\Converters\IObjectConverter.cs" />
-		<file src="Converters/ObjectConverter.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/Converters/ObjectConverter.cs" />
-		<file src="Converters/ObjectConverter.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\Converters\ObjectConverter.cs" />
 		<file src="XmlExtensions.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/XmlExtensions.cs" />
 		<file src="XmlExtensions.cs" target="contentFiles\cs\any\App_Packages\Simplify.Xml.Sources.$version$\XmlExtensions.cs" />
 		<file src="XmlSerializer.cs" target="content/App_Packages/Simplify.Xml.Sources.$version$/XmlSerializer.cs" />

@@ -9,6 +9,7 @@
 ### Dependencies
 
 - Microsoft.Extensions.DependencyInjection bump to 10.0.9
+- Simplify.DI bump to 4.3
 
 ## [1.7.0] - 2025-06-15
 

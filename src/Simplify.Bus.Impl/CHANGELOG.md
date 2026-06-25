@@ -10,6 +10,10 @@
 
 - `EventBusAsync<TEvent>` with the `ParallelWhenAll` strategy rethrew only the first handler exception (the default `await Task.WhenAll` behavior), silently losing the rest; when more than one handler fails the full `AggregateException` is now thrown
 
+### Dependencies
+
+- Simplify.DI bump to 4.3
+
 ## [0.1.2] - 2025-10-10
 
 ### Dependencies

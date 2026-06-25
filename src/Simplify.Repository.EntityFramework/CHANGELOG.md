@@ -18,6 +18,7 @@
 ### Dependencies
 
 - Microsoft.EntityFrameworkCore.Relational bump to 10.0.9
+- Simplify.DI bump to 4.3
 
 ## [0.4.0] - 2025-10-10
 

@@ -13,6 +13,8 @@
 
 #### Dependencies
 
+- Simplify.DI bump to 4.3
+- Simplify.System bump to 1.6.3
 - Microsoft.Extensions.Configuration bump to 10.0.9
 
 ## [2.15.1] - 2025-10-10

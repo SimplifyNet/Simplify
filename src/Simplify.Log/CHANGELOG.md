@@ -12,6 +12,7 @@
 ### Dependencies
 
 - System.IO.Abstractions bump to 22.1.1
+- Microsoft.Extensions.Configuration.Abstractions to 10.0.9
 
 ## [2.3.0] - 2025-06-15
 

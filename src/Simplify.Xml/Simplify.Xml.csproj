@@ -25,7 +25,7 @@
 		<PackageReleaseNotes>See https://github.com/SimplifyNet/Simplify/tree/master/src/Simplify.Xml/CHANGELOG.md for details</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Simplify.System\Simplify.System.csproj" />
+		<PackageReference Include="Simplify.System" Version="1.6.3" />
 	</ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
 		<Reference Include="System.Xml" />
