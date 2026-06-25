@@ -26,7 +26,6 @@ scheduler.AddBasicJob<BasicTaskProcessorAsync>();
 if (await scheduler.StartAsync(args))
 	return;
 
-
 // Testing some processors without scheduler
 
 using var scope = DIContainer.Current.BeginLifetimeScope();
