@@ -27,7 +27,7 @@ public class ModelSetter<T>(ITemplate template, T model, string? modelPrefix = n
 	/// <typeparam name="TData">The type of the data.</typeparam>
 	/// <param name="memberExpression">The member expression.</param>
 	/// <param name="dataExpression">The data expression.</param>
-	/// <exception cref="System.ArgumentException">memberExpression type is not a MemberExpression</exception>
+	/// <exception cref="ArgumentException">memberExpression type is not a MemberExpression</exception>
 	public IModelSetter<T> With<TData>(Expression<Func<T, TData>> memberExpression, Func<TData, object> dataExpression)
 	{
 		var expression = memberExpression.Body as MemberExpression ?? throw new ArgumentException("memberExpression type is not a MemberExpression");
