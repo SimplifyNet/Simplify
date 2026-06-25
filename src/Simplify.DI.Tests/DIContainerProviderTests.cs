@@ -88,7 +88,6 @@ public class DIContainerProviderTests
 		Assert.That(foo, Is.Not.Null);
 	}
 
-
 	[Test]
 	public void ScopedResolve_ScopeDelegateRegistered_Resolved()
 	{
