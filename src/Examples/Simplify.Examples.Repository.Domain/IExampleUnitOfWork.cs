@@ -2,6 +2,4 @@
 
 namespace Simplify.Examples.Repository.Domain;
 
-public interface IExampleUnitOfWork : ITransactUnitOfWork
-{
-}
+public interface IExampleUnitOfWork : ITransactUnitOfWork;

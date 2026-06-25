@@ -3,9 +3,6 @@ using Simplify.Repository.EntityFramework;
 
 namespace Simplify.Examples.Repository.EntityFramework;
 
-public class ExampleUnitOfWork : TransactUnitOfWork<ExampleDbContext>, IExampleUnitOfWork
+public class ExampleUnitOfWork(ExampleDbContext context) : TransactUnitOfWork<ExampleDbContext>(context), IExampleUnitOfWork
 {
-	public ExampleUnitOfWork(ExampleDbContext context) : base(context)
-	{
-	}
 }

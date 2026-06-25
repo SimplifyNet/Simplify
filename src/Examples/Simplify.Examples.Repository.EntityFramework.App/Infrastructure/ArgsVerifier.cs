@@ -1,26 +1,19 @@
 ﻿namespace Simplify.Examples.Repository.EntityFramework.App.Infrastructure;
 
-public class ArgsVerifier
+public class ArgsVerifier(INotifier notifier)
 {
-	private readonly INotifier _notifier;
-
-	public ArgsVerifier(INotifier notifier)
-	{
-		_notifier = notifier;
-	}
-
 	public bool Verify(string[] args)
 	{
 		if (args.Length == 0)
 		{
-			_notifier.ShowNoArgsMessage();
+			notifier.ShowNoArgsMessage();
 
 			return false;
 		}
 
 		if (args.Length > 1)
 		{
-			_notifier.ShowTooManyArgsMessage();
+			notifier.ShowTooManyArgsMessage();
 
 			return false;
 		}

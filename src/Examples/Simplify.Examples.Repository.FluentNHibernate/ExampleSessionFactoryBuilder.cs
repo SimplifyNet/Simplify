@@ -6,13 +6,8 @@ using Simplify.FluentNHibernate.Conventions;
 
 namespace Simplify.Examples.Repository.FluentNHibernate;
 
-public class ExampleSessionFactoryBuilder : SessionFactoryBuilderBase
+public class ExampleSessionFactoryBuilder(IConfiguration configuration, string configSectionName = "ExampleDatabaseConnectionSettings") : SessionFactoryBuilderBase(configuration, configSectionName)
 {
-	public ExampleSessionFactoryBuilder(IConfiguration configuration, string configSectionName = "ExampleDatabaseConnectionSettings")
-		: base(configuration, configSectionName)
-	{
-	}
-
 	public override FluentConfiguration CreateConfiguration()
 	{
 		FluentConfiguration.InitializeFromConfigMsSql(Configuration, ConfigSectionName);
