@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.7.4] - 2026-06-25
+
+### Added
+
+- .NET 10 support
+
+### Dependencies
+
+- Simplify.FluentNHibernate bump to 3.3.1
+- Simplify.DI bump to 4.3
+
 ## [1.7.3] - 2025-10-10
 
 ### Removed
