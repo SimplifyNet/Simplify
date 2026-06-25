@@ -8,17 +8,13 @@ namespace Simplify.Repository.FluentNHibernate;
 /// <summary>
 /// Provides unit of work with manual open transaction
 /// </summary>
-public class TransactUnitOfWork : UnitOfWork, ITransactUnitOfWork
+/// <remarks>
+/// Initializes a new instance of the <see cref="TransactUnitOfWork"/> class.
+/// </remarks>
+/// <param name="sessionFactory">The session factory.</param>
+public class TransactUnitOfWork(ISessionFactory sessionFactory) : UnitOfWork(sessionFactory), ITransactUnitOfWork
 {
 	private ITransaction? _transaction;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="TransactUnitOfWork"/> class.
-	/// </summary>
-	/// <param name="sessionFactory">The session factory.</param>
-	public TransactUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory)
-	{
-	}
 
 	/// <summary>
 	/// Gets a value indicating whether UoW's transaction is active.
@@ -59,6 +55,7 @@ public class TransactUnitOfWork : UnitOfWork, ITransactUnitOfWork
 			throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 		await _transaction.CommitAsync();
+
 		_transaction.Dispose();
 		_transaction = null;
 	}
@@ -86,6 +83,7 @@ public class TransactUnitOfWork : UnitOfWork, ITransactUnitOfWork
 			throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 		await _transaction.RollbackAsync();
+
 		_transaction.Dispose();
 		_transaction = null;
 	}

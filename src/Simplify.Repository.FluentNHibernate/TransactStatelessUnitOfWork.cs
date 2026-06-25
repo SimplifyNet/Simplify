@@ -9,17 +9,13 @@ namespace Simplify.Repository.FluentNHibernate;
 ///  Provides unit of work with manual stateless session open transaction
 /// </summary>
 /// <seealso cref="IUnitOfWork" />
-public class TransactStatelessUnitOfWork : StatelessUnitOfWork, ITransactUnitOfWork
+/// <remarks>
+/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
+/// </remarks>
+/// <param name="sessionFactory">The session factory.</param>
+public class TransactStatelessUnitOfWork(ISessionFactory sessionFactory) : StatelessUnitOfWork(sessionFactory), ITransactUnitOfWork
 {
 	private ITransaction? _transaction;
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="StatelessUnitOfWork"/> class.
-	/// </summary>
-	/// <param name="sessionFactory">The session factory.</param>
-	public TransactStatelessUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory)
-	{
-	}
 
 	/// <summary>
 	/// Gets a value indicating whether UoW's transaction is active.
@@ -58,6 +54,7 @@ public class TransactStatelessUnitOfWork : StatelessUnitOfWork, ITransactUnitOfW
 			throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 		await _transaction.CommitAsync();
+
 		_transaction.Dispose();
 		_transaction = null;
 	}
@@ -85,6 +82,7 @@ public class TransactStatelessUnitOfWork : StatelessUnitOfWork, ITransactUnitOfW
 			throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 		await _transaction.RollbackAsync();
+
 		_transaction.Dispose();
 		_transaction = null;
 	}
