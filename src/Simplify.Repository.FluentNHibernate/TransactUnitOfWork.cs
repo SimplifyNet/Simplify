@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Threading.Tasks;
 using NHibernate;
 
@@ -14,79 +13,26 @@ namespace Simplify.Repository.FluentNHibernate;
 /// <param name="sessionFactory">The session factory.</param>
 public class TransactUnitOfWork(ISessionFactory sessionFactory) : UnitOfWork(sessionFactory), ITransactUnitOfWork
 {
-	private ITransaction? _transaction;
+	private readonly UnitOfWorkTransaction _transaction = new();
 
-	/// <summary>
-	/// Gets a value indicating whether UoW's transaction is active.
-	/// </summary>
-	/// <value>
-	///  <c>true</c> if UoW's transaction active; otherwise, <c>false</c>.
-	/// </value>
-	public bool IsTransactionActive => _transaction != null;
+	/// <inheritdoc />
+	public bool IsTransactionActive => _transaction.IsActive;
 
-	/// <summary>
-	/// Begins the transaction.
-	/// </summary>
-	/// <param name="isolationLevel">The isolation level.</param>
-	public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) => _transaction = Session.BeginTransaction(isolationLevel);
+	/// <inheritdoc />
+	public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) =>
+		_transaction.Begin(Session.BeginTransaction(isolationLevel));
 
-	/// <summary>
-	/// Commits transaction.
-	/// </summary>
-	/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
-	public virtual void Commit()
-	{
-		if (_transaction == null || !_transaction.IsActive)
-			throw new InvalidOperationException("Oops! We don't have an active transaction");
+	/// <inheritdoc />
+	public virtual void Commit() => _transaction.Commit();
 
-		_transaction.Commit();
-		_transaction.Dispose();
-		_transaction = null;
-	}
+	/// <inheritdoc />
+	public Task CommitAsync() => _transaction.CommitAsync();
 
-	/// <summary>
-	/// Commits transaction asynchronously.
-	/// </summary>
-	/// <returns></returns>
-	/// <exception cref="InvalidOperationException">Oops! We don't have an active transaction</exception>
-	public async Task CommitAsync()
-	{
-		if (_transaction == null || !_transaction.IsActive)
-			throw new InvalidOperationException("Oops! We don't have an active transaction");
+	/// <inheritdoc />
+	public virtual void Rollback() => _transaction.Rollback();
 
-		await _transaction.CommitAsync();
-
-		_transaction.Dispose();
-		_transaction = null;
-	}
-
-	/// <summary>
-	/// Rollbacks transaction.
-	/// </summary>
-	public virtual void Rollback()
-	{
-		if (_transaction == null || !_transaction.IsActive)
-			throw new InvalidOperationException("Oops! We don't have an active transaction");
-
-		_transaction.Rollback();
-		_transaction.Dispose();
-		_transaction = null;
-	}
-
-	/// <summary>
-	/// Rollbacks transaction asynchronously.
-	/// </summary>
-	/// <returns></returns>
-	public async Task RollbackAsync()
-	{
-		if (_transaction == null || !_transaction.IsActive)
-			throw new InvalidOperationException("Oops! We don't have an active transaction");
-
-		await _transaction.RollbackAsync();
-
-		_transaction.Dispose();
-		_transaction = null;
-	}
+	/// <inheritdoc />
+	public Task RollbackAsync() => _transaction.RollbackAsync();
 
 	/// <summary>
 	/// Releases unmanaged and - optionally - managed resources.
@@ -97,7 +43,7 @@ public class TransactUnitOfWork(ISessionFactory sessionFactory) : UnitOfWork(ses
 		if (!disposing)
 			return;
 
-		_transaction?.Dispose();
+		_transaction.Dispose();
 
 		base.Dispose(disposing);
 	}

@@ -57,6 +57,7 @@ public class TransactUnitOfWork<T>(DbContext context) : UnitOfWork<T>(context), 
 			throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 		await _transaction.CommitAsync();
+
 		_transaction.Dispose();
 		_transaction = null;
 	}
@@ -84,6 +85,7 @@ public class TransactUnitOfWork<T>(DbContext context) : UnitOfWork<T>(context), 
 			throw new InvalidOperationException("Oops! We don't have an active transaction");
 
 		await _transaction.RollbackAsync();
+
 		_transaction.Dispose();
 		_transaction = null;
 	}
