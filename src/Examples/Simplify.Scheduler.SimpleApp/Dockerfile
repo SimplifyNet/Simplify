@@ -1,14 +1,14 @@
 # build
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 as build
 WORKDIR /src
 
 COPY . .
-RUN dotnet publish -f netcoreapp3.1 -c release -o out
+RUN dotnet publish -f net10.0 -c release -o out
 
 # launch
 
-FROM mcr.microsoft.com/dotnet/core/runtime:3.1
+FROM mcr.microsoft.com/dotnet/runtime:10.0
 WORKDIR /app
 
 COPY --from=build /src/out /app
