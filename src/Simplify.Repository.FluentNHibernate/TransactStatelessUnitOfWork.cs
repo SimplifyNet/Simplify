@@ -20,11 +20,11 @@ public class TransactStatelessUnitOfWork(ISessionFactory sessionFactory) : State
 	public bool IsTransactionActive => _transaction.IsActive;
 
 	/// <inheritdoc />
-	public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) =>
+	public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted) =>
 		_transaction.Begin(Session.BeginTransaction(isolationLevel));
 
 	/// <inheritdoc />
-	public void Commit() => _transaction.Commit();
+	public virtual void Commit() => _transaction.Commit();
 
 	/// <inheritdoc />
 	public Task CommitAsync() => _transaction.CommitAsync();

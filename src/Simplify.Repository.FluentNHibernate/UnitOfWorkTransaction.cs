@@ -20,7 +20,14 @@ internal sealed class UnitOfWorkTransaction : IDisposable
 	/// Begins the transaction.
 	/// </summary>
 	/// <param name="transaction">The transaction to track.</param>
-	public void Begin(ITransaction transaction) => _transaction = transaction;
+	/// <exception cref="InvalidOperationException">Oops! We already have an active transaction</exception>
+	public void Begin(ITransaction transaction)
+	{
+		if (_transaction is { IsActive: true })
+			throw new InvalidOperationException("Oops! We already have an active transaction");
+
+		_transaction = transaction;
+	}
 
 	/// <summary>
 	/// Commits transaction.
