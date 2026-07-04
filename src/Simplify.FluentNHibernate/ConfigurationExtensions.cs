@@ -526,18 +526,46 @@ public static class ConfigurationExtensions
 			_ => throw new InvalidOperationException()
 		};
 
-		clientConfiguration.ConnectionString(c => c
-			.Server(settings.ServerName)
-			.Database(settings.DataBaseName)
-			.Username(settings.UserName)
-			.Password(settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null")))
-			.Driver<MicrosoftDataSqlClientDriver>();
+		// FluentNHibernate's connection string builder has no Encrypt/TrustServerCertificate/Port support,
+		// so a raw connection string is required whenever any of these is explicitly configured.
+		if (settings.Encrypt.HasValue || settings.TrustServerCertificate.HasValue || settings.Port.HasValue)
+			clientConfiguration.ConnectionString(BuildMicrosoftDriverRawConnectionString(settings));
+		else
+			clientConfiguration.ConnectionString(c => c
+				.Server(settings.ServerName)
+				.Database(settings.DataBaseName)
+				.Username(settings.UserName)
+				.Password(settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null")));
+
+		clientConfiguration.Driver<MicrosoftDataSqlClientDriver>();
 
 		additionalClientConfiguration?.Invoke(clientConfiguration);
 
 		fluentConfiguration.Database(clientConfiguration);
 
 		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
+	}
+
+	private static string BuildMicrosoftDriverRawConnectionString(DbConnectionSettings settings)
+	{
+		var password = settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null");
+
+		var connectionString = settings.Port.HasValue
+			? $"Data Source={settings.ServerName},{settings.Port.Value}"
+			: $"Data Source={settings.ServerName}";
+
+		connectionString += $";Initial Catalog={settings.DataBaseName}";
+		connectionString += ";Integrated Security=False";
+		connectionString += $";User ID={settings.UserName}";
+		connectionString += $";Password={password}";
+
+		if (settings.Encrypt.HasValue)
+			connectionString += $";Encrypt={settings.Encrypt.Value}";
+
+		if (settings.TrustServerCertificate.HasValue)
+			connectionString += $";TrustServerCertificate={settings.TrustServerCertificate.Value}";
+
+		return connectionString;
 	}
 
 	#endregion MS SQL Microsoft Driver

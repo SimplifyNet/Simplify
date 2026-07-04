@@ -58,4 +58,14 @@ public class DbConnectionSettings
 	/// Gets the port number.
 	/// </summary>
 	public int? Port { get; protected set; }
+
+	/// <summary>
+	/// Gets a value indicating whether the connection should be encrypted, if not set, the driver's default is used.
+	/// </summary>
+	public bool? Encrypt { get; protected set; }
+
+	/// <summary>
+	/// Gets a value indicating whether the server certificate should be trusted without validation, if not set, the driver's default is used.
+	/// </summary>
+	public bool? TrustServerCertificate { get; protected set; }
 }

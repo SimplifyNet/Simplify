@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.4.0] - 2026-07-03
+
+### Added
+
+- `Encrypt`/`TrustServerCertificate` connection settings, readable from config as `Encrypt`/`TrustServerCertificate` and applied by `InitializeFromConfigMsSqlMicrosoftDriver` — needed because `Microsoft.Data.SqlClient` defaults to mandatory encryption with certificate validation, unlike the deprecated `System.Data.SqlClient`, which broke connections to servers with self-signed/mismatched certificates
+
 ## [3.3.1] - 2026-06-25
 
 ### Added

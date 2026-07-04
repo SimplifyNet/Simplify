@@ -26,9 +26,12 @@ public class ConfigurationManagerBasedDbConnectionSettings : DbConnectionSetting
 		DataBaseName = settings[nameof(DataBaseName)];
 		UserName = settings[nameof(UserName)];
 		UserPassword = settings[nameof(UserPassword)];
+
 		var showSqlText = settings[nameof(ShowSql)];
 		var showSqlOutputTypeText = settings[nameof(ShowSqlOutputType)];
 		var port = settings[nameof(Port)];
+		var encryptText = settings[nameof(Encrypt)];
+		var trustServerCertificateText = settings[nameof(TrustServerCertificate)];
 
 		if (string.IsNullOrEmpty(ServerName))
 			throw new DatabaseConnectionConfigurationException(
@@ -53,5 +56,13 @@ public class ConfigurationManagerBasedDbConnectionSettings : DbConnectionSetting
 		if (!string.IsNullOrEmpty(port))
 			if (int.TryParse(port, out var buffer))
 				Port = buffer;
+
+		if (!string.IsNullOrEmpty(encryptText))
+			if (bool.TryParse(encryptText, out var buffer))
+				Encrypt = buffer;
+
+		if (!string.IsNullOrEmpty(trustServerCertificateText))
+			if (bool.TryParse(trustServerCertificateText, out var buffer))
+				TrustServerCertificate = buffer;
 	}
 }
