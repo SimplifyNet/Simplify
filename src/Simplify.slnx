@@ -60,6 +60,7 @@
   <Folder Name="/Mail/">
     <Project Path="Simplify.Mail.IntegrationTests/Simplify.Mail.IntegrationTests.csproj" />
     <Project Path="Simplify.Mail.TestConsoleApp/Simplify.Mail.TestConsoleApp.csproj" />
+    <Project Path="Simplify.Mail.Tests/Simplify.Mail.Tests.csproj" />
     <Project Path="Simplify.Mail/Simplify.Mail.csproj" />
   </Folder>
   <Folder Name="/Repository/">

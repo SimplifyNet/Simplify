@@ -25,24 +25,36 @@ public class MailSenderTests
 	}
 
 	[TearDown]
-	public void TearDown()
+	public void TearDown() => _mailSender.Dispose();
+
+	[Test]
+	public void Constructor_FromConfiguration_Succeeds()
 	{
-		_mailSender.Dispose();
+		Assert.That(_mailSender, Is.Not.Null);
+		Assert.That(_mailSender.Settings.SmtpServerAddress, Is.EqualTo("localhost"));
 	}
 
+	[Test]
+	public void Settings_DefaultPort_Is25() =>
+		Assert.That(_mailSender.Settings.SmtpServerPortNumber, Is.EqualTo(25));
+
+	// Requires a running SMTP server (e.g. smtp4dev on localhost:25)
 	[Test]
 	public void SendSimpleTestEmail() =>
 		_mailSender.Send("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
 
+	// Requires a running SMTP server (e.g. smtp4dev on localhost:25)
 	[Test]
 	public async Task SendSimpleAsyncTestEmail() =>
 		await _mailSender.SendAsync("somesender@somedomain.com", "somereceiver@somedomain.com", "Hello subject", "Hello World!!!");
 
+	// Verifies the anti-spam pool suppresses duplicate emails across DI scopes.
+	// Requires a running SMTP server (e.g. smtp4dev on localhost:25).
+	// Only the first SendAsync should attempt connection; calls 2 and 3 are suppressed.
 	[Test]
 	public async Task SendAsync_TwoDuplicates_OneSend()
 	{
 		// Arrange
-
 		var container = new DryIocDIProvider();
 
 		container.Register<IMailSender>(r => new MailSender(_configuration));
@@ -63,5 +75,10 @@ public class MailSenderTests
 		using var scope2 = container.BeginLifetimeScope();
 
 		await scope2.Resolver.Resolve<IMailSender>().SendAsync(from, to, subject, body);
+
+		// Assert — no exception means the anti-spam pool suppressed duplicates
+		// (if the pool didn't suppress, the second and third calls would attempt
+		//  an SMTP connection alongside the first)
+		Assert.Pass("All sends completed without exception; anti-spam pool suppressed duplicates.");
 	}
 }

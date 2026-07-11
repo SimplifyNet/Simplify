@@ -15,11 +15,7 @@ public sealed class ConfigurationBasedMailSenderSettings : MailSenderSettings
 	/// <param name="configSectionName">Name of the configuration section.</param>
 	/// <exception cref="MailSenderException">No MailSenderSettings in config.
 	/// or
-	/// MailSenderSettings SmtpServerAddress is empty or missing from config.
-	/// or
-	/// MailSenderSettings SmtpUserName is empty or missing from config.
-	/// or
-	/// MailSenderSettings SmtpUserPassword is empty or missing from config.</exception>
+	/// MailSenderSettings SmtpServerAddress is empty or missing from config.</exception>
 	public ConfigurationBasedMailSenderSettings(IConfiguration configuration,
 		string configSectionName = "MailSenderSettings")
 	{

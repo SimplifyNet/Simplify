@@ -1,6 +1,25 @@
 # Changelog
 
-## [2.1.0] - 2026-06-25
+## [2.2.0] - 2026-07-11
+
+### Added
+
+- BCC recipient support on all multi-recipient overloads
+- `IAntiSpamPool` / `AntiSpamPool` extracted from `MailSender` with O(m) queue-based expiry and configurable max-items eviction (default 10 000) to prevent OOM
+- `MailSender.DefaultAntiSpamPool` static property to swap the pool implementation without constructor injection
+- Port validation in `MailSenderSettings` (throws `ArgumentOutOfRangeException` on out-of-range values)
+
+### Fixed
+
+- Double-checked locking in `SmtpClient` getter replaced with `Lazy<SmtpClient>(ExecutionAndPublication)` for correct thread-safety on all architectures
+- `Dispose` no longer disposes `SemaphoreSlim` while another thread may hold it; blocks until in-flight send completes, then disposes cleanly
+- `CheckAntiSpamPool` redundant `ContainsKey` check removed
+- Integration test assertions added for construction and port default
+
+### Performance
+
+- `SendSeparately` / `SendSeparatelyAsync` now holds the SMTP lock for the entire batch instead of per-recipient acquire/release
+- Anti-spam pool expiry uses queue-based O(m) scan instead of full O(n) dictionary enumeration
 
 ### Added
 

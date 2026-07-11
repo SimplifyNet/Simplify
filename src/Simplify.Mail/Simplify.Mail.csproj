@@ -7,7 +7,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>2.1</Version>
+		<Version>2.2</Version>
 
 		<Description>Simple mail sender</Description>
 		<Product>Simplify</Product>

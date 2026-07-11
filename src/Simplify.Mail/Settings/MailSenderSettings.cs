@@ -1,4 +1,6 @@
-﻿namespace Simplify.Mail.Settings;
+﻿using System;
+
+namespace Simplify.Mail.Settings;
 
 /// <summary>
 /// Represents MailSender settings group
@@ -20,6 +22,10 @@ public class MailSenderSettings : IMailSenderSettings
 		bool enableSsl = false, bool antiSpamMessagesPoolOn = true, int antiSpamPoolMessageLifeTime = 125)
 	{
 		SmtpServerAddress = smtpServerAddress;
+
+		if (smtpServerPortNumber is < 1 or > 65535)
+			throw new ArgumentOutOfRangeException(nameof(smtpServerPortNumber), smtpServerPortNumber, "SMTP port must be between 1 and 65535.");
+
 		SmtpServerPortNumber = smtpServerPortNumber;
 		SmtpUserName = smtpUserName;
 		SmtpUserPassword = smtpUserPassword;
