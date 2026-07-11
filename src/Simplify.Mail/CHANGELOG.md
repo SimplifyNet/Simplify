@@ -21,6 +21,8 @@
 - `SendSeparately` / `SendSeparatelyAsync` now holds the SMTP lock for the entire batch instead of per-recipient acquire/release
 - Anti-spam pool expiry uses queue-based O(m) scan instead of full O(n) dictionary enumeration
 
+## [2.1.0] - 2026-06-25
+
 ### Added
 
 - .NET 10 support
