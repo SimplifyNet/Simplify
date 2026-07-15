@@ -194,7 +194,14 @@ public class TransactGenericRepository<T>(IGenericRepository<T> baseRepository, 
 		}
 		catch
 		{
-			unitOfWork.Rollback();
+			try
+			{
+				unitOfWork.Rollback();
+			}
+			catch
+			{
+				// Best-effort rollback: if it fails, preserve the original exception.
+			}
 
 			throw;
 		}
@@ -225,7 +232,14 @@ public class TransactGenericRepository<T>(IGenericRepository<T> baseRepository, 
 		}
 		catch
 		{
-			await unitOfWork.RollbackAsync();
+			try
+			{
+				await unitOfWork.RollbackAsync();
+			}
+			catch
+			{
+				// Best-effort rollback: if it fails, preserve the original exception.
+			}
 
 			throw;
 		}

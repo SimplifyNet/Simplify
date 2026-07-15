@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.2] - 2026-07-15
+
+### Fixed
+
+- `TransactGenericRepository` rollback on zombie transactions no longer masks the original exception; rollback failures (e.g. lost connection) are now silently swallowed, preserving the original error
+
 ## [1.7.1] - 2026-06-25
 
 ### Added
