@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using Simplify.Mail.Settings.Impl;
@@ -163,5 +164,75 @@ public class ConfigurationBasedMailSenderSettingsTests
 
 		// Act & Assert
 		Assert.Throws<MailSenderException>(() => new ConfigurationBasedMailSenderSettings(config));
+	}
+
+	[Test]
+	public void Constructor_SecureSocketOptions_ParsesValue()
+	{
+		// Arrange
+		var config = BuildConfig(new Dictionary<string, string?>
+		{
+			["MailSenderSettings:SmtpServerAddress"] = "smtp.example.com",
+			["MailSenderSettings:SecureSocketOptions"] = "None"
+		});
+
+		// Act
+		var settings = new ConfigurationBasedMailSenderSettings(config);
+
+		// Assert
+		Assert.That(settings.SecureSocketOptions, Is.EqualTo(SecureSocketOptions.None));
+	}
+
+	[Test]
+	public void Constructor_SecureSocketOptionsStartTls_ParsesValue()
+	{
+		// Arrange
+		var config = BuildConfig(new Dictionary<string, string?>
+		{
+			["MailSenderSettings:SmtpServerAddress"] = "smtp.example.com",
+			["MailSenderSettings:SecureSocketOptions"] = "StartTls"
+		});
+
+		// Act
+		var settings = new ConfigurationBasedMailSenderSettings(config);
+
+		// Assert
+		Assert.That(settings.SecureSocketOptions, Is.EqualTo(SecureSocketOptions.StartTls));
+	}
+
+	[Test]
+	public void Constructor_InvalidSecureSocketOptions_DefaultsToNull()
+	{
+		// Arrange
+		var config = BuildConfig(new Dictionary<string, string?>
+		{
+			["MailSenderSettings:SmtpServerAddress"] = "smtp.example.com",
+			["MailSenderSettings:SecureSocketOptions"] = "invalid-value"
+		});
+
+		// Act
+		var settings = new ConfigurationBasedMailSenderSettings(config);
+
+		// Assert
+		Assert.That(settings.SecureSocketOptions, Is.Null);
+	}
+
+	[Test]
+	public void Constructor_SecureSocketOptions_OverridesEnableSsl()
+	{
+		// Arrange
+		var config = BuildConfig(new Dictionary<string, string?>
+		{
+			["MailSenderSettings:SmtpServerAddress"] = "smtp.example.com",
+			["MailSenderSettings:EnableSsl"] = "true",
+			["MailSenderSettings:SecureSocketOptions"] = "None"
+		});
+
+		// Act
+		var settings = new ConfigurationBasedMailSenderSettings(config);
+
+		// Assert
+		Assert.That(settings.EnableSsl, Is.True);
+		Assert.That(settings.SecureSocketOptions, Is.EqualTo(SecureSocketOptions.None));
 	}
 }

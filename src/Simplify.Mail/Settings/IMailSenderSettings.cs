@@ -1,3 +1,5 @@
+using MailKit.Security;
+
 namespace Simplify.Mail.Settings;
 
 /// <summary>
@@ -42,4 +44,11 @@ public interface IMailSenderSettings
 	/// <c>true</c> if SSL is enabled for connection; otherwise, <c>false</c>.
 	/// </value>
 	bool EnableSsl { get; }
+
+	/// <summary>
+	/// Gets the secure socket options for the SMTP connection.
+	/// When set, this overrides <see cref="EnableSsl"/>.
+	/// When <c>null</c>, the connection behavior is determined by <see cref="EnableSsl"/>.
+	/// </summary>
+	SecureSocketOptions? SecureSocketOptions { get; }
 }

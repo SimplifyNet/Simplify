@@ -1,4 +1,5 @@
 ﻿using System;
+using MailKit.Security;
 
 namespace Simplify.Mail.Settings;
 
@@ -17,9 +18,11 @@ public class MailSenderSettings : IMailSenderSettings
 	/// <param name="enableSsl">Enables SSL connection.</param>
 	/// <param name="antiSpamMessagesPoolOn">Enables anti-spam messages pool.</param>
 	/// <param name="antiSpamPoolMessageLifeTime">The anti-spam pool message life time.</param>
+	/// <param name="secureSocketOptions">The secure socket options. When set, overrides <paramref name="enableSsl"/>.</param>
 	public MailSenderSettings(string smtpServerAddress, int smtpServerPortNumber,
 		string smtpUserName, string smtpUserPassword,
-		bool enableSsl = false, bool antiSpamMessagesPoolOn = true, int antiSpamPoolMessageLifeTime = 125)
+		bool enableSsl = false, bool antiSpamMessagesPoolOn = true, int antiSpamPoolMessageLifeTime = 125,
+		SecureSocketOptions? secureSocketOptions = null)
 	{
 		SmtpServerAddress = smtpServerAddress;
 
@@ -30,6 +33,7 @@ public class MailSenderSettings : IMailSenderSettings
 		SmtpUserName = smtpUserName;
 		SmtpUserPassword = smtpUserPassword;
 		EnableSsl = enableSsl;
+		SecureSocketOptions = secureSocketOptions;
 		AntiSpamMessagesPoolOn = antiSpamMessagesPoolOn;
 		AntiSpamPoolMessageLifeTime = antiSpamPoolMessageLifeTime;
 	}
@@ -78,4 +82,11 @@ public class MailSenderSettings : IMailSenderSettings
 	/// <c>true</c> if SSL is enabled for connection; otherwise, <c>false</c>.
 	/// </value>
 	public bool EnableSsl { get; protected set; }
+
+	/// <summary>
+	/// Gets the secure socket options for the SMTP connection.
+	/// When set, overrides <see cref="EnableSsl"/>.
+	/// When <c>null</c>, the connection behavior is determined by <see cref="EnableSsl"/>.
+	/// </summary>
+	public SecureSocketOptions? SecureSocketOptions { get; protected set; }
 }

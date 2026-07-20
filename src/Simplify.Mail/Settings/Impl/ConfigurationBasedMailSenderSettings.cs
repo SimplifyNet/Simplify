@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 
 namespace Simplify.Mail.Settings.Impl;
@@ -60,5 +61,10 @@ public sealed class ConfigurationBasedMailSenderSettings : MailSenderSettings
 
 		if (!string.IsNullOrEmpty(enableSsl) && bool.TryParse(enableSsl, out var sslEnabled))
 			EnableSsl = sslEnabled;
+
+		var secureSocketOptions = config["SecureSocketOptions"];
+
+		if (!string.IsNullOrEmpty(secureSocketOptions) && System.Enum.TryParse<SecureSocketOptions>(secureSocketOptions, out var parsed))
+			SecureSocketOptions = parsed;
 	}
 }

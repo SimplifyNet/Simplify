@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3.0] - 2026-07-20
+
+### Added
+
+- `SecureSocketOptions` property to mail sender settings — when set, explicitly controls the MailKit `SecureSocketOptions` value for the SMTP connection, overriding the `EnableSsl` boolean. Use `"None"` for explicit non-TLS connections.
+
+### Changed
+
+- `MailSender` constructor overload with individual parameters now accepts optional `SecureSocketOptions? secureSocketOptions` parameter.
+
 ## [2.2.0] - 2026-07-11
 
 ### Added

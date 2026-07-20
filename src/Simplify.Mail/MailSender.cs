@@ -52,14 +52,16 @@ public class MailSender : IMailSender, IDisposable
 	/// <param name="enableSsl">if set to <c>true</c> [enable SSL].</param>
 	/// <param name="antiSpamMessagesPoolOn">if set to <c>true</c> [anti spam messages pool on].</param>
 	/// <param name="antiSpamPoolMessageLifeTime">The anti spam pool message life time.</param>
+	/// <param name="secureSocketOptions">The secure socket options. When set, overrides <paramref name="enableSsl"/>.</param>
 	/// <exception cref="ArgumentNullException">smtpServerAddress</exception>
 	public MailSender(string smtpServerAddress, int smtpServerPortNumber, string smtpUserName, string smtpUserPassword,
-		bool enableSsl = false, bool antiSpamMessagesPoolOn = true, int antiSpamPoolMessageLifeTime = 125)
+		bool enableSsl = false, bool antiSpamMessagesPoolOn = true, int antiSpamPoolMessageLifeTime = 125,
+		SecureSocketOptions? secureSocketOptions = null)
 	{
 		if (string.IsNullOrEmpty(smtpServerAddress)) throw new ArgumentNullException(nameof(smtpServerAddress));
 
 		Settings = new MailSenderSettings(smtpServerAddress, smtpServerPortNumber, smtpUserName, smtpUserPassword, enableSsl,
-			antiSpamMessagesPoolOn, antiSpamPoolMessageLifeTime);
+			antiSpamMessagesPoolOn, antiSpamPoolMessageLifeTime, secureSocketOptions);
 		_smtpClientLazy = new Lazy<SmtpClient>(() => new SmtpClient(), LazyThreadSafetyMode.ExecutionAndPublication);
 		_antiSpamPool = DefaultAntiSpamPool;
 	}
@@ -575,7 +577,7 @@ public class MailSender : IMailSender, IDisposable
 		if (client.IsConnected)
 			return;
 
-		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.StartTlsWhenAvailable;
+		var secureSocketOptions = Settings.SecureSocketOptions ?? (Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.StartTlsWhenAvailable);
 
 		await client.ConnectAsync(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber, secureSocketOptions, cancellationToken);
 
@@ -588,7 +590,7 @@ public class MailSender : IMailSender, IDisposable
 		if (client.IsConnected)
 			return;
 
-		var secureSocketOptions = Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.StartTlsWhenAvailable;
+		var secureSocketOptions = Settings.SecureSocketOptions ?? (Settings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.StartTlsWhenAvailable);
 
 		client.Connect(Settings.SmtpServerAddress, Settings.SmtpServerPortNumber, secureSocketOptions);
 
