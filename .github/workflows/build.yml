@@ -1,6 +1,8 @@
 name: Build Package
 
-on: push
+on:
+  push:
+  pull_request:
 
 defaults:
   run:
@@ -22,12 +24,8 @@ jobs:
             tests-exclude-category: Windows
             test-framework-command: --framework net10.0
 
-    env:
-      DOTNET_TEST_FRAMEWORK: ${{ matrix.dotnet-test-framework }} # Set at job level
-
     steps:
-      - name: Code Checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install DotNet
         uses: actions/setup-dotnet@v5
@@ -58,3 +56,36 @@ jobs:
         with:
           name: Packages
           path: ./src/publish/
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Parse tag
+        id: tag
+        run: |
+          tag="${{ github.ref_name }}"
+          name=$(echo "$tag" | sed 's/\.[0-9][0-9]*.*//')
+          version=$(echo "$tag" | sed 's/^[^0-9]*//')
+          echo "name=$name" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Extract changelog entry
+        run: |
+          awk '/^## \[/{if(f) exit; f=1; next} f' \
+            "src/${{ steps.tag.outputs.name }}/CHANGELOG.md" \
+            > /tmp/release_notes.md
+
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "${{ steps.tag.outputs.name }} ${{ steps.tag.outputs.version }}" \
+            --notes-file /tmp/release_notes.md
