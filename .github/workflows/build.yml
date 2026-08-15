@@ -79,7 +79,7 @@ jobs:
       - name: Extract changelog entry
         run: |
           awk '/^## \[/{if(f) exit; f=1; next} f' \
-            "src/${{ steps.tag.outputs.name }}/CHANGELOG.md" \
+            "${{ steps.tag.outputs.name }}/CHANGELOG.md" \
             > /tmp/release_notes.md
 
       - name: Create release
