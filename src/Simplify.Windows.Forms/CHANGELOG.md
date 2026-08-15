@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.4] - 2026-08-15
+
+### Dependencies
+
+- Simplify.Resources bump to 1.1
+
 ## [1.1.3] - 2023-08-01
 
 ### Removed
