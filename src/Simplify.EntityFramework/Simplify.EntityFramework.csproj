@@ -6,7 +6,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<Version>1.1</Version>
+		<Version>1.2</Version>
 
 		<Description>Simplifies EntityFramework connection configuration and allows you to write data-base queries with lambda expressions</Description>
 		<Product>Simplify</Product>

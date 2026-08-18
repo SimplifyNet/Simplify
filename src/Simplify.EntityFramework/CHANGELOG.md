@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2] - 2026-08-18
+
+### Added
+
+- `SettingsBasedConnectionString` now includes the `Port` from `DbConnectionSettings` in the connection string
+
 ## [1.1] - 2025-10-10
 
 ### Removed

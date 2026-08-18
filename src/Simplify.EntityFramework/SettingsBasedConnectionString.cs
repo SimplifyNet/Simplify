@@ -25,9 +25,14 @@ public static class SettingsBasedConnectionString
 	/// <returns></returns>
 	public static string Build(DbConnectionSettings settings)
 	{
+		var dataSource = settings.ServerName;
+
+		if (settings.Port.HasValue && !dataSource.Contains(','))
+			dataSource = $"{dataSource},{settings.Port}";
+
 		return new SqlConnectionStringBuilder
 		{
-			DataSource = settings.ServerName,
+			DataSource = dataSource,
 			InitialCatalog = settings.DataBaseName,
 			UserID = settings.UserName,
 			Password = settings.UserPassword
