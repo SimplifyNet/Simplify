@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.5.0] - 2026-08-19
+
+### Added
+
+- `Port` connection setting support for `InitializeFromConfigMsSql` — since FluentNHibernate's connection string builder has no port property, a raw connection string with the `Data Source=host,port` format is used whenever the port is explicitly configured
+
 ## [3.4.0] - 2026-07-09
 
 ### Added

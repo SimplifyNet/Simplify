@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using Microsoft.Extensions.Configuration;
+using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NUnit.Framework;
 
@@ -58,6 +59,34 @@ public class ConfigurationExtensionsTests
 	{
 		// Act
 		Fluently.Configure().InitializeFromConfigMsSql(_configuration);
+	}
+
+	[Test]
+	public void InitializeFromConfigMsSql_PortConfigured_ConnectionStringContainsPort()
+	{
+		// Arrange & Act
+		Configuration config = null;
+		Fluently.Configure()
+			.InitializeFromConfigMsSql(_configuration)
+			.ExposeConfiguration(c => config = c)
+			.BuildConfiguration();
+
+		// Assert
+		Assert.That(config.GetProperty(Environment.ConnectionString), Does.Contain("localhost,1231"));
+	}
+
+	[Test]
+	public void InitializeFromConfigMsSqlMicrosoftDriver_PortConfigured_ConnectionStringContainsPort()
+	{
+		// Arrange & Act
+		Configuration config = null;
+		Fluently.Configure()
+			.InitializeFromConfigMsSqlMicrosoftDriver(_configuration)
+			.ExposeConfiguration(c => config = c)
+			.BuildConfiguration();
+
+		// Assert
+		Assert.That(config.GetProperty(Environment.ConnectionString), Does.Contain("localhost,1231"));
 	}
 
 	[Test]

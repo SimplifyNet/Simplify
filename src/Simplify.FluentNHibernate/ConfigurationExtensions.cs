@@ -437,17 +437,38 @@ public static class ConfigurationExtensions
 			_ => throw new InvalidOperationException()
 		};
 
-		clientConfiguration.ConnectionString(c => c
-			.Server(settings.ServerName)
-			.Database(settings.DataBaseName)
-			.Username(settings.UserName)
-			.Password(settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null")));
+		// FluentNHibernate's connection string builder has no Port support,
+		// so a raw connection string is required whenever the port is explicitly configured.
+		if (settings.Port.HasValue)
+			clientConfiguration.ConnectionString(BuildMsSqlRawConnectionString(settings));
+		else
+			clientConfiguration.ConnectionString(c => c
+				.Server(settings.ServerName)
+				.Database(settings.DataBaseName)
+				.Username(settings.UserName)
+				.Password(settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null")));
 
 		additionalClientConfiguration?.Invoke(clientConfiguration);
 
 		fluentConfiguration.Database(clientConfiguration);
 
 		PerformCommonInitialization(fluentConfiguration, settings.ShowSql, settings.ShowSqlOutputType);
+	}
+
+	private static string BuildMsSqlRawConnectionString(DbConnectionSettings settings)
+	{
+		var password = settings.UserPassword ?? throw new ArgumentException($"{nameof(settings.UserPassword)} is null");
+
+		var connectionString = settings.Port.HasValue
+			? $"Data Source={settings.ServerName},{settings.Port.Value}"
+			: $"Data Source={settings.ServerName}";
+
+		connectionString += $";Initial Catalog={settings.DataBaseName}";
+		connectionString += ";Integrated Security=False";
+		connectionString += $";User ID={settings.UserName}";
+		connectionString += $";Password={password}";
+
+		return connectionString;
 	}
 
 	#endregion MS SQL

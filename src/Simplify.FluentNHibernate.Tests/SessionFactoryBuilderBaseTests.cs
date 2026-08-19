@@ -26,6 +26,6 @@ public class SessionFactoryBuilderBaseTests
 		var result = builder.ConnectionString;
 
 		// Assert
-		Assert.That(result, Is.EqualTo("Data Source=localhost;Initial Catalog=foodatabase;Integrated Security=False;User ID=foouser;Password=foopassword"));
+		Assert.That(result, Is.EqualTo("Data Source=localhost,1231;Initial Catalog=foodatabase;Integrated Security=False;User ID=foouser;Password=foopassword"));
 	}
 }
