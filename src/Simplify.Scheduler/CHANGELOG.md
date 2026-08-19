@@ -6,6 +6,10 @@
 
 - Public `Stop`/`StopAsync` methods to shut the scheduler down programmatically (previously a running `Start`/`StartAsync` could only be released via `Ctrl + C`), enabling hosting and testing scenarios
 
+### Dependencies
+
+- Microsoft.Extensions.Configuration bump to 10.0.11
+
 ## [1.7.0] - 2026-06-25
 
 ### Fixed
