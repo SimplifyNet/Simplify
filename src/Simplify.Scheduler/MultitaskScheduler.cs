@@ -75,6 +75,26 @@ public class MultitaskScheduler : SchedulerJobsHandler
 	}
 
 	/// <summary>
+	/// Stops the scheduler, releasing a blocked <see cref="Start" /> / <see cref="StartAsync" /> call.
+	/// </summary>
+	public void Stop()
+	{
+		StopJobs();
+
+		_closing.Set();
+	}
+
+	/// <summary>
+	/// Stops the scheduler asynchronously, releasing a blocked <see cref="StartAsync" /> call.
+	/// </summary>
+	public Task StopAsync()
+	{
+		Stop();
+
+		return Task.CompletedTask;
+	}
+
+	/// <summary>
 	/// Called when scheduler is about to stop, main stopping point
 	/// </summary>
 	protected void StopJobs(object? sender, ConsoleCancelEventArgs args)

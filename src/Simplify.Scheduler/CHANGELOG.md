@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.8.0] - 2026-08-19
+
+### Added
+
+- Public `Stop`/`StopAsync` methods to shut the scheduler down programmatically (previously a running `Start`/`StartAsync` could only be released via `Ctrl + C`), enabling hosting and testing scenarios
+
 ## [1.7.0] - 2026-06-25
 
 ### Fixed
